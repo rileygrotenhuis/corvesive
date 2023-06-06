@@ -26,12 +26,14 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/budgets', [BudgetController::class, 'index'])->middleware(['auth', 'verified'])->name('budgets.index');
-Route::get('/budgets/create', [BudgetController::class, 'create'])->middleware(['auth', 'verified'])->name('budgets.create');
-Route::get('/budgets/{budget}', [BudgetController::class, 'show'])->middleware(['auth', 'verified'])->name('budgets.show');
-Route::get('/budgets/{budget}/edit', [BudgetController::class, 'edit'])->middleware(['auth', 'verified'])->name('budgets.edit');
-
 Route::middleware('auth')->group(function () {
+    Route::get('/budgets', [BudgetController::class, 'index'])->name('budgets.index');
+    Route::get('/budgets/create', [BudgetController::class, 'create'])->name('budgets.create');
+    Route::get('/budgets/{budget}', [BudgetController::class, 'show'])->name('budgets.show');
+    Route::get('/budgets/{budget}/edit', [BudgetController::class, 'edit'])->name('budgets.edit');
+    Route::post('budgets', [BudgetController::class, 'store'])->name('budgets.store');
+    Route::put('budgets/{budget}', [BudgetController::class, 'update'])->name('budgets.update');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

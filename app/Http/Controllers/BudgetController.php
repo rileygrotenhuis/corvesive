@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class BudgetController extends Controller
@@ -16,7 +17,11 @@ class BudgetController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Budgets/Index');
+        return Inertia::render('Budgets/Index', [
+            'budgets' => Budget::with('user')
+                ->where('user_id', Auth::user()->id)
+                ->get(),
+        ]);
     }
 
     /**
@@ -37,7 +42,13 @@ class BudgetController extends Controller
      */
     public function store(StoreBudgetRequest $request)
     {
-        //
+        $budget = new Budget();
+        $budget->user_id = Auth::user()->id;
+        $budget->name = $request->name;
+        $budget->amount = $request->amount * 100;
+        $budget->save();
+
+        return to_route('budgets.index');
     }
 
     /**
