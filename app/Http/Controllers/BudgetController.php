@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Carbon\Carbon;
 
 class BudgetController extends Controller
 {
@@ -21,7 +22,15 @@ class BudgetController extends Controller
         return Inertia::render('Budgets/Index', [
             'budgets' => Budget::with('user')
                 ->where('user_id', Auth::user()->id)
-                ->get(),
+                ->get()
+                ->map(function ($budget) {
+                    return [
+                        'id' => $budget->id,
+                        'name' => $budget->name,
+                        'amount' => $budget->amount,
+                        'average_daily_amount' => $budget->amount / (Carbon::now()->diffInDays(Carbon::parse(Auth::user()->next_payday))),
+                    ];
+                }),
         ]);
     }
 
@@ -61,7 +70,12 @@ class BudgetController extends Controller
     public function show(Budget $budget)
     {
         return Inertia::render('Budgets/Show', [
-            'budget' => $budget
+            'budget' => [
+                'id' => $budget->id,
+                'name' => $budget->name,
+                'amount' => $budget->amount,
+                'average_daily_amount' => $budget->amount / (Carbon::now()->diffInDays(Carbon::parse(Auth::user()->next_payday))),
+            ]
         ]);
     }
 

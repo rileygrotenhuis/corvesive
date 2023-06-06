@@ -27,7 +27,8 @@ const submit = () => {
             </a>
         </div>
         <div class="mt-8 text-center">
-            <h3 class="text-2xl">${{ (budget.amount / 100).toFixed(2) }}</h3>
+            <h3 class="text-2xl font-semibold">${{ (budget.amount / 100).toFixed(2) }}</h3>
+            <h3 class="text-xl mt-2">(~${{ (budget.average_daily_amount / 100).toFixed(2) }}/day)</h3>
             <form @submit.prevent="submit" class="mt-4 flex gap-2 justify-center">
                 <TextInput autofocus type="number" step="0.01" v-model="form.amount" />
                 <PrimaryButton>Make Payment</PrimaryButton>

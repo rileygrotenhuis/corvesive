@@ -16,6 +16,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
                     <th class="border bg-slate-300 px-4 py-2">ID</th>
                     <th class="border bg-slate-300 px-4 py-2">Name</th>
                     <th class="border bg-slate-300 px-4 py-2">Amount</th>
+                    <th class="border bg-slate-300 px-4 py-2">Daily Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
                     </td>
                     <td class="border px-4 py-2 text-center">{{ budget.name }}</td>
                     <td class="border px-4 py-2 text-center">${{ (budget.amount / 100).toFixed(2) }}</td>
+                    <td class="border px-4 py-2 text-center">${{ (budget.average_daily_amount / 100).toFixed(2) }}</td>
                 </tr>
             </tbody>
         </table>
