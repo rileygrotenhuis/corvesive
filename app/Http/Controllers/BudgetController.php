@@ -69,6 +69,8 @@ class BudgetController extends Controller
      */
     public function show(Budget $budget)
     {
+        $this->authorize('view', $budget);
+
         return Inertia::render('Budgets/Show', [
             'budget' => [
                 'id' => $budget->id,
@@ -87,6 +89,8 @@ class BudgetController extends Controller
      */
     public function edit(Budget $budget)
     {
+        $this->authorize('update', $budget);
+
         return Inertia::render('Budgets/Edit', [
             'budget' => $budget
         ]);
@@ -101,6 +105,8 @@ class BudgetController extends Controller
      */
     public function update(UpdateBudgetRequest $request, Budget $budget)
     {
+        $this->authorize('update', $budget);
+
         $budget->name = $request->name;
         $budget->amount = $request->amount * 100;
         $budget->save();
@@ -116,6 +122,8 @@ class BudgetController extends Controller
      */
     public function destroy(Budget $budget)
     {
+        $this->authorize('delete', $budget);
+
         $budget->delete();
 
         return to_route('budgets.index');
