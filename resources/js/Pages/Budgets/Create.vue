@@ -21,7 +21,7 @@ const form = useForm({
             </div>
             <div class="mt-4">
                 <InputLabel class="mb-2" value="Amount" />
-                <TextInput type="number" v-model="form.amount" />
+                <TextInput type="number" step="0.01" v-model="form.amount" />
             </div>
             <PrimaryButton class="mt-4">Save</PrimaryButton>
         </form>
