@@ -24,7 +24,10 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
                     <td class="border px-4 py-2 text-center">{{ budget.id }}</td>
                     <td class="border px-4 py-2 text-center">{{ budget.name }}</td>
                     <td class="border px-4 py-2 text-center">${{ (budget.amount / 100).toFixed(2) }}</td>
-                    <td class="border px-4 py-2 text-center">
+                    <td class="border px-4 py-2 flex gap-2 justify-center">
+                        <a :href="route('budgets.show', budget.id)">
+                            <PrimaryButton>Show</PrimaryButton>
+                        </a>
                         <a :href="route('budgets.edit', budget.id)">
                             <PrimaryButton>Edit</PrimaryButton>
                         </a>

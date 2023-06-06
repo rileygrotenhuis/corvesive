@@ -13,7 +13,7 @@ class UpdateBudgetRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateBudgetRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'amount' => 'required|numeric|min:0'
         ];
     }
 }

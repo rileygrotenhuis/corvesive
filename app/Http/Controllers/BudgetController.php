@@ -59,7 +59,9 @@ class BudgetController extends Controller
      */
     public function show(Budget $budget)
     {
-        return Inertia::render('Budgets/Show');
+        return Inertia::render('Budgets/Show', [
+            'budget' => $budget
+        ]);
     }
 
     /**
@@ -70,7 +72,9 @@ class BudgetController extends Controller
      */
     public function edit(Budget $budget)
     {
-        return Inertia::render('Budgets/Edit');
+        return Inertia::render('Budgets/Edit', [
+            'budget' => $budget
+        ]);
     }
 
     /**
@@ -82,7 +86,11 @@ class BudgetController extends Controller
      */
     public function update(UpdateBudgetRequest $request, Budget $budget)
     {
-        //
+        $budget->name = $request->name;
+        $budget->amount = $request->amount * 100;
+        $budget->save();
+
+        return to_route('budgets.show', $budget->id);
     }
 
     /**
