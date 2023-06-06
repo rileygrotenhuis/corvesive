@@ -15,6 +15,7 @@ const user = usePage().props.auth.user;
 const form = useForm({
     name: user.name,
     email: user.email,
+    next_payday: user.next_payday,
 });
 </script>
 
@@ -55,6 +56,20 @@ const form = useForm({
                     v-model="form.email"
                     required
                     autocomplete="username"
+                />
+
+                <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div>
+                <InputLabel for="next_payday" value="Next Paydate" />
+
+                <TextInput
+                    id="next_payday"
+                    type="date"
+                    class="mt-1 block w-full"
+                    v-model="form.next_payday"
+                    required
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
