@@ -9,8 +9,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 <template>
     <AuthenticatedLayout>
-        <h1>All Budgets</h1>
-        <table class="w-full">
+        <h1 class="text-xl font-semibold">Your Budgets</h1>
+        <table class="w-full mt-4">
             <thead>
                 <tr class="px-4 py-2">
                     <th class="border bg-slate-300 px-4 py-2">ID</th>
