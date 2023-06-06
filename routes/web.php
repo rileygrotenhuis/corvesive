@@ -24,12 +24,12 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
 
-Route::get('/budgets', [BudgetController::class, 'index'])->middleware(['auth', 'verified']);
-Route::get('/budgets/create', [BudgetController::class, 'create'])->middleware(['auth', 'verified']);
-Route::get('/budgets/{budget}', [BudgetController::class, 'show'])->middleware(['auth', 'verified']);
-Route::get('/budgets/{budget}/edit', [BudgetController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::get('/budgets', [BudgetController::class, 'index'])->middleware(['auth', 'verified'])->name('budgets.index');
+Route::get('/budgets/create', [BudgetController::class, 'create'])->middleware(['auth', 'verified'])->name('budgets.create');
+Route::get('/budgets/{budget}', [BudgetController::class, 'show'])->middleware(['auth', 'verified'])->name('budgets.show');
+Route::get('/budgets/{budget}/edit', [BudgetController::class, 'edit'])->middleware(['auth', 'verified'])->name('budgets.edit');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
