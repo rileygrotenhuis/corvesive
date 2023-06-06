@@ -18,7 +18,7 @@ class BudgetFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'amount' => $this->faker->numberBetween(500, 10000),
+            'amount' => $this->faker->numberBetween(10000, 50000),
         ];
     }
 }

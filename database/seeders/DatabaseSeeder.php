@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Budget;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $user = User::factory()->create([
+            'name' => 'Dev Admin',
+            'email' => 'dev@dev.com',
+            'password' => '$2y$10$4EGb48ZZW3GWWL6Fw1JbLuIYhYruQTG8M23xquQZ3hQk7t.KhuAnO'
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        foreach (['Groceries', 'Gas', 'Spending'] as $budget) {
+            Budget::factory()->for($user)->create([
+                'name' => $budget
+            ]);
+        }
     }
 }
