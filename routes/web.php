@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,9 +26,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/budgets', [BudgetController::class, 'index'])->middleware(['auth', 'verified']);
+Route::get('/budgets/create', [BudgetController::class, 'create'])->middleware(['auth', 'verified']);
+Route::get('/budgets/{budget}', [BudgetController::class, 'show'])->middleware(['auth', 'verified']);
+Route::get('/budgets/{budget}/edit', [BudgetController::class, 'edit'])->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

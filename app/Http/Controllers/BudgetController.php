@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
+use Inertia\Inertia;
 
 class BudgetController extends Controller
 {
@@ -15,7 +16,7 @@ class BudgetController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Budgets/Index');
     }
 
     /**
@@ -25,7 +26,7 @@ class BudgetController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Budgets/Create');
     }
 
     /**
@@ -47,7 +48,7 @@ class BudgetController extends Controller
      */
     public function show(Budget $budget)
     {
-        //
+        return Inertia::render('Budgets/Show');
     }
 
     /**
@@ -58,7 +59,7 @@ class BudgetController extends Controller
      */
     public function edit(Budget $budget)
     {
-        //
+        return Inertia::render('Budgets/Edit');
     }
 
     /**
