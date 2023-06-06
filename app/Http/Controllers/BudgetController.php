@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PaymentBudgetRequest;
 use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
@@ -102,5 +103,20 @@ class BudgetController extends Controller
     public function destroy(Budget $budget)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\PaymentBudgetRequest  $request
+     * @param  \App\Models\Budget  $budget
+     * @return \Illuminate\Http\Response
+     */
+    public function payment(PaymentBudgetRequest $request, Budget $budget)
+    {
+        $budget->amount = $budget->amount - ($request->amount * 100);
+        $budget->save();
+
+        return to_route('budgets.show', $budget->id);
     }
 }

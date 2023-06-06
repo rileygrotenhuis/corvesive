@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/budgets/{budget}/edit', [BudgetController::class, 'edit'])->name('budgets.edit');
     Route::post('budgets', [BudgetController::class, 'store'])->name('budgets.store');
     Route::put('budgets/{budget}', [BudgetController::class, 'update'])->name('budgets.update');
+    Route::put('budgets/{budget}/payment', [BudgetController::class, 'payment'])->name('budgets.payment');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
