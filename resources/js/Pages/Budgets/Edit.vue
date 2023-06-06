@@ -17,8 +17,8 @@ const form = useForm({
 
 <template>
     <AuthenticatedLayout>
-        <h1 class="text-xl font-semibold">Create Budget</h1>
-        <form @submit.prevent="form.put(route('budgets.update', budget.id))">
+        <h1 class="text-xl text-center font-semibold">Edit {{ budget.name }} Budget</h1>
+        <form class="mx-auto w-fit" @submit.prevent="form.put(route('budgets.update', budget.id))">
             <div class="mt-4">
                 <InputLabel class="mb-2" value="Name" />
                 <TextInput type="text" v-model="form.name" />

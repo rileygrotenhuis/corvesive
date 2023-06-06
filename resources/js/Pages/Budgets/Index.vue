@@ -9,28 +9,17 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 <template>
     <AuthenticatedLayout>
-        <h1 class="text-xl font-semibold">Your Budgets</h1>
-        <table class="w-full mt-4">
-            <thead>
-                <tr class="px-4 py-2">
-                    <th class="border bg-slate-300 px-4 py-2">ID</th>
-                    <th class="border bg-slate-300 px-4 py-2">Name</th>
-                    <th class="border bg-slate-300 px-4 py-2">Amount</th>
-                    <th class="border bg-slate-300 px-4 py-2">Daily Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="budget in budgets" :key="budget.id">
-                    <td class="border px-4 py-2 text-center">
-                        <a :href="route('budgets.show', budget.id)">
-                            {{ budget.id }}
-                        </a>
-                    </td>
-                    <td class="border px-4 py-2 text-center">{{ budget.name }}</td>
-                    <td class="border px-4 py-2 text-center">${{ (budget.amount / 100).toFixed(2) }}</td>
-                    <td class="border px-4 py-2 text-center">${{ (budget.average_daily_amount / 100).toFixed(2) }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <h1 class="text-xl text-center font-semibold">Your Budgets</h1>
+        <div class="mt-4 flex flex-col gap-4">
+            <div class="w-48 mx-auto" v-for="budget in budgets" :key="budget.id">
+                <a :href="route('budgets.show', budget.id)">
+                    <div class="text-center border bg-slate-50 shadow-md w-48 p-4 rounded-md">
+                        <h3 class="text-2xl font-semibold">{{ budget.name }}</h3>
+                        <h4 class="text-xl">${{ (budget.amount / 100).toFixed(2) }}</h4>
+                        <h4>(~${{ (budget.average_daily_amount / 100).toFixed(2) }}/day)</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
     </AuthenticatedLayout>
 </template>
