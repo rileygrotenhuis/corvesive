@@ -141,6 +141,9 @@ class BudgetController extends Controller
         $budget->amount = $budget->amount - ($request->amount * 100);
         $budget->save();
 
+        $request->user()->total = $request->user()->total - ($request->amount * 100);
+        $request->user()->save();
+
         return to_route('budgets.show', $budget->id);
     }
 }
