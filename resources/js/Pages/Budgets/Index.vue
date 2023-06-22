@@ -1,15 +1,18 @@
 <script setup>
-    import PrimaryButton from '@/Components/PrimaryButton.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { usePage } from '@inertiajs/vue3';
 
-    defineProps({
-        budgets: Array
-    });
+const user = usePage().props.auth.user;
+
+defineProps({
+    budgets: Array
+});
 </script>
 
 <template>
     <AuthenticatedLayout>
-        <h1 class="text-xl text-center font-semibold">Your Budgets</h1>
+        <h1 class="text-2xl text-center">${{ (user.total / 100).toFixed(2) }}</h1>
         <div class="mt-4 flex flex-col gap-4">
             <div class="w-48 mx-auto" v-for="budget in budgets" :key="budget.id">
                 <a :href="route('budgets.show', budget.id)">
@@ -20,6 +23,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
                     </div>
                 </a>
             </div>
+            <a class="w-auto mx-auto" :href="route('budgets.create')">
+                <PrimaryButton>+ Budget</PrimaryButton>
+            </a>
         </div>
     </AuthenticatedLayout>
 </template>
