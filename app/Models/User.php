@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'next_payday',
         'password',
+        'total'
     ];
 
     /**

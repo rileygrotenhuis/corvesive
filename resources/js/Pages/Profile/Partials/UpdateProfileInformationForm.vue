@@ -16,6 +16,7 @@ const form = useForm({
     name: user.name,
     email: user.email,
     next_payday: user.next_payday,
+    total: (user.total / 100).toFixed(2)
 });
 </script>
 
@@ -69,6 +70,21 @@ const form = useForm({
                     type="date"
                     class="mt-1 block w-full"
                     v-model="form.next_payday"
+                    required
+                />
+
+                <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div>
+                <InputLabel for="total" value="Total" />
+
+                <TextInput
+                    id="total"
+                    type="number"
+                    class="mt-1 block w-full"
+                    v-model="form.total"
+                    step="0.01"
                     required
                 />
 
