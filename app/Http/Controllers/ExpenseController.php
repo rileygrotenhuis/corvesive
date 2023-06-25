@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -112,5 +113,23 @@ class ExpenseController extends Controller
         $expense->delete();
 
         return to_route('expenses.index');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Models\Expense  $expense
+     * @return \Illuminate\Http\Response
+     */
+    public function payment(Expense $expense)
+    {
+        $expense->is_payed = true;
+        $expense->save();
+
+        $user = User::where('id', Auth::user()->id)->first();
+        $user->total = $expense->amount;
+        $user->save();
+
+        return to_route('expenses.index', $expense);
     }
 }

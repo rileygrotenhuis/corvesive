@@ -13,7 +13,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(route('expenses.payment', props.expense.id));
+    form.post(route('expenses.payment', props.expense.id));
     form.reset();
 };
 
@@ -28,8 +28,7 @@ const deleteexpense = () => {
         <div class="mt-8 text-center">
             <h3 class="text-2xl font-semibold">${{ (expense.amount / 100).toFixed(2) }}</h3>
             <form @submit.prevent="submit" class="mt-4 flex gap-2 justify-center">
-                <TextInput autofocus type="number" step="0.01" v-model="form.amount" />
-                <PrimaryButton>Make Payment</PrimaryButton>
+                <PrimaryButton>Pay Bill</PrimaryButton>
             </form>
             <div class="mt-4 flex gap-4 justify-center">
                 <a :href="route('expenses.edit', expense.id)">
