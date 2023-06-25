@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('name');
             $table->unsignedBigInteger('amount')->default(0);
+            $table->boolean('show_daily_amount')->default(true);
             $table->timestamps();
         });
     }

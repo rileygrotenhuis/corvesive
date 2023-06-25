@@ -25,7 +25,8 @@ class StoreBudgetRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'amount' => 'required|numeric|min:0'
+            'amount' => 'required|numeric|min:0',
+            'show_daily_amount' => 'required|boolean'
         ];
     }
 }

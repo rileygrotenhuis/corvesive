@@ -28,6 +28,7 @@ class BudgetController extends Controller
                         'id' => $budget->id,
                         'name' => $budget->name,
                         'amount' => $budget->amount,
+                        'show_daily_amount' => $budget->show_daily_amount,
                         'average_daily_amount' => $budget->amount / (Carbon::now()->diffInDays(Carbon::parse(Auth::user()->next_payday))),
                     ];
                 }),
@@ -56,6 +57,7 @@ class BudgetController extends Controller
         $budget->user_id = Auth::user()->id;
         $budget->name = $request->name;
         $budget->amount = $request->amount * 100;
+        $budget->show_daily_amount = $request->show_daily_amount;
         $budget->save();
 
         return to_route('budgets.index');
@@ -76,6 +78,7 @@ class BudgetController extends Controller
                 'id' => $budget->id,
                 'name' => $budget->name,
                 'amount' => $budget->amount,
+                'show_daily_amount' => $budget->show_daily_amount,
                 'average_daily_amount' => $budget->amount / (Carbon::now()->diffInDays(Carbon::parse(Auth::user()->next_payday))),
             ]
         ]);
@@ -109,6 +112,7 @@ class BudgetController extends Controller
 
         $budget->name = $request->name;
         $budget->amount = $request->amount * 100;
+        $budget->show_daily_amount = $request->show_daily_amount;
         $budget->save();
 
         return to_route('budgets.show', $budget->id);

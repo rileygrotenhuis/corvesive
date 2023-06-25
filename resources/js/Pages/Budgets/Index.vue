@@ -18,7 +18,7 @@ defineProps({
                     <div class="text-center border bg-slate-50 shadow-lg w-48 p-4 rounded-md">
                         <h3 class="text-2xl font-semibold">{{ budget.name }}</h3>
                         <h4 class="text-xl">${{ (budget.amount / 100).toFixed(2) }}</h4>
-                        <h4>(~${{ (budget.average_daily_amount / 100).toFixed(2) }}/day)</h4>
+                        <h4 v-if="budget.show_daily_amount">(~${{ (budget.average_daily_amount / 100).toFixed(2) }}/day)</h4>
                     </div>
                 </a>
             </div>
