@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Dev Admin',
             'email' => 'dev@dev.com',
-            'password' => '$2y$10$4EGb48ZZW3GWWL6Fw1JbLuIYhYruQTG8M23xquQZ3hQk7t.KhuAnO'
+            'password' => '$2y$10$4EGb48ZZW3GWWL6Fw1JbLuIYhYruQTG8M23xquQZ3hQk7t.KhuAnO',
+            'total' => 250000
         ]);
 
         foreach (['Groceries', 'Gas', 'Spending'] as $budget) {
