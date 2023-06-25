@@ -17,7 +17,8 @@ class ExpenseFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'amount' => $this->faker->numberBetween(10000, 50000),
         ];
     }
 }

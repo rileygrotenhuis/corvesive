@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Budget;
+use App\Models\Expense;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +25,12 @@ class DatabaseSeeder extends Seeder
         foreach (['Groceries', 'Gas', 'Spending'] as $budget) {
             Budget::factory()->for($user)->create([
                 'name' => $budget
+            ]);
+        }
+
+        foreach (['Rent', 'Utilities', 'Insurance'] as $expense) {
+            Expense::factory()->for($user)->create([
+                'name' => $expense
             ]);
         }
     }
