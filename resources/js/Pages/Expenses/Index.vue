@@ -6,24 +6,23 @@ import { usePage } from '@inertiajs/vue3';
 const user = usePage().props.auth.user;
 
 defineProps({
-    budgets: Array
+    expenses: Array
 });
 </script>
 
 <template>
     <AuthenticatedLayout>
         <div class="mt-4 flex flex-col gap-4">
-            <div class="w-48 mx-auto" v-for="budget in budgets" :key="budget.id">
-                <a :href="route('budgets.show', budget.id)">
+            <div class="w-48 mx-auto" v-for="expense in expenses" :key="expense.id">
+                <a :href="route('expenses.show', expense.id)">
                     <div class="text-center border bg-slate-50 shadow-md w-48 p-4 rounded-md">
-                        <h3 class="text-2xl font-semibold">{{ budget.name }}</h3>
-                        <h4 class="text-xl">${{ (budget.amount / 100).toFixed(2) }}</h4>
-                        <h4>(~${{ (budget.average_daily_amount / 100).toFixed(2) }}/day)</h4>
+                        <h3 class="text-2xl font-semibold">{{ expense.name }}</h3>
+                        <h4 class="text-xl">${{ (expense.amount / 100).toFixed(2) }}</h4>
                     </div>
                 </a>
             </div>
-            <a class="w-auto mx-auto" :href="route('budgets.create')">
-                <PrimaryButton>+ Budget</PrimaryButton>
+            <a class="w-auto mx-auto" :href="route('expenses.create')">
+                <PrimaryButton>+ Expense</PrimaryButton>
             </a>
         </div>
     </AuthenticatedLayout>

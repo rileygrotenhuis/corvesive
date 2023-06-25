@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ExpenseController extends Controller
 {
@@ -15,7 +17,11 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Expenses/Index', [
+            'expenses' => Expense::with('user')
+                ->where('user_id', Auth::user()->id)
+                ->get()
+        ]);
     }
 
     /**
@@ -25,7 +31,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Expenses/Create');
     }
 
     /**
@@ -36,7 +42,13 @@ class ExpenseController extends Controller
      */
     public function store(StoreExpenseRequest $request)
     {
-        //
+        $expense = new Expense();
+        $expense->user_id = Auth::user()->id;
+        $expense->name = $request->name;
+        $expense->amount = $request->amount * 100;
+        $expense->save();
+
+        return to_route('expenses.index');
     }
 
     /**
@@ -47,7 +59,11 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
-        //
+        $this->authorize('view', $expense);
+
+        return Inertia::render('Expenses/Show', [
+            'expense' => $expense
+        ]);
     }
 
     /**
@@ -58,7 +74,11 @@ class ExpenseController extends Controller
      */
     public function edit(Expense $expense)
     {
-        //
+        $this->authorize('update', $expense);
+
+        return Inertia::render('Expenses/Edit', [
+            'expense' => $expense
+        ]);
     }
 
     /**
@@ -70,7 +90,13 @@ class ExpenseController extends Controller
      */
     public function update(UpdateExpenseRequest $request, Expense $expense)
     {
-        //
+        $this->authorize('update', $expense);
+
+        $expense->name = $request->name;
+        $expense->amount = $request->amount * 100;
+        $expense->save();
+
+        return to_route('expenses.show', $expense->id);
     }
 
     /**
@@ -81,6 +107,10 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        //
+        $this->authorize('delete', $expense);
+
+        $expense->delete();
+
+        return to_route('expenses.index');
     }
 }

@@ -30,7 +30,7 @@ class ExpensePolicy
      */
     public function view(User $user, Expense $expense)
     {
-        //
+        return $user->id === $expense->user_id;
     }
 
     /**
@@ -53,7 +53,7 @@ class ExpensePolicy
      */
     public function update(User $user, Expense $expense)
     {
-        //
+        return $user->id === $expense->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class ExpensePolicy
      */
     public function delete(User $user, Expense $expense)
     {
-        //
+        return $user->id === $expense->user_id;
     }
 
     /**
