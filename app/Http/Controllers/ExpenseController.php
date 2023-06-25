@@ -128,7 +128,25 @@ class ExpenseController extends Controller
         $expense->save();
 
         $user = User::where('id', Auth::user()->id)->first();
-        $user->total = $expense->amount;
+        $user->total = $user->total - $expense->amount;
+        $user->save();
+
+        return to_route('expenses.index', $expense);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Models\Expense  $expense
+     * @return \Illuminate\Http\Response
+     */
+    public function unpayment(Expense $expense)
+    {
+        $expense->is_payed = false;
+        $expense->save();
+
+        $user = User::where('id', Auth::user()->id)->first();
+        $user->total = $user->total + $expense->amount;
         $user->save();
 
         return to_route('expenses.index', $expense);

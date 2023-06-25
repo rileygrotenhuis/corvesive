@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/expenses/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
     Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
     Route::post('/expenses/{expense}/payment', [ExpenseController::class, 'payment'])->name('expenses.payment');
+    Route::post('/expenses/{expense}/unpayment', [ExpenseController::class, 'unpayment'])->name('expenses.unpayment');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
