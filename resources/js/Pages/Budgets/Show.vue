@@ -13,7 +13,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(route('budgets.payment', props.budget.id));
+    form.post(route('budgets.payment', props.budget.id));
     form.reset();
 };
 
