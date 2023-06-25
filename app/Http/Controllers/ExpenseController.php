@@ -21,6 +21,7 @@ class ExpenseController extends Controller
         return Inertia::render('Expenses/Index', [
             'expenses' => Expense::with('user')
                 ->where('user_id', Auth::user()->id)
+                ->orderBy('is_payed', 'asc')
                 ->get()
         ]);
     }

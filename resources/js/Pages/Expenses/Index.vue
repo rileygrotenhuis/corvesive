@@ -15,7 +15,7 @@ defineProps({
         <div class="mt-4 flex flex-col gap-4">
             <div class="w-48 mx-auto" v-for="expense in expenses" :key="expense.id">
                 <a :href="route('expenses.show', expense.id)">
-                    <div class="text-center border bg-slate-50 shadow-md w-48 p-4 rounded-md">
+                    <div class="text-center border shadow-lg w-48 p-4 rounded-md" :class="`${expense.is_payed ? 'bg-green-200' : 'bg-slate-50'}`">
                         <h3 class="text-2xl font-semibold">{{ expense.name }}</h3>
                         <h4 class="text-xl">${{ (expense.amount / 100).toFixed(2) }}</h4>
                     </div>
