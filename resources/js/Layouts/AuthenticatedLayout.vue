@@ -29,11 +29,14 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('budgets.index')" :active="route().current('budgets.index')">
-                                    Budgets
+                                <NavLink :href="route('savings.index')" :active="route().current('savings.index')">
+                                    Savings
                                 </NavLink>
                                 <NavLink :href="route('expenses.index')" :active="route().current('expenses.index')">
                                     Expenses
+                                </NavLink>
+                                <NavLink :href="route('budgets.index')" :active="route().current('budgets.index')">
+                                    Budgets
                                 </NavLink>
                             </div>
                         </div>
@@ -115,11 +118,14 @@ const showingNavigationDropdown = ref(false);
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('budgets.index')" :active="route().current('budgets.index')">
-                            Budgets
+                        <ResponsiveNavLink :href="route('savings.index')" :active="route().current('savings.index')">
+                            Savings
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('expenses.index')" :active="route().current('expenses.index')">
                             Expenses
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('budgets.index')" :active="route().current('budgets.index')">
+                            Budgets
                         </ResponsiveNavLink>
                     </div>
 

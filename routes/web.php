@@ -4,6 +4,7 @@ use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SavingController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -27,6 +28,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
     Route::post('/expenses/{expense}/payment', [ExpenseController::class, 'payment'])->name('expenses.payment');
     Route::post('/expenses/{expense}/unpayment', [ExpenseController::class, 'unpayment'])->name('expenses.unpayment');
+
+    Route::get('/savings', [SavingController::class, 'index'])->name('savings.index');
+    Route::get('/savings/create', [SavingController::class, 'create'])->name('savings.create');
+    Route::get('/savings/{saving}', [SavingController::class, 'show'])->name('savings.show');
+    Route::get('/savings/{saving}/edit', [SavingController::class, 'edit'])->name('savings.edit');
+    Route::post('/savings', [SavingController::class, 'store'])->name('savings.store');
+    Route::put('/savings/{saving}', [SavingController::class, 'update'])->name('savings.update');
+    Route::delete('/savings/{saving}', [SavingController::class, 'destroy'])->name('savings.destroy');
+    Route::post('/savings/{saving}/payment', [SavingController::class, 'payment'])->name('savings.payment');
+    Route::post('/savings/{saving}/unpayment', [SavingController::class, 'unpayment'])->name('savings.unpayment');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
