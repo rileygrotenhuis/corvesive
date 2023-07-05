@@ -9,7 +9,7 @@ import { useForm } from '@inertiajs/vue3';
 const form = useForm({
     name: '',
     amount: '',
-    show_daily_amount: true
+    show_daily_amount: false
 });
 </script>
 
