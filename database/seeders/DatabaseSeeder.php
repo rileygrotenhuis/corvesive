@@ -21,24 +21,24 @@ class DatabaseSeeder extends Seeder
             'name' => 'Dev Admin',
             'email' => 'dev@dev.com',
             'password' => '$2y$10$4EGb48ZZW3GWWL6Fw1JbLuIYhYruQTG8M23xquQZ3hQk7t.KhuAnO',
-            'total' => 250000
+            'total' => 250000,
         ]);
 
         foreach (['Groceries', 'Gas', 'Spending'] as $budget) {
             Budget::factory()->for($user)->create([
-                'name' => $budget
+                'name' => $budget,
             ]);
         }
 
         foreach (['Rent', 'Utilities', 'Insurance'] as $expense) {
             Expense::factory()->for($user)->create([
-                'name' => $expense
+                'name' => $expense,
             ]);
         }
 
         foreach (['401K', 'General'] as $saving) {
             Saving::factory()->for($user)->create([
-                'name' => $saving
+                'name' => $saving,
             ]);
         }
     }

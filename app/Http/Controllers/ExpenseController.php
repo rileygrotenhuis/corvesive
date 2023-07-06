@@ -6,43 +6,29 @@ use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ExpenseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('Expenses/Index', [
             'expenses' => Expense::with('user')
                 ->where('user_id', Auth::user()->id)
                 ->orderBy('is_payed', 'asc')
-                ->get()
+                ->get(),
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('Expenses/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreExpenseRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreExpenseRequest $request)
+    public function store(StoreExpenseRequest $request): RedirectResponse
     {
         $expense = new Expense();
         $expense->user_id = Auth::user()->id;
@@ -53,44 +39,25 @@ class ExpenseController extends Controller
         return to_route('expenses.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Expense  $expense
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Expense $expense)
+    public function show(Expense $expense): Response
     {
         $this->authorize('view', $expense);
 
         return Inertia::render('Expenses/Show', [
-            'expense' => $expense
+            'expense' => $expense,
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Expense  $expense
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Expense $expense)
+    public function edit(Expense $expense): Response
     {
         $this->authorize('update', $expense);
 
         return Inertia::render('Expenses/Edit', [
-            'expense' => $expense
+            'expense' => $expense,
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateExpenseRequest  $request
-     * @param  \App\Models\Expense  $expense
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateExpenseRequest $request, Expense $expense)
+    public function update(UpdateExpenseRequest $request, Expense $expense): RedirectResponse
     {
         $this->authorize('update', $expense);
 
@@ -101,13 +68,7 @@ class ExpenseController extends Controller
         return to_route('expenses.show', $expense->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Expense  $expense
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Expense $expense)
+    public function destroy(Expense $expense): RedirectResponse
     {
         $this->authorize('delete', $expense);
 
@@ -116,13 +77,7 @@ class ExpenseController extends Controller
         return to_route('expenses.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Models\Expense  $expense
-     * @return \Illuminate\Http\Response
-     */
-    public function payment(Expense $expense)
+    public function payment(Expense $expense): RedirectResponse
     {
         $expense->is_payed = true;
         $expense->save();
@@ -134,13 +89,7 @@ class ExpenseController extends Controller
         return to_route('expenses.index', $expense);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Models\Expense  $expense
-     * @return \Illuminate\Http\Response
-     */
-    public function unpayment(Expense $expense)
+    public function unpayment(Expense $expense): RedirectResponse
     {
         $expense->is_payed = false;
         $expense->save();

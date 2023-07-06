@@ -6,43 +6,29 @@ use App\Http\Requests\StoreSavingRequest;
 use App\Http\Requests\UpdateSavingRequest;
 use App\Models\Saving;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class SavingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('Savings/Index', [
             'savings' => Saving::with('user')
                 ->where('user_id', Auth::user()->id)
                 ->orderBy('is_payed', 'asc')
-                ->get()
+                ->get(),
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('Savings/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreSavingRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreSavingRequest $request)
+    public function store(StoreSavingRequest $request): RedirectResponse
     {
         $saving = new Saving();
         $saving->user_id = Auth::user()->id;
@@ -53,44 +39,25 @@ class SavingController extends Controller
         return to_route('savings.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Saving  $saving
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Saving $saving)
+    public function show(Saving $saving): Response
     {
         $this->authorize('view', $saving);
 
         return Inertia::render('Savings/Show', [
-            'saving' => $saving
+            'saving' => $saving,
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Saving  $saving
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Saving $saving)
+    public function edit(Saving $saving): Response
     {
         $this->authorize('update', $saving);
 
         return Inertia::render('Savings/Edit', [
-            'saving' => $saving
+            'saving' => $saving,
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateSavingRequest  $request
-     * @param  \App\Models\Saving  $saving
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateSavingRequest $request, Saving $saving)
+    public function update(UpdateSavingRequest $request, Saving $saving): RedirectResponse
     {
         $this->authorize('update', $saving);
 
@@ -101,13 +68,7 @@ class SavingController extends Controller
         return to_route('savings.show', $saving->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Saving  $saving
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Saving $saving)
+    public function destroy(Saving $saving): RedirectResponse
     {
         $this->authorize('delete', $saving);
 
@@ -116,13 +77,7 @@ class SavingController extends Controller
         return to_route('savings.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Models\Saving  $saving
-     * @return \Illuminate\Http\Response
-     */
-    public function payment(Saving $saving)
+    public function payment(Saving $saving): RedirectResponse
     {
         $saving->is_payed = true;
         $saving->save();
@@ -134,13 +89,7 @@ class SavingController extends Controller
         return to_route('savings.index', $saving);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Models\Saving  $saving
-     * @return \Illuminate\Http\Response
-     */
-    public function unpayment(Saving $saving)
+    public function unpayment(Saving $saving): RedirectResponse
     {
         $saving->is_payed = false;
         $saving->save();

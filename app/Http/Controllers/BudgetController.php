@@ -6,18 +6,15 @@ use App\Http\Requests\PaymentBudgetRequest;
 use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
+use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Carbon\Carbon;
+use Inertia\Response;
 
 class BudgetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('Budgets/Index', [
             'budgets' => Budget::with('user')
@@ -35,23 +32,12 @@ class BudgetController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('Budgets/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBudgetRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreBudgetRequest $request)
+    public function store(StoreBudgetRequest $request): RedirectResponse
     {
         $budget = new Budget();
         $budget->user_id = Auth::user()->id;
@@ -63,13 +49,7 @@ class BudgetController extends Controller
         return to_route('budgets.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Budget  $budget
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Budget $budget)
+    public function show(Budget $budget): Response
     {
         $this->authorize('view', $budget);
 
@@ -80,33 +60,20 @@ class BudgetController extends Controller
                 'amount' => $budget->amount,
                 'show_daily_amount' => $budget->show_daily_amount,
                 'average_daily_amount' => $budget->amount / (Carbon::now()->diffInDays(Carbon::parse(Auth::user()->next_payday))),
-            ]
+            ],
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Budget  $budget
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Budget $budget)
+    public function edit(Budget $budget): Response
     {
         $this->authorize('update', $budget);
 
         return Inertia::render('Budgets/Edit', [
-            'budget' => $budget
+            'budget' => $budget,
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBudgetRequest  $request
-     * @param  \App\Models\Budget  $budget
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateBudgetRequest $request, Budget $budget)
+    public function update(UpdateBudgetRequest $request, Budget $budget): RedirectResponse
     {
         $this->authorize('update', $budget);
 
@@ -118,13 +85,7 @@ class BudgetController extends Controller
         return to_route('budgets.show', $budget->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Budget  $budget
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Budget $budget)
+    public function destroy(Budget $budget): RedirectResponse
     {
         $this->authorize('delete', $budget);
 
@@ -133,14 +94,7 @@ class BudgetController extends Controller
         return to_route('budgets.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\PaymentBudgetRequest  $request
-     * @param  \App\Models\Budget  $budget
-     * @return \Illuminate\Http\Response
-     */
-    public function payment(PaymentBudgetRequest $request, Budget $budget)
+    public function payment(PaymentBudgetRequest $request, Budget $budget): RedirectResponse
     {
         $budget->amount = $budget->amount - ($request->amount * 100);
         $budget->save();
