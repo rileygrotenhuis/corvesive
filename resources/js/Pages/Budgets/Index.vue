@@ -10,10 +10,10 @@ defineProps({
 <template>
   <AuthenticatedLayout>
     <div class="mt-4 flex flex-col gap-4">
-      <div class="w-48 mx-auto" v-for="budget in budgets.data" :key="budget.id">
+      <div class="mx-auto w-48" v-for="budget in budgets.data" :key="budget.id">
         <a :href="route('budgets.show', budget.id)">
           <div
-            class="text-center border bg-slate-50 shadow-lg w-48 p-4 rounded-md"
+            class="w-48 rounded-md border bg-slate-50 p-4 text-center shadow-lg"
           >
             <h3 class="text-2xl font-semibold">{{ budget.name }}</h3>
             <h4 class="text-xl">${{ (budget.amount / 100).toFixed(2) }}</h4>
@@ -23,7 +23,7 @@ defineProps({
           </div>
         </a>
       </div>
-      <a class="w-auto mx-auto" :href="route('budgets.create')">
+      <a class="mx-auto w-auto" :href="route('budgets.create')">
         <PrimaryButton>+ Budget</PrimaryButton>
       </a>
     </div>

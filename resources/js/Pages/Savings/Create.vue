@@ -13,7 +13,7 @@ const form = useForm({
 
 <template>
   <AuthenticatedLayout>
-    <h1 class="text-xl text-center font-semibold">Create Saving</h1>
+    <h1 class="text-center text-xl font-semibold">Create Saving</h1>
     <form
       class="mx-auto w-fit"
       @submit.prevent="form.post(route('savings.store'))"

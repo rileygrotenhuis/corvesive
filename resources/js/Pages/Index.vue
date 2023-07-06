@@ -1,9 +1,10 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import ExpenseTypeSwitch from '@/Components/UI/ExpenseTypeSwitch.vue';
 </script>
 
 <template>
   <AuthenticatedLayout>
-    <h1 class="text-xl text-center font-semibold">Home</h1>
+    <ExpenseTypeSwitch />
   </AuthenticatedLayout>
 </template>

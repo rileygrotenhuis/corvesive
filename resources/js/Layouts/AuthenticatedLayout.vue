@@ -18,13 +18,13 @@ const user = computed(() => page.props.auth.user);
 <template>
   <div>
     <div class="min-h-screen bg-gray-100">
-      <nav class="bg-white border-b border-gray-100">
+      <nav class="border-b border-gray-100 bg-white">
         <!-- Primary Navigation Menu -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between items-center h-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 items-center justify-between">
             <div class="flex">
               <!-- Logo -->
-              <div class="shrink-0 flex items-center">
+              <div class="flex shrink-0 items-center">
                 <Link :href="route('home')">
                   <ApplicationLogo
                     class="block h-9 w-auto fill-current text-gray-800"
@@ -55,23 +55,23 @@ const user = computed(() => page.props.auth.user);
               </div>
             </div>
 
-            <div class="text-slate-500 text-sm">
+            <div class="text-sm text-slate-500">
               ${{ (user.total / 100).toFixed(2) }}
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden sm:ml-6 sm:flex sm:items-center">
               <!-- Settings Dropdown -->
-              <div class="ml-3 relative">
+              <div class="relative ml-3">
                 <Dropdown align="right" width="48">
                   <template #trigger>
                     <span class="inline-flex rounded-md">
                       <button
                         type="button"
-                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                        class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                       >
                         <span>{{ $page.props.auth.user.name }}</span>
                         <svg
-                          class="ml-2 -mr-0.5 h-4 w-4"
+                          class="-mr-0.5 ml-2 h-4 w-4"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
@@ -106,7 +106,7 @@ const user = computed(() => page.props.auth.user);
             <div class="-mr-2 flex items-center sm:hidden">
               <button
                 @click="showingNavigationDropdown = !showingNavigationDropdown"
-                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
               >
                 <svg
                   class="h-6 w-6"
@@ -148,7 +148,7 @@ const user = computed(() => page.props.auth.user);
           }"
           class="sm:hidden"
         >
-          <div class="pt-2 pb-3 space-y-1">
+          <div class="space-y-1 pb-3 pt-2">
             <ResponsiveNavLink
               :href="route('savings.index')"
               :active="route().current('savings.index')"
@@ -170,12 +170,12 @@ const user = computed(() => page.props.auth.user);
           </div>
 
           <!-- Responsive Settings Options -->
-          <div class="pt-4 pb-1 border-t border-gray-200">
+          <div class="border-t border-gray-200 pb-1 pt-4">
             <div class="px-4">
-              <div class="font-medium text-base text-gray-800">
+              <div class="text-base font-medium text-gray-800">
                 {{ $page.props.auth.user.name }}
               </div>
-              <div class="font-medium text-sm text-gray-500 flex gap-4">
+              <div class="flex gap-4 text-sm font-medium text-gray-500">
                 {{ $page.props.auth.user.email }}
               </div>
             </div>
@@ -198,13 +198,13 @@ const user = computed(() => page.props.auth.user);
 
       <!-- Page Heading -->
       <header class="bg-white shadow" v-if="$slots.header">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <slot name="header" />
         </div>
       </header>
 
       <!-- Page Content -->
-      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <main class="mx-auto mt-8 max-w-7xl px-4 sm:px-6 lg:px-8">
         <slot />
       </main>
     </div>

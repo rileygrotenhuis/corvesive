@@ -19,7 +19,7 @@ const form = useForm({
 
 <template>
   <AuthenticatedLayout>
-    <h1 class="text-xl text-center font-semibold">
+    <h1 class="text-center text-xl font-semibold">
       Edit {{ budget.data.name }} Budget
     </h1>
     <form
