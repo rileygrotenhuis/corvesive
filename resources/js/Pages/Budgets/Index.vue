@@ -10,7 +10,7 @@ defineProps({
 <template>
     <AuthenticatedLayout>
         <div class="mt-4 flex flex-col gap-4">
-            <div class="w-48 mx-auto" v-for="budget in budgets" :key="budget.id">
+            <div class="w-48 mx-auto" v-for="budget in budgets.data" :key="budget.id">
                 <a :href="route('budgets.show', budget.id)">
                     <div class="text-center border bg-slate-50 shadow-lg w-48 p-4 rounded-md">
                         <h3 class="text-2xl font-semibold">{{ budget.name }}</h3>

@@ -10,7 +10,7 @@ defineProps({
 <template>
     <AuthenticatedLayout>
         <div class="mt-4 flex flex-col gap-4">
-            <div class="w-48 mx-auto" v-for="saving in savings" :key="saving.id">
+            <div class="w-48 mx-auto" v-for="saving in savings.data" :key="saving.id">
                 <a :href="route('savings.show', saving.id)">
                     <div class="text-center border shadow-lg w-48 p-4 rounded-md" :class="`${saving.is_payed ? 'bg-green-200' : 'bg-slate-50'}`">
                         <h3 class="text-2xl font-semibold">{{ saving.name }}</h3>

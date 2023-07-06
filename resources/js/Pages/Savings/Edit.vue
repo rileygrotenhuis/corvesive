@@ -10,15 +10,15 @@ const props = defineProps({
 });
 
 const form = useForm({
-    name: props.saving.name,
-    amount: (props.saving.amount / 100).toFixed(2)
+    name: props.saving.data.name,
+    amount: (props.saving.data.amount / 100).toFixed(2)
 });
 </script>
 
 <template>
     <AuthenticatedLayout>
-        <h1 class="text-xl text-center font-semibold">Edit {{ saving.name }} saving</h1>
-        <form class="mx-auto w-fit" @submit.prevent="form.put(route('savings.update', saving.id))">
+        <h1 class="text-xl text-center font-semibold">Edit {{ saving.data.name }} saving</h1>
+        <form class="mx-auto w-fit" @submit.prevent="form.put(route('savings.update', saving.data.id))">
             <div class="mt-4">
                 <InputLabel class="mb-2" value="Name" />
                 <TextInput type="text" v-model="form.name" />

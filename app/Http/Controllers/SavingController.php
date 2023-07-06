@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSavingRequest;
 use App\Http\Requests\UpdateSavingRequest;
+use App\Http\Resources\SavingResource;
 use App\Models\Saving;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -16,10 +17,11 @@ class SavingController extends Controller
     public function index(): Response
     {
         return Inertia::render('Savings/Index', [
-            'savings' => Saving::with('user')
-                ->where('user_id', Auth::user()->id)
-                ->orderBy('is_payed', 'asc')
-                ->get(),
+            'savings' => SavingResource::collection(
+                Saving::where('user_id', Auth::user()->id)
+                    ->orderBy('is_payed', 'asc')
+                    ->get()
+            ),
         ]);
     }
 
@@ -44,7 +46,7 @@ class SavingController extends Controller
         $this->authorize('view', $saving);
 
         return Inertia::render('Savings/Show', [
-            'saving' => $saving,
+            'saving' => new SavingResource($saving),
         ]);
     }
 
@@ -53,7 +55,7 @@ class SavingController extends Controller
         $this->authorize('update', $saving);
 
         return Inertia::render('Savings/Edit', [
-            'saving' => $saving,
+            'saving' => new SavingResource($saving),
         ]);
     }
 

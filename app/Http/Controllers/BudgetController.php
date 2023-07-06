@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PaymentBudgetRequest;
 use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
+use App\Http\Resources\BudgetResource;
 use App\Models\Budget;
-use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -17,18 +17,10 @@ class BudgetController extends Controller
     public function index(): Response
     {
         return Inertia::render('Budgets/Index', [
-            'budgets' => Budget::with('user')
-                ->where('user_id', Auth::user()->id)
-                ->get()
-                ->map(function ($budget) {
-                    return [
-                        'id' => $budget->id,
-                        'name' => $budget->name,
-                        'amount' => $budget->amount,
-                        'show_daily_amount' => $budget->show_daily_amount,
-                        'average_daily_amount' => $budget->amount / (Carbon::now()->diffInDays(Carbon::parse(Auth::user()->next_payday))),
-                    ];
-                }),
+            'budgets' => BudgetResource::collection(
+                Budget::where('user_id', Auth::user()->id)
+                    ->get()
+            ),
         ]);
     }
 
@@ -54,13 +46,7 @@ class BudgetController extends Controller
         $this->authorize('view', $budget);
 
         return Inertia::render('Budgets/Show', [
-            'budget' => [
-                'id' => $budget->id,
-                'name' => $budget->name,
-                'amount' => $budget->amount,
-                'show_daily_amount' => $budget->show_daily_amount,
-                'average_daily_amount' => $budget->amount / (Carbon::now()->diffInDays(Carbon::parse(Auth::user()->next_payday))),
-            ],
+            'budget' => new BudgetResource($budget),
         ]);
     }
 
@@ -69,7 +55,7 @@ class BudgetController extends Controller
         $this->authorize('update', $budget);
 
         return Inertia::render('Budgets/Edit', [
-            'budget' => $budget,
+            'budget' => new BudgetResource($budget),
         ]);
     }
 

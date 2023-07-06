@@ -10,15 +10,15 @@ const props = defineProps({
 });
 
 const form = useForm({
-    name: props.bill.name,
-    amount: (props.bill.amount / 100).toFixed(2)
+    name: props.bill.data.name,
+    amount: (props.bill.data.amount / 100).toFixed(2)
 });
 </script>
 
 <template>
     <AuthenticatedLayout>
-        <h1 class="text-xl text-center font-semibold">Edit {{ bill.name }} bill</h1>
-        <form class="mx-auto w-fit" @submit.prevent="form.put(route('bills.update', bill.id))">
+        <h1 class="text-xl text-center font-semibold">Edit {{ bill.data.name }} bill</h1>
+        <form class="mx-auto w-fit" @submit.prevent="form.put(route('bills.update', bill.data.id))">
             <div class="mt-4">
                 <InputLabel class="mb-2" value="Name" />
                 <TextInput type="text" v-model="form.name" />

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBillRequest;
 use App\Http\Requests\UpdateBillRequest;
+use App\Http\Resources\BillResource;
 use App\Models\Bill;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -16,10 +17,11 @@ class BillController extends Controller
     public function index(): Response
     {
         return Inertia::render('Bills/Index', [
-            'bills' => Bill::with('user')
-                ->where('user_id', Auth::user()->id)
-                ->orderBy('is_payed', 'asc')
-                ->get(),
+            'bills' => BillResource::collection(
+                Bill::where('user_id', Auth::user()->id)
+                    ->orderBy('is_payed', 'desc')
+                    ->get()
+            ),
         ]);
     }
 
@@ -44,7 +46,7 @@ class BillController extends Controller
         $this->authorize('view', $bill);
 
         return Inertia::render('Bills/Show', [
-            'bill' => $bill,
+            'bill' => new BillResource($bill),
         ]);
     }
 
@@ -53,7 +55,7 @@ class BillController extends Controller
         $this->authorize('update', $bill);
 
         return Inertia::render('Bills/Edit', [
-            'bill' => $bill,
+            'bill' => new BillResource($bill),
         ]);
     }
 

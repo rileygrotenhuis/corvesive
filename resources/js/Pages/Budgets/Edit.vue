@@ -11,16 +11,16 @@ const props = defineProps({
 });
 
 const form = useForm({
-    name: props.budget.name,
-    amount: (props.budget.amount / 100).toFixed(2),
-    show_daily_amount: props.budget.show_daily_amount
+    name: props.budget.data.name,
+    amount: (props.budget.data.amount / 100).toFixed(2),
+    show_daily_amount: props.budget.data.show_daily_amount
 });
 </script>
 
 <template>
     <AuthenticatedLayout>
-        <h1 class="text-xl text-center font-semibold">Edit {{ budget.name }} Budget</h1>
-        <form class="mx-auto w-fit" @submit.prevent="form.put(route('budgets.update', budget.id))">
+        <h1 class="text-xl text-center font-semibold">Edit {{ budget.data.name }} Budget</h1>
+        <form class="mx-auto w-fit" @submit.prevent="form.put(route('budgets.update', budget.data.id))">
             <div class="mt-4">
                 <InputLabel class="mb-2" value="Name" />
                 <TextInput type="text" v-model="form.name" />
