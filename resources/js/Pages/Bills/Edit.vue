@@ -6,28 +6,33 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
-    bill: Object
+  bill: Object,
 });
 
 const form = useForm({
-    name: props.bill.data.name,
-    amount: (props.bill.data.amount / 100).toFixed(2)
+  name: props.bill.data.name,
+  amount: (props.bill.data.amount / 100).toFixed(2),
 });
 </script>
 
 <template>
-    <AuthenticatedLayout>
-        <h1 class="text-xl text-center font-semibold">Edit {{ bill.data.name }} bill</h1>
-        <form class="mx-auto w-fit" @submit.prevent="form.put(route('bills.update', bill.data.id))">
-            <div class="mt-4">
-                <InputLabel class="mb-2" value="Name" />
-                <TextInput type="text" v-model="form.name" />
-            </div>
-            <div class="mt-4">
-                <InputLabel class="mb-2" value="Amount" />
-                <TextInput type="number" step="0.01" v-model="form.amount" />
-            </div>
-            <PrimaryButton class="mt-4">Save</PrimaryButton>
-        </form>
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <h1 class="text-xl text-center font-semibold">
+      Edit {{ bill.data.name }} bill
+    </h1>
+    <form
+      class="mx-auto w-fit"
+      @submit.prevent="form.put(route('bills.update', bill.data.id))"
+    >
+      <div class="mt-4">
+        <InputLabel class="mb-2" value="Name" />
+        <TextInput type="text" v-model="form.name" />
+      </div>
+      <div class="mt-4">
+        <InputLabel class="mb-2" value="Amount" />
+        <TextInput type="number" step="0.01" v-model="form.amount" />
+      </div>
+      <PrimaryButton class="mt-4">Save</PrimaryButton>
+    </form>
+  </AuthenticatedLayout>
 </template>

@@ -3,25 +3,29 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 defineProps({
-    budgets: Array
+  budgets: Array,
 });
 </script>
 
 <template>
-    <AuthenticatedLayout>
-        <div class="mt-4 flex flex-col gap-4">
-            <div class="w-48 mx-auto" v-for="budget in budgets.data" :key="budget.id">
-                <a :href="route('budgets.show', budget.id)">
-                    <div class="text-center border bg-slate-50 shadow-lg w-48 p-4 rounded-md">
-                        <h3 class="text-2xl font-semibold">{{ budget.name }}</h3>
-                        <h4 class="text-xl">${{ (budget.amount / 100).toFixed(2) }}</h4>
-                        <h4 v-if="budget.show_daily_amount">(~${{ (budget.average_daily_amount / 100).toFixed(2) }}/day)</h4>
-                    </div>
-                </a>
-            </div>
-            <a class="w-auto mx-auto" :href="route('budgets.create')">
-                <PrimaryButton>+ Budget</PrimaryButton>
-            </a>
-        </div>
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <div class="mt-4 flex flex-col gap-4">
+      <div class="w-48 mx-auto" v-for="budget in budgets.data" :key="budget.id">
+        <a :href="route('budgets.show', budget.id)">
+          <div
+            class="text-center border bg-slate-50 shadow-lg w-48 p-4 rounded-md"
+          >
+            <h3 class="text-2xl font-semibold">{{ budget.name }}</h3>
+            <h4 class="text-xl">${{ (budget.amount / 100).toFixed(2) }}</h4>
+            <h4 v-if="budget.show_daily_amount">
+              (~${{ (budget.average_daily_amount / 100).toFixed(2) }}/day)
+            </h4>
+          </div>
+        </a>
+      </div>
+      <a class="w-auto mx-auto" :href="route('budgets.create')">
+        <PrimaryButton>+ Budget</PrimaryButton>
+      </a>
+    </div>
+  </AuthenticatedLayout>
 </template>
