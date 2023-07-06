@@ -1,9 +1,6 @@
 <script setup>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { usePage } from '@inertiajs/vue3';
-
-const user = usePage().props.auth.user;
 
 defineProps({
     budgets: Array

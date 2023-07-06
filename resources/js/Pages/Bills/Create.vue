@@ -13,8 +13,8 @@ const form = useForm({
 
 <template>
     <AuthenticatedLayout>
-        <h1 class="text-xl text-center font-semibold">Create Expense</h1>
-        <form class="mx-auto w-fit" @submit.prevent="form.post(route('expenses.store'))">
+        <h1 class="text-xl text-center font-semibold">Create Bill</h1>
+        <form class="mx-auto w-fit" @submit.prevent="form.post(route('bills.store'))">
             <div class="mt-4">
                 <InputLabel class="mb-2" value="Name" />
                 <TextInput type="text" v-model="form.name" />

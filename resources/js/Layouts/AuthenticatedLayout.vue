@@ -37,8 +37,8 @@ const user = computed(() => page.props.auth.user);
                                 <NavLink :href="route('savings.index')" :active="route().current('savings.index')">
                                     Savings
                                 </NavLink>
-                                <NavLink :href="route('expenses.index')" :active="route().current('expenses.index')">
-                                    Expenses
+                                <NavLink :href="route('bills.index')" :active="route().current('bills.index')">
+                                    Bills
                                 </NavLink>
                                 <NavLink :href="route('budgets.index')" :active="route().current('budgets.index')">
                                     Budgets
@@ -127,8 +127,8 @@ const user = computed(() => page.props.auth.user);
                         <ResponsiveNavLink :href="route('savings.index')" :active="route().current('savings.index')">
                             Savings
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('expenses.index')" :active="route().current('expenses.index')">
-                            Expenses
+                        <ResponsiveNavLink :href="route('bills.index')" :active="route().current('bills.index')">
+                            Bills
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('budgets.index')" :active="route().current('budgets.index')">
                             Budgets

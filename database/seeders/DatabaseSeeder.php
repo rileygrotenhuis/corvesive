@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bill;
 use App\Models\Budget;
-use App\Models\Expense;
 use App\Models\Saving;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -30,9 +30,9 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        foreach (['Rent', 'Utilities', 'Insurance'] as $expense) {
-            Expense::factory()->for($user)->create([
-                'name' => $expense,
+        foreach (['Rent', 'Utilities', 'Insurance'] as $bill) {
+            Bill::factory()->for($user)->create([
+                'name' => $bill,
             ]);
         }
 

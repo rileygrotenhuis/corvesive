@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\BudgetController;
-use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SavingController;
@@ -19,15 +19,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/budgets/{budget}', [BudgetController::class, 'destroy'])->name('budgets.destroy');
     Route::post('/budgets/{budget}/payment', [BudgetController::class, 'payment'])->name('budgets.payment');
 
-    Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses.index');
-    Route::get('/expenses/create', [ExpenseController::class, 'create'])->name('expenses.create');
-    Route::get('/expenses/{expense}', [ExpenseController::class, 'show'])->name('expenses.show');
-    Route::get('/expenses/{expense}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
-    Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
-    Route::put('/expenses/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
-    Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
-    Route::post('/expenses/{expense}/payment', [ExpenseController::class, 'payment'])->name('expenses.payment');
-    Route::post('/expenses/{expense}/unpayment', [ExpenseController::class, 'unpayment'])->name('expenses.unpayment');
+    Route::get('/bills', [BillController::class, 'index'])->name('bills.index');
+    Route::get('/bills/create', [BillController::class, 'create'])->name('bills.create');
+    Route::get('/bills/{bill}', [BillController::class, 'show'])->name('bills.show');
+    Route::get('/bills/{bill}/edit', [BillController::class, 'edit'])->name('bills.edit');
+    Route::post('/bills', [BillController::class, 'store'])->name('bills.store');
+    Route::put('/bills/{bill}', [BillController::class, 'update'])->name('bills.update');
+    Route::delete('/bills/{bill}', [BillController::class, 'destroy'])->name('bills.destroy');
+    Route::post('/bills/{bill}/payment', [BillController::class, 'payment'])->name('bills.payment');
+    Route::post('/bills/{bill}/unpayment', [BillController::class, 'unpayment'])->name('bills.unpayment');
 
     Route::get('/savings', [SavingController::class, 'index'])->name('savings.index');
     Route::get('/savings/create', [SavingController::class, 'create'])->name('savings.create');
