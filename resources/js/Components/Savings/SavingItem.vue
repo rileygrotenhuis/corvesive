@@ -1,4 +1,8 @@
 <script setup>
+import useSavingsStore from '@/store/savings';
+
+const savingsStore = useSavingsStore();
+
 defineProps({
   saving: Object,
 });
@@ -9,6 +13,7 @@ defineProps({
     :class="`flex h-auto w-40 flex-col rounded-md border border-black ${
       saving.is_payed ? 'bg-green-200' : ''
     } p-4 text-center shadow-lg hover:cursor-pointer`"
+    @click="savingsStore.setNewSavingsFormOpen(true)"
   >
     <span class="text-2xl font-bold">{{ saving.name }}</span>
     <span class="text-lg font-extralight"

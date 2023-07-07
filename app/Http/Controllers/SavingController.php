@@ -38,7 +38,7 @@ class SavingController extends Controller
         $saving->amount = $request->amount * 100;
         $saving->save();
 
-        return to_route('savings.index');
+        return to_route('home');
     }
 
     public function show(Saving $saving): Response
@@ -76,7 +76,7 @@ class SavingController extends Controller
 
         $saving->delete();
 
-        return to_route('savings.index');
+        return to_route('home');
     }
 
     public function payment(Saving $saving): RedirectResponse
@@ -88,7 +88,7 @@ class SavingController extends Controller
         $user->total = $user->total - $saving->amount;
         $user->save();
 
-        return to_route('savings.index', $saving);
+        return to_route('home', $saving);
     }
 
     public function unpayment(Saving $saving): RedirectResponse
@@ -100,6 +100,6 @@ class SavingController extends Controller
         $user->total = $user->total + $saving->amount;
         $user->save();
 
-        return to_route('savings.index', $saving);
+        return to_route('home', $saving);
     }
 }

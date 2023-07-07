@@ -198,13 +198,13 @@ const user = computed(() => page.props.auth.user);
 
       <!-- Page Heading -->
       <header class="bg-white shadow" v-if="$slots.header">
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl px-4 py-6 pb-8 sm:px-6 lg:px-8">
           <slot name="header" />
         </div>
       </header>
 
       <!-- Page Content -->
-      <main class="mx-auto mt-8 max-w-7xl px-4 sm:px-6 lg:px-8">
+      <main class="mx-auto mt-8 max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
         <slot />
       </main>
     </div>
