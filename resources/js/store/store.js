@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 const useStore = defineStore('store', {
   state: () => ({
-    expenseType: 'budget',
+    expenseType: 'budgets',
   }),
   actions: {
     setExpenseType(expenseType) {

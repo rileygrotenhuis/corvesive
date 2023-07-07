@@ -8,25 +8,25 @@ const store = useStore();
   <div class="text-center">
     <button
       :class="`rounded-l-xl border border-slate-500 px-4 py-2 text-sm font-bold shadow-lg ${
-        store.expenseType === 'budget' ? 'bg-slate-400' : 'bg-slate-200'
+        store.expenseType === 'budgets' ? 'bg-slate-400' : 'bg-slate-200'
       } w-32 hover:bg-slate-400`"
-      @click.prevent="store.setExpenseType('budget')"
+      @click.prevent="store.setExpenseType('budgets')"
     >
       Budgets
     </button>
     <button
       :class="`border border-slate-500 px-4 py-2 text-sm font-bold shadow-lg ${
-        store.expenseType === 'bill' ? 'bg-slate-400' : 'bg-slate-200'
+        store.expenseType === 'bills' ? 'bg-slate-400' : 'bg-slate-200'
       } w-32 hover:bg-slate-400`"
-      @click.prevent="store.setExpenseType('bill')"
+      @click.prevent="store.setExpenseType('bills')"
     >
       Bills
     </button>
     <button
       :class="`rounded-r-xl border border-slate-500 px-4 py-2 text-sm font-bold shadow-lg ${
-        store.expenseType === 'saving' ? 'bg-slate-400' : 'bg-slate-200'
+        store.expenseType === 'savings' ? 'bg-slate-400' : 'bg-slate-200'
       } w-32 hover:bg-slate-400`"
-      @click.prevent="store.setExpenseType('saving')"
+      @click.prevent="store.setExpenseType('savings')"
     >
       Savings
     </button>
