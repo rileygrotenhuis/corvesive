@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import ExpenseTypeSwitch from '@/Components/UI/ExpenseTypeSwitch.vue';
 import AllBudgets from '@/Components/Budgets/AllBudgets.vue';
 import AllBills from '@/Components/Bills/AllBills.vue';
-import AllSavings from '@/Components/Savings/AllSavings.vue';
+import Savings from '@/Components/Savings/Savings.vue';
 import useStore from '@/store/store';
 
 const store = useStore();
@@ -25,7 +25,7 @@ defineProps({
         v-if="store.expenseType === 'bills'"
         :bills="expenses.bills.data"
       />
-      <AllSavings
+      <Savings
         v-if="store.expenseType === 'savings'"
         :savings="expenses.savings.data"
       />
