@@ -4,7 +4,7 @@ import ExpenseTypeSwitch from '@/Components/UI/ExpenseTypeSwitch.vue';
 import AllBudgets from '@/Components/Budgets/AllBudgets.vue';
 import AllBills from '@/Components/Bills/AllBills.vue';
 import AllSavings from '@/Components/Savings/AllSavings.vue';
-import useStore from '@/Store/store';
+import useStore from '@/store/store';
 
 const store = useStore();
 
