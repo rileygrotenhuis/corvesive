@@ -1,15 +1,19 @@
 <script setup>
 defineProps({
-    savings: Object
+  savings: Object,
 });
 </script>
 <template>
-<ul class="w-fit mx-auto flex flex-col gap-4">
+  <ul class="mx-auto flex w-fit flex-col gap-4">
     <li v-for="saving in savings" :key="saving.id">
-        <div class="w-40 h-auto p-4 flex flex-col border border-black text-center rounded-md shadow-lg hover:cursor-pointer">
-            <span class="font-bold text-2xl">{{ saving.name }}</span>
-            <span class="font-extralight text-lg">${{ (saving.amount / 100).toFixed(2) }}</span>
-        </div>
+      <div
+        class="flex h-auto w-40 flex-col rounded-md border border-black p-4 text-center shadow-lg hover:cursor-pointer"
+      >
+        <span class="text-2xl font-bold">{{ saving.name }}</span>
+        <span class="text-lg font-extralight"
+          >${{ (saving.amount / 100).toFixed(2) }}</span
+        >
+      </div>
     </li>
-</ul>
+  </ul>
 </template>

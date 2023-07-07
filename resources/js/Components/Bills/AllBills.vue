@@ -1,15 +1,19 @@
 <script setup>
 defineProps({
-    bills: Object
+  bills: Object,
 });
 </script>
 <template>
-<ul class="w-fit mx-auto flex flex-col gap-4">
+  <ul class="mx-auto flex w-fit flex-col gap-4">
     <li v-for="bill in bills" :key="bill.id">
-        <div class="w-40 h-auto p-4 flex flex-col border border-black text-center rounded-md shadow-lg hover:cursor-pointer">
-            <span class="font-bold text-2xl">{{ bill.name }}</span>
-            <span class="font-extralight text-lg">${{ (bill.amount / 100).toFixed(2) }}</span>
-        </div>
+      <div
+        class="flex h-auto w-40 flex-col rounded-md border border-black p-4 text-center shadow-lg hover:cursor-pointer"
+      >
+        <span class="text-2xl font-bold">{{ bill.name }}</span>
+        <span class="text-lg font-extralight"
+          >${{ (bill.amount / 100).toFixed(2) }}</span
+        >
+      </div>
     </li>
-</ul>
+  </ul>
 </template>

@@ -17,9 +17,18 @@ defineProps({
   <AuthenticatedLayout>
     <ExpenseTypeSwitch />
     <div class="mt-8">
-        <AllBudgets v-if="store.expenseType === 'budgets'" :budgets="expenses.budgets.data" />
-        <AllBills v-if="store.expenseType === 'bills'"  :bills="expenses.bills.data" />
-        <AllSavings v-if="store.expenseType === 'savings'" :savings="expenses.savings.data" />
+      <AllBudgets
+        v-if="store.expenseType === 'budgets'"
+        :budgets="expenses.budgets.data"
+      />
+      <AllBills
+        v-if="store.expenseType === 'bills'"
+        :bills="expenses.bills.data"
+      />
+      <AllSavings
+        v-if="store.expenseType === 'savings'"
+        :savings="expenses.savings.data"
+      />
     </div>
   </AuthenticatedLayout>
 </template>
