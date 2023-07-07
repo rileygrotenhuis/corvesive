@@ -1,4 +1,8 @@
 <script setup>
+import useBudgetsStore from '@/store/budgets';
+
+const budgetsStore = useBudgetsStore();
+
 defineProps({
   budget: Object,
 });
@@ -7,6 +11,7 @@ defineProps({
 <template>
   <div
     class="flex h-auto w-40 flex-col rounded-md border border-black p-4 text-center shadow-lg hover:cursor-pointer"
+    @click="budgetsStore.setBudgetPaymentFormOpen(true, budget.id)"
   >
     <span class="text-2xl font-bold">{{ budget.name }}</span>
     <span class="text-lg font-extralight"
