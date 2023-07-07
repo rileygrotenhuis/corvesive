@@ -20,14 +20,17 @@ class HomeController extends Controller
             'expenses' => [
                 'budgets' => BudgetResource::collection(
                     Budget::where('user_id', Auth::user()->id)
+                        ->orderBy('updated_at', 'desc')
                         ->get()
                 ),
                 'bills' => BillResource::collection(
                     Bill::where('user_id', Auth::user()->id)
+                        ->orderBy('is_payed', 'asc')
                         ->get()
                 ),
                 'savings' => SavingResource::collection(
                     Saving::where('user_id', Auth::user()->id)
+                        ->orderBy('is_payed', 'asc')
                         ->get()
                 ),
             ],
