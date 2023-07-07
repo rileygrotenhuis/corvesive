@@ -38,7 +38,7 @@ class BillController extends Controller
         $bill->amount = $request->amount * 100;
         $bill->save();
 
-        return to_route('bills.index');
+        return to_route('home');
     }
 
     public function show(Bill $bill): Response
@@ -67,7 +67,7 @@ class BillController extends Controller
         $bill->amount = $request->amount * 100;
         $bill->save();
 
-        return to_route('bills.show', $bill->id);
+        return to_route('home');
     }
 
     public function destroy(Bill $bill): RedirectResponse
@@ -76,7 +76,7 @@ class BillController extends Controller
 
         $bill->delete();
 
-        return to_route('bills.index');
+        return to_route('home');
     }
 
     public function payment(Bill $bill): RedirectResponse
@@ -88,7 +88,7 @@ class BillController extends Controller
         $user->total = $user->total - $bill->amount;
         $user->save();
 
-        return to_route('bills.index', $bill);
+        return to_route('home');
     }
 
     public function unpayment(Bill $bill): RedirectResponse
@@ -100,6 +100,6 @@ class BillController extends Controller
         $user->total = $user->total + $bill->amount;
         $user->save();
 
-        return to_route('bills.index', $bill);
+        return to_route('home');
     }
 }

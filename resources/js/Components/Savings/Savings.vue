@@ -7,7 +7,7 @@ import useSavingsStore from '@/store/savings';
 const savingsStore = useSavingsStore();
 
 defineProps({
-  savings: Object,
+  savings: Array,
 });
 </script>
 <template>
