@@ -2,9 +2,10 @@
 import BudgetItem from './BudgetItem.vue';
 
 defineProps({
-  budgets: Object,
+  budgets: Array,
 });
 </script>
+
 <template>
   <ul class="mx-auto flex w-fit flex-col gap-4">
     <li v-for="budget in budgets" :key="budget.id">

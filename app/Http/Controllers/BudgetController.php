@@ -38,7 +38,7 @@ class BudgetController extends Controller
         $budget->show_daily_amount = $request->show_daily_amount;
         $budget->save();
 
-        return to_route('budgets.index');
+        return to_route('home');
     }
 
     public function show(Budget $budget): Response
@@ -68,7 +68,7 @@ class BudgetController extends Controller
         $budget->show_daily_amount = $request->show_daily_amount;
         $budget->save();
 
-        return to_route('budgets.show', $budget->id);
+        return to_route('home');
     }
 
     public function destroy(Budget $budget): RedirectResponse
@@ -77,7 +77,7 @@ class BudgetController extends Controller
 
         $budget->delete();
 
-        return to_route('budgets.index');
+        return to_route('home');
     }
 
     public function payment(PaymentBudgetRequest $request, Budget $budget): RedirectResponse
@@ -88,6 +88,6 @@ class BudgetController extends Controller
         $request->user()->total = $request->user()->total - ($request->amount * 100);
         $request->user()->save();
 
-        return to_route('budgets.index');
+        return to_route('home');
     }
 }

@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import ExpenseTypeSwitch from '@/Components/UI/ExpenseTypeSwitch.vue';
-import AllBudgets from '@/Components/Budgets/AllBudgets.vue';
+import Budgets from '@/Components/Budgets/Budgets.vue';
 import Bills from '@/Components/Bills/Bills.vue';
 import Savings from '@/Components/Savings/Savings.vue';
 import useStore from '@/store/store';
@@ -17,7 +17,7 @@ defineProps({
   <AuthenticatedLayout>
     <ExpenseTypeSwitch />
     <div class="mt-8">
-      <AllBudgets
+      <Budgets
         v-if="store.expenseType === 'budgets'"
         :budgets="expenses.budgets.data"
       />

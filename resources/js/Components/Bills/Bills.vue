@@ -15,7 +15,7 @@ defineProps({
   <BillsList :bills="bills" />
   <div class="mx-auto mt-4 w-fit">
     <PrimaryButton @click="billsStore.setNewBillsFormOpen(true)">
-      + Savings
+      + Bill
     </PrimaryButton>
   </div>
 </template>
