@@ -1,6 +1,9 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import ExpenseTypeSwitch from '@/Components/UI/ExpenseTypeSwitch.vue';
+import AllBudgets from '@/Components/Budgets/AllBudgets.vue';
+import AllBills from '@/Components/Bills/AllBills.vue';
+import AllSavings from '@/Components/Savings/AllSavings.vue';
 import useStore from '@/Store/store';
 
 const store = useStore();
@@ -13,10 +16,8 @@ defineProps({
 <template>
   <AuthenticatedLayout>
     <ExpenseTypeSwitch />
-    <ul>
-      <li v-for="expense in expenses[store.expenseType].data" :key="expense.id">
-        {{ expense.name }}
-      </li>
-    </ul>
+    <AllBudgets v-if="store.expenseType === 'budgets'" :budgets="expenses.budgets.data" />
+    <AllBills v-if="store.expenseType === 'bills'"  :bills="expenses.bills.data" />
+    <AllSavings v-if="store.expenseType === 'savings'" :savings="expenses.savings.data" />
   </AuthenticatedLayout>
 </template>
