@@ -31,7 +31,6 @@ class BudgetController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreBudgetRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreBudgetRequest $request)
@@ -42,7 +41,6 @@ class BudgetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Budget  $budget
      * @return \Illuminate\Http\Response
      */
     public function show(Budget $budget)
@@ -53,7 +51,6 @@ class BudgetController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Budget  $budget
      * @return \Illuminate\Http\Response
      */
     public function edit(Budget $budget)
@@ -64,8 +61,6 @@ class BudgetController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateBudgetRequest  $request
-     * @param  \App\Models\Budget  $budget
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateBudgetRequest $request, Budget $budget)
@@ -76,7 +71,6 @@ class BudgetController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Budget  $budget
      * @return \Illuminate\Http\Response
      */
     public function destroy(Budget $budget)

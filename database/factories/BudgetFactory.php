@@ -17,10 +17,10 @@ class BudgetFactory extends Factory
             'name' => fake()->randomElement([
                 'Spending',
                 'Groceries',
-                'Gas'
+                'Gas',
             ]),
             'amount' => fake()->numberBetween(20000, 25000),
-            'remaining_balance' => fake()->numberBetween(10000, 15000)
+            'remaining_balance' => fake()->numberBetween(10000, 15000),
         ];
     }
 }

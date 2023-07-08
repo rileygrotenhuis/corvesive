@@ -14,7 +14,7 @@ class SavingFactory extends Factory
             'name' => fake()->randomElement([
                 'General',
                 '401K',
-                'Emergency'
+                'Emergency',
             ]),
             'amount' => fake()->numberBetween(5000, 25000),
         ];

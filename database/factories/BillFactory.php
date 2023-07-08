@@ -14,7 +14,7 @@ class BillFactory extends Factory
             'name' => fake()->randomElement([
                 'Rent',
                 'Utilities',
-                'Insurance'
+                'Insurance',
             ]),
             'amount' => fake()->numberBetween(5000, 25000),
         ];
