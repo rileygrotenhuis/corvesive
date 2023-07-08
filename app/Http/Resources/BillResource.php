@@ -11,6 +11,7 @@ class BillResource extends JsonResource
         return [
             'id' => $this->id,
             'user' => new UserResource($this->user),
+            'pay_period_id' => $this->pay_period_id,
             'name' => $this->name,
             'amount' => $this->amount,
             'has_payed' => $this->has_payed,

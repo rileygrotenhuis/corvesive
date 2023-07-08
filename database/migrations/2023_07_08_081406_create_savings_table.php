@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('savings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id');
+            $table->foreignId('pay_period_id')->constrained('pay_periods', 'id');
             $table->string('name');
             $table->unsignedBigInteger('amount')->default(0);
             $table->boolean('has_payed')->default(false);

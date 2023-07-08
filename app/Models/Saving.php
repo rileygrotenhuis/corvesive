@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Saving extends Model
 {
@@ -16,8 +15,8 @@ class Saving extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function payPeriods(): BelongsToMany
+    public function payPeriod(): BelongsTo
     {
-        return $this->belongsToMany(PayPeriod::class);
+        return $this->belongsTo(PayPeriod::class);
     }
 }
