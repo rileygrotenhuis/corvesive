@@ -14,7 +14,7 @@ defineProps({
   </ul>
   <div v-else>
     <p class="mx-auto w-96 text-center">
-      Create a new Bill entry to trakc your consistent monthly expenses like
+      Create a new Bill entry to track your consistent monthly expenses like
       rent and utilities
     </p>
   </div>
