@@ -12,8 +12,9 @@ const budgetsStore = useBudgetsStore();
     class="m-8 mx-auto w-fit"
     @submit.prevent="budgetsStore.makeBudgetPayment(budgetsStore.currentBudget)"
   >
-    <div class="mb-4">
-      <InputLabel class="mb-2" value="Payment Amount" />
+    <h3 class="text-xl font-bold">Make Payment</h3>
+    <div class="mb-4 mt-4">
+      <InputLabel class="mb-2" value="Amount" />
       <TextInput
         autofocus
         type="number"
