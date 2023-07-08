@@ -10,9 +10,9 @@ const budgetsStore = useBudgetsStore();
 <template>
   <form
     class="m-8 mx-auto w-fit"
-    @submit.prevent="budgetsStore.makeBudgetPayment(budgetsStore.currentBudget)"
+    @submit.prevent="budgetsStore.makeBudgetPayment(budgetsStore.currentBudget.id)"
   >
-    <h3 class="text-xl font-bold">Make Payment</h3>
+    <h3 class="text-xl font-bold">Make payment for {{ budgetsStore.currentBudget.name }} budget</h3>
     <div class="mb-4 mt-4">
       <InputLabel class="mb-2" value="Amount" />
       <TextInput
