@@ -12,9 +12,9 @@ class BillFactory extends Factory
         return [
             'user_id' => User::factory(),
             'name' => fake()->randomElement([
-                'General',
-                '401K',
-                'Emergency'
+                'Rent',
+                'Utilities',
+                'Insurance'
             ]),
             'amount' => fake()->numberBetween(5000, 25000),
         ];
