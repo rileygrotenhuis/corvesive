@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Services;
 
+use App\Models\PayPeriod;
 use App\Models\User;
 use App\Services\PayPeriodService;
 use Carbon\Carbon;
@@ -46,6 +47,30 @@ class PayPeriodServiceTest extends TestCase
             'start_date' => $this->startDate,
             'end_date' => $this->endDate,
             'total_balance' => $this->totalBalance,
+        ]);
+    }
+
+    public function test_that_pay_period_is_updated(): void
+    {
+        $payPeriod = PayPeriod::factory()->create([
+            'user_id' => $this->user->id,
+            'start_date' => $this->startDate,
+            'end_date' => $this->endDate,
+            'total_balance' => $this->totalBalance
+        ]);
+
+        $this->payPeriodService->updatePayPeriod(
+            $payPeriod,
+            Carbon::now()->addDays(5)->toDateString(),
+            Carbon::now()->addDays(20)->toDateString(),
+            250000
+        );
+
+        $this->assertDatabaseHas('pay_periods', [
+            'user_id' => $this->user->id,
+            'start_date' => Carbon::now()->addDays(5)->toDateString(),
+            'end_date' => Carbon::now()->addDays(20)->toDateString(),
+            'total_balance' => 250000,
         ]);
     }
 }
