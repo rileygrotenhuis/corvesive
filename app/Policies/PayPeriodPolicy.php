@@ -10,38 +10,13 @@ class PayPeriodPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user): bool
-    {
-        //
-    }
-
-    public function view(User $user, PayPeriod $payPeriod): bool
-    {
-        //
-    }
-
-    public function create(User $user): bool
-    {
-        //
-    }
-
     public function update(User $user, PayPeriod $payPeriod): bool
     {
-        //
+        return $user->id === $payPeriod->user_id;
     }
 
     public function delete(User $user, PayPeriod $payPeriod): bool
     {
-        //
-    }
-
-    public function restore(User $user, PayPeriod $payPeriod): bool
-    {
-        //
-    }
-
-    public function forceDelete(User $user, PayPeriod $payPeriod): bool
-    {
-        //
+        return $user->id === $payPeriod->user_id;
     }
 }

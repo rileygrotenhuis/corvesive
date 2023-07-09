@@ -39,4 +39,10 @@ class PayPeriodService
 
         return $payPeriod;
     }
+
+    public function deletePayPeriod(
+        PayPeriod $payPeriod
+    ): bool {
+        return $payPeriod->delete();
+    }
 }
