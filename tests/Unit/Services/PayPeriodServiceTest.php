@@ -56,7 +56,7 @@ class PayPeriodServiceTest extends TestCase
             'user_id' => $this->user->id,
             'start_date' => $this->startDate,
             'end_date' => $this->endDate,
-            'total_balance' => $this->totalBalance
+            'total_balance' => $this->totalBalance,
         ]);
 
         $this->payPeriodService->updatePayPeriod(
