@@ -80,4 +80,30 @@ class PayPeriodServiceTest extends TestCase
             'total_balance' => 250000,
         ]);
     }
+
+    public function test_that_pay_period_is_deleted(): void
+    {
+        $payPeriod = PayPeriod::factory()->create([
+            'user_id' => $this->user->id,
+            'start_date' => $this->startDate,
+            'end_date' => $this->endDate,
+            'total_balance' => $this->totalBalance,
+        ]);
+
+        $this->assertDatabaseHas('pay_periods', [
+            'user_id' => $this->user->id,
+            'start_date' => $this->startDate,
+            'end_date' => $this->endDate,
+            'total_balance' => $this->totalBalance,
+        ]);
+
+        $this->payPeriodService->deletePayPeriod($payPeriod);
+
+        $this->assertSoftDeleted('pay_periods', [
+            'user_id' => $this->user->id,
+            'start_date' => $this->startDate,
+            'end_date' => $this->endDate,
+            'total_balance' => $this->totalBalance,
+        ]);
+    }
 }
