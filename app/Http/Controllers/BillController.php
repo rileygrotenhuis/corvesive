@@ -9,7 +9,6 @@ use App\Models\Bill;
 use App\Models\PayPeriod;
 use App\Services\BillService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class BillController extends Controller
@@ -18,12 +17,12 @@ class BillController extends Controller
     {
     }
 
-    public function index(): Response
+    public function index()
     {
         //
     }
 
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -40,12 +39,12 @@ class BillController extends Controller
         return new BillResource($bill);
     }
 
-    public function show(Bill $bill): Response
+    public function show(Bill $bill)
     {
         //
     }
 
-    public function edit(Bill $bill): Response
+    public function edit(Bill $bill)
     {
         //
     }
@@ -63,7 +62,7 @@ class BillController extends Controller
         return new BillResource($bill);
     }
 
-    public function destroy(Bill $bill): JsonResponse
+    public function destroy(PayPeriod $payPeriod, Bill $bill): JsonResponse
     {
         $this->authorize('delete', $bill);
 

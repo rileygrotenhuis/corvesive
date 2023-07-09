@@ -9,7 +9,6 @@ use App\Models\PayPeriod;
 use App\Models\Saving;
 use App\Services\SavingService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class SavingController extends Controller
@@ -18,12 +17,12 @@ class SavingController extends Controller
     {
     }
 
-    public function index(): Response
+    public function index()
     {
         //
     }
 
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -40,12 +39,12 @@ class SavingController extends Controller
         return new SavingResource($saving);
     }
 
-    public function show(Saving $saving): Response
+    public function show(Saving $saving)
     {
         //
     }
 
-    public function edit(Saving $saving): Response
+    public function edit(Saving $saving)
     {
         //
     }
@@ -63,7 +62,7 @@ class SavingController extends Controller
         return new SavingResource($saving);
     }
 
-    public function destroy(Saving $saving): JsonResponse
+    public function destroy(PayPeriod $payPeriod, Saving $saving): JsonResponse
     {
         $this->savingService->deleteSaving($saving);
 

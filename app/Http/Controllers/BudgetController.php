@@ -9,7 +9,6 @@ use App\Models\Budget;
 use App\Models\PayPeriod;
 use App\Services\BudgetService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class BudgetController extends Controller
@@ -18,12 +17,12 @@ class BudgetController extends Controller
     {
     }
 
-    public function index(): Response
+    public function index()
     {
         //
     }
 
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -40,12 +39,12 @@ class BudgetController extends Controller
         return new BudgetResource($budget);
     }
 
-    public function show(Budget $budget): Response
+    public function show(Budget $budget)
     {
         //
     }
 
-    public function edit(Budget $budget): Response
+    public function edit(Budget $budget)
     {
         //
     }
@@ -59,6 +58,8 @@ class BudgetController extends Controller
             $request->name,
             $request->amount
         );
+
+        return new BudgetResource($budget);
     }
 
     public function destroy(PayPeriod $payPeriod, Budget $budget): JsonResponse

@@ -8,7 +8,6 @@ use App\Http\Resources\PayPeriodResource;
 use App\Models\PayPeriod;
 use App\Services\PayPeriodService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class PayPeriodController extends Controller
@@ -17,12 +16,12 @@ class PayPeriodController extends Controller
     {
     }
 
-    public function index(): Response
+    public function index()
     {
         //
     }
 
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -39,12 +38,12 @@ class PayPeriodController extends Controller
         return new PayPeriodResource($payPeriod);
     }
 
-    public function show(PayPeriod $payPeriod): Response
+    public function show(PayPeriod $payPeriod)
     {
         //
     }
 
-    public function edit(PayPeriod $payPeriod): Response
+    public function edit(PayPeriod $payPeriod)
     {
         //
     }
