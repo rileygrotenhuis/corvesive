@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('end_date')->required();
             $table->unsignedBigInteger('total_balance')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

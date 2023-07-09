@@ -40,4 +40,9 @@ class SavingService
 
         return $saving;
     }
+
+    public function deleteSaving(Saving $saving): bool
+    {
+        return $saving->delete();
+    }
 }

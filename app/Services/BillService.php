@@ -40,4 +40,9 @@ class BillService
 
         return $bill;
     }
+
+    public function deleteBill(Bill $bill): bool
+    {
+        return $bill->delete();
+    }
 }

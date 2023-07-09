@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('amount')->default(0);
             $table->unsignedBigInteger('remaining_balance')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

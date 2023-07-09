@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('amount')->default(0);
             $table->boolean('has_payed')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

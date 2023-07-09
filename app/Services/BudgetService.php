@@ -42,4 +42,9 @@ class BudgetService
 
         return $budget;
     }
+
+    public function deleteBudget(Budget $budget): bool
+    {
+        return $budget->delete();
+    }
 }
