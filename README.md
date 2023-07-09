@@ -53,4 +53,4 @@ This is a personal budgeting application built using Laravel and InertiaJS. Corv
    npm run dev
    ```
 
-9. Your application will now begin running at http://localhost:8000
+9. Your application will now begin running at http://localhost
