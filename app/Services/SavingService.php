@@ -28,7 +28,6 @@ class SavingService
 
     public function updateSaving(
         Saving $saving,
-        PayPeriod $payPeriod,
         string $name,
         int $amount
     ): Saving {
