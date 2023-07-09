@@ -29,11 +29,9 @@ class BudgetService
 
     public function updateBudget(
         Budget $budget,
-        PayPeriod $payPeriod,
         string $name,
         int $amount
     ): Budget {
-        $budget->pay_period_id = $payPeriod->id;
         $budget->name = $name;
         $budget->amount = $amount;
         $budget->remaining_balance = $amount;
