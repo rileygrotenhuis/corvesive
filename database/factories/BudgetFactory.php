@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\PayPeriod;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -14,6 +15,7 @@ class BudgetFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
+            'pay_period_id' => PayPeriod::factory(),
             'name' => fake()->randomElement([
                 'Spending',
                 'Groceries',
