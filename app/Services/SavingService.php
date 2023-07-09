@@ -43,4 +43,12 @@ class SavingService
     {
         return $saving->delete();
     }
+
+    public function updateSavingPayedStatus(Saving $saving, bool $hasPayed): Saving
+    {
+        $saving->has_payed = $hasPayed;
+        $saving->save();
+
+        return $saving;
+    }
 }

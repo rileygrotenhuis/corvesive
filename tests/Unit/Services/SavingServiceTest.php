@@ -106,4 +106,33 @@ class SavingServiceTest extends TestCase
             'has_payed' => false,
         ]);
     }
+
+    public function test_that_bill_has_been_payed(): void
+    {
+        $saving = Saving::factory()
+            ->for($this->payPeriod)
+            ->for($this->user)
+            ->create([
+                'name' => 'Test',
+                'amount' => 10000,
+            ]);
+
+        $this->assertDatabaseHas('savings', [
+            'user_id' => $this->user->id,
+            'pay_period_id' => $this->payPeriod->id,
+            'name' => 'Test',
+            'amount' => 10000,
+            'has_payed' => false,
+        ]);
+
+        $this->savingService->updateSavingPayedStatus($saving, true);
+
+        $this->assertDatabaseHas('savings', [
+            'user_id' => $this->user->id,
+            'pay_period_id' => $this->payPeriod->id,
+            'name' => 'Test',
+            'amount' => 10000,
+            'has_payed' => true,
+        ]);
+    }
 }

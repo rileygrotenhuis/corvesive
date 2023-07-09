@@ -43,4 +43,12 @@ class BillService
     {
         return $bill->delete();
     }
+
+    public function updateBillPayedStatus(Bill $bill, bool $hasPayed): Bill
+    {
+        $bill->has_payed = $hasPayed;
+        $bill->save();
+
+        return $bill;
+    }
 }
