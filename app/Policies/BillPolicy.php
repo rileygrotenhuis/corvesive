@@ -10,38 +10,13 @@ class BillPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user): bool
-    {
-        //
-    }
-
-    public function view(User $user, Bill $bill): bool
-    {
-        //
-    }
-
-    public function create(User $user): bool
-    {
-        //
-    }
-
     public function update(User $user, Bill $bill): bool
     {
-        //
+        return $user->id === $bill->user_id;
     }
 
     public function delete(User $user, Bill $bill): bool
     {
-        //
-    }
-
-    public function restore(User $user, Bill $bill): bool
-    {
-        //
-    }
-
-    public function forceDelete(User $user, Bill $bill): bool
-    {
-        //
+        return $user->id === $bill->user_id;
     }
 }

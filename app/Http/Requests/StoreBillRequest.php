@@ -9,7 +9,8 @@ class StoreBillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string',
+            'balance' => 'required|integer|min:1',
         ];
     }
 }

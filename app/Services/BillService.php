@@ -28,11 +28,9 @@ class BillService
 
     public function updateBill(
         Bill $bill,
-        PayPeriod $payPeriod,
         string $name,
         int $amount
     ): Bill {
-        $bill->pay_period_id = $payPeriod->id;
         $bill->name = $name;
         $bill->amount = $amount;
 
