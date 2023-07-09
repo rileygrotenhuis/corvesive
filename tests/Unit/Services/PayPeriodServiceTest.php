@@ -47,6 +47,7 @@ class PayPeriodServiceTest extends TestCase
             'start_date' => $this->startDate,
             'end_date' => $this->endDate,
             'total_balance' => $this->totalBalance,
+            'remaining_balance' => $this->totalBalance,
         ]);
     }
 
@@ -57,6 +58,7 @@ class PayPeriodServiceTest extends TestCase
             'start_date' => $this->startDate,
             'end_date' => $this->endDate,
             'total_balance' => $this->totalBalance,
+            'remaining_balance' => $this->totalBalance,
         ]);
 
         $this->assertDatabaseHas('pay_periods', [
@@ -64,6 +66,7 @@ class PayPeriodServiceTest extends TestCase
             'start_date' => $this->startDate,
             'end_date' => $this->endDate,
             'total_balance' => $this->totalBalance,
+            'remaining_balance' => $this->totalBalance,
         ]);
 
         $this->payPeriodService->updatePayPeriod(
@@ -78,6 +81,7 @@ class PayPeriodServiceTest extends TestCase
             'start_date' => Carbon::now()->addDays(5)->toDateString(),
             'end_date' => Carbon::now()->addDays(20)->toDateString(),
             'total_balance' => 250000,
+            'remaining_balance' => 250000,
         ]);
     }
 
@@ -88,6 +92,7 @@ class PayPeriodServiceTest extends TestCase
             'start_date' => $this->startDate,
             'end_date' => $this->endDate,
             'total_balance' => $this->totalBalance,
+            'remaining_balance' => $this->totalBalance,
         ]);
 
         $this->assertDatabaseHas('pay_periods', [
@@ -95,6 +100,7 @@ class PayPeriodServiceTest extends TestCase
             'start_date' => $this->startDate,
             'end_date' => $this->endDate,
             'total_balance' => $this->totalBalance,
+            'remaining_balance' => $this->totalBalance,
         ]);
 
         $this->payPeriodService->deletePayPeriod($payPeriod);
@@ -104,6 +110,7 @@ class PayPeriodServiceTest extends TestCase
             'start_date' => $this->startDate,
             'end_date' => $this->endDate,
             'total_balance' => $this->totalBalance,
+            'remaining_balance' => $this->totalBalance,
         ]);
     }
 }

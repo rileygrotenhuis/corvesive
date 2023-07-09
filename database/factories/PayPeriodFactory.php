@@ -14,7 +14,8 @@ class PayPeriodFactory extends Factory
             'user_id' => User::factory(),
             'start_date' => Carbon::now()->format('Y-m-d'),
             'end_date' => Carbon::now()->addDays(20)->format('Y-m-d'),
-            'total_balance' => fake()->numberBetween(100000, 250000),
+            'total_balance' => fake()->numberBetween(20000, 25000),
+            'remaining_balance' => fake()->numberBetween(10000, 15000),
         ];
     }
 }

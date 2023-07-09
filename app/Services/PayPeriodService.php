@@ -19,6 +19,7 @@ class PayPeriodService
         $payPeriod->start_date = $startDate;
         $payPeriod->end_date = $endDate;
         $payPeriod->total_balance = $totalBalance;
+        $payPeriod->remaining_balance = $totalBalance;
 
         $payPeriod->save();
 
@@ -34,6 +35,7 @@ class PayPeriodService
         $payPeriod->start_date = $startDate;
         $payPeriod->end_date = $endDate;
         $payPeriod->total_balance = $totalBalance;
+        $payPeriod->remaining_balance = $totalBalance;
 
         $payPeriod->save();
 
