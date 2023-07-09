@@ -31,7 +31,6 @@ class SavingService
         string $name,
         int $amount
     ): Saving {
-        $saving->pay_period_id = $payPeriod->id;
         $saving->name = $name;
         $saving->amount = $amount;
 

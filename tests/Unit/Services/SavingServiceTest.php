@@ -2,18 +2,18 @@
 
 namespace Tests\Unit\Services;
 
-use App\Models\Bill;
 use App\Models\PayPeriod;
+use App\Models\Saving;
 use App\Models\User;
-use App\Services\BillService;
+use App\Services\SavingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class BillServiceTest extends TestCase
+class SavingServiceTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected BillService $billService;
+    protected SavingService $savingService;
 
     protected User $user;
 
@@ -22,21 +22,21 @@ class BillServiceTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->billService = new BillService();
+        $this->savingService = new SavingService();
         $this->user = User::factory()->create();
         $this->payPeriod = PayPeriod::factory()->for($this->user)->create();
     }
 
-    public function test_that_bill_is_created(): void
+    public function test_that_saving_is_created(): void
     {
-        $this->billService->createBill(
+        $this->savingService->createSaving(
             $this->user,
             $this->payPeriod,
             'Test',
             10000
         );
 
-        $this->assertDatabaseHas('bills', [
+        $this->assertDatabaseHas('savings', [
             'user_id' => $this->user->id,
             'pay_period_id' => $this->payPeriod->id,
             'name' => 'Test',
@@ -45,9 +45,9 @@ class BillServiceTest extends TestCase
         ]);
     }
 
-    public function test_that_bill_is_updated(): void
+    public function test_that_saving_is_updated(): void
     {
-        $bill = Bill::factory()
+        $saving = Saving::factory()
             ->for($this->payPeriod)
             ->for($this->user)
             ->create([
@@ -55,7 +55,7 @@ class BillServiceTest extends TestCase
                 'amount' => 10000,
             ]);
 
-        $this->assertDatabaseHas('bills', [
+        $this->assertDatabaseHas('savings', [
             'user_id' => $this->user->id,
             'pay_period_id' => $this->payPeriod->id,
             'name' => 'Test',
@@ -63,13 +63,13 @@ class BillServiceTest extends TestCase
             'has_payed' => false,
         ]);
 
-        $this->billService->updateBill(
-            $bill,
+        $this->savingService->updateSaving(
+            $saving,
             'Updated Test',
             25000
         );
 
-        $this->assertDatabaseHas('bills', [
+        $this->assertDatabaseHas('savings', [
             'user_id' => $this->user->id,
             'pay_period_id' => $this->payPeriod->id,
             'name' => 'Updated Test',
