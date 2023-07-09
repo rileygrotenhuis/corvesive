@@ -134,5 +134,13 @@ class SavingServiceTest extends TestCase
             'amount' => 10000,
             'has_payed' => true,
         ]);
+
+        $this->assertDatabaseHas('pay_periods', [
+            'user_id' => $this->user->id,
+            'start_date' => $this->payPeriod->start_date,
+            'end_date' => $this->payPeriod->end_date,
+            'total_balance' => $this->payPeriod->total_balance,
+            'remaining_balance' => $this->payPeriod->total_balance - $saving->amount,
+        ]);
     }
 }

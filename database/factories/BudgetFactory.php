@@ -13,6 +13,8 @@ class BudgetFactory extends Factory
 {
     public function definition(): array
     {
+        $amount = fake()->numberBetween(20000, 25000);
+
         return [
             'user_id' => User::factory(),
             'pay_period_id' => PayPeriod::factory(),
@@ -21,8 +23,8 @@ class BudgetFactory extends Factory
                 'Groceries',
                 'Gas',
             ]),
-            'amount' => fake()->numberBetween(20000, 25000),
-            'remaining_balance' => fake()->numberBetween(10000, 15000),
+            'amount' => $amount,
+            'remaining_balance' => $amount,
         ];
     }
 }

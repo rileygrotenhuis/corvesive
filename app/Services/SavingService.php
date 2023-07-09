@@ -49,6 +49,10 @@ class SavingService
         $saving->has_payed = $hasPayed;
         $saving->save();
 
+        $payPeriod = $saving->payPeriod;
+        $payPeriod->remaining_balance = $payPeriod->remaining_balance - $saving->amount;
+        $payPeriod->save();
+
         return $saving;
     }
 }

@@ -49,6 +49,10 @@ class BillService
         $bill->has_payed = $hasPayed;
         $bill->save();
 
+        $payPeriod = $bill->payPeriod;
+        $payPeriod->remaining_balance = $payPeriod->remaining_balance - $bill->amount;
+        $payPeriod->save();
+
         return $bill;
     }
 }
