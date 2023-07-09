@@ -10,7 +10,7 @@ class StoreSavingRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'balance' => 'required|integer|min:1',
+            'amount' => 'required|integer|min:1',
         ];
     }
 }
