@@ -108,4 +108,34 @@ class BudgetServiceTest extends TestCase
             'remaining_balance' => 10000,
         ]);
     }
+
+    public function test_that_payment_is_made_on_budget(): void
+    {
+        $budget = Budget::factory()
+            ->for($this->payPeriod)
+            ->for($this->user)
+            ->create([
+                'name' => 'Test',
+                'amount' => 10000,
+                'remaining_balance' => 10000,
+            ]);
+
+        $this->assertDatabaseHas('budgets', [
+            'user_id' => $this->user->id,
+            'pay_period_id' => $this->payPeriod->id,
+            'name' => 'Test',
+            'amount' => 10000,
+            'remaining_balance' => 10000,
+        ]);
+
+        $this->budgetService->makePaymentOnBudget($budget, 100);
+
+        $this->assertDatabaseHas('budgets', [
+            'user_id' => $this->user->id,
+            'pay_period_id' => $this->payPeriod->id,
+            'name' => 'Test',
+            'amount' => 10000,
+            'remaining_balance' => 9900,
+        ]);
+    }
 }

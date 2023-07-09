@@ -45,4 +45,12 @@ class BudgetService
     {
         return $budget->delete();
     }
+
+    public function makePaymentOnBudget(Budget $budget, int $amount): Budget
+    {
+        $budget->remaining_balance = $budget->remaining_balance - $amount;
+        $budget->save();
+
+        return $budget;
+    }
 }
