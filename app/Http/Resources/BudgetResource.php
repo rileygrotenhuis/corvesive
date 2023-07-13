@@ -10,8 +10,8 @@ class BudgetResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
-            'pay_period_id' => $this->pay_period_id,
+            'user' => $this->whenLoaded('user', new UserResource($this->user)),
+            'pay_period' => $this->whenLoaded('payPeriod', new PayPeriodResource($this->payPeriod)),
             'name' => $this->name,
             'amount' => $this->amount,
             'remaining_balance' => $this->remaining_balance,

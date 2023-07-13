@@ -10,14 +10,14 @@ class PayPeriodResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
+            'user' => $this->whenLoaded('user', new UserResource($this->user)),
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'total_balance' => $this->total_balance,
             'expenses' => [
-                'budgets' => BudgetResource::collection($this->budgets),
-                'bills' => BillResource::collection($this->bills),
-                'savings' => SavingResource::collection($this->savings),
+                'budgets' => $this->whenLoaded('budgets', BudgetResource::collection($this->budgets)),
+                'bills' => $this->whenLoaded('bills', BillResource::collection($this->bills)),
+                'savings' => $this->whenLoaded('savings', SavingResource::collection($this->savings)),
             ],
         ];
     }
