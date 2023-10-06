@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\Budget;
+use App\Models\PayPeriod;
+use App\Models\PayPeriodBudget;
+
+class PayPeriodBudgetService
+{
+    public function addBudgetToPayPeriod(
+        int $payPeriodId,
+        int $budgetId,
+        int $totalBalance
+    ): void {
+        $payPeriodBudget = new PayPeriodBudget();
+        $payPeriodBudget->pay_period_id = $payPeriodId;
+        $payPeriodBudget->budget_id = $budgetId;
+        $payPeriodBudget->total_balance = $totalBalance;
+        $payPeriodBudget->remaining_balance = $totalBalance;
+        $payPeriodBudget->save();
+    }
+
+    public function updatePayPeriodBudget(
+        int $payPeriodId,
+        int $budgetId,
+        int $totalBalance,
+        int $remainingBalance,
+    ): void {
+        PayPeriodBudget::where('pay_period_id', $payPeriodId)
+            ->where('budget_id', $budgetId)
+            ->update([
+                'total_balance' => $totalBalance,
+                'remaining_balance' => $remainingBalance,
+            ]);
+    }
+
+    public function removeBudgetFromPayPeriod(
+        PayPeriod $payPeriod,
+        Budget $budget,
+    ): void {
+        PayPeriodBudget::where('pay_period_id', $payPeriod->id)
+            ->where('budget_id', $budget->id)
+            ->delete();
+    }
+}
