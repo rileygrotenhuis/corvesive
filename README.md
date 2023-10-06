@@ -59,3 +59,13 @@ To maintain a consistent code style for easy readability we utilize Laravel Pint
 ```bash
 ./vendor/bin/pint
 ```
+
+## Contributions
+
+All contributions, big or small, are welcome and I appreciate any effort to improve this repository and this project!
+
+View our [Contributing Guide](CONTRIBUTING.md) for more details.
+
+## License
+
+[MIT License](LICENSE.txt)
