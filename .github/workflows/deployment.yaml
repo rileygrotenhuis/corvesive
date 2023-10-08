@@ -1,0 +1,33 @@
+name: Laravel Forge Deployment
+
+on:
+  push: main
+  workflow_run:
+    workflows: ["PHPUnit Tests"]
+    types:
+      -
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          composer install
+          npm install
+        working-directory: ./your-laravel-app-directory
+
+      - name: Build assets
+        run: |
+          npm run production
+        working-directory: ./your-laravel-app-directory
+
+      - name: Deploy to Laravel Forge
+        env:
+          FORGE_API_URL: ${{ secrets.FORGE_API_URL }}
+        run: |
+          curl -X POST "$FORGE_API_URL"
