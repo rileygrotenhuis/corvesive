@@ -1,7 +1,10 @@
 name: Laravel Forge Deployment
 
 on:
-  push: main
+  push:
+    branches:
+      - main
+
   workflow_run:
     workflows: ["PHPUnit Tests"]
     types:
