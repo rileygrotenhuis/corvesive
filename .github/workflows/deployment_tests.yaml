@@ -1,8 +1,8 @@
-name: PHPUnit Tests
+name: PHPUnit Tests for Deployment
 
 on:
   push:
-    branches-ignore:
+    branches:
       - main
 
 jobs:

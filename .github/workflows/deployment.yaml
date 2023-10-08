@@ -6,7 +6,7 @@ on:
       - main
 
   workflow_run:
-    workflows: [PHPUnit Tests]
+    workflows: [PHPUnit Tests for Deployment]
     types:
       - completed
 
