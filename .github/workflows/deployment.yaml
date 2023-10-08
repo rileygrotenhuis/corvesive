@@ -18,17 +18,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          composer install
-          npm install
-        working-directory: ./your-laravel-app-directory
-
-      - name: Build assets
-        run: |
-          npm run production
-        working-directory: ./your-laravel-app-directory
-
       - name: Deploy to Laravel Forge
         env:
           FORGE_API_URL: ${{ secrets.FORGE_API_URL }}
