@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Services\PayPeriodBillService;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -41,6 +42,11 @@ class BillResource extends JsonResource
                         ],
                     ],
                     'has_payed' => $this->pivot->has_payed,
+                    'status' => (new PayPeriodBillService())
+                        ->getPayPeriodBillStatus(
+                            $this->pivot->has_payed,
+                            $this->pivot->due_date
+                        ),
                 ];
             }),
         ];
