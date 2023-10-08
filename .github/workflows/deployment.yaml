@@ -5,7 +5,7 @@ on:
   workflow_run:
     workflows: ["PHPUnit Tests"]
     types:
-      -
+      - completed
 
 jobs:
   deploy:
