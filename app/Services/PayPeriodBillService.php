@@ -50,10 +50,14 @@ class PayPeriodBillService
             return 'payed';
         }
 
-        $today = Carbon::today()->toDateString();
+        $today = Carbon::today();
 
-        if ($today > $dueDate) {
+        if ($today->toDateString() >= $dueDate) {
             return 'late';
+        }
+
+        if ($today->addDay()->toDateString() === $dueDate) {
+            return 'upcoming';
         }
 
         return 'unpayed';

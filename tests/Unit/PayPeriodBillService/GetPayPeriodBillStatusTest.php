@@ -15,13 +15,10 @@ class GetPayPeriodBillStatusTest extends TestCase
 
     protected string $dueDate;
 
-    protected string $today;
-
     public function setUp(): void
     {
         $this->payPeriodBillService = new PayPeriodBillService();
-        $this->dueDate = Carbon::tomorrow()->toDateString();
-        $this->today = Carbon::today()->toDateString();
+        $this->dueDate = Carbon::today()->addDays(10)->toDateString();
     }
 
     public function test_pay_period_bill_unpayed_status(): void
@@ -51,9 +48,35 @@ class GetPayPeriodBillStatusTest extends TestCase
         Carbon::setTestNow(Carbon::today()->addDays(20));
 
         $this->assertEquals(
-            'payed',
+            'late',
             $this->payPeriodBillService->getPayPeriodBillStatus(
-                true,
+                false,
+                $this->dueDate
+            )
+        );
+    }
+
+    public function test_pay_period_bill_late_status_on_same_day(): void
+    {
+        Carbon::setTestNow(Carbon::today()->addDays(10));
+
+        $this->assertEquals(
+            'late',
+            $this->payPeriodBillService->getPayPeriodBillStatus(
+                false,
+                $this->dueDate
+            )
+        );
+    }
+
+    public function test_pay_period_bill_upcoming_status(): void
+    {
+        Carbon::setTestNow(Carbon::today()->addDays(9));
+
+        $this->assertEquals(
+            'upcoming',
+            $this->payPeriodBillService->getPayPeriodBillStatus(
+                false,
                 $this->dueDate
             )
         );
