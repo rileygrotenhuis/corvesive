@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users', 'id');
             $table->foreignId('pay_period_id')->constrained('pay_periods', 'id');
             $table->foreignId('pay_period_bill_id')->nullable()->constrained('pay_period_bill', 'id');
-            $table->foreignId('pay_period_budget_id')->nullable()->constrained('pay_budget_bill', 'id');
+            $table->foreignId('pay_period_budget_id')->nullable()->constrained('pay_period_budget', 'id');
             $table->enum('type', [
                 'payment',
                 'deposit',
