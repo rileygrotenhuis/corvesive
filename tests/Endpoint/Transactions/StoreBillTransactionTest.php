@@ -45,7 +45,9 @@ class StoreBillTransactionTest extends TestCase
             ->for($this->bill)
             ->create();
 
-        $this->payload = [];
+        $this->payload = [
+            'pay_period_bill_id' => $this->payPeriodBill->id
+        ];
     }
 
     public function test_successful_bill_transaction(): void

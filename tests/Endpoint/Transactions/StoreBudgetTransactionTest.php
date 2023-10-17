@@ -43,9 +43,14 @@ class StoreBudgetTransactionTest extends TestCase
         $this->payPeriodBudget::factory()
             ->for($this->payperiod)
             ->for($this->budget)
-            ->create();
+            ->create([
+                'amount' => 100000
+            ]);
 
-        $this->payload = [];
+        $this->payload = [
+            'pay_period_budget_id' => $this->payPeriodBudget->id,
+            'amount' => -100
+        ];
     }
 
     protected function test_successful_budget_transaction_deposit(): void
