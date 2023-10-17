@@ -22,8 +22,6 @@ class StoreBillTransactionTest extends TestCase
 
     protected PayPeriodBill $payPeriodBill;
 
-    protected array $payload;
-
     public function setUp(): void
     {
         parent::setUp();
@@ -46,10 +44,6 @@ class StoreBillTransactionTest extends TestCase
             ->create([
                 'amount' => 100000
             ]);
-
-        $this->payload = [
-            'pay_period_bill_id' => $this->payPeriodBill->id
-        ];
     }
 
     public function test_successful_bill_transaction(): void
@@ -67,24 +61,21 @@ class StoreBillTransactionTest extends TestCase
         ]);
     }
 
-    protected function test_failed_bill_transaction_with_missing_bill_value(): void
+    public function test_failed_bill_transaction_with_no_authorization(): void
     {
-    }
+        $newUser = User::factory()->create();
+        $this->authenticatesUser($newUser);
 
-    protected function test_failed_bill_transaction_with_invalid_bill_value(): void
-    {
-    }
+        $newBill = Bill::factory()
+            ->for($newUser)
+            ->create();
 
-    protected function test_failed_bill_transaction_with_multiple_expense_types(): void
-    {
-    }
+        $newPayPeriodBill = PayPeriodBill::factory()
+            ->for($newBill)
+            ->create();
 
-    protected function test_failed_bill_transaction_with_no_expense_values(): void
-    {
-    }
-
-    protected function test_failed_bill_transaction_with_no_authorization(): void
-    {
+        $this->submitRequest($newPayPeriodBill)
+            ->assertStatus(403);
     }
 
     protected function submitRequest(PayPeriodBill $payPeriodBill): TestResponse
@@ -93,8 +84,7 @@ class StoreBillTransactionTest extends TestCase
             route('pay-periods.bills.transaction', [
                 $this->payPeriod,
                 $payPeriodBill,
-            ]),
-            $this->payload
+            ])
         );
     }
 }
