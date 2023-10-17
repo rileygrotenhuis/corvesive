@@ -28,4 +28,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Paystub::class);
     }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

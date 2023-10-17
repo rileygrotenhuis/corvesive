@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PayPeriodBill extends Model
 {
@@ -27,8 +27,8 @@ class PayPeriodBill extends Model
         return $this->belongsTo(Bill::class);
     }
 
-    public function transactions(): MorphMany
+    public function transactions(): HasMany
     {
-        return $this->morphMany(Transaction::class, 'transactionable');
+        return $this->hasMany(Transaction::class);
     }
 }
