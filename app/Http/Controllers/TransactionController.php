@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\TransactionResource;
 
 class TransactionController extends Controller
 {
-    public function store(): JsonResponse
+    public function store(): TransactionResource
     {
-        return response()->json('');
+        return new TransactionResource([]);
     }
 }
