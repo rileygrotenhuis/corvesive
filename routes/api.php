@@ -39,10 +39,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('bills/{bill}', [PayPeriodBillController::class, 'store'])->name('pay-periods.bills.store');
         Route::put('bills/{bill}', [PayPeriodBillController::class, 'update'])->name('pay-periods.bills.update');
         Route::delete('bills/{bill}', [PayPeriodBillController::class, 'destroy'])->name('pay-periods.bills.destroy');
+        Route::post('bills/{payPeriodBill}/transaction', [TransactionController::class, 'billTransaction'])->name('pay_periods.bills.transaction');
 
         Route::post('budgets/{budget}', [PayPeriodBudgetController::class, 'store'])->name('pay-periods.budgets.store');
         Route::put('budgets/{budget}', [PayPeriodBudgetController::class, 'update'])->name('pay-periods.budgets.update');
         Route::delete('budgets/{budget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-periods.budgets.destroy');
+        Route::post('/budgets/{payPeriodBudget}/transaction', [TransactionController::class, 'budgetTransaction'])->name('pay-periods.budgets.transaction');
     });
 
     Route::prefix('account')->group(function () {
