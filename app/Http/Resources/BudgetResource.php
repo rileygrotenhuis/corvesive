@@ -20,19 +20,9 @@ class BudgetResource extends JsonResource
             'pay_periods' => PayPeriodResource::collection(
                 $this->whenLoaded('payPeriods')
             ),
-            'pivot' => $this->whenPivotLoaded('pay_period_budget', function () {
-                return [
-                    'id' => $this->pivot->id,
-                    'total_balance' => [
-                        'raw' => $this->pivot->total_balance,
-                        'pretty' => '$'.number_format(($this->pivot->total_balance / 100), 2),
-                    ],
-                    'remaining_balance' => [
-                        'raw' => $this->pivot->remaining_balance,
-                        'pretty' => '$'.number_format(($this->pivot->remaining_balance / 100), 2),
-                    ],
-                ];
-            }),
+            'pivot' => $this->whenPivotLoaded(
+                'pay_period_budget', new PayPeriodBudgetResource($this->pivot)
+            ),
         ];
     }
 
