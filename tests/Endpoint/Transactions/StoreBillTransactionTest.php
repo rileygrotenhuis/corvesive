@@ -40,10 +40,12 @@ class StoreBillTransactionTest extends TestCase
             ->for($this->user)
             ->create();
 
-        $this->payPeriodBill::factory()
-            ->for($this->payperiod)
+        $this->payPeriodBill = PayPeriodBill::factory()
+            ->for($this->payPeriod)
             ->for($this->bill)
-            ->create();
+            ->create([
+                'amount' => 100000
+            ]);
 
         $this->payload = [
             'pay_period_bill_id' => $this->payPeriodBill->id
@@ -52,6 +54,17 @@ class StoreBillTransactionTest extends TestCase
 
     public function test_successful_bill_transaction(): void
     {
+        $this->submitRequest($this->payPeriodBill)
+            ->assertStatus(201);
+
+        $this->assertDatabaseHas('transactions', [
+            'user_id' => $this->user->id,
+            'pay_period_id' => $this->payPeriod->id,
+            'pay_period_bill_id' => $this->payPeriodBill->id,
+            'pay_period_budget_id' => null,
+            'type' => 'payment',
+            'amount' => $this->payPeriodBill->amount,
+        ]);
     }
 
     protected function test_failed_bill_transaction_with_missing_bill_value(): void
@@ -74,12 +87,12 @@ class StoreBillTransactionTest extends TestCase
     {
     }
 
-    protected function submitRequest(Bill $bill): TestResponse
+    protected function submitRequest(PayPeriodBill $payPeriodBill): TestResponse
     {
         return $this->postJson(
             route('pay-periods.bills.transaction', [
                 $this->payPeriod,
-                $bill,
+                $payPeriodBill,
             ]),
             $this->payload
         );

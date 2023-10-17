@@ -40,8 +40,8 @@ class StoreBudgetTransactionTest extends TestCase
             ->for($this->user)
             ->create();
 
-        $this->payPeriodBudget::factory()
-            ->for($this->payperiod)
+        $this->payPeriodBudget = PayPeriodBudget::factory()
+            ->for($this->payPeriodc)
             ->for($this->budget)
             ->create([
                 'amount' => 100000
