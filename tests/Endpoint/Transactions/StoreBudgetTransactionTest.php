@@ -48,6 +48,38 @@ class StoreBudgetTransactionTest extends TestCase
         $this->payload = [];
     }
 
+    protected function test_successful_budget_transaction_deposit(): void
+    {
+    }
+
+    protected function test_successful_budget_transaction_payment(): void
+    {
+    }
+
+    protected function test_failed_budget_transaction_with_missing_budget_value(): void
+    {
+    }
+
+    protected function test_failed_budget_transaction_with_invalid_budget_value(): void
+    {
+    }
+
+    protected function test_failed_budget_transaction_with_no_expense_values(): void
+    {
+    }
+
+    protected function test_failed_budget_transaction_with_missing_amount_value(): void
+    {
+    }
+
+    protected function test_failed_budget_transaction_with_invalid_amount_value(): void
+    {
+    }
+
+    protected function test_failed_budget_transaction_with_no_authorization(): void
+    {
+    }
+
     protected function submitRequest(Budget $budget): TestResponse
     {
         return $this->postJson(

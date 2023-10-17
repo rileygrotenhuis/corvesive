@@ -48,6 +48,30 @@ class StoreBillTransactionTest extends TestCase
         $this->payload = [];
     }
 
+    public function test_successful_bill_transaction(): void
+    {
+    }
+
+    protected function test_failed_bill_transaction_with_missing_bill_value(): void
+    {
+    }
+
+    protected function test_failed_bill_transaction_with_invalid_bill_value(): void
+    {
+    }
+
+    protected function test_failed_bill_transaction_with_multiple_expense_types(): void
+    {
+    }
+
+    protected function test_failed_bill_transaction_with_no_expense_values(): void
+    {
+    }
+
+    protected function test_failed_bill_transaction_with_no_authorization(): void
+    {
+    }
+
     protected function submitRequest(Bill $bill): TestResponse
     {
         return $this->postJson(
