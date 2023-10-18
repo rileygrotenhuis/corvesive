@@ -42,7 +42,7 @@ class StoreBillTransactionTest extends TestCase
             ->for($this->payPeriod)
             ->for($this->bill)
             ->create([
-                'amount' => 100000
+                'amount' => 100000,
             ]);
     }
 
@@ -58,6 +58,11 @@ class StoreBillTransactionTest extends TestCase
             'pay_period_budget_id' => null,
             'type' => 'payment',
             'amount' => $this->payPeriodBill->amount,
+        ]);
+
+        $this->assertDatabaseHas('pay_period_bills', [
+            'id' => $this->payPeriodBill->id,
+            'has_payed' => 1,
         ]);
     }
 

@@ -44,53 +44,100 @@ class StoreBudgetTransactionTest extends TestCase
             ->for($this->payPeriod)
             ->for($this->budget)
             ->create([
-                'amount' => 100000
+                'total_balance' => 100000,
+                'remaining_balance' => 100000,
             ]);
 
         $this->payload = [
-            'pay_period_budget_id' => $this->payPeriodBudget->id,
-            'amount' => -100
+            'amount' => -10000,
         ];
     }
 
-    protected function test_successful_budget_transaction_deposit(): void
+    public function test_successful_budget_transaction_payment(): void
     {
+        $this->submitRequest($this->payPeriodBudget)
+            ->assertStatus(201);
+
+        $this->assertDatabaseHas('transactions', [
+            'user_id' => $this->user->id,
+            'pay_period_id' => $this->payPeriod->id,
+            'pay_period_budget_id' => $this->payPeriodBudget->id,
+            'pay_period_bill_id' => null,
+            'type' => 'payment',
+            'amount' => $this->payload['amount'],
+        ]);
+
+        $this->assertDatabaseHas('pay_period_budgets', [
+            'id' => $this->payPeriodBudget->id,
+            'total_balance' => $this->payPeriodBudget->total_balance,
+            'remaining_balance' => 90000,
+        ]);
     }
 
-    protected function test_successful_budget_transaction_payment(): void
+    public function test_successful_budget_transaction_deposit(): void
     {
+        $this->payload['amount'] = 10000;
+
+        $this->submitRequest($this->payPeriodBudget)
+            ->assertStatus(201);
+
+        $this->assertDatabaseHas('transactions', [
+            'user_id' => $this->user->id,
+            'pay_period_id' => $this->payPeriod->id,
+            'pay_period_budget_id' => $this->payPeriodBudget->id,
+            'pay_period_bill_id' => null,
+            'type' => 'payment',
+            'amount' => $this->payload['amount'],
+        ]);
+
+        $this->assertDatabaseHas('pay_period_budgets', [
+            'id' => $this->payPeriodBudget->id,
+            'total_balance' => $this->payPeriodBudget->total_balance,
+            'remaining_balance' => 110000,
+        ]);
     }
 
-    protected function test_failed_budget_transaction_with_missing_budget_value(): void
+    public function test_failed_budget_transaction_with_missing_amount_value(): void
     {
+        unset($this->payload['amount']);
+
+        $this->submitRequest($this->payPeriodBudget)
+            ->assertStatus(422)
+            ->assertJsonValidationErrorFor('amount');
     }
 
-    protected function test_failed_budget_transaction_with_invalid_budget_value(): void
+    public function test_failed_budget_transaction_with_invalid_amount_value(): void
     {
+        $this->payload['amount'] = 'invalid';
+
+        $this->submitRequest($this->payPeriodBudget)
+            ->assertStatus(422)
+            ->assertJsonValidationErrorFor('amount');
     }
 
-    protected function test_failed_budget_transaction_with_no_expense_values(): void
+    public function test_failed_budget_transaaction_with_no_authorization(): void
     {
+        $newUser = User::factory()->create();
+        $this->authenticatesUser($newUser);
+
+        $newBudget = Budget::factory()
+            ->for($newUser)
+            ->create();
+
+        $newPayPeriodBudget = PayPeriodBudget::factory()
+            ->for($newBudget)
+            ->create();
+
+        $this->submitRequest($newPayPeriodBudget)
+            ->assertStatus(403);
     }
 
-    protected function test_failed_budget_transaction_with_missing_amount_value(): void
-    {
-    }
-
-    protected function test_failed_budget_transaction_with_invalid_amount_value(): void
-    {
-    }
-
-    protected function test_failed_budget_transaction_with_no_authorization(): void
-    {
-    }
-
-    protected function submitRequest(Budget $budget): TestResponse
+    protected function submitRequest(PayPeriodBudget $payPeriodBudget): TestResponse
     {
         return $this->postJson(
             route('pay-periods.budgets.transaction', [
                 $this->payPeriod,
-                $budget,
+                $payPeriodBudget,
             ]),
             $this->payload
         );
