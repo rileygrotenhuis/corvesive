@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBudgetTransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\PayPeriod;
 use App\Models\PayPeriodBill;
