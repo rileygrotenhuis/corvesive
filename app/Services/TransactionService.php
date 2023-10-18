@@ -18,7 +18,7 @@ class TransactionService
         $transaction->pay_period_id = $payPeriod->id;
         $transaction->pay_period_bill_id = $payPeriodBill->id;
         $transaction->type = 'payment';
-        $transaction->amount = $payPeriodBill->amount;
+        $transaction->amount = $payPeriodBill->amount * -1;
         $transaction->save();
 
         $this->markPayPeriodBillAsPayed($payPeriodBill);
