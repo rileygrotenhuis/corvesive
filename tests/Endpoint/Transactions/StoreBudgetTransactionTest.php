@@ -67,7 +67,7 @@ class StoreBudgetTransactionTest extends TestCase
             'amount' => $this->payload['amount'],
         ]);
 
-        $this->assertDatabaseHas('pay_period_budgets', [
+        $this->assertDatabaseHas('pay_period_budget', [
             'id' => $this->payPeriodBudget->id,
             'total_balance' => $this->payPeriodBudget->total_balance,
             'remaining_balance' => 90000,
@@ -90,7 +90,7 @@ class StoreBudgetTransactionTest extends TestCase
             'amount' => $this->payload['amount'],
         ]);
 
-        $this->assertDatabaseHas('pay_period_budgets', [
+        $this->assertDatabaseHas('pay_period_budget', [
             'id' => $this->payPeriodBudget->id,
             'total_balance' => $this->payPeriodBudget->total_balance,
             'remaining_balance' => 110000,

@@ -33,6 +33,11 @@ class PayPeriodPolicy
         return $user->id === $payPeriod->user_id;
     }
 
+    public function transaction(User $user, PayPeriod $payPeriod): bool
+    {
+        return $user->id === $payPeriod->user_id;
+    }
+
     public function paystub(User $user, PayPeriod $payPeriod, Paystub $paystub): bool
     {
         return ($user->id === $payPeriod->user_id) && ($payPeriod->user_id === $paystub->user_id);
