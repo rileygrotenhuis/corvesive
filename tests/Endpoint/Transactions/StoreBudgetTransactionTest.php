@@ -86,7 +86,7 @@ class StoreBudgetTransactionTest extends TestCase
             'pay_period_id' => $this->payPeriod->id,
             'pay_period_budget_id' => $this->payPeriodBudget->id,
             'pay_period_bill_id' => null,
-            'type' => 'payment',
+            'type' => 'deposit',
             'amount' => $this->payload['amount'],
         ]);
 
