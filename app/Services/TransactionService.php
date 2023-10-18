@@ -21,8 +21,7 @@ class TransactionService
         $transaction->amount = $payPeriodBill->amount;
         $transaction->save();
 
-        $payPeriodBill->has_payed = 1;
-        $payPeriodBill->save();
+        $this->markPayPeriodBillAsPayed($payPeriodBill);
 
         return $transaction;
     }
@@ -40,9 +39,20 @@ class TransactionService
         $transaction->amount = $amount;
         $transaction->save();
 
-        $payPeriodBudget->remaining_balance = $payPeriodBudget->remaining_balance + $amount;
-        $payPeriodBudget->save();
+        $this->updatePayPeriodBudgetBalance($payPeriodBudget, $amount);
 
         return $transaction;
+    }
+
+    protected function markPayPeriodBillAsPayed(PayPeriodBill $payPeriodBill): void
+    {
+        $payPeriodBill->has_payed = 1;
+        $payPeriodBill->save();
+    }
+
+    protected function updatePayPeriodBudgetBalance(PayPeriodBudget $payPeriodBudget, int $amount): void
+    {
+        $payPeriodBudget->remaining_balance = $payPeriodBudget->remaining_balance + $amount;
+        $payPeriodBudget->save();
     }
 }
