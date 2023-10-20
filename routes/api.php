@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     ]);
 
     Route::prefix('pay-periods/{payPeriod}')->group(function () {
+        Route::post('deposit', [TransactionController::class, 'deposit'])->name('pay-periods.deposit');
+
         Route::post('paystubs/{paystub}', [PayPeriodPaystubController::class, 'store'])->name('pay-periods.paystubs.store');
         Route::delete('paystubs/{paystub}', [PayPeriodPaystubController::class, 'destroy'])->name('pay-periods.paystubs.destroy');
 
@@ -43,7 +45,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('budgets/{budget}', [PayPeriodBudgetController::class, 'store'])->name('pay-periods.budgets.store');
         Route::put('budgets/{budget}', [PayPeriodBudgetController::class, 'update'])->name('pay-periods.budgets.update');
         Route::delete('budgets/{budget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-periods.budgets.destroy');
-        Route::post('/budgets/{payPeriodBudget}/transaction', [TransactionController::class, 'budgetTransaction'])->name('pay-periods.budgets.transaction');
+        Route::post('budgets/{payPeriodBudget}/transaction', [TransactionController::class, 'budgetTransaction'])->name('pay-periods.budgets.transaction');
     });
 
     Route::prefix('account')->group(function () {
