@@ -28,11 +28,6 @@ class PayPeriodPolicy
         return $user->id === $payPeriod->user_id;
     }
 
-    public function spending(User $user, PayPeriod $payPeriod): bool
-    {
-        return $user->id === $payPeriod->user_id;
-    }
-
     public function transaction(User $user, PayPeriod $payPeriod): bool
     {
         return $user->id === $payPeriod->user_id;

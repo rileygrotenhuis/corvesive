@@ -10,7 +10,6 @@ use App\Http\Controllers\PayPeriodBudgetController;
 use App\Http\Controllers\PayPeriodController;
 use App\Http\Controllers\PayPeriodPaystubController;
 use App\Http\Controllers\PaystubController;
-use App\Http\Controllers\SpendingController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 

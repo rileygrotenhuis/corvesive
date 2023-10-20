@@ -9,13 +9,11 @@ use App\Models\Budget;
 use App\Models\CreditAccount;
 use App\Models\PayPeriod;
 use App\Models\Paystub;
-use App\Models\Spending;
 use App\Policies\BillPolicy;
 use App\Policies\BudgetPolicy;
 use App\Policies\CreditAccountPolicy;
 use App\Policies\PayPeriodPolicy;
 use App\Policies\PaystubPolicy;
-use App\Policies\SpendingPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -26,7 +24,6 @@ class AuthServiceProvider extends ServiceProvider
         CreditAccount::class => CreditAccountPolicy::class,
         PayPeriod::class => PayPeriodPolicy::class,
         Paystub::class => PaystubPolicy::class,
-        Spending::class => SpendingPolicy::class,
     ];
 
     public function boot()
