@@ -49,7 +49,7 @@ class StoreBudgetTransactionTest extends TestCase
             ]);
 
         $this->payload = [
-            'amount' => -10000,
+            'amount' => 10000,
         ];
     }
 

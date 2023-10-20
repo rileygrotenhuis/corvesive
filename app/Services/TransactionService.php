@@ -71,7 +71,7 @@ class TransactionService
 
     protected function updatePayPeriodBudgetBalance(PayPeriodBudget $payPeriodBudget, int $amount): void
     {
-        $payPeriodBudget->remaining_balance = $payPeriodBudget->remaining_balance + $amount;
+        $payPeriodBudget->remaining_balance = $payPeriodBudget->remaining_balance - $amount;
         $payPeriodBudget->save();
     }
 }
