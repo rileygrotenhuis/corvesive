@@ -38,12 +38,22 @@ class StorePayPeriodPaystubTest extends TestCase
 
     public function test_successful_pay_period_to_paystub_link(): void
     {
+        $this->assertDatabaseHas('pay_periods', [
+            'id' => $this->payPeriod->id,
+            'total_income' => 0
+        ]);
+
         $this->submitRequest($this->paystub)
             ->assertStatus(200);
 
         $this->assertDatabaseHas('pay_period_paystub', [
             'pay_period_id' => $this->payPeriod->id,
             'paystub_id' => $this->paystub->id,
+        ]);
+
+        $this->assertDatabaseHas('pay_periods', [
+            'id' => $this->payPeriod->id,
+            'total_income' => $this->paystub->amount
         ]);
     }
 
