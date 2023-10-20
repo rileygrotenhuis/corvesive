@@ -47,8 +47,7 @@ class TransactionService
     public function makePayPeriodDeposit(
         PayPeriod $payPeriod,
         int $amount
-    ): Transaction
-    {
+    ): Transaction {
         $transaction = new Transaction();
         $transaction->user_id = auth()->user()->id;
         $transaction->pay_period_id = $payPeriod->id;

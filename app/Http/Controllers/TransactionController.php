@@ -6,7 +6,6 @@ use App\Http\Resources\TransactionResource;
 use App\Models\PayPeriod;
 use App\Models\PayPeriodBill;
 use App\Models\PayPeriodBudget;
-use App\Models\Transaction;
 use App\Services\TransactionService;
 use Illuminate\Http\Request;
 
@@ -48,7 +47,7 @@ class TransactionController extends Controller
         $this->authorize('transaction', $payPeriod);
 
         $request->validate([
-            'amount' => 'required|integer|min:1'
+            'amount' => 'required|integer|min:1',
         ]);
 
         $transaction = (new TransactionService())

@@ -2,9 +2,7 @@
 
 namespace Tests\Endpoint\Transactions;
 
-use App\Models\Bill;
 use App\Models\PayPeriod;
-use App\Models\PayPeriodBill;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
@@ -31,11 +29,11 @@ class PayPeriodDepositTest extends TestCase
         $this->payPeriod = PayPeriod::factory()
             ->for($this->user)
             ->create([
-                'total_income' => 100000
+                'total_income' => 100000,
             ]);
 
         $this->payload = [
-            'amount' => 10000
+            'amount' => 10000,
         ];
     }
 
@@ -43,7 +41,7 @@ class PayPeriodDepositTest extends TestCase
     {
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,
-            'total_income' => 100000
+            'total_income' => 100000,
         ]);
 
         $this->submitRequest()
@@ -55,12 +53,12 @@ class PayPeriodDepositTest extends TestCase
             'pay_period_bill_id' => null,
             'pay_period_budget_id' => null,
             'type' => 'deposit',
-            'amount' => $this->payload['amount']
+            'amount' => $this->payload['amount'],
         ]);
 
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,
-            'total_income' => 110000
+            'total_income' => 110000,
         ]);
     }
 
