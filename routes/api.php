@@ -28,7 +28,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         'bills' => BillController::class,
         'budgets' => BudgetController::class,
         'credit-accounts' => CreditAccountController::class,
-        'pay-periods.spendings' => SpendingController::class,
     ]);
 
     Route::prefix('pay-periods/{payPeriod}')->group(function () {

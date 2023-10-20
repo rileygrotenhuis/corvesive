@@ -9,7 +9,6 @@ use App\Models\PayPeriodBill;
 use App\Models\PayPeriodBudget;
 use App\Models\PayPeriodPaystub;
 use App\Models\Paystub;
-use App\Models\Spending;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -89,7 +88,6 @@ class DatabaseSeeder extends Seeder
     protected function addExpensesToPayPeriod(PayPeriod $payPeriod): void
     {
         $this->addPaystubToPayPeriod($payPeriod);
-        $this->addSpendingToPayPeriod($payPeriod);
         $this->addBudgetsToPayPeriod($payPeriod);
         $this->addBillsToPayPeriod($payPeriod);
     }
@@ -99,14 +97,6 @@ class DatabaseSeeder extends Seeder
         PayPeriodPaystub::factory()
             ->for($payPeriod)
             ->for($this->paystub);
-    }
-
-    protected function addSpendingToPayPeriod(PayPeriod $payPeriod): void
-    {
-        Spending::factory()
-            ->for($this->adminUser)
-            ->for($payPeriod)
-            ->create();
     }
 
     protected function addBudgetsToPayPeriod(PayPeriod $payPeriod): void
