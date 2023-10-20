@@ -30,9 +30,9 @@ class PayPeriodResource extends JsonResource
                     ],
                 ],
             ],
-            'total_income' => [
-                'raw' => $this->total_income,
-                'pretty' => '$'.number_format(($this->total_income / 100), 2),
+            'total_balance' => [
+                'raw' => $this->total_balance,
+                'pretty' => '$'.number_format(($this->total_balance / 100), 2),
             ],
             'paystubs' => PaystubResource::collection(
                 $this->whenLoaded('paystubs')

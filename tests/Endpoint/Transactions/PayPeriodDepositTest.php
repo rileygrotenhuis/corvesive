@@ -29,7 +29,7 @@ class PayPeriodDepositTest extends TestCase
         $this->payPeriod = PayPeriod::factory()
             ->for($this->user)
             ->create([
-                'total_income' => 100000,
+                'total_balance' => 100000,
             ]);
 
         $this->payload = [
@@ -41,7 +41,7 @@ class PayPeriodDepositTest extends TestCase
     {
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,
-            'total_income' => 100000,
+            'total_balance' => 100000,
         ]);
 
         $this->submitRequest()
@@ -59,7 +59,7 @@ class PayPeriodDepositTest extends TestCase
 
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,
-            'total_income' => 110000,
+            'total_balance' => 110000,
         ]);
     }
 
@@ -69,7 +69,7 @@ class PayPeriodDepositTest extends TestCase
 
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,
-            'total_income' => 100000,
+            'total_balance' => 100000,
         ]);
 
         $this->submitRequest()
@@ -87,7 +87,7 @@ class PayPeriodDepositTest extends TestCase
 
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,
-            'total_income' => 110000,
+            'total_balance' => 110000,
         ]);
     }
 

@@ -57,7 +57,7 @@ class TransactionService
         $transaction->notes = $notes;
         $transaction->save();
 
-        $payPeriod->total_income = $payPeriod->total_income + $amount;
+        $payPeriod->total_balance = $payPeriod->total_balance + $amount;
         $payPeriod->save();
 
         return $transaction;

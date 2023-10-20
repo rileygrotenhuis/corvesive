@@ -17,7 +17,7 @@ class PayPeriodPaystubService
         $payPeriodPaystub->paystub_id = $paystub->id;
         $payPeriodPaystub->save();
 
-        $payPeriod->total_income = $payPeriod->total_income + $paystub->amount;
+        $payPeriod->total_balance = $payPeriod->total_balance + $paystub->amount;
         $payPeriod->save();
     }
 
@@ -29,7 +29,7 @@ class PayPeriodPaystubService
             ->where('paystub_id', $paystub->id)
             ->delete();
 
-        $payPeriod->total_income = $payPeriod->total_income - $paystub->amount;
+        $payPeriod->total_balance = $payPeriod->total_balance - $paystub->amount;
         $payPeriod->save();
     }
 }
