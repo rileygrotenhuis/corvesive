@@ -35,7 +35,7 @@ class TransactionService
         $transaction->user_id = auth()->user()->id;
         $transaction->pay_period_id = $payPeriod->id;
         $transaction->pay_period_budget_id = $payPeriodBudget->id;
-        $transaction->type = $amount >= 0 ? 'deposit' : 'payment';
+        $transaction->type = 'payment';
         $transaction->amount = $amount;
         $transaction->save();
 

@@ -75,30 +75,6 @@ class StoreBudgetTransactionTest extends TestCase
         ]);
     }
 
-    public function test_successful_budget_transaction_deposit(): void
-    {
-        $this->payload['amount'] = 10000;
-
-        $this->submitRequest($this->payPeriodBudget)
-            ->assertStatus(201);
-
-        $this->assertDatabaseHas('transactions', [
-            'user_id' => $this->user->id,
-            'pay_period_id' => $this->payPeriod->id,
-            'pay_period_budget_id' => $this->payPeriodBudget->id,
-            'pay_period_bill_id' => null,
-            'type' => 'deposit',
-            'amount' => $this->payload['amount'],
-            'notes' => null,
-        ]);
-
-        $this->assertDatabaseHas('pay_period_budget', [
-            'id' => $this->payPeriodBudget->id,
-            'total_balance' => $this->payPeriodBudget->total_balance,
-            'remaining_balance' => 110000,
-        ]);
-    }
-
     public function test_failed_budget_transaction_with_missing_amount_value(): void
     {
         unset($this->payload['amount']);
