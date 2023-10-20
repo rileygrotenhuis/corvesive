@@ -40,7 +40,7 @@ class StorePayPeriodPaystubTest extends TestCase
     {
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,
-            'total_income' => 0
+            'total_income' => 0,
         ]);
 
         $this->submitRequest($this->paystub)
@@ -53,7 +53,7 @@ class StorePayPeriodPaystubTest extends TestCase
 
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,
-            'total_income' => $this->paystub->amount
+            'total_income' => $this->paystub->amount,
         ]);
     }
 

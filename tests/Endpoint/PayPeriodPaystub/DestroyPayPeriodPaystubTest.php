@@ -35,7 +35,7 @@ class DestroyPayPeriodPaystubTest extends TestCase
         $this->payPeriod = PayPeriod::factory()
             ->for($this->user)
             ->create([
-                'total_income' => $this->paystub->amount
+                'total_income' => $this->paystub->amount,
             ]);
 
         PayPeriodPaystub::factory()->create([
@@ -48,7 +48,7 @@ class DestroyPayPeriodPaystubTest extends TestCase
     {
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,
-            'total_income' => $this->paystub->amount
+            'total_income' => $this->paystub->amount,
         ]);
 
         $this->submitRequest()
@@ -58,7 +58,7 @@ class DestroyPayPeriodPaystubTest extends TestCase
 
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,
-            'total_income' => 0
+            'total_income' => 0,
         ]);
     }
 

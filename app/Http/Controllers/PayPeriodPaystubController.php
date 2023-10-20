@@ -18,8 +18,8 @@ class PayPeriodPaystubController extends Controller
 
         (new PayPeriodPaystubService())
             ->addPaystubToPayPeriod(
-                $payPeriod->id,
-                $paystub->id
+                $payPeriod,
+                $paystub
             );
 
         return new PayPeriodResource(
@@ -40,8 +40,8 @@ class PayPeriodPaystubController extends Controller
 
         (new PayPeriodPaystubService())
             ->removePaystubFromPayPeriod(
-                $payPeriod->id,
-                $paystub->id
+                $payPeriod,
+                $paystub
             );
 
         return new PayPeriodResource(
