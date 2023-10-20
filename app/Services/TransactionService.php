@@ -46,13 +46,15 @@ class TransactionService
 
     public function makePayPeriodDeposit(
         PayPeriod $payPeriod,
-        int $amount
+        int $amount,
+        ?string $notes
     ): Transaction {
         $transaction = new Transaction();
         $transaction->user_id = auth()->user()->id;
         $transaction->pay_period_id = $payPeriod->id;
         $transaction->type = 'deposit';
         $transaction->amount = $amount;
+        $transaction->notes = $notes;
         $transaction->save();
 
         $payPeriod->total_income = $payPeriod->total_income + $amount;

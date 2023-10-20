@@ -19,6 +19,7 @@ class TransactionFactory extends Factory
             'pay_period_bill_id' => PayPeriodBill::factory()->for($payPeriod)->create()->id,
             'type' => 'payment',
             'amount' => fake()->numberBetween(1000, 10000),
+            'notes' => fake()->text(),
         ];
     }
 }

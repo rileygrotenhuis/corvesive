@@ -58,6 +58,7 @@ class StoreBillTransactionTest extends TestCase
             'pay_period_budget_id' => null,
             'type' => 'payment',
             'amount' => $this->payPeriodBill->amount * -1,
+            'notes' => null,
         ]);
 
         $this->assertDatabaseHas('pay_period_bill', [

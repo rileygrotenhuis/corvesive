@@ -48,12 +48,14 @@ class TransactionController extends Controller
 
         $request->validate([
             'amount' => 'required|integer|min:1',
+            'notes' => 'nullable|string',
         ]);
 
         $transaction = (new TransactionService())
             ->makePayPeriodDeposit(
                 $payPeriod,
-                $request->amount
+                $request->amount,
+                $request->notes
             );
 
         return new TransactionResource($transaction);

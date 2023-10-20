@@ -65,6 +65,7 @@ class StoreBudgetTransactionTest extends TestCase
             'pay_period_bill_id' => null,
             'type' => 'payment',
             'amount' => $this->payload['amount'],
+            'notes' => null,
         ]);
 
         $this->assertDatabaseHas('pay_period_budget', [
@@ -88,6 +89,7 @@ class StoreBudgetTransactionTest extends TestCase
             'pay_period_bill_id' => null,
             'type' => 'deposit',
             'amount' => $this->payload['amount'],
+            'notes' => null,
         ]);
 
         $this->assertDatabaseHas('pay_period_budget', [

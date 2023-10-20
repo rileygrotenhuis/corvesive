@@ -19,6 +19,7 @@ class TransactionResource extends JsonResource
                 'raw' => $this->amount,
                 'pretty' => '$'.number_format((abs($this->amount) / 100), 2),
             ],
+            'notes' => $this->notes,
         ];
     }
 

@@ -54,6 +54,35 @@ class PayPeriodDepositTest extends TestCase
             'pay_period_budget_id' => null,
             'type' => 'deposit',
             'amount' => $this->payload['amount'],
+            'notes' => null,
+        ]);
+
+        $this->assertDatabaseHas('pay_periods', [
+            'id' => $this->payPeriod->id,
+            'total_income' => 110000,
+        ]);
+    }
+
+    public function test_successful_pay_period_deposit_with_notes_field(): void
+    {
+        $this->payload['notes'] = 'This is a test';
+
+        $this->assertDatabaseHas('pay_periods', [
+            'id' => $this->payPeriod->id,
+            'total_income' => 100000,
+        ]);
+
+        $this->submitRequest()
+            ->assertStatus(201);
+
+        $this->assertDatabaseHas('transactions', [
+            'user_id' => $this->user->id,
+            'pay_period_id' => $this->payPeriod->id,
+            'pay_period_bill_id' => null,
+            'pay_period_budget_id' => null,
+            'type' => 'deposit',
+            'amount' => $this->payload['amount'],
+            'notes' => 'This is a test',
         ]);
 
         $this->assertDatabaseHas('pay_periods', [
