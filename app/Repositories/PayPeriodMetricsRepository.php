@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Objects;
+namespace App\Repositories;
 
 use App\Models\PayPeriod;
 use Illuminate\Support\Collection;
 
-class PayPeriodMetrics
+class PayPeriodMetricsRepository
 {
     protected Collection $billMetrics;
 
