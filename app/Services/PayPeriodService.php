@@ -23,10 +23,12 @@ class PayPeriodService
     public function updatePayPeriod(
         PayPeriod $payPeriod,
         string $startDate,
-        string $endDate
+        string $endDate,
+        int $totalBalance
     ): PayPeriod {
         $payPeriod->start_date = $startDate;
         $payPeriod->end_date = $endDate;
+        $payPeriod->total_balance = $totalBalance;
         $payPeriod->save();
 
         return $payPeriod;

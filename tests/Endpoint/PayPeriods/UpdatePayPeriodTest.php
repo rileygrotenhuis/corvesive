@@ -37,6 +37,7 @@ class UpdatePayPeriodTest extends TestCase
         $this->payload = [
             'start_date' => Carbon::today()->toDateString(),
             'end_date' => Carbon::today()->addDays(20)->toDateString(),
+            'total_balance' => 100000,
         ];
     }
 
@@ -49,6 +50,7 @@ class UpdatePayPeriodTest extends TestCase
             'user_id' => $this->user->id,
             'start_date' => Carbon::today()->toDateString(),
             'end_date' => Carbon::today()->addDays(20)->toDateString(),
+            'total_balance' => 100000,
         ]);
     }
 
@@ -68,6 +70,24 @@ class UpdatePayPeriodTest extends TestCase
         $this->submitRequest()
             ->assertStatus(422)
             ->assertJsonValidationErrorFor('start_date');
+    }
+
+    public function test_failed_pay_period_update_with_missing_total_balance_value(): void
+    {
+        unset($this->payload['total_balance']);
+
+        $this->submitRequest()
+            ->assertStatus(422)
+            ->assertJsonValidationErrorFor('total_balance');
+    }
+
+    public function test_failed_pay_period_update_with_invalid_total_balance_value(): void
+    {
+        $this->payload['total_balance'] = 'invalid';
+
+        $this->submitRequest()
+            ->assertStatus(422)
+            ->assertJsonValidationErrorFor('total_balance');
     }
 
     public function test_failed_pay_period_update_with_end_date_after_start(): void
