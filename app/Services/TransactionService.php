@@ -44,6 +44,24 @@ class TransactionService
         return $transaction;
     }
 
+    public function makePayPeriodDeposit(
+        PayPeriod $payPeriod,
+        int $amount
+    ): Transaction
+    {
+        $transaction = new Transaction();
+        $transaction->user_id = auth()->user()->id;
+        $transaction->pay_period_id = $payPeriod->id;
+        $transaction->type = 'deposit';
+        $transaction->amount = $amount;
+        $transaction->save();
+
+        $payPeriod->total_income = $payPeriod->total_income + $amount;
+        $payPeriod->save();
+
+        return $transaction;
+    }
+
     protected function markPayPeriodBillAsPayed(PayPeriodBill $payPeriodBill): void
     {
         $payPeriodBill->has_payed = 1;

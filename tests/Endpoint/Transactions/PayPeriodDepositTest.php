@@ -2,7 +2,9 @@
 
 namespace Tests\Endpoint\Transactions;
 
+use App\Models\Bill;
 use App\Models\PayPeriod;
+use App\Models\PayPeriodBill;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;

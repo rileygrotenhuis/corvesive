@@ -6,6 +6,7 @@ use App\Http\Resources\TransactionResource;
 use App\Models\PayPeriod;
 use App\Models\PayPeriodBill;
 use App\Models\PayPeriodBudget;
+use App\Models\Transaction;
 use App\Services\TransactionService;
 use Illuminate\Http\Request;
 
@@ -36,6 +37,23 @@ class TransactionController extends Controller
             ->createBudgetTransaction(
                 $payPeriod,
                 $payPeriodBudget,
+                $request->amount
+            );
+
+        return new TransactionResource($transaction);
+    }
+
+    public function payPeriodDeposit(Request $request, PayPeriod $payPeriod): TransactionResource
+    {
+        $this->authorize('transaction', $payPeriod);
+
+        $request->validate([
+            'amount' => 'required|integer|min:1'
+        ]);
+
+        $transaction = (new TransactionService())
+            ->makePayPeriodDeposit(
+                $payPeriod,
                 $request->amount
             );
 
