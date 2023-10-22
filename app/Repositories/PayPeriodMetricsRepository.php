@@ -50,22 +50,22 @@ class PayPeriodMetricsRepository
 
     public function getTransactionMetrics(): Collection
     {
-        $budgetSpent = $this->payPeriod->transactions()
-            ->whereNotNull('pay_period_budget_id')
-            ->whereNull('pay_period_bill_id')
-            ->where('type', '=', 'payment')
-            ->sum('amount');
-
         $billSpent = $this->payPeriod->transactions()
             ->whereNull('pay_period_budget_id')
             ->whereNotNull('pay_period_bill_id')
             ->where('type', '=', 'payment')
             ->sum('amount');
 
+        $budgetSpent = $this->payPeriod->transactions()
+            ->whereNotNull('pay_period_budget_id')
+            ->whereNull('pay_period_bill_id')
+            ->where('type', '=', 'payment')
+            ->sum('amount');
+
         return collect([
             'spent' => [
-                'budgets' => $budgetSpent,
                 'bills' => $billSpent,
+                'budgets' => $budgetSpent,
                 'total' => $budgetSpent + $billSpent,
             ],
             'deposit' => $this->payPeriod->transactions()
