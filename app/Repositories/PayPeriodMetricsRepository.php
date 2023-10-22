@@ -7,37 +7,11 @@ use Illuminate\Support\Collection;
 
 class PayPeriodMetricsRepository
 {
-    protected Collection $billMetrics;
-
-    protected Collection $budgetMetrics;
-
-    protected Collection $incomeMetrics;
-
-    protected Collection $transactionMetrics;
-
-    protected Collection $surplusMetrics;
-
     public function __construct(protected PayPeriod $payPeriod)
     {
-        $this->billMetrics = $this->collectBillMetrics();
-        $this->budgetMetrics = $this->collectBudgetMetrics();
-        $this->incomeMetrics = $this->collectIncomeMetrics();
-        $this->transactionMetrics = $this->collectTransactionMetrics();
-        $this->surplusMetrics = $this->collectSurplusMetrics();
     }
 
-    public function get(): Collection
-    {
-        return collect([
-            'bills' => $this->billMetrics,
-            'budgets' => $this->budgetMetrics,
-            'income' => $this->incomeMetrics,
-            'transactions' => $this->transactionMetrics,
-            'surplus' => $this->surplusMetrics,
-        ]);
-    }
-
-    protected function collectBillMetrics(): Collection
+    public function getBillMetrics(): Collection
     {
         $totalPayed = $this->payPeriod->bills()
             ->where('pay_period_bill.has_payed', 1)
@@ -54,7 +28,7 @@ class PayPeriodMetricsRepository
         ]);
     }
 
-    protected function collectBudgetMetrics(): Collection
+    public function getBudgetMetrics(): Collection
     {
         return collect([
             'total_balance' => $this->payPeriod
@@ -66,7 +40,7 @@ class PayPeriodMetricsRepository
         ]);
     }
 
-    protected function collectIncomeMetrics(): Collection
+    public function getIncomeMetrics(): Collection
     {
         return collect([
             'total_income' => $this->payPeriod->total_balance,
@@ -74,7 +48,7 @@ class PayPeriodMetricsRepository
         ]);
     }
 
-    protected function collectTransactionMetrics(): Collection
+    public function getTransactionMetrics(): Collection
     {
         $budgetSpent = $this->payPeriod->transactions()
             ->whereNotNull('pay_period_budget_id')
@@ -99,14 +73,6 @@ class PayPeriodMetricsRepository
                 ->whereNull('pay_period_bill_id')
                 ->where('type', '=', 'deposit')
                 ->sum('amount'),
-        ]);
-    }
-
-    protected function collectSurplusMetrics(): Collection
-    {
-        return collect([
-            'current' => $this->incomeMetrics['total_income'] - $this->transactionMetrics['spent']['total'],
-            'projected' => $this->incomeMetrics['total_income'] - $this->billMetrics['total'] - $this->budgetMetrics['total_balance'],
         ]);
     }
 }
