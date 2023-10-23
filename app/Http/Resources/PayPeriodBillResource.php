@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Services\PayPeriodBillService;
+use App\Util\CurrencyUtil;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -12,10 +13,7 @@ class PayPeriodBillResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'amount' => [
-                'raw' => $this->amount,
-                'pretty' => '$'.number_format(($this->amount / 100), 2),
-            ],
+            'amount' => CurrencyUtil::formatCurrencyValues($this->amount),
             'dates' => [
                 'due' => [
                     'raw' => $this->due_date,

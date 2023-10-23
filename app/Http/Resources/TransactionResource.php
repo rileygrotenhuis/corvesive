@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Util\CurrencyUtil;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TransactionResource extends JsonResource
@@ -15,10 +16,7 @@ class TransactionResource extends JsonResource
             'pay_period_bill' => $this->payPeriodBill(),
             'pay_period_budget' => $this->payPeriodBudget(),
             'type' => ucfirst($this->type),
-            'amount' => [
-                'raw' => $this->amount,
-                'pretty' => '$'.number_format((abs($this->amount) / 100), 2),
-            ],
+            'amount' => CurrencyUtil::formatCurrencyValues(abs($this->amount)),
             'notes' => $this->notes,
         ];
     }

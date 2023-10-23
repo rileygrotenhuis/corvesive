@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Util\CurrencyUtil;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CreditAccountResource extends JsonResource
@@ -14,15 +15,9 @@ class CreditAccountResource extends JsonResource
             'issuer' => $this->issuer,
             'name' => $this->name,
             'type' => $this->type,
-            'credit_limit' => [
-                'raw' => $this->credit_limit,
-                'pretty' => '$'.number_format(($this->credit_limit / 100), 2),
-            ],
+            'credit_limit' => CurrencyUtil::formatCurrencyValues($this->credit_limit),
             'interest_rate' => $this->interest_rate,
-            'annual_fee' => [
-                'raw' => $this->annual_fee,
-                'pretty' => '$'.number_format(($this->annual_fee / 100), 2),
-            ],
+            'annual_fee' => CurrencyUtil::formatCurrencyValues($this->annual_fee),
             'benefits' => $this->benefits,
             'notes' => $this->notes,
         ];

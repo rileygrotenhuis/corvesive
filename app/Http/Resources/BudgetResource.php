@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Util\CurrencyUtil;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BudgetResource extends JsonResource
@@ -12,10 +13,7 @@ class BudgetResource extends JsonResource
             'id' => $this->id,
             'user' => $this->user(),
             'name' => $this->name,
-            'amount' => [
-                'raw' => $this->amount,
-                'pretty' => '$'.number_format(($this->amount / 100), 2),
-            ],
+            'amount' => CurrencyUtil::formatCurrencyValues($this->amount),
             'notes' => $this->notes,
             'pay_periods' => PayPeriodResource::collection(
                 $this->whenLoaded('payPeriods')
