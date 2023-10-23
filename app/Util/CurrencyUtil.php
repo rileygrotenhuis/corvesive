@@ -6,11 +6,18 @@ use Illuminate\Support\Collection;
 
 class CurrencyUtil
 {
-    public static function formatCurrencyValues(int $amount): Collection
+    public static function formatCurrencyValues(?int $amount): Collection
     {
+        if ($amount) {
+            return collect([
+                'raw' => $amount,
+                'pretty' => '$'.number_format(($amount / 100), 2),
+            ]);
+        }
+
         return collect([
-            'raw' => $amount,
-            'pretty' => '$'.number_format(($amount / 100), 2),
+            'raw' => 0,
+            'pretty' => '$0.00',
         ]);
     }
 }

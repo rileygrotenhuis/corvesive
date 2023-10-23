@@ -42,4 +42,15 @@ class CurrencyUtilTest extends TestCase
             'pretty' => '$125.67',
         ]), $result);
     }
+
+    public function test_format_currency_values_with_null_amount(): void
+    {
+        $amount = null;
+        $result = CurrencyUtil::formatCurrencyValues($amount);
+
+        $this->assertEquals(collect([
+            'raw' => 0,
+            'pretty' => '$0.00',
+        ]), $result);
+    }
 }
