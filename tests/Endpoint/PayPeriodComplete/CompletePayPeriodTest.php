@@ -36,8 +36,7 @@ class CompletePayPeriodTest extends TestCase
     public function test_successful_pay_period_completion(): void
     {
         $this->assertDatabaseHas('pay_periods', [
-            'user_id' => $this->user->id,
-            'start_date' => Carbon::today()->toDateString(),
+            'id' => $this->payPeriod->id,
             'is_complete' => 0,
         ]);
 
@@ -45,15 +44,14 @@ class CompletePayPeriodTest extends TestCase
             ->assertStatus(200);
 
         $this->assertDatabaseHas('pay_periods', [
-            'user_id' => $this->user->id,
-            'start_date' => Carbon::today()->toDateString(),
+            'id' => $this->payPeriod->id,
             'is_complete' => 1,
         ]);
     }
 
     protected function submitRequest(): TestResponse
     {
-        return $this->putJson(
+        return $this->postJson(
             route('pay-periods.complete', $this->payPeriod)
         );
     }

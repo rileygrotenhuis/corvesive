@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PayPeriodResource;
 use App\Models\PayPeriod;
-use Illuminate\Http\JsonResponse;
 
 class PayPeriodCompleteController extends Controller
 {
-    public function complete(PayPeriod $payPeriod): JsonResponse
+    public function complete(PayPeriod $payPeriod): PayPeriodResource
     {
         $this->authorize('update', $payPeriod);
 
-        return response()->json('', 204);
+        $payPeriod->is_complete = 1;
+        $payPeriod->save();
+
+        return new PayPeriodResource($payPeriod);
     }
 
-    public function incomplete(PayPeriod $payPeriod): JsonResponse
+    public function incomplete(PayPeriod $payPeriod): PayPeriodResource
     {
         $this->authorize('update', $payPeriod);
 
-        return response()->json('', 204);
+        $payPeriod->is_complete = 0;
+        $payPeriod->save();
+
+        return new PayPeriodResource($payPeriod);
     }
 }
