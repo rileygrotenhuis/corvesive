@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Endpoint\PayPeriods;
+namespace Tests\Endpoint\PayPeriodComplete;
 
 use App\Models\PayPeriod;
 use App\Models\User;
