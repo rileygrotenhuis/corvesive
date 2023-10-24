@@ -32,6 +32,7 @@ class PayPeriodResource extends JsonResource
                 ],
             ],
             'total_balance' => CurrencyUtil::formatCurrencyValues($this->total_balance),
+            'is_complete' => $this->is_complete,
             'paystubs' => PaystubResource::collection(
                 $this->whenLoaded('paystubs')
             ),

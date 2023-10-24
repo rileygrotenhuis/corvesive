@@ -20,9 +20,8 @@ class PayPeriodQuery extends QueryBuilder
             'user_id',
             'start_date',
             'end_date',
-            'totalBalance',
-            'surplus',
-            'projectedSurplus',
+            'total_balance',
+            'is_complete'
         ]);
 
         $this->allowedIncludes([
@@ -36,16 +35,16 @@ class PayPeriodQuery extends QueryBuilder
             AllowedFilter::exact('user_id'),
             AllowedFilter::exact('start_date'),
             AllowedFilter::exact('end_date'),
-            AllowedFilter::exact('surplus'),
-            AllowedFilter::exact('projectedSurplus'),
+            AllowedFilter::exact('total_balance'),
+            AllowedFilter::exact('is_complete'),
         ]);
 
         $this->allowedSorts([
             AllowedSort::field('user_id'),
             AllowedSort::field('start_date'),
             AllowedSort::field('end_date'),
-            AllowedSort::field('surplus'),
-            AllowedSort::field('projectedSurplus'),
+            AllowedSort::field('total_balance'),
+            AllowedSort::field('is_complete'),
         ]);
     }
 }
