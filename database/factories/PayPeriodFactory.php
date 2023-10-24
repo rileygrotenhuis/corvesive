@@ -14,6 +14,7 @@ class PayPeriodFactory extends Factory
             'user_id' => User::factory(),
             'start_date' => Carbon::today()->toDateString(),
             'end_date' => Carbon::today()->addDays(20)->toDateString(),
+            'is_complete' => 0,
         ];
     }
 }
