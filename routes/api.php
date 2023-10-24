@@ -12,6 +12,7 @@ use App\Http\Controllers\PayPeriodMetricsController;
 use App\Http\Controllers\PayPeriodPaystubController;
 use App\Http\Controllers\PaystubController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\PayPeriodCompleteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -35,7 +36,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::post('deposit', [TransactionController::class, 'payPeriodDeposit'])->name('pay-periods.deposit');
 
-        Route::post('complete', [PayPeriodController::class, 'complete'])->name('pay-periods.complete');
+        Route::post('complete', [PayPeriodCompleteController::class, 'complete'])->name('pay-periods.complete');
+        Route::post('incomplete', [PayPeriodCompleteController::class, 'incomplete'])->name('pay-periods.incomplete');
 
         Route::post('paystubs/{paystub}', [PayPeriodPaystubController::class, 'store'])->name('pay-periods.paystubs.store');
         Route::delete('paystubs/{paystub}', [PayPeriodPaystubController::class, 'destroy'])->name('pay-periods.paystubs.destroy');
