@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Util\CurrencyUtil;
+use App\Util\DayOfMonthUtil;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BillResource extends JsonResource
@@ -15,7 +16,10 @@ class BillResource extends JsonResource
             'issuer' => $this->issuer,
             'name' => $this->name,
             'amount' => CurrencyUtil::formatCurrencyValues($this->amount),
-            'due_date' => $this->due_date,
+            'due_date' => [
+                'raw' => $this->due_date,
+                'pretty' => DayOfMonthUtil::convertDayOfMonthToPrettyString($this->due_date),
+            ],
             'notes' => $this->notes,
             'pay_periods' => PayPeriodResource::collection(
                 $this->whenLoaded('payPeriods')
