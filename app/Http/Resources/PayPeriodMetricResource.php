@@ -10,56 +10,33 @@ class PayPeriodMetricResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'user' => $this->user(),
-            'pay_period' => $this->payPeriod(),
+            'user_id' => $this->userId,
+            'pay_period_id' => $this->payPeriodId,
             'bill_metrics' => [
-                'total_payed' => [],
-                'total_unpayed' => [],
-                'total' => [],
+                'total_payed' => CurrencyUtil::formatCurrencyValues($this->billsTotalPayed),
+                'total_unpayed' => CurrencyUtil::formatCurrencyValues($this->billsTotalUnpayed),
+                'total' => CurrencyUtil::formatCurrencyValues($this->billsTotal),
             ],
             'budget_metrics' => [
-                'total_balance' => [],
-                'remaining_balance' => []
+                'total_balance' => CurrencyUtil::formatCurrencyValues($this->budgetsTotalBalance),
+                'remaining_balance' => CurrencyUtil::formatCurrencyValues($this->budgetsRemainingBalance),
             ],
             'income_metrics' => [
-                'total_income' => [],
-                'paystubs_total' => [],
+                'total_paystubs' => CurrencyUtil::formatCurrencyValues($this->totalPaystubs),
+                'total_income' => CurrencyUtil::formatCurrencyValues($this->totalIncome),
             ],
             'transaction_metrics' => [
                 'total_spent' => [
-                    'bills' => [],
-                    'budgets' => [],
-                    'total' => [],
+                    'bills' => CurrencyUtil::formatCurrencyValues($this->billsTotalSpent),
+                    'budgets' => CurrencyUtil::formatCurrencyValues($this->budgetsTotalSpent),
+                    'total' => CurrencyUtil::formatCurrencyValues($this->totalSpent),
                 ],
-                'total_deposited' => [],
+                'total_deposited' => CurrencyUtil::formatCurrencyValues($this->totalDeposited),
             ],
-            'surplus_metrics' => [],
+            'surplus_metrics' => [
+                'current' => CurrencyUtil::formatCurrencyValues($this->currentSurplus),
+                'projected' => CurrencyUtil::formatCurrencyValues($this->projectedSurplus),
+            ],
         ];
-    }
-
-    protected function user(): UserResource|array
-    {
-        if (! $this->resource->relationLoaded('user')) {
-            return [
-                'id' => $this->user_id ?? null,
-            ];
-        }
-
-        return UserResource::make(
-            $this->user
-        );
-    }
-
-    protected function payPeriod(): PayPeriodResource|array
-    {
-        if (! $this->resource->relationLoaded('payPeriod')) {
-            return [
-                'id' => $this->pay_period_id ?? null,
-            ];
-        }
-
-        return PayPeriodResource::make(
-            $this->payPeriod
-        );
     }
 }
