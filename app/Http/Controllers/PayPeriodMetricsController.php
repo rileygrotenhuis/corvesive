@@ -13,13 +13,15 @@ class PayPeriodMetricsController extends Controller
     {
         $payPeriodMetricsRepository = (new PayPeriodMetricsRepository($payPeriod));
 
-        return new PayPeriodMetricResource(new PayPeriodMetricsObject(
-            auth()->user()->id,
-            $payPeriod->id,
-            $payPeriodMetricsRepository->getBillMetrics(),
-            $payPeriodMetricsRepository->getBudgetMetrics(),
-            $payPeriodMetricsRepository->getIncomeMetrics(),
-            $payPeriodMetricsRepository->getTransactionMetrics()
-        ));
+        return new PayPeriodMetricResource(
+            new PayPeriodMetricsObject(
+                auth()->user()->id,
+                $payPeriod->id,
+                $payPeriodMetricsRepository->getBillMetrics(),
+                $payPeriodMetricsRepository->getBudgetMetrics(),
+                $payPeriodMetricsRepository->getIncomeMetrics(),
+                $payPeriodMetricsRepository->getTransactionMetrics()
+            )
+        );
     }
 }
