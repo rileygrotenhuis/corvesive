@@ -7,12 +7,12 @@ use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CreditAccountController;
 use App\Http\Controllers\PayPeriodBillController;
 use App\Http\Controllers\PayPeriodBudgetController;
+use App\Http\Controllers\PayPeriodCompleteController;
 use App\Http\Controllers\PayPeriodController;
 use App\Http\Controllers\PayPeriodMetricsController;
 use App\Http\Controllers\PayPeriodPaystubController;
 use App\Http\Controllers\PaystubController;
 use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\PayPeriodCompleteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

@@ -21,7 +21,7 @@ class PayPeriodQuery extends QueryBuilder
             'start_date',
             'end_date',
             'total_balance',
-            'is_complete'
+            'is_complete',
         ]);
 
         $this->allowedIncludes([
