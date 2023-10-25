@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PayPeriodResource;
 use App\Models\PayPeriod;
+use App\Services\PayPeriodMetricService;
 
 class PayPeriodCompleteController extends Controller
 {
@@ -13,6 +14,8 @@ class PayPeriodCompleteController extends Controller
 
         $payPeriod->is_complete = 1;
         $payPeriod->save();
+
+        (new PayPeriodMetricService())->savePayPeriodMetrics($payPeriod);
 
         return new PayPeriodResource($payPeriod);
     }
