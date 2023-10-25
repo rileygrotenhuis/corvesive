@@ -7,35 +7,35 @@ use Illuminate\Support\Collection;
 
 class PayPeriodMetricsObject
 {
-    public int $billsTotalPayed;
+    public int $bills_total_payed;
 
-    public int $billsTotalUnpayed;
+    public int $bills_total_unpayed;
 
-    public int $billsTotal;
+    public int $bills_total;
 
-    public int $budgetsTotalBalance;
+    public int $budgets_total_balance;
 
-    public int $budgetsRemainingBalance;
+    public int $budgets_remaining_balance;
 
-    public int $totalPaystubs;
+    public int $total_paystubs;
 
-    public int $totalIncome;
+    public int $total_income;
 
-    public int $billsTotalSpent;
+    public int $bills_total_spent;
 
-    public int $budgetsTotalSpent;
+    public int $budgets_total_spent;
 
-    public int $totalSpent;
+    public int $total_spent;
 
-    public int $totalDeposited;
+    public int $total_deposited;
 
-    public int $currentSurplus;
+    public int $current_surplus;
 
-    public int $projectedSurplus;
+    public int $projected_surplus;
 
     public function __construct(
-        public int $userId,
-        public int $payPeriodId,
+        public int $user_id,
+        public int $pay_period_id,
         Collection $billMetrics,
         Collection $budgetMetrics,
         Collection $incomeMetrics,
@@ -48,22 +48,22 @@ class PayPeriodMetricsObject
             $budgetMetrics['total_balance']
         );
 
-        $this->billsTotalPayed = $billMetrics['payed'];
-        $this->billsTotalUnpayed = $billMetrics['unpayed'];
-        $this->billsTotal = $billMetrics['total'];
+        $this->bills_total_payed = $billMetrics['payed'];
+        $this->bills_total_unpayed = $billMetrics['unpayed'];
+        $this->bills_total = $billMetrics['total'];
 
-        $this->budgetsTotalBalance = $budgetMetrics['total_balance'];
-        $this->budgetsRemainingBalance = $budgetMetrics['remaining_balance'];
+        $this->budgets_total_balance = $budgetMetrics['total_balance'];
+        $this->budgets_remaining_balance = $budgetMetrics['remaining_balance'];
 
-        $this->totalPaystubs = $incomeMetrics['paystubs_total'];
-        $this->totalIncome = $incomeMetrics['total_income'];
+        $this->total_paystubs = $incomeMetrics['paystubs_total'];
+        $this->total_income = $incomeMetrics['total_income'];
 
-        $this->billsTotalSpent = $transactionMetrics['spent']['bills'];
-        $this->budgetsTotalSpent = $transactionMetrics['spent']['budgets'];
-        $this->totalSpent = $transactionMetrics['spent']['total'];
-        $this->totalDeposited = $transactionMetrics['deposit'];
+        $this->bills_total_spent = $transactionMetrics['spent']['bills'];
+        $this->budgets_total_spent = $transactionMetrics['spent']['budgets'];
+        $this->total_spent = $transactionMetrics['spent']['total'];
+        $this->total_deposited = $transactionMetrics['deposit'];
 
-        $this->currentSurplus = $surplusMetrics['current'];
-        $this->projectedSurplus = $surplusMetrics['projected'];
+        $this->current_surplus = $surplusMetrics['current'];
+        $this->projected_surplus = $surplusMetrics['projected'];
     }
 }

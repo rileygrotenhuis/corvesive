@@ -52,9 +52,9 @@ class PayPeriodMetricService
         PayPeriodMetric $payPeriodMetric,
         PayPeriodMetricsObject $payPeriodMetricsFormatted
     ): PayPeriodMetric {
-        $payPeriodMetric->bills_total_payed = $payPeriodMetricsFormatted->billsTotalPayed;
-        $payPeriodMetric->bills_total_unpayed = $payPeriodMetricsFormatted->billsTotalUnpayed;
-        $payPeriodMetric->bills_total = $payPeriodMetricsFormatted->billsTotal;
+        $payPeriodMetric->bills_total_payed = $payPeriodMetricsFormatted->bills_total_payed;
+        $payPeriodMetric->bills_total_unpayed = $payPeriodMetricsFormatted->bills_total_unpayed;
+        $payPeriodMetric->bills_total = $payPeriodMetricsFormatted->bills_total;
 
         return $payPeriodMetric;
     }
@@ -63,8 +63,8 @@ class PayPeriodMetricService
         PayPeriodMetric $payPeriodMetric,
         PayPeriodMetricsObject $payPeriodMetricsFormatted
     ): PayPeriodMetric {
-        $payPeriodMetric->budgets_total_balance = $payPeriodMetricsFormatted->budgetsTotalBalance;
-        $payPeriodMetric->budgets_remaining_balance = $payPeriodMetricsFormatted->budgetsRemainingBalance;
+        $payPeriodMetric->budgets_total_balance = $payPeriodMetricsFormatted->budgets_total_balance;
+        $payPeriodMetric->budgets_remaining_balance = $payPeriodMetricsFormatted->budgets_remaining_balance;
 
         return $payPeriodMetric;
     }
@@ -73,8 +73,8 @@ class PayPeriodMetricService
         PayPeriodMetric $payPeriodMetric,
         PayPeriodMetricsObject $payPeriodMetricsFormatted
     ): PayPeriodMetric {
-        $payPeriodMetric->total_paystubs = $payPeriodMetricsFormatted->totalPaystubs;
-        $payPeriodMetric->total_income = $payPeriodMetricsFormatted->totalIncome;
+        $payPeriodMetric->total_paystubs = $payPeriodMetricsFormatted->total_paystubs;
+        $payPeriodMetric->total_income = $payPeriodMetricsFormatted->total_income;
 
         return $payPeriodMetric;
     }
@@ -83,10 +83,10 @@ class PayPeriodMetricService
         PayPeriodMetric $payPeriodMetric,
         PayPeriodMetricsObject $payPeriodMetricsFormatted
     ): PayPeriodMetric {
-        $payPeriodMetric->bills_total_spent = $payPeriodMetricsFormatted->billsTotalSpent;
-        $payPeriodMetric->budgets_total_spent = $payPeriodMetricsFormatted->budgetsTotalSpent;
-        $payPeriodMetric->total_spent = $payPeriodMetricsFormatted->totalSpent;
-        $payPeriodMetric->total_deposited = $payPeriodMetricsFormatted->totalDeposited;
+        $payPeriodMetric->bills_total_spent = $payPeriodMetricsFormatted->bills_total_spent;
+        $payPeriodMetric->budgets_total_spent = $payPeriodMetricsFormatted->budgets_total_spent;
+        $payPeriodMetric->total_spent = $payPeriodMetricsFormatted->total_spent;
+        $payPeriodMetric->total_deposited = $payPeriodMetricsFormatted->total_deposited;
 
         return $payPeriodMetric;
     }
@@ -95,8 +95,8 @@ class PayPeriodMetricService
         PayPeriodMetric $payPeriodMetric,
         PayPeriodMetricsObject $payPeriodMetricsFormatted
     ): PayPeriodMetric {
-        $payPeriodMetric->current_surplus = $payPeriodMetricsFormatted->currentSurplus;
-        $payPeriodMetric->projected_surplus = $payPeriodMetricsFormatted->projectedSurplus;
+        $payPeriodMetric->current_surplus = $payPeriodMetricsFormatted->current_surplus;
+        $payPeriodMetric->projected_surplus = $payPeriodMetricsFormatted->projected_surplus;
 
         return $payPeriodMetric;
     }
