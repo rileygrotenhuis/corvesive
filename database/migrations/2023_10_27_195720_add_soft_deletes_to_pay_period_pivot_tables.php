@@ -31,7 +31,7 @@ return new class extends Migration
             $table->dropColumn('deleted_at');
         });
 
-        Schema::table('pay_period_paystubc', function (Blueprint $table) {
+        Schema::table('pay_period_paystub', function (Blueprint $table) {
             $table->dropColumn('deleted_at');
         });
     }
