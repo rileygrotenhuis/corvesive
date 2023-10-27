@@ -26,17 +26,14 @@ class UserResource extends JsonResource
 
     protected function payPeriod(): PayPeriodResource|array
     {
+        if (! $this->resource->relationLoaded('payPeriod')) {
+            return [
+                'id' => $this->pay_period_id,
+            ];
+        }
+
         return PayPeriodResource::make(
-            $this->payPeriod->load([
-                'paystubs',
-                'bills' => function ($query) {
-                    $query->orderBy('pay_period_bill.has_payed', 'asc')
-                        ->orderBy('pay_period_bill.due_date', 'asc');
-                },
-                'budgets' => function ($query) {
-                    $query->orderBy('pay_period_budget.remaining_balance', 'desc');
-                },
-            ])
+            $this->payPeriod
         );
     }
 }
