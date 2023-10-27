@@ -46,13 +46,17 @@ class PayPeriodController extends Controller
 
         return new PayPeriodResource(
             $payPeriod->load([
-                'paystubs',
+                'paystubs' => function ($query) {
+                    $query->whereNull('pay_period_paystub.deleted_at');
+                },
                 'bills' => function ($query) {
-                    $query->orderBy('pay_period_bill.has_payed', 'asc')
+                    $query->whereNull('pay_period_bill.deleted_at')
+                        ->orderBy('pay_period_bill.has_payed', 'asc')
                         ->orderBy('pay_period_bill.due_date', 'asc');
                 },
                 'budgets' => function ($query) {
-                    $query->orderBy('pay_period_budget.remaining_balance', 'desc');
+                    $query->whereNull('pay_period_budget.deleted_at')
+                        ->orderBy('pay_period_budget.remaining_balance', 'desc');
                 },
             ])
         );
