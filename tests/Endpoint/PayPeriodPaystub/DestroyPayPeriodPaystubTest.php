@@ -54,7 +54,7 @@ class DestroyPayPeriodPaystubTest extends TestCase
         $this->submitRequest()
             ->assertStatus(200);
 
-        $this->assertDatabaseCount('pay_period_paystub', 0);
+        $this->assertEquals(0, PayPeriodPaystub::count());
 
         $this->assertDatabaseHas('pay_periods', [
             'id' => $this->payPeriod->id,

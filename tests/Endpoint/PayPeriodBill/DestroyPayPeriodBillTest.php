@@ -47,7 +47,7 @@ class DestroyPayPeriodBillTest extends TestCase
         $this->submitRequest()
             ->assertStatus(200);
 
-        $this->assertDatabaseCount('pay_period_bill', 0);
+        $this->assertEquals(0, PayPeriodBill::count());
     }
 
     public function test_failed_pay_period_to_bill_link_with_failed_authorization(): void
