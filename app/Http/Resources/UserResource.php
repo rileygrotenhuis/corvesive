@@ -17,9 +17,26 @@ class UserResource extends JsonResource
             ],
             'email' => $this->email,
             'phone_number' => $this->phone_number,
+            'pay_period' => $this->payPeriod(),
             'paystubs' => PaystubResource::collection(
                 $this->whenLoaded('paystubs')
             ),
         ];
+    }
+
+    protected function payPeriod(): PayPeriodResource|array
+    {
+        return PayPeriodResource::make(
+            $this->payPeriod->load([
+                'paystubs',
+                'bills' => function ($query) {
+                    $query->orderBy('pay_period_bill.has_payed', 'asc')
+                        ->orderBy('pay_period_bill.due_date', 'asc');
+                },
+                'budgets' => function ($query) {
+                    $query->orderBy('pay_period_budget.remaining_balance', 'desc');
+                },
+            ])
+        );
     }
 }
