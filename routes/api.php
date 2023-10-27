@@ -9,6 +9,7 @@ use App\Http\Controllers\PayPeriodBillController;
 use App\Http\Controllers\PayPeriodBudgetController;
 use App\Http\Controllers\PayPeriodCompleteController;
 use App\Http\Controllers\PayPeriodController;
+use App\Http\Controllers\PayPeriodCurrentController;
 use App\Http\Controllers\PayPeriodMetricsController;
 use App\Http\Controllers\PayPeriodPaystubController;
 use App\Http\Controllers\PaystubController;
@@ -38,6 +39,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::post('complete', [PayPeriodCompleteController::class, 'complete'])->name('pay-periods.complete');
         Route::post('incomplete', [PayPeriodCompleteController::class, 'incomplete'])->name('pay-periods.incomplete');
+
+        Route::post('current', [PayPeriodCurrentController::class, 'store'])->name('pay-periods.current');
 
         Route::post('paystubs/{paystub}', [PayPeriodPaystubController::class, 'store'])->name('pay-periods.paystubs.store');
         Route::delete('paystubs/{paystub}', [PayPeriodPaystubController::class, 'destroy'])->name('pay-periods.paystubs.destroy');
