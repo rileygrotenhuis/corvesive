@@ -19,6 +19,9 @@ class PaystubResource extends JsonResource
             'pay_periods' => PayPeriodResource::collection(
                 $this->whenLoaded('payPeriods')
             ),
+            'pivot' => $this->whenPivotLoaded(
+                'pay_period_paystub', new PayPeriodPaystubResource($this->pivot)
+            ),
         ];
     }
 

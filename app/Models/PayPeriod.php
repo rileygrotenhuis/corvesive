@@ -27,7 +27,8 @@ class PayPeriod extends Model
 
     public function paystubs(): BelongsToMany
     {
-        return $this->belongsToMany(Paystub::class, 'pay_period_paystub');
+        return $this->belongsToMany(Paystub::class, 'pay_period_paystub')
+            ->withPivot('id', 'amount');
     }
 
     public function bills(): BelongsToMany
