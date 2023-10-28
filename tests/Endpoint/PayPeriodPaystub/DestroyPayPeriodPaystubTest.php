@@ -34,9 +34,7 @@ class DestroyPayPeriodPaystubTest extends TestCase
 
         $this->payPeriod = PayPeriod::factory()
             ->for($this->user)
-            ->create([
-                'total_balance' => $this->paystub->amount,
-            ]);
+            ->create();
 
         PayPeriodPaystub::factory()->create([
             'pay_period_id' => $this->payPeriod->id,
@@ -46,20 +44,10 @@ class DestroyPayPeriodPaystubTest extends TestCase
 
     public function test_successful_pay_period_to_paystub_unlink(): void
     {
-        $this->assertDatabaseHas('pay_periods', [
-            'id' => $this->payPeriod->id,
-            'total_balance' => $this->paystub->amount,
-        ]);
-
         $this->submitRequest()
             ->assertStatus(200);
 
         $this->assertEquals(0, PayPeriodPaystub::count());
-
-        $this->assertDatabaseHas('pay_periods', [
-            'id' => $this->payPeriod->id,
-            'total_balance' => 0,
-        ]);
     }
 
     public function test_failed_pay_period_to_paystub_link_with_failed_authorization(): void

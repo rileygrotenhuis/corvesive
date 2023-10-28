@@ -16,9 +16,6 @@ class PayPeriodPaystubService
         $payPeriodPaystub->pay_period_id = $payPeriod->id;
         $payPeriodPaystub->paystub_id = $paystub->id;
         $payPeriodPaystub->save();
-
-        $payPeriod->total_balance = $payPeriod->total_balance + $paystub->amount;
-        $payPeriod->save();
     }
 
     public function removePaystubFromPayPeriod(
@@ -28,8 +25,5 @@ class PayPeriodPaystubService
         PayPeriodPaystub::where('pay_period_id', $payPeriod->id)
             ->where('paystub_id', $paystub->id)
             ->delete();
-
-        $payPeriod->total_balance = $payPeriod->total_balance - $paystub->amount;
-        $payPeriod->save();
     }
 }

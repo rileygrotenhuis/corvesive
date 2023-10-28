@@ -43,7 +43,6 @@ class PayPeriodMetricsRepository
     public function getIncomeMetrics(): Collection
     {
         return collect([
-            'total_income' => $this->payPeriod->total_balance,
             'paystubs_total' => $this->payPeriod->paystubs->sum('amount'),
         ]);
     }

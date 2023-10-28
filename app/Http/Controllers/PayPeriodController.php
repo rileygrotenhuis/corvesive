@@ -70,8 +70,7 @@ class PayPeriodController extends Controller
             ->updatePayPeriod(
                 $payPeriod,
                 $request->start_date,
-                $request->end_date,
-                $request->total_balance
+                $request->end_date
             );
 
         $payPeriod->save();

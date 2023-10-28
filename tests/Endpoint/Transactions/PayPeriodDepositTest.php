@@ -28,9 +28,7 @@ class PayPeriodDepositTest extends TestCase
 
         $this->payPeriod = PayPeriod::factory()
             ->for($this->user)
-            ->create([
-                'total_balance' => 100000,
-            ]);
+            ->create();
 
         $this->payload = [
             'amount' => 10000,
@@ -39,11 +37,6 @@ class PayPeriodDepositTest extends TestCase
 
     public function test_successful_pay_period_deposit(): void
     {
-        $this->assertDatabaseHas('pay_periods', [
-            'id' => $this->payPeriod->id,
-            'total_balance' => 100000,
-        ]);
-
         $this->submitRequest()
             ->assertStatus(201);
 
@@ -56,21 +49,11 @@ class PayPeriodDepositTest extends TestCase
             'amount' => $this->payload['amount'],
             'notes' => null,
         ]);
-
-        $this->assertDatabaseHas('pay_periods', [
-            'id' => $this->payPeriod->id,
-            'total_balance' => 110000,
-        ]);
     }
 
     public function test_successful_pay_period_deposit_with_notes_field(): void
     {
         $this->payload['notes'] = 'This is a test';
-
-        $this->assertDatabaseHas('pay_periods', [
-            'id' => $this->payPeriod->id,
-            'total_balance' => 100000,
-        ]);
 
         $this->submitRequest()
             ->assertStatus(201);
@@ -83,11 +66,6 @@ class PayPeriodDepositTest extends TestCase
             'type' => 'deposit',
             'amount' => $this->payload['amount'],
             'notes' => 'This is a test',
-        ]);
-
-        $this->assertDatabaseHas('pay_periods', [
-            'id' => $this->payPeriod->id,
-            'total_balance' => 110000,
         ]);
     }
 

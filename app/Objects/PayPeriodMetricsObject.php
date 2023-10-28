@@ -41,8 +41,10 @@ class PayPeriodMetricsObject
         Collection $incomeMetrics,
         Collection $transactionMetrics
     ) {
+        $totalIncome = $incomeMetrics['paystubs_total'] + $transactionMetrics['deposit'];
+
         $surplusMetrics = PayPeriodMetricsUtil::calculatePayPeriodSurplus(
-            $incomeMetrics['total_income'],
+            $totalIncome,
             $transactionMetrics['spent']['total'],
             $billMetrics['total'],
             $budgetMetrics['total_balance']
@@ -56,7 +58,7 @@ class PayPeriodMetricsObject
         $this->budgets_remaining_balance = $budgetMetrics['remaining_balance'];
 
         $this->total_paystubs = $incomeMetrics['paystubs_total'];
-        $this->total_income = $incomeMetrics['total_income'];
+        $this->total_income = $totalIncome;
 
         $this->bills_total_spent = $transactionMetrics['spent']['bills'];
         $this->budgets_total_spent = $transactionMetrics['spent']['budgets'];
