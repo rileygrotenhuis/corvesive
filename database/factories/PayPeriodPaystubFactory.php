@@ -13,6 +13,7 @@ class PayPeriodPaystubFactory extends Factory
         return [
             'pay_period_id' => PayPeriod::factory(),
             'paystub_id' => Paystub::factory(),
+            'amount' => fake()->numberBetween(5000, 25000),
         ];
     }
 }
