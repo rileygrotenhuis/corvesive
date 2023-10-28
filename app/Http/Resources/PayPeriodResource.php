@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Util\CurrencyUtil;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -31,7 +30,6 @@ class PayPeriodResource extends JsonResource
                     ],
                 ],
             ],
-            'total_balance' => CurrencyUtil::formatCurrencyValues($this->total_balance),
             'is_complete' => $this->is_complete,
             'paystubs' => PaystubResource::collection(
                 $this->whenLoaded('paystubs')

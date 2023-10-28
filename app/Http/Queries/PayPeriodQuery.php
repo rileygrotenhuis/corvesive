@@ -20,7 +20,6 @@ class PayPeriodQuery extends QueryBuilder
             'user_id',
             'start_date',
             'end_date',
-            'total_balance',
             'is_complete',
         ]);
 
@@ -35,7 +34,6 @@ class PayPeriodQuery extends QueryBuilder
             AllowedFilter::exact('user_id'),
             AllowedFilter::exact('start_date'),
             AllowedFilter::exact('end_date'),
-            AllowedFilter::exact('total_balance'),
             AllowedFilter::exact('is_complete'),
         ]);
 
@@ -43,7 +41,6 @@ class PayPeriodQuery extends QueryBuilder
             AllowedSort::field('user_id'),
             AllowedSort::field('start_date'),
             AllowedSort::field('end_date'),
-            AllowedSort::field('total_balance'),
             AllowedSort::field('is_complete'),
         ]);
     }
