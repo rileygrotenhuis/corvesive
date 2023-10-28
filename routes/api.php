@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('current', [PayPeriodCurrentController::class, 'store'])->name('pay-periods.current');
 
         Route::post('paystubs/{paystub}', [PayPeriodPaystubController::class, 'store'])->name('pay-periods.paystubs.store');
+        Route::put('paystubs/{paystub}', [PayPeriodPaystubController::class, 'update'])->name('pay-periods.paystubs.update');
         Route::delete('paystubs/{paystub}', [PayPeriodPaystubController::class, 'destroy'])->name('pay-periods.paystubs.destroy');
 
         Route::post('bills/{bill}', [PayPeriodBillController::class, 'store'])->name('pay-periods.bills.store');

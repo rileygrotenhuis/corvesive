@@ -20,6 +20,18 @@ class PayPeriodPaystubService
         $payPeriodPaystub->save();
     }
 
+    public function updatePayPeriodPaystub(
+        PayPeriod $payPeriod,
+        Paystub $paystub,
+        int $amount
+    ): void {
+        PayPeriodPaystub::where('pay_period_id', $payPeriod->id)
+            ->where('paystub_id', $paystub->id)
+            ->update([
+                'amount' => $amount
+            ]);
+    }
+
     public function removePaystubFromPayPeriod(
         PayPeriod $payPeriod,
         Paystub $paystub

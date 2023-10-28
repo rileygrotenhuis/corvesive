@@ -37,6 +37,33 @@ class PayPeriodPaystubController extends Controller
         );
     }
 
+    public function update(Request $request, PayPeriod $payPeriod, Paystub $paystub): PayPeriodResource
+    {
+        $request->validate([
+            'amount' => 'required|integer|min:1',
+        ]);
+
+        $this->authorize('paystub', [
+            $payPeriod,
+            $paystub,
+        ]);
+
+        (new PayPeriodPaystubService())
+            ->updatePayPeriodPaystub(
+                $payPeriod,
+                $paystub,
+                $request->amount
+            );
+
+        return new PayPeriodResource(
+            $payPeriod->load([
+                'paystubs',
+                'bills',
+                'budgets',
+            ])
+        );
+    }
+
     public function destroy(PayPeriod $payPeriod, Paystub $paystub): PayPeriodResource
     {
         $this->authorize('paystub', [
