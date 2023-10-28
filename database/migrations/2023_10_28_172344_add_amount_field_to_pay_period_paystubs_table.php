@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pay_period_paystub', function (Blueprint $table) {
-            $table->unsignedBigInteger('amount')->after('paystub_id');
+            $table->unsignedBigInteger('amount')->after('paystub_id')->default(0);
         });
     }
 
