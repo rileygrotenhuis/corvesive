@@ -10,11 +10,13 @@ class PayPeriodPaystubService
 {
     public function addPaystubToPayPeriod(
         PayPeriod $payPeriod,
-        Paystub $paystub
+        Paystub $paystub,
+        int $amount
     ): void {
         $payPeriodPaystub = new PayPeriodPaystub();
         $payPeriodPaystub->pay_period_id = $payPeriod->id;
         $payPeriodPaystub->paystub_id = $paystub->id;
+        $payPeriodPaystub->amount = $amount;
         $payPeriodPaystub->save();
     }
 

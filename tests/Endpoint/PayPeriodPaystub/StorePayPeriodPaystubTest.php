@@ -19,6 +19,8 @@ class StorePayPeriodPaystubTest extends TestCase
 
     protected Paystub $paystub;
 
+    protected array $payload;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -34,6 +36,10 @@ class StorePayPeriodPaystubTest extends TestCase
         $this->paystub = Paystub::factory()
             ->for($this->user)
             ->create();
+
+        $this->payload = [
+            'amount' => 100000,
+        ];
     }
 
     public function test_successful_pay_period_to_paystub_link(): void
@@ -44,7 +50,26 @@ class StorePayPeriodPaystubTest extends TestCase
         $this->assertDatabaseHas('pay_period_paystub', [
             'pay_period_id' => $this->payPeriod->id,
             'paystub_id' => $this->paystub->id,
+            'amount' => 100000,
         ]);
+    }
+
+    public function test_failed_pay_period_to_paystub_link_with_missing_amount_field(): void
+    {
+        unset($this->payload['amount']);
+
+        $this->submitRequest($this->paystub)
+            ->assertStatus(422)
+            ->assertJsonValidationErrorFor('amount');
+    }
+
+    public function test_failed_pay_period_to_paystub_link_with_invalid_amount_field(): void
+    {
+        $this->payload['amount'] = -100;
+
+        $this->submitRequest($this->paystub)
+            ->assertStatus(422)
+            ->assertJsonValidationErrorFor('amount');
     }
 
     public function test_failed_pay_period_to_paystub_link_with_failed_authorization(): void
@@ -67,6 +92,7 @@ class StorePayPeriodPaystubTest extends TestCase
                 $this->payPeriod,
                 $paystub,
             ]),
+            $this->payload
         );
     }
 }

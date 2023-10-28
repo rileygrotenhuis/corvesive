@@ -6,11 +6,16 @@ use App\Http\Resources\PayPeriodResource;
 use App\Models\PayPeriod;
 use App\Models\Paystub;
 use App\Services\PayPeriodPaystubService;
+use Illuminate\Http\Request;
 
 class PayPeriodPaystubController extends Controller
 {
-    public function store(PayPeriod $payPeriod, Paystub $paystub): PayPeriodResource
+    public function store(Request $request, PayPeriod $payPeriod, Paystub $paystub): PayPeriodResource
     {
+        $request->validate([
+            'amount' => 'required|integer|min:1',
+        ]);
+
         $this->authorize('paystub', [
             $payPeriod,
             $paystub,
@@ -19,7 +24,8 @@ class PayPeriodPaystubController extends Controller
         (new PayPeriodPaystubService())
             ->addPaystubToPayPeriod(
                 $payPeriod,
-                $paystub
+                $paystub,
+                $request->amount
             );
 
         return new PayPeriodResource(
