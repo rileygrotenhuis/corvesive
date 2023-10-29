@@ -10,15 +10,15 @@ class MonthlyMetricResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'expenses' => [
+            'expense_metrics' => [
                 'bills' => CurrencyUtil::formatCurrencyValues($this->bills_total),
                 'budgets' => CurrencyUtil::formatCurrencyValues($this->budgets_total),
                 'total' => CurrencyUtil::formatCurrencyValues($this->expenses_total),
             ],
-            'income' => [
+            'income_metrics' => [
                 'paystubs_total' => CurrencyUtil::formatCurrencyValues($this->paystubs_total),
             ],
-            'surplus' => [
+            'surplus_metrics' => [
                 'projected' => CurrencyUtil::formatCurrencyValues($this->projected_surplus),
             ],
         ];
