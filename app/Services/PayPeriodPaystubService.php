@@ -28,7 +28,7 @@ class PayPeriodPaystubService
         PayPeriodPaystub::where('pay_period_id', $payPeriod->id)
             ->where('paystub_id', $paystub->id)
             ->update([
-                'amount' => $amount
+                'amount' => $amount,
             ]);
     }
 

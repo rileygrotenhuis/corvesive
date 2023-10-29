@@ -2,9 +2,9 @@
 
 namespace Tests\Endpoint\PayPeriodPaystub;
 
-use App\Models\Paystub;
 use App\Models\PayPeriod;
 use App\Models\PayPeriodPaystub;
+use App\Models\Paystub;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
@@ -41,11 +41,11 @@ class UpdatePayPeriodPaystubTest extends TestCase
         PayPeriodPaystub::factory()->create([
             'pay_period_id' => $this->payPeriod->id,
             'paystub_id' => $this->paystub->id,
-            'amount' => 100000
+            'amount' => 100000,
         ]);
 
         $this->payload = [
-            'amount' => 200000
+            'amount' => 200000,
         ];
     }
 
@@ -54,7 +54,7 @@ class UpdatePayPeriodPaystubTest extends TestCase
         $this->assertDatabaseHas('pay_period_paystub', [
             'pay_period_id' => $this->payPeriod->id,
             'paystub_id' => $this->paystub->id,
-            'amount' => 100000
+            'amount' => 100000,
         ]);
 
         $this->submitRequest()
@@ -63,7 +63,7 @@ class UpdatePayPeriodPaystubTest extends TestCase
         $this->assertDatabaseHas('pay_period_paystub', [
             'pay_period_id' => $this->payPeriod->id,
             'paystub_id' => $this->paystub->id,
-            'amount' => 200000
+            'amount' => 200000,
         ]);
     }
 

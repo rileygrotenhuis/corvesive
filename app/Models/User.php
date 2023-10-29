@@ -30,6 +30,16 @@ class User extends Authenticatable
         return $this->hasMany(Paystub::class);
     }
 
+    public function bills(): HasMany
+    {
+        return $this->hasMany(Bill::class);
+    }
+
+    public function budgets(): HasMany
+    {
+        return $this->hasMany(Budget::class);
+    }
+
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);

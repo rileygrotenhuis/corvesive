@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CreditAccountController;
+use App\Http\Controllers\MonthlyMetricsController;
 use App\Http\Controllers\PayPeriodBillController;
 use App\Http\Controllers\PayPeriodBudgetController;
 use App\Http\Controllers\PayPeriodCompleteController;
@@ -56,6 +57,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::delete('budgets/{budget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-periods.budgets.destroy');
         Route::post('budgets/{payPeriodBudget}/transaction', [TransactionController::class, 'budgetTransaction'])->name('pay-periods.budgets.transaction');
     });
+
+    Route::get('monthly/metrics', [MonthlyMetricsController::class, 'index'])->name('monthly-metrics');
 
     Route::prefix('account')->group(function () {
         Route::get('/me', [AccountController::class, 'me'])->name('me');
