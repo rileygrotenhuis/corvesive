@@ -64,7 +64,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::prefix('account')->group(function () {
         Route::get('/me', [AccountController::class, 'me'])->name('me');
-        Route::get('/transactions', [TransactionController::class, 'accountTransactions'])->name('account.transactions');
         Route::put('/', [AccountController::class, 'update'])->name('account.update');
     });
 

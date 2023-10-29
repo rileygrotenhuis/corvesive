@@ -13,20 +13,6 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class TransactionController extends Controller
 {
-    public function accountTransactions(): AnonymousResourceCollection
-    {
-        return TransactionResource::collection(
-            Transaction::with([
-                'payPeriod',
-                'payPeriodBill',
-                'payPeriodBudget',
-            ])
-                ->where('user_id', auth()->user()->id)
-                ->orderBy('created_at')
-                ->get()
-        );
-    }
-
     public function payPeriodTransactions(PayPeriod $payPeriod): AnonymousResourceCollection
     {
         return TransactionResource::collection(
