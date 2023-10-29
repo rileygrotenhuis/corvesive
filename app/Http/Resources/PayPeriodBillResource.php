@@ -13,6 +13,8 @@ class PayPeriodBillResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'pay_period' => $this->payPeriod(),
+            'bill' => $this->bill(),
             'amount' => CurrencyUtil::formatCurrencyValues($this->amount),
             'dates' => [
                 'due' => [
@@ -31,5 +33,31 @@ class PayPeriodBillResource extends JsonResource
                     $this->due_date
                 ),
         ];
+    }
+
+    protected function payPeriod(): PayPeriodResource|array
+    {
+        if (! $this->resource->relationLoaded('payPeriod')) {
+            return [
+                'id' => $this->pay_period_id,
+            ];
+        }
+
+        return PayPeriodResource::make(
+            $this->payPeriod
+        );
+    }
+
+    protected function bill(): BillResource|array
+    {
+        if (! $this->resource->relationLoaded('bill')) {
+            return [
+                'id' => $this->bill_id,
+            ];
+        }
+
+        return BillResource::make(
+            $this->bill
+        );
     }
 }

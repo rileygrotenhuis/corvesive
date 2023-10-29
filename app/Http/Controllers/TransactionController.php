@@ -18,12 +18,12 @@ class TransactionController extends Controller
         return TransactionResource::collection(
             Transaction::with([
                 'payPeriod',
-                'payPeriodBill',
-                'payPeriodBudget',
+                'payPeriodBill.bill',
+                'payPeriodBudget.budget',
             ])
                 ->where('user_id', auth()->user()->id)
                 ->where('pay_period_id', $payPeriod->id)
-                ->orderBy('created_at')
+                ->orderBy('created_at', 'desc')
                 ->get()
         );
     }

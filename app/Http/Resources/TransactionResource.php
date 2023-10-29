@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Util\CurrencyUtil;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TransactionResource extends JsonResource
@@ -18,6 +19,12 @@ class TransactionResource extends JsonResource
             'type' => ucfirst($this->type),
             'amount' => CurrencyUtil::formatCurrencyValues(abs($this->amount)),
             'notes' => $this->notes,
+            'dates' => [
+                'created' => [
+                    'raw' => $this->created_at,
+                    'pretty' => Carbon::parse($this->created_at)->format('F j, Y'),
+                ],
+            ],
         ];
     }
 
