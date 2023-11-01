@@ -45,9 +45,10 @@ class PayPeriodMetricsObject
 
         $surplusMetrics = PayPeriodMetricsUtil::calculatePayPeriodSurplus(
             $totalIncome,
-            $transactionMetrics['spent']['total'],
             $billMetrics['total'],
-            $budgetMetrics['total_balance']
+            $billMetrics['payed'],
+            $budgetMetrics['total_balance'],
+            $budgetMetrics['remaining_balance']
         );
 
         $this->bills_total_payed = $billMetrics['payed'];
