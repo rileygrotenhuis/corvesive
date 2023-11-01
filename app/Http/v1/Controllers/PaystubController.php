@@ -2,7 +2,6 @@
 
 namespace App\Http\v1\Controllers;
 
-use App\Http\v1\Queries\PaystubQuery;
 use App\Http\v1\Requests\StorePaystubRequest;
 use App\Http\v1\Requests\UpdatePaystubRequest;
 use App\Http\v1\Resources\PaystubResource;
@@ -16,9 +15,10 @@ class PaystubController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return PaystubResource::collection(
-            (new PaystubQuery())
-                ->where('user_id', auth()->user()->id)
-                ->paginate(100)
+            Paystub::where(
+                'user_id',
+                auth()->user()->id
+            )->get()
         );
     }
 

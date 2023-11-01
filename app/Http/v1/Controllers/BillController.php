@@ -2,7 +2,6 @@
 
 namespace App\Http\v1\Controllers;
 
-use App\Http\v1\Queries\BillQuery;
 use App\Http\v1\Requests\StoreBillRequest;
 use App\Http\v1\Requests\UpdateBillRequest;
 use App\Http\v1\Resources\BillResource;
@@ -16,9 +15,10 @@ class BillController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return BillResource::collection(
-            (new BillQuery())
-                ->where('user_id', auth()->user()->id)
-                ->paginate(100)
+            Bill::where(
+                'user_id',
+                auth()->user()->id
+            )->get()
         );
     }
 

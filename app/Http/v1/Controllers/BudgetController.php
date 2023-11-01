@@ -2,7 +2,6 @@
 
 namespace App\Http\v1\Controllers;
 
-use App\Http\v1\Queries\BudgetQuery;
 use App\Http\v1\Requests\StoreBudgetRequest;
 use App\Http\v1\Requests\UpdateBudgetRequest;
 use App\Http\v1\Resources\BudgetResource;
@@ -16,9 +15,10 @@ class BudgetController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return BudgetResource::collection(
-            (new BudgetQuery())
-                ->where('user_id', auth()->user()->id)
-                ->paginate(100)
+            Budget::where(
+                'user_id',
+                auth()->user()->id
+            )->get()
         );
     }
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\v1\Controllers;
 
-use App\Http\v1\Queries\PayPeriodQuery;
 use App\Http\v1\Requests\StorePayPeriodRequest;
 use App\Http\v1\Requests\UpdatePayPeriodRequest;
 use App\Http\v1\Resources\PayPeriodResource;
@@ -16,9 +15,10 @@ class PayPeriodController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return PayPeriodResource::collection(
-            (new PayPeriodQuery())
-                ->where('user_id', auth()->user()->id)
-                ->paginate(100)
+            PayPeriod::where(
+                'user_id',
+                auth()->user()->id
+            )->get()
         );
     }
 
