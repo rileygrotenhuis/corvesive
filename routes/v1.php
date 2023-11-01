@@ -1,20 +1,20 @@
 <?php
 
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BillController;
-use App\Http\Controllers\BudgetController;
-use App\Http\Controllers\CreditAccountController;
-use App\Http\Controllers\MonthlyMetricsController;
-use App\Http\Controllers\PayPeriodBillController;
-use App\Http\Controllers\PayPeriodBudgetController;
-use App\Http\Controllers\PayPeriodCompleteController;
-use App\Http\Controllers\PayPeriodController;
-use App\Http\Controllers\PayPeriodCurrentController;
-use App\Http\Controllers\PayPeriodMetricsController;
-use App\Http\Controllers\PayPeriodPaystubController;
-use App\Http\Controllers\PaystubController;
-use App\Http\Controllers\TransactionController;
+use App\Http\v1\Controllers\AccountController;
+use App\Http\v1\Controllers\AuthController;
+use App\Http\v1\Controllers\BillController;
+use App\Http\v1\Controllers\BudgetController;
+use App\Http\v1\Controllers\CreditAccountController;
+use App\Http\v1\Controllers\MonthlyMetricsController;
+use App\Http\v1\Controllers\PayPeriodBillController;
+use App\Http\v1\Controllers\PayPeriodBudgetController;
+use App\Http\v1\Controllers\PayPeriodCompleteController;
+use App\Http\v1\Controllers\PayPeriodController;
+use App\Http\v1\Controllers\PayPeriodCurrentController;
+use App\Http\v1\Controllers\PayPeriodMetricsController;
+use App\Http\v1\Controllers\PayPeriodPaystubController;
+use App\Http\v1\Controllers\PaystubController;
+use App\Http\v1\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
