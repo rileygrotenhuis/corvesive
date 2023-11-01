@@ -8,13 +8,14 @@ class PayPeriodMetricsUtil
 {
     public static function calculatePayPeriodSurplus(
         int $totalIncome,
-        int $totalSpent,
         int $billsTotal,
-        int $budgetsTotal
+        int $billsPayed,
+        int $budgetsTotalBalance,
+        int $budgetsRemainingBalance
     ): Collection {
         return collect([
-            'current' => $totalIncome - $totalSpent,
-            'projected' => $totalIncome - $billsTotal - $budgetsTotal,
+            'current' => $totalIncome - $billsPayed - ($budgetsTotalBalance - $budgetsRemainingBalance),
+            'projected' => $totalIncome - $billsTotal - $budgetsTotalBalance,
         ]);
     }
 }

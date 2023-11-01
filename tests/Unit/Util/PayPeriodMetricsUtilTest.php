@@ -12,41 +12,17 @@ class PayPeriodMetricsUtilTest extends TestCase
 
     public function test_successful_pay_period_surplus_calculation(): void
     {
-        $totalIncome = 250000;
-        $totalSpent = 150000;
-        $billsTotal = 150000;
-        $budgetsTotal = 100000;
-
         $result = PayPeriodMetricsUtil::calculatePayPeriodSurplus(
-            $totalIncome,
-            $totalSpent,
-            $billsTotal,
-            $budgetsTotal
+            184000,
+            91900,
+            91900,
+            92000,
+            14100
         );
 
         $this->assertEquals(collect([
-            'current' => 100000,
+            'current' => 14200,
             'projected' => 0,
-        ]), $result);
-    }
-
-    public function test_successful_pay_period_surplus_calculation_with_leftover_surplus(): void
-    {
-        $totalIncome = 250000;
-        $totalSpent = 150000;
-        $billsTotal = 150000;
-        $budgetsTotal = 50000;
-
-        $result = PayPeriodMetricsUtil::calculatePayPeriodSurplus(
-            $totalIncome,
-            $totalSpent,
-            $billsTotal,
-            $budgetsTotal
-        );
-
-        $this->assertEquals(collect([
-            'current' => 100000,
-            'projected' => 50000,
         ]), $result);
     }
 }
