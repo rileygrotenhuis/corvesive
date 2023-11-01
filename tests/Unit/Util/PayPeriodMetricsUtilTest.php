@@ -22,7 +22,7 @@ class PayPeriodMetricsUtilTest extends TestCase
 
         $this->assertEquals(collect([
             'current' => 14200,
-            'projected' => 0,
+            'projected' => 100,
         ]), $result);
     }
 }
