@@ -4,7 +4,6 @@ use App\Http\v1\Controllers\AccountController;
 use App\Http\v1\Controllers\AuthController;
 use App\Http\v1\Controllers\BillController;
 use App\Http\v1\Controllers\BudgetController;
-use App\Http\v1\Controllers\CreditAccountController;
 use App\Http\v1\Controllers\MonthlyMetricsController;
 use App\Http\v1\Controllers\PayPeriodBillController;
 use App\Http\v1\Controllers\PayPeriodBudgetController;
@@ -30,7 +29,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         'pay-periods' => PayPeriodController::class,
         'bills' => BillController::class,
         'budgets' => BudgetController::class,
-        'credit-accounts' => CreditAccountController::class,
     ]);
 
     Route::prefix('pay-periods/{payPeriod}')->group(function () {
