@@ -21,6 +21,10 @@ class PayPeriodService
         $payPeriod->end_date = $endDate;
         $payPeriod->save();
 
+        $user = User::where('id', auth()->user()->id)->first();
+        $user->pay_period_id = $payPeriod->id;
+        $user->save();
+
         return $payPeriod;
     }
 
