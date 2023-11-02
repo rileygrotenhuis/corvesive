@@ -39,7 +39,7 @@ class TransactionService
         $transaction->amount = $amount;
         $transaction->save();
 
-        $this->updatePayPeriodBudgetBalance($payPeriodBudget, $amount);
+        $this->payPeriodBudgetPayment($payPeriodBudget, $amount);
 
         return $transaction;
     }
@@ -77,15 +77,39 @@ class TransactionService
         return $transaction;
     }
 
+    public function deleteTransaction(Transaction $transaction): void {
+        if ($transaction->payPeriodBudget) {
+            $this->payPeriodBudgetDeposit($transaction->payPeriodBudget, $transaction->amount);
+        }
+
+        if ($transaction->payPeriodBill) {
+            $this->markPayPeriodBillAsUnpayed($transaction->payPeriodBill);
+        }
+
+        $transaction->delete();
+    }
+
     protected function markPayPeriodBillAsPayed(PayPeriodBill $payPeriodBill): void
     {
         $payPeriodBill->has_payed = 1;
         $payPeriodBill->save();
     }
 
-    protected function updatePayPeriodBudgetBalance(PayPeriodBudget $payPeriodBudget, int $amount): void
+    protected function markPayPeriodBillAsUnpayed(PayPeriodBill $payPeriodBill): void
+    {
+        $payPeriodBill->has_payed = 0;
+        $payPeriodBill->save();
+    }
+
+    protected function payPeriodBudgetPayment(PayPeriodBudget $payPeriodBudget, int $amount): void
     {
         $payPeriodBudget->remaining_balance = $payPeriodBudget->remaining_balance - $amount;
+        $payPeriodBudget->save();
+    }
+
+    protected function payPeriodBudgetDeposit(PayPeriodBudget $payPeriodBudget, int $amount): void
+    {
+        $payPeriodBudget->remaining_balance = $payPeriodBudget->remaining_balance + $amount;
         $payPeriodBudget->save();
     }
 }

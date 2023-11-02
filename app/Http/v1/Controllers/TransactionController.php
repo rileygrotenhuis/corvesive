@@ -8,6 +8,7 @@ use App\Models\PayPeriodBill;
 use App\Models\PayPeriodBudget;
 use App\Models\Transaction;
 use App\Services\TransactionService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -96,5 +97,14 @@ class TransactionController extends Controller
             );
 
         return new TransactionResource($transaction);
+    }
+
+    public function destroy(PayPeriod $payPeriod, Transaction $transaction): JsonResponse
+    {
+        $this->authorize('transaction', $payPeriod);
+
+        (new TransactionService())->deleteTransaction($transaction);
+
+        return response()->json('', 204);
     }
 }
