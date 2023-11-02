@@ -77,7 +77,8 @@ class TransactionService
         return $transaction;
     }
 
-    public function deleteTransaction(Transaction $transaction): void {
+    public function deleteTransaction(Transaction $transaction): void
+    {
         if ($transaction->payPeriodBudget) {
             $this->payPeriodBudgetDeposit($transaction->payPeriodBudget, $transaction->amount);
         }

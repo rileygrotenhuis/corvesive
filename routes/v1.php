@@ -10,6 +10,7 @@ use App\Http\v1\Controllers\PayPeriodBudgetController;
 use App\Http\v1\Controllers\PayPeriodCompleteController;
 use App\Http\v1\Controllers\PayPeriodController;
 use App\Http\v1\Controllers\PayPeriodCurrentController;
+use App\Http\v1\Controllers\PayPeriodDashboardController;
 use App\Http\v1\Controllers\PayPeriodMetricsController;
 use App\Http\v1\Controllers\PayPeriodPaystubController;
 use App\Http\v1\Controllers\PaystubController;
@@ -32,6 +33,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     ]);
 
     Route::prefix('pay-periods/{payPeriod}')->group(function () {
+        Route::get('dashboard', [PayPeriodDashboardController::class, 'index'])->name('pay-periods.dashboard');
+
         Route::get('metrics', [PayPeriodMetricsController::class, 'index'])->name('pay-periods.metrics');
 
         Route::post('deposit', [TransactionController::class, 'payPeriodDeposit'])->name('pay-periods.deposit');
