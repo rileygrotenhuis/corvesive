@@ -60,6 +60,23 @@ class TransactionService
         return $transaction;
     }
 
+    public function updateTransaction(
+        PayPeriod $payPeriod,
+        Transaction $transaction,
+        int $amount,
+        string $notes
+    ): Transaction {
+        $transaction = Transaction::where('id', $transaction->id)
+            ->where('pay_period_id', $payPeriod->id)
+            ->first();
+
+        $transaction->amount = $amount;
+        $transaction->notes = $notes;
+        $transaction->save();
+
+        return $transaction;
+    }
+
     protected function markPayPeriodBillAsPayed(PayPeriodBill $payPeriodBill): void
     {
         $payPeriodBill->has_payed = 1;

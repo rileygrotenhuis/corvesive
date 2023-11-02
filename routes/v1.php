@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('current', [PayPeriodCurrentController::class, 'store'])->name('pay-periods.current');
 
         Route::get('transactions', [TransactionController::class, 'payPeriodTransactions'])->name('pay-periods.transactions');
+        Route::put('transactions/{transaction}', [TransactionController::class, 'update'])->name('pay-periods.transactions.update');
 
         Route::post('paystubs/{paystub}', [PayPeriodPaystubController::class, 'store'])->name('pay-periods.paystubs.store');
         Route::put('paystubs/{paystub}', [PayPeriodPaystubController::class, 'update'])->name('pay-periods.paystubs.update');

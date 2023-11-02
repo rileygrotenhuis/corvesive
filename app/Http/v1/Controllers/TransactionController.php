@@ -77,4 +77,24 @@ class TransactionController extends Controller
 
         return new TransactionResource($transaction);
     }
+
+    public function update(Request $request, PayPeriod $payPeriod, Transaction $transaction): TransactionResource
+    {
+        $this->authorize('transaction', $payPeriod);
+
+        $request->validate([
+            'amount' => 'required|integer|min:1',
+            'notes' => 'nullable|string',
+        ]);
+
+        $transaction = (new TransactionService())
+            ->updateTransaction(
+                $payPeriod,
+                $transaction,
+                $request->amount,
+                $request->notes
+            );
+
+        return new TransactionResource($transaction);
+    }
 }
