@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Models\PayPeriod;
+use App\Models\PayPeriodBill;
+use App\Models\PayPeriodBudget;
+use App\Models\PayPeriodPaystub;
 
 class PayPeriodService
 {
@@ -34,6 +37,10 @@ class PayPeriodService
 
     public function deletePayPeriod(PayPeriod $payPeriod): bool
     {
+        PayPeriodPaystub::where('pay_period_id', $payPeriod->id)->delete();
+        PayPeriodBudget::where('pay_period_id', $payPeriod->id)->delete();
+        PayPeriodBill::where('pay_period_id', $payPeriod->id)->delete();
+
         return $payPeriod->delete();
     }
 }
