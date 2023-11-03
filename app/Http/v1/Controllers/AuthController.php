@@ -5,7 +5,9 @@ namespace App\Http\v1\Controllers;
 use App\Http\v1\Requests\LoginRequest;
 use App\Http\v1\Requests\RegistrationRequest;
 use App\Http\v1\Resources\UserResource;
+use App\Models\PayPeriod;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +25,15 @@ class AuthController extends Controller
         $user->save();
 
         $token = $user->createToken('myapptoken')->plainTextToken;
+
+        $payPeriod = new PayPeriod();
+        $payPeriod->user_id = $user->id;
+        $payPeriod->start_date = Carbon::today()->toDateString();
+        $payPeriod->end_date = Carbon::today()->endOfMonth()->toDateString();
+        $payPeriod->save();
+
+        $user->pay_period_id = $payPeriod->id;
+        $user->save();
 
         return response()->json([
             'user' => new UserResource($user),
