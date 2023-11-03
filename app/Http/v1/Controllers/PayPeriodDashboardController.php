@@ -17,7 +17,8 @@ class PayPeriodDashboardController extends Controller
         return new PayPeriodDashboardResource(
             new PayPeriodDashboardObject(
                 $payPeriodDashboardRepository->getUpcomingBills(),
-                $payPeriodDashboardRepository->getRemainingBudgets()
+                $payPeriodDashboardRepository->getRemainingBudgets(),
+                $payPeriodDashboardRepository->getTotalSpentToday(),
             )
         );
     }

@@ -64,7 +64,7 @@ class TransactionService
         PayPeriod $payPeriod,
         Transaction $transaction,
         int $amount,
-        string $notes
+        ?string $notes
     ): Transaction {
         $transaction = Transaction::where('id', $transaction->id)
             ->where('pay_period_id', $payPeriod->id)
