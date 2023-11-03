@@ -4,13 +4,13 @@ use App\Http\v1\Controllers\AccountController;
 use App\Http\v1\Controllers\AuthController;
 use App\Http\v1\Controllers\BillController;
 use App\Http\v1\Controllers\BudgetController;
-use App\Http\v1\Controllers\DashboardController;
 use App\Http\v1\Controllers\MonthlyMetricsController;
 use App\Http\v1\Controllers\PayPeriodBillController;
 use App\Http\v1\Controllers\PayPeriodBudgetController;
 use App\Http\v1\Controllers\PayPeriodCompleteController;
 use App\Http\v1\Controllers\PayPeriodController;
 use App\Http\v1\Controllers\PayPeriodCurrentController;
+use App\Http\v1\Controllers\PayPeriodDashboardController;
 use App\Http\v1\Controllers\PayPeriodMetricsController;
 use App\Http\v1\Controllers\PayPeriodPaystubController;
 use App\Http\v1\Controllers\PaystubController;
@@ -33,6 +33,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     ]);
 
     Route::prefix('pay-periods/{payPeriod}')->group(function () {
+        Route::get('dashboard', [PayPeriodDashboardController::class, 'index'])->name('pay-periods.dashboard');
+
         Route::get('metrics', [PayPeriodMetricsController::class, 'index'])->name('pay-periods.metrics');
 
         Route::post('deposit', [TransactionController::class, 'payPeriodDeposit'])->name('pay-periods.deposit');
@@ -60,8 +62,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::delete('budgets/{budget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-periods.budgets.destroy');
         Route::post('budgets/{payPeriodBudget}/transaction', [TransactionController::class, 'budgetTransaction'])->name('pay-periods.budgets.transaction');
     });
-
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('monthly/metrics', [MonthlyMetricsController::class, 'index'])->name('monthly-metrics');
 
