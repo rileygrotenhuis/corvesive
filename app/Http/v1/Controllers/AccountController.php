@@ -4,6 +4,7 @@ namespace App\Http\v1\Controllers;
 
 use App\Http\v1\Requests\UpdateAccountRequest;
 use App\Http\v1\Resources\UserResource;
+use App\Models\User;
 use App\Services\AccountService;
 
 class AccountController extends Controller
@@ -31,5 +32,14 @@ class AccountController extends Controller
             );
 
         return new UserResource($user);
+    }
+
+    public function onboard(): UserResource
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        $user->is_onboarding = 0;
+        $user->save();
+
+        return new UserResource(auth()->user());
     }
 }
