@@ -18,6 +18,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'pay_period' => $this->payPeriod(),
+            'is_onboarding' => $this->is_onboarding,
             'paystubs' => PaystubResource::collection(
                 $this->whenLoaded('paystubs')
             ),
