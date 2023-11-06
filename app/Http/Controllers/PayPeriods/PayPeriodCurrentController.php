@@ -11,6 +11,8 @@ class PayPeriodCurrentController extends Controller
 {
     public function store(PayPeriod $payPeriod): PayPeriodResource
     {
+        $this->authorize('user', $payPeriod);
+
         $user = User::where(
             'id',
             auth()->user()->id

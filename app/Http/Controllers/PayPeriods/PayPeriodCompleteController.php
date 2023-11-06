@@ -11,7 +11,7 @@ class PayPeriodCompleteController extends Controller
 {
     public function complete(PayPeriod $payPeriod): PayPeriodResource
     {
-        $this->authorize('update', $payPeriod);
+        $this->authorize('user', $payPeriod);
 
         $payPeriod->is_complete = 1;
         $payPeriod->save();
@@ -23,7 +23,7 @@ class PayPeriodCompleteController extends Controller
 
     public function incomplete(PayPeriod $payPeriod): PayPeriodResource
     {
-        $this->authorize('update', $payPeriod);
+        $this->authorize('user', $payPeriod);
 
         $payPeriod->is_complete = 0;
         $payPeriod->save();

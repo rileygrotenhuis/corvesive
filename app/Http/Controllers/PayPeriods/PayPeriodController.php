@@ -96,7 +96,7 @@ class PayPeriodController extends Controller
 
     public function complete(PayPeriod $payPeriod): JsonResponse
     {
-        $this->authorize('update', $payPeriod);
+        $this->authorize('user', $payPeriod);
 
         return response()->json('', 204);
     }
