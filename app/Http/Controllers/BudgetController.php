@@ -37,14 +37,14 @@ class BudgetController extends Controller
 
     public function show(Budget $budget): BudgetResource
     {
-        $this->authorize('show', $budget);
+        $this->authorize('user', $budget);
 
         return new BudgetResource($budget);
     }
 
     public function update(UpdateBudgetRequest $request, Budget $budget): BudgetResource
     {
-        $this->authorize('update', $budget);
+        $this->authorize('user', $budget);
 
         $budget = (new BudgetService())
             ->updateBudget(
@@ -59,7 +59,7 @@ class BudgetController extends Controller
 
     public function destroy(Budget $budget): JsonResponse
     {
-        $this->authorize('destroy', $budget);
+        $this->authorize('user', $budget);
 
         (new BudgetService())->deleteBudget($budget);
 

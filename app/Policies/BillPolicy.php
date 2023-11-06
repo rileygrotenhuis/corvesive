@@ -10,17 +10,7 @@ class BillPolicy
 {
     use HandlesAuthorization;
 
-    public function show(User $user, Bill $bill): bool
-    {
-        return $user->id === $bill->user_id;
-    }
-
-    public function update(User $user, Bill $bill): bool
-    {
-        return $user->id === $bill->user_id;
-    }
-
-    public function destroy(User $user, Bill $bill): bool
+    public function user(User $user, Bill $bill): bool
     {
         return $user->id === $bill->user_id;
     }

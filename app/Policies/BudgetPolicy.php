@@ -10,17 +10,7 @@ class BudgetPolicy
 {
     use HandlesAuthorization;
 
-    public function show(User $user, Budget $budget): bool
-    {
-        return $user->id === $budget->user_id;
-    }
-
-    public function update(User $user, Budget $budget): bool
-    {
-        return $user->id === $budget->user_id;
-    }
-
-    public function destroy(User $user, Budget $budget): bool
+    public function user(User $user, Budget $budget): bool
     {
         return $user->id === $budget->user_id;
     }

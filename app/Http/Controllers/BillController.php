@@ -39,14 +39,14 @@ class BillController extends Controller
 
     public function show(Bill $bill): BillResource
     {
-        $this->authorize('show', $bill);
+        $this->authorize('user', $bill);
 
         return new BillResource($bill);
     }
 
     public function update(UpdateBillRequest $request, Bill $bill): BillResource
     {
-        $this->authorize('update', $bill);
+        $this->authorize('user', $bill);
 
         $bill = (new BillService())
             ->updateBill(
@@ -63,7 +63,7 @@ class BillController extends Controller
 
     public function destroy(Bill $bill): JsonResponse
     {
-        $this->authorize('destroy', $bill);
+        $this->authorize('user', $bill);
 
         (new BillService())->deleteBill($bill);
 

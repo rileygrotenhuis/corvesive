@@ -10,17 +10,7 @@ class PaystubPolicy
 {
     use HandlesAuthorization;
 
-    public function show(User $user, Paystub $paystub): bool
-    {
-        return $user->id === $paystub->user_id;
-    }
-
-    public function update(User $user, Paystub $paystub): bool
-    {
-        return $user->id === $paystub->user_id;
-    }
-
-    public function destroy(User $user, Paystub $paystub)
+    public function user(User $user, Paystub $paystub): bool
     {
         return $user->id === $paystub->user_id;
     }

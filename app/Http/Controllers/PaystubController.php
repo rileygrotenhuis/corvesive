@@ -37,14 +37,14 @@ class PaystubController extends Controller
 
     public function show(Paystub $paystub): PaystubResource
     {
-        $this->authorize('show', $paystub);
+        $this->authorize('user', $paystub);
 
         return new PaystubResource($paystub);
     }
 
     public function update(UpdatePaystubRequest $request, Paystub $paystub): PaystubResource
     {
-        $this->authorize('update', $paystub);
+        $this->authorize('user', $paystub);
 
         $paystub = (new PaystubService())
             ->updatePaystub(
@@ -59,7 +59,7 @@ class PaystubController extends Controller
 
     public function destroy(Paystub $paystub): JsonResponse
     {
-        $this->authorize('destroy', $paystub);
+        $this->authorize('user', $paystub);
 
         (new PaystubService())->deletePaystub($paystub);
 
