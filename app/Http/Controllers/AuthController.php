@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\InvalidPasswordException;
+use App\Exceptions\UserDoesNotExistException;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Http\Resources\UserResource;
@@ -47,19 +49,11 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user === null) {
-            return response()->json([
-                'errors' => [
-                    'email' => ['User does not exist with that email'],
-                ],
-            ], 401);
+            throw new UserDoesNotExistException();
         }
 
         if (! Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'errors' => [
-                    'password' => ['Invalid password'],
-                ],
-            ], 401);
+            throw new InvalidPasswordException();
         }
 
         $token = $user->createToken('myapptoken')->plainTextToken;
