@@ -16,6 +16,8 @@ class TransactionController extends Controller
 {
     public function payPeriodTransactions(PayPeriod $payPeriod): AnonymousResourceCollection
     {
+        $this->authorize('user', $payPeriod);
+
         return TransactionResource::collection(
             Transaction::with([
                 'payPeriod',
@@ -31,7 +33,10 @@ class TransactionController extends Controller
 
     public function billTransaction(PayPeriod $payPeriod, PayPeriodBill $payPeriodBill): TransactionResource
     {
-        $this->authorize('transaction', $payPeriod);
+        $this->authorize('billTransaction', [
+            $payPeriod,
+            $payPeriodBill
+        ]);
 
         $transaction = (new TransactionService())
             ->createBillTransaction(
@@ -44,7 +49,10 @@ class TransactionController extends Controller
 
     public function budgetTransaction(Request $request, PayPeriod $payPeriod, PayPeriodBudget $payPeriodBudget): TransactionResource
     {
-        $this->authorize('transaction', $payPeriod);
+        $this->authorize('budgetTransaction', [
+            $payPeriod,
+            $payPeriodBudget
+        ]);
 
         $request->validate([
             'amount' => 'required|integer',
@@ -62,7 +70,7 @@ class TransactionController extends Controller
 
     public function payPeriodDeposit(Request $request, PayPeriod $payPeriod): TransactionResource
     {
-        $this->authorize('transaction', $payPeriod);
+        $this->authorize('deposit', $payPeriod);
 
         $request->validate([
             'amount' => 'required|integer|min:1',
@@ -81,7 +89,7 @@ class TransactionController extends Controller
 
     public function update(Request $request, PayPeriod $payPeriod, Transaction $transaction): TransactionResource
     {
-        $this->authorize('transaction', $payPeriod);
+        $this->authorize('user', $transaction);
 
         $request->validate([
             'amount' => 'required|integer|min:1',
@@ -101,7 +109,7 @@ class TransactionController extends Controller
 
     public function destroy(PayPeriod $payPeriod, Transaction $transaction): JsonResponse
     {
-        $this->authorize('transaction', $payPeriod);
+        $this->authorize('user', $transaction);
 
         (new TransactionService())->deleteTransaction($transaction);
 
