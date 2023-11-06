@@ -2,6 +2,8 @@
 
 namespace App\Services\PayPeriods;
 
+use App\Models\Bill;
+use App\Models\PayPeriod;
 use App\Models\PayPeriodBill;
 use Carbon\Carbon;
 
@@ -61,5 +63,12 @@ class PayPeriodBillService
         }
 
         return 'unpayed';
+    }
+
+    public function billIsAlreadyAttachedToPayPeriod(PayPeriod $payPeriod, Bill $bill): bool
+    {
+        return PayPeriodBill::where('pay_period_id', $payPeriod->id)
+            ->where('bill_id', $bill->id)
+            ->exists();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\PayPeriods;
 
+use App\Exceptions\AlreadyAttachedToPayPeriod;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PayPeriods\UpdatePayPeriodBudgetRequest;
 use App\Http\Resources\PayPeriods\PayPeriodResource;
@@ -22,6 +23,10 @@ class PayPeriodBudgetController extends Controller
             $payPeriod,
             $budget,
         ]);
+
+        if ((new PayPeriodBudgetService())->budgetIsAlreadyAttachedToPayPeriod($payPeriod, $budget)) {
+            throw new AlreadyAttachedToPayPeriod();
+        }
 
         (new PayPeriodBudgetService())
             ->addBudgetToPayPeriod(

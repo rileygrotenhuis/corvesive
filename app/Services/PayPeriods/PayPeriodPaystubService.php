@@ -40,4 +40,11 @@ class PayPeriodPaystubService
             ->where('paystub_id', $paystub->id)
             ->delete();
     }
+
+    public function paystubIsAlreadyAttachedToPayPeriod(PayPeriod $payPeriod, Paystub $paystub): bool
+    {
+        return PayPeriodPaystub::where('pay_period_id', $payPeriod->id)
+            ->where('paystub_id', $paystub->id)
+            ->exists();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\PayPeriods;
 
+use App\Exceptions\AlreadyAttachedToPayPeriod;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PayPeriods\StorePayPeriodBillRequest;
 use App\Http\Requests\PayPeriods\UpdatePayPeriodBillRequest;
@@ -18,6 +19,10 @@ class PayPeriodBillController extends Controller
             $payPeriod,
             $bill,
         ]);
+
+        if ((new PayPeriodBillService())->billIsAlreadyAttachedToPayPeriod($payPeriod, $bill)) {
+            throw new AlreadyAttachedToPayPeriod();
+        }
 
         (new PayPeriodBillService())
             ->addBillToPayPeriod(

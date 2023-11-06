@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\PayPeriods;
 
+use App\Exceptions\AlreadyAttachedToPayPeriod;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PayPeriods\PayPeriodResource;
 use App\Models\PayPeriod;
@@ -21,6 +22,10 @@ class PayPeriodPaystubController extends Controller
             $payPeriod,
             $paystub,
         ]);
+
+        if ((new PayPeriodPaystubService())->paystubIsAlreadyAttachedToPayPeriod($payPeriod, $paystub)) {
+            throw new AlreadyAttachedToPayPeriod();
+        }
 
         (new PayPeriodPaystubService())
             ->addPaystubToPayPeriod(
