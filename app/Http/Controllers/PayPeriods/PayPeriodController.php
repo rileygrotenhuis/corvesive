@@ -43,7 +43,7 @@ class PayPeriodController extends Controller
 
     public function show(PayPeriod $payPeriod): PayPeriodResource
     {
-        $this->authorize('show', $payPeriod);
+        $this->authorize('user', $payPeriod);
 
         return new PayPeriodResource(
             $payPeriod->load([
@@ -65,7 +65,7 @@ class PayPeriodController extends Controller
 
     public function update(UpdatePayPeriodRequest $request, PayPeriod $payPeriod): PayPeriodResource
     {
-        $this->authorize('update', $payPeriod);
+        $this->authorize('user', $payPeriod);
 
         $payPeriod = (new PayPeriodService())
             ->updatePayPeriod(
@@ -87,7 +87,7 @@ class PayPeriodController extends Controller
 
     public function destroy(PayPeriod $payPeriod): JsonResponse
     {
-        $this->authorize('destroy', $payPeriod);
+        $this->authorize('user', $payPeriod);
 
         (new PayPeriodService())->deletePayPeriod($payPeriod);
 

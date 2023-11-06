@@ -13,17 +13,7 @@ class PayPeriodPolicy
 {
     use HandlesAuthorization;
 
-    public function show(User $user, PayPeriod $payPeriod): bool
-    {
-        return $user->id === $payPeriod->user_id;
-    }
-
-    public function update(User $user, PayPeriod $payPeriod): bool
-    {
-        return $user->id === $payPeriod->user_id;
-    }
-
-    public function destroy(User $user, PayPeriod $payPeriod): bool
+    public function user(User $user, PayPeriod $payPeriod): bool
     {
         return $user->id === $payPeriod->user_id;
     }
