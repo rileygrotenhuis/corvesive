@@ -49,4 +49,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(PayPeriod::class);
     }
+
+    public function onboardUser(): void
+    {
+        $this->is_onboarding = 0;
+        $this->save();
+    }
 }
