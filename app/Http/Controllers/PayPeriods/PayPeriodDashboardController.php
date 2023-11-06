@@ -13,6 +13,8 @@ class PayPeriodDashboardController extends Controller
 {
     public function index(PayPeriod $payPeriod): PayPeriodDashboardResource|JsonResponse
     {
+        $this->authorize('user', $payPeriod);
+
         $payPeriodDashboardRepository = (new PayPeriodDashboardRepository($payPeriod));
 
         return new PayPeriodDashboardResource(
