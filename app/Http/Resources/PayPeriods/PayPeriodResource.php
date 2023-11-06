@@ -1,7 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\PayPeriods;
 
+use App\Http\Resources\BillResource;
+use App\Http\Resources\BudgetResource;
+use App\Http\Resources\PaystubResource;
+use App\Http\Resources\UserResource;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 

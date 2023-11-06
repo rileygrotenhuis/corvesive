@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PayPeriods;
 
-use App\Http\Resources\PayPeriodResource;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PayPeriods\PayPeriodResource;
 use App\Models\PayPeriod;
 use App\Models\Paystub;
-use App\Services\PayPeriodPaystubService;
+use App\Services\PayPeriods\PayPeriodPaystubService;
 use Illuminate\Http\Request;
 
 class PayPeriodPaystubController extends Controller

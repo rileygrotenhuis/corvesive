@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\PayPeriods;
 
-use App\Services\PayPeriodBillService;
+use App\Http\Resources\BillResource;
+use App\Services\PayPeriods\PayPeriodBillService;
 use App\Util\CurrencyUtil;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;

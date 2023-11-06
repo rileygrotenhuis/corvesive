@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PayPeriods;
 
-use App\Http\Requests\UpdatePayPeriodBudgetRequest;
-use App\Http\Resources\PayPeriodResource;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PayPeriods\UpdatePayPeriodBudgetRequest;
+use App\Http\Resources\PayPeriods\PayPeriodResource;
 use App\Models\Budget;
 use App\Models\PayPeriod;
-use App\Services\PayPeriodBudgetService;
+use App\Services\PayPeriods\PayPeriodBudgetService;
 use Illuminate\Http\Request;
 
 class PayPeriodBudgetController extends Controller

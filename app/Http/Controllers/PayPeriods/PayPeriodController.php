@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PayPeriods;
 
-use App\Http\Requests\StorePayPeriodRequest;
-use App\Http\Requests\UpdatePayPeriodRequest;
-use App\Http\Resources\PayPeriodResource;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PayPeriods\StorePayPeriodRequest;
+use App\Http\Requests\PayPeriods\UpdatePayPeriodRequest;
+use App\Http\Resources\PayPeriods\PayPeriodResource;
 use App\Models\PayPeriod;
-use App\Services\PayPeriodService;
+use App\Services\PayPeriods\PayPeriodService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 

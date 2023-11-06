@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\PayPeriods\PayPeriodBillResource;
+use App\Http\Resources\PayPeriods\PayPeriodBudgetResource;
+use App\Http\Resources\PayPeriods\PayPeriodResource;
 use App\Util\CurrencyUtil;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;

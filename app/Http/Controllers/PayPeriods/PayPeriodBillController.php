@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PayPeriods;
 
-use App\Http\Requests\StorePayPeriodBillRequest;
-use App\Http\Requests\UpdatePayPeriodBillRequest;
-use App\Http\Resources\PayPeriodResource;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PayPeriods\StorePayPeriodBillRequest;
+use App\Http\Requests\PayPeriods\UpdatePayPeriodBillRequest;
+use App\Http\Resources\PayPeriods\PayPeriodResource;
 use App\Models\Bill;
 use App\Models\PayPeriod;
-use App\Services\PayPeriodBillService;
+use App\Services\PayPeriods\PayPeriodBillService;
 
 class PayPeriodBillController extends Controller
 {

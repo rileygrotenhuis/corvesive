@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\PayPeriods;
 
 use App\Util\CurrencyUtil;
 use Illuminate\Http\Resources\Json\JsonResource;

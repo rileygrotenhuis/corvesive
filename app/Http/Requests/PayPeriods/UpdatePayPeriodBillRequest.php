@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\PayPeriods;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePayPeriodBillRequest extends FormRequest
+class UpdatePayPeriodBillRequest extends FormRequest
 {
     public function rules(): array
     {

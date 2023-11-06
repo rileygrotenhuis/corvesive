@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PayPeriods;
 
-use App\Http\Resources\PayPeriodMetricResource;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PayPeriods\PayPeriodMetricResource;
 use App\Models\PayPeriod;
 use App\Models\PayPeriodMetric;
 use App\Objects\PayPeriodMetricsObject;

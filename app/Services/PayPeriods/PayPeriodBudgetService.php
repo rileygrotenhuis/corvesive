@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\PayPeriods;
 
 use App\Models\Budget;
 use App\Models\PayPeriod;

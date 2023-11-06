@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PayPeriods;
 
-use App\Http\Resources\PayPeriodDashboardResource;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PayPeriods\PayPeriodDashboardResource;
 use App\Models\PayPeriod;
 use App\Objects\PayPeriodDashboardObject;
 use App\Repositories\PayPeriodDashboardRepository;
