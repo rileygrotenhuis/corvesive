@@ -25,12 +25,22 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::prefix('account')->group(function () {
+        Route::get('/me', [AccountController::class, 'me'])->name('me');
+        Route::put('/', [AccountController::class, 'update'])->name('account.update');
+        Route::put('/onboard', [AccountController::class, 'onboard'])->name('account.onboard');
+    });
+
     Route::apiResources([
         'paystubs' => PaystubController::class,
         'pay-periods' => PayPeriodController::class,
         'bills' => BillController::class,
         'budgets' => BudgetController::class,
     ]);
+
+    Route::get('monthly/metrics', [MonthlyMetricsController::class, 'index'])->name('monthly-metrics');
 
     Route::prefix('pay-periods/{payPeriod}')->group(function () {
         Route::get('dashboard', [PayPeriodDashboardController::class, 'index'])->name('pay-periods.dashboard');
@@ -62,14 +72,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::delete('budgets/{budget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-periods.budgets.destroy');
         Route::post('budgets/{payPeriodBudget}/transaction', [TransactionController::class, 'budgetTransaction'])->name('pay-periods.budgets.transaction');
     });
-
-    Route::get('monthly/metrics', [MonthlyMetricsController::class, 'index'])->name('monthly-metrics');
-
-    Route::prefix('account')->group(function () {
-        Route::get('/me', [AccountController::class, 'me'])->name('me');
-        Route::put('/', [AccountController::class, 'update'])->name('account.update');
-        Route::put('/onboard', [AccountController::class, 'onboard'])->name('account.onboard');
-    });
-
-    Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
 });
