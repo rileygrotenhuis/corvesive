@@ -47,6 +47,6 @@ class PayPeriodPolicy
 
     public function deposit(User $user, PayPeriod $payPeriod): bool
     {
-        return ($user->id === $payPeriod->user_id);
+        return $user->id === $payPeriod->user_id;
     }
 }

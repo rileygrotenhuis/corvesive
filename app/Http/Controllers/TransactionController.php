@@ -35,7 +35,7 @@ class TransactionController extends Controller
     {
         $this->authorize('billTransaction', [
             $payPeriod,
-            $payPeriodBill
+            $payPeriodBill,
         ]);
 
         $transaction = (new TransactionService())
@@ -51,7 +51,7 @@ class TransactionController extends Controller
     {
         $this->authorize('budgetTransaction', [
             $payPeriod,
-            $payPeriodBudget
+            $payPeriodBudget,
         ]);
 
         $request->validate([

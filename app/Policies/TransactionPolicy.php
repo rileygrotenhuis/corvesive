@@ -2,9 +2,6 @@
 
 namespace App\Policies;
 
-use App\Models\PayPeriod;
-use App\Models\PayPeriodBill;
-use App\Models\PayPeriodBudget;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;

@@ -23,7 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         Budget::class => BudgetPolicy::class,
         PayPeriod::class => PayPeriodPolicy::class,
         Paystub::class => PaystubPolicy::class,
-        Transaction::class => TransactionPolicy::class
+        Transaction::class => TransactionPolicy::class,
     ];
 
     public function boot()
