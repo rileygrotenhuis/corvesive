@@ -14,6 +14,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class TransactionController extends Controller
 {
+    public function __construct(protected TransactionService $transactionService)
+    {
+    }
+
     public function payPeriodTransactions(PayPeriod $payPeriod): AnonymousResourceCollection
     {
         $this->authorize('user', $payPeriod);
@@ -38,7 +42,7 @@ class TransactionController extends Controller
             $payPeriodBill,
         ]);
 
-        $transaction = (new TransactionService())
+        $transaction = $this->transactionService
             ->createBillTransaction(
                 $payPeriod,
                 $payPeriodBill
@@ -58,7 +62,7 @@ class TransactionController extends Controller
             'amount' => 'required|integer',
         ]);
 
-        $transaction = (new TransactionService())
+        $transaction = $this->transactionService
             ->createBudgetTransaction(
                 $payPeriod,
                 $payPeriodBudget,
@@ -77,7 +81,7 @@ class TransactionController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $transaction = (new TransactionService())
+        $transaction = $this->transactionService
             ->makePayPeriodDeposit(
                 $payPeriod,
                 $request->amount,
@@ -96,7 +100,7 @@ class TransactionController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $transaction = (new TransactionService())
+        $transaction = $this->transactionService
             ->updateTransaction(
                 $payPeriod,
                 $transaction,
@@ -111,7 +115,7 @@ class TransactionController extends Controller
     {
         $this->authorize('user', $transaction);
 
-        (new TransactionService())->deleteTransaction($transaction);
+        $this->transactionService->deleteTransaction($transaction);
 
         return response()->json('', 204);
     }

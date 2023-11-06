@@ -12,6 +12,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class PaystubController extends Controller
 {
+    public function __construct(protected PaystubService $paystubService)
+    {
+    }
+
     public function index(): AnonymousResourceCollection
     {
         return PaystubResource::collection(
@@ -24,13 +28,12 @@ class PaystubController extends Controller
 
     public function store(StorePaystubRequest $request): PaystubResource
     {
-        $paystub = (new PaystubService())
-            ->createPaystub(
-                auth()->user()->id,
-                $request->issuer,
-                $request->amount,
-                $request->notes,
-            );
+        $paystub = $this->paystubService->createPaystub(
+            auth()->user()->id,
+            $request->issuer,
+            $request->amount,
+            $request->notes,
+        );
 
         return new PaystubResource($paystub);
     }
@@ -46,7 +49,7 @@ class PaystubController extends Controller
     {
         $this->authorize('user', $paystub);
 
-        $paystub = (new PaystubService())
+        $paystub = $this->paystubService
             ->updatePaystub(
                 $paystub,
                 $request->issuer,
@@ -61,7 +64,7 @@ class PaystubController extends Controller
     {
         $this->authorize('user', $paystub);
 
-        (new PaystubService())->deletePaystub($paystub);
+        $this->paystubService->deletePaystub($paystub);
 
         return response()->json('', 204);
     }

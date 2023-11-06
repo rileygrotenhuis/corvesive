@@ -12,6 +12,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BudgetController extends Controller
 {
+    public function __construct(protected BudgetService $budgetService)
+    {
+    }
+
     public function index(): AnonymousResourceCollection
     {
         return BudgetResource::collection(
@@ -24,13 +28,12 @@ class BudgetController extends Controller
 
     public function store(StoreBudgetRequest $request): BudgetResource
     {
-        $budget = (new BudgetService())
-            ->createBudget(
-                auth()->user()->id,
-                $request->name,
-                $request->amount,
-                $request->notes
-            );
+        $budget = $this->budgetService->createBudget(
+            auth()->user()->id,
+            $request->name,
+            $request->amount,
+            $request->notes
+        );
 
         return new BudgetResource($budget);
     }
@@ -46,13 +49,12 @@ class BudgetController extends Controller
     {
         $this->authorize('user', $budget);
 
-        $budget = (new BudgetService())
-            ->updateBudget(
-                $budget,
-                $request->name,
-                $request->amount,
-                $request->notes
-            );
+        $budget = $this->budgetService->updateBudget(
+            $budget,
+            $request->name,
+            $request->amount,
+            $request->notes
+        );
 
         return new BudgetResource($budget);
     }
@@ -61,7 +63,7 @@ class BudgetController extends Controller
     {
         $this->authorize('user', $budget);
 
-        (new BudgetService())->deleteBudget($budget);
+        $this->budgetService->deleteBudget($budget);
 
         return response()->json('', 204);
     }

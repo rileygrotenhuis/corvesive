@@ -8,6 +8,10 @@ use App\Services\AccountService;
 
 class AccountController extends Controller
 {
+    public function __construct(protected AccountService $accountService)
+    {
+    }
+
     public function me(): UserResource
     {
         return new UserResource(auth()->user());
@@ -21,14 +25,13 @@ class AccountController extends Controller
             ]);
         }
 
-        $user = (new AccountService())
-            ->updateAccount(
-                auth()->user(),
-                $request->first_name,
-                $request->last_name,
-                $request->email,
-                $request->phone_number
-            );
+        $user = $this->accountService->updateAccount(
+            auth()->user(),
+            $request->first_name,
+            $request->last_name,
+            $request->email,
+            $request->phone_number
+        );
 
         return new UserResource($user);
     }

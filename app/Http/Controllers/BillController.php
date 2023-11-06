@@ -12,6 +12,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BillController extends Controller
 {
+    public function __construct(protected BillService $billService)
+    {
+    }
+
     public function index(): AnonymousResourceCollection
     {
         return BillResource::collection(
@@ -24,15 +28,14 @@ class BillController extends Controller
 
     public function store(StoreBillRequest $request): BillResource
     {
-        $bill = (new BillService())
-            ->createBill(
-                auth()->user()->id,
-                $request->issuer,
-                $request->name,
-                $request->amount,
-                $request->due_date,
-                $request->notes,
-            );
+        $bill = $this->billService->createBill(
+            auth()->user()->id,
+            $request->issuer,
+            $request->name,
+            $request->amount,
+            $request->due_date,
+            $request->notes,
+        );
 
         return new BillResource($bill);
     }
@@ -48,15 +51,14 @@ class BillController extends Controller
     {
         $this->authorize('user', $bill);
 
-        $bill = (new BillService())
-            ->updateBill(
-                $bill,
-                $request->issuer,
-                $request->name,
-                $request->amount,
-                $request->due_date,
-                $request->notes,
-            );
+        $bill = $this->billService->updateBill(
+            $bill,
+            $request->issuer,
+            $request->name,
+            $request->amount,
+            $request->due_date,
+            $request->notes,
+        );
 
         return new BillResource($bill);
     }
@@ -65,7 +67,7 @@ class BillController extends Controller
     {
         $this->authorize('user', $bill);
 
-        (new BillService())->deleteBill($bill);
+        $this->billService->deleteBill($bill);
 
         return response()->json('', 204);
     }
