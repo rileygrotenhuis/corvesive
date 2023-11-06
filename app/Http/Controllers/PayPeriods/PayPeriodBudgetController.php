@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 
 class PayPeriodBudgetController extends Controller
 {
+    public function __construct(protected PayPeriodBudgetService $payPeriodBudgetService)
+    {
+    }
+
     public function store(Request $request, PayPeriod $payPeriod, Budget $budget): PayPeriodResource
     {
         $request->validate([
@@ -24,11 +28,11 @@ class PayPeriodBudgetController extends Controller
             $budget,
         ]);
 
-        if ((new PayPeriodBudgetService())->budgetIsAlreadyAttachedToPayPeriod($payPeriod, $budget)) {
+        if ($this->payPeriodBudgetService->budgetIsAlreadyAttachedToPayPeriod($payPeriod, $budget)) {
             throw new AlreadyAttachedToPayPeriod();
         }
 
-        (new PayPeriodBudgetService())
+        $this->payPeriodBudgetService
             ->addBudgetToPayPeriod(
                 $payPeriod->id,
                 $budget->id,
@@ -51,7 +55,7 @@ class PayPeriodBudgetController extends Controller
             $budget,
         ]);
 
-        (new PayPeriodBudgetService())
+        $this->payPeriodBudgetService
             ->updatePayPeriodBudget(
                 $payPeriod->id,
                 $budget->id,
@@ -75,7 +79,7 @@ class PayPeriodBudgetController extends Controller
             $budget,
         ]);
 
-        (new PayPeriodBudgetService())
+        $this->payPeriodBudgetService
             ->removeBudgetFromPayPeriod(
                 $payPeriod,
                 $budget

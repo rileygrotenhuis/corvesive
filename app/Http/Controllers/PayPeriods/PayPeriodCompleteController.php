@@ -9,6 +9,10 @@ use App\Services\PayPeriods\PayPeriodMetricService;
 
 class PayPeriodCompleteController extends Controller
 {
+    public function __construct(protected PayPeriodMetricService $payPeriodMetricService)
+    {
+    }
+
     public function complete(PayPeriod $payPeriod): PayPeriodResource
     {
         $this->authorize('user', $payPeriod);
@@ -16,7 +20,7 @@ class PayPeriodCompleteController extends Controller
         $payPeriod->is_complete = 1;
         $payPeriod->save();
 
-        (new PayPeriodMetricService())->savePayPeriodMetrics($payPeriod);
+        $this->payPeriodMetricService->savePayPeriodMetrics($payPeriod);
 
         return new PayPeriodResource($payPeriod);
     }

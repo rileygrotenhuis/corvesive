@@ -13,6 +13,10 @@ use App\Services\PayPeriods\PayPeriodBillService;
 
 class PayPeriodBillController extends Controller
 {
+    public function __construct(protected PayPeriodBillService $payPeriodBillService)
+    {
+    }
+
     public function store(StorePayPeriodBillRequest $request, PayPeriod $payPeriod, Bill $bill): PayPeriodResource
     {
         $this->authorize('bill', [
@@ -20,11 +24,11 @@ class PayPeriodBillController extends Controller
             $bill,
         ]);
 
-        if ((new PayPeriodBillService())->billIsAlreadyAttachedToPayPeriod($payPeriod, $bill)) {
+        if ($this->payPeriodBillService->billIsAlreadyAttachedToPayPeriod($payPeriod, $bill)) {
             throw new AlreadyAttachedToPayPeriod();
         }
 
-        (new PayPeriodBillService())
+        $this->payPeriodBillService
             ->addBillToPayPeriod(
                 $payPeriod->id,
                 $bill->id,
@@ -48,7 +52,7 @@ class PayPeriodBillController extends Controller
             $bill,
         ]);
 
-        (new PayPeriodBillService())
+        $this->payPeriodBillService
             ->updatePayPeriodBill(
                 $payPeriod->id,
                 $bill->id,
@@ -72,7 +76,7 @@ class PayPeriodBillController extends Controller
             $bill,
         ]);
 
-        (new PayPeriodBillService())
+        $this->payPeriodBillService
             ->removeBillFromPayPeriod(
                 $payPeriod->id,
                 $bill->id

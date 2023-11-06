@@ -13,6 +13,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class PayPeriodController extends Controller
 {
+    public function __construct(protected PayPeriodService $payPeriodService)
+    {
+    }
+
     public function index(): AnonymousResourceCollection
     {
         return PayPeriodResource::collection(
@@ -25,7 +29,7 @@ class PayPeriodController extends Controller
 
     public function store(StorePayPeriodRequest $request): PayPeriodResource
     {
-        $payPeriod = (new PayPeriodService())
+        $payPeriod = $this->payPeriodService
             ->createPayPeriod(
                 auth()->user()->id,
                 $request->start_date,
@@ -67,7 +71,7 @@ class PayPeriodController extends Controller
     {
         $this->authorize('user', $payPeriod);
 
-        $payPeriod = (new PayPeriodService())
+        $payPeriod = $this->payPeriodService
             ->updatePayPeriod(
                 $payPeriod,
                 $request->start_date,
@@ -89,7 +93,7 @@ class PayPeriodController extends Controller
     {
         $this->authorize('user', $payPeriod);
 
-        (new PayPeriodService())->deletePayPeriod($payPeriod);
+        $this->payPeriodService->deletePayPeriod($payPeriod);
 
         return response()->json('', 204);
     }

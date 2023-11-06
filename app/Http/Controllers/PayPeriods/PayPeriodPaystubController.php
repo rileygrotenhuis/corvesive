@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class PayPeriodPaystubController extends Controller
 {
+    public function __construct(protected PayPeriodPaystubService $payPeriodPaystubService)
+    {
+    }
+
     public function store(Request $request, PayPeriod $payPeriod, Paystub $paystub): PayPeriodResource
     {
         $request->validate([
@@ -23,11 +27,11 @@ class PayPeriodPaystubController extends Controller
             $paystub,
         ]);
 
-        if ((new PayPeriodPaystubService())->paystubIsAlreadyAttachedToPayPeriod($payPeriod, $paystub)) {
+        if ($this->payPeriodPaystubService->paystubIsAlreadyAttachedToPayPeriod($payPeriod, $paystub)) {
             throw new AlreadyAttachedToPayPeriod();
         }
 
-        (new PayPeriodPaystubService())
+        $this->payPeriodPaystubService
             ->addPaystubToPayPeriod(
                 $payPeriod,
                 $paystub,
@@ -54,7 +58,7 @@ class PayPeriodPaystubController extends Controller
             $paystub,
         ]);
 
-        (new PayPeriodPaystubService())
+        $this->payPeriodPaystubService
             ->updatePayPeriodPaystub(
                 $payPeriod,
                 $paystub,
@@ -77,7 +81,7 @@ class PayPeriodPaystubController extends Controller
             $paystub,
         ]);
 
-        (new PayPeriodPaystubService())
+        $this->payPeriodPaystubService
             ->removePaystubFromPayPeriod(
                 $payPeriod,
                 $paystub
