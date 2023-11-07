@@ -25,6 +25,7 @@ class PayPeriodBudgetController extends Controller
         return PayPeriodBudgetResource::collection(
             PayPeriodBudget::with('budget')
                 ->where('pay_period_id', $payPeriod->id)
+                ->orderBy('pay_period_budget.remaining_balance', 'desc')
                 ->get()
         );
     }

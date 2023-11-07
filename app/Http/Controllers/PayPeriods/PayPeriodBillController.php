@@ -25,6 +25,8 @@ class PayPeriodBillController extends Controller
         return PayPeriodBillResource::collection(
             PayPeriodBill::with('bill')
                 ->where('pay_period_id', $payPeriod->id)
+                ->orderBy('pay_period_bill.has_payed')
+                ->orderBy('pay_period_bill.due_date')
                 ->get()
         );
     }
