@@ -46,7 +46,8 @@ class PayPeriodBudgetService
 
     public function budgetIsAlreadyAttachedToPayPeriod(PayPeriod $payPeriod, Budget $budget): bool
     {
-        return PayPeriodBudget::where('pay_period_id', $payPeriod->id)
+        return PayPeriodBudget::withoutTrashed()
+            ->where('pay_period_id', $payPeriod->id)
             ->where('budget_id', $budget->id)
             ->exists();
     }

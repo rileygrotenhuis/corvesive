@@ -43,7 +43,8 @@ class PayPeriodPaystubService
 
     public function paystubIsAlreadyAttachedToPayPeriod(PayPeriod $payPeriod, Paystub $paystub): bool
     {
-        return PayPeriodPaystub::where('pay_period_id', $payPeriod->id)
+        return PayPeriodPaystub::withoutTrashed()
+            ->where('pay_period_id', $payPeriod->id)
             ->where('paystub_id', $paystub->id)
             ->exists();
     }

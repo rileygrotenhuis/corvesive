@@ -67,7 +67,8 @@ class PayPeriodBillService
 
     public function billIsAlreadyAttachedToPayPeriod(PayPeriod $payPeriod, Bill $bill): bool
     {
-        return PayPeriodBill::where('pay_period_id', $payPeriod->id)
+        return PayPeriodBill::withoutTrashed()
+            ->where('pay_period_id', $payPeriod->id)
             ->where('bill_id', $bill->id)
             ->exists();
     }
