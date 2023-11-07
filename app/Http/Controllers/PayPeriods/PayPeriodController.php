@@ -36,35 +36,14 @@ class PayPeriodController extends Controller
                 $request->end_date
             );
 
-        return new PayPeriodResource(
-            $payPeriod->load([
-                'paystubs',
-                'bills',
-                'budgets',
-            ])
-        );
+        return new PayPeriodResource($payPeriod);
     }
 
     public function show(PayPeriod $payPeriod): PayPeriodResource
     {
         $this->authorize('user', $payPeriod);
 
-        return new PayPeriodResource(
-            $payPeriod->load([
-                'paystubs' => function ($query) {
-                    $query->whereNull('pay_period_paystub.deleted_at');
-                },
-                'bills' => function ($query) {
-                    $query->whereNull('pay_period_bill.deleted_at')
-                        ->orderBy('pay_period_bill.has_payed', 'asc')
-                        ->orderBy('pay_period_bill.due_date', 'asc');
-                },
-                'budgets' => function ($query) {
-                    $query->whereNull('pay_period_budget.deleted_at')
-                        ->orderBy('pay_period_budget.remaining_balance', 'desc');
-                },
-            ])
-        );
+        return new PayPeriodResource($payPeriod);
     }
 
     public function update(UpdatePayPeriodRequest $request, PayPeriod $payPeriod): PayPeriodResource
@@ -80,13 +59,7 @@ class PayPeriodController extends Controller
 
         $payPeriod->save();
 
-        return new PayPeriodResource(
-            $payPeriod->load([
-                'paystubs',
-                'bills',
-                'budgets',
-            ])
-        );
+        return new PayPeriodResource($payPeriod);
     }
 
     public function destroy(PayPeriod $payPeriod): JsonResponse

@@ -50,13 +50,7 @@ class PayPeriodPaystubController extends Controller
                 $request->amount
             );
 
-        return new PayPeriodResource(
-            $payPeriod->load([
-                'paystubs',
-                'bills',
-                'budgets',
-            ])
-        );
+        return new PayPeriodResource($payPeriod);
     }
 
     public function update(Request $request, PayPeriod $payPeriod, Paystub $paystub): PayPeriodResource
@@ -77,13 +71,7 @@ class PayPeriodPaystubController extends Controller
                 $request->amount
             );
 
-        return new PayPeriodResource(
-            $payPeriod->load([
-                'paystubs',
-                'bills',
-                'budgets',
-            ])
-        );
+        return new PayPeriodResource($payPeriod);
     }
 
     public function destroy(PayPeriod $payPeriod, Paystub $paystub): PayPeriodResource
@@ -99,12 +87,6 @@ class PayPeriodPaystubController extends Controller
                 $paystub
             );
 
-        return new PayPeriodResource(
-            $payPeriod->load([
-                'paystubs',
-                'bills',
-                'budgets',
-            ])
-        );
+        return new PayPeriodResource($payPeriod);
     }
 }

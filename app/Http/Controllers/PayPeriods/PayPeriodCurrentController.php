@@ -21,12 +21,6 @@ class PayPeriodCurrentController extends Controller
         $user->pay_period_id = $payPeriod->id;
         $user->save();
 
-        return new PayPeriodResource(
-            $payPeriod->load([
-                'paystubs',
-                'bills',
-                'budgets',
-            ])
-        );
+        return new PayPeriodResource($payPeriod);
     }
 }
