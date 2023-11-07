@@ -58,15 +58,18 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('transactions/{transaction}', [TransactionController::class, 'update'])->name('pay-periods.transactions.update');
         Route::delete('transactions/{transaction}', [TransactionController::class, 'destroy'])->name('pay-periods.transactions.destroy');
 
+        Route::get('paystubs', [PayPeriodPaystubController::class, 'index'])->name('pay-periods.paystubs.index');
         Route::post('paystubs/{paystub}', [PayPeriodPaystubController::class, 'store'])->name('pay-periods.paystubs.store');
         Route::put('paystubs/{paystub}', [PayPeriodPaystubController::class, 'update'])->name('pay-periods.paystubs.update');
         Route::delete('paystubs/{paystub}', [PayPeriodPaystubController::class, 'destroy'])->name('pay-periods.paystubs.destroy');
 
+        Route::get('bills', [PayPeriodBillController::class, 'index'])->name('pay-periods.bills.index');
         Route::post('bills/{bill}', [PayPeriodBillController::class, 'store'])->name('pay-periods.bills.store');
         Route::put('bills/{bill}', [PayPeriodBillController::class, 'update'])->name('pay-periods.bills.update');
         Route::delete('bills/{bill}', [PayPeriodBillController::class, 'destroy'])->name('pay-periods.bills.destroy');
         Route::post('bills/{payPeriodBill}/transaction', [TransactionController::class, 'billTransaction'])->name('pay-periods.bills.transaction');
 
+        Route::get('budgets', [PayPeriodBudgetController::class, 'index'])->name('pay-periods.budgets.index');
         Route::post('budgets/{budget}', [PayPeriodBudgetController::class, 'store'])->name('pay-periods.budgets.store');
         Route::put('budgets/{budget}', [PayPeriodBudgetController::class, 'update'])->name('pay-periods.budgets.update');
         Route::delete('budgets/{budget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-periods.budgets.destroy');

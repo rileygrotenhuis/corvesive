@@ -6,15 +6,28 @@ use App\Exceptions\AlreadyAttachedToPayPeriod;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PayPeriods\StorePayPeriodBillRequest;
 use App\Http\Requests\PayPeriods\UpdatePayPeriodBillRequest;
+use App\Http\Resources\PayPeriods\PayPeriodBillResource;
 use App\Http\Resources\PayPeriods\PayPeriodResource;
 use App\Models\Bill;
 use App\Models\PayPeriod;
+use App\Models\PayPeriodBill;
 use App\Services\PayPeriods\PayPeriodBillService;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class PayPeriodBillController extends Controller
 {
     public function __construct(protected PayPeriodBillService $payPeriodBillService)
     {
+    }
+
+    public function index(PayPeriod $payPeriod): AnonymousResourceCollection
+    {
+        return PayPeriodBillResource::collection(
+            PayPeriodBill::where(
+                'pay_period_id',
+                $payPeriod->id
+            )->get()
+        );
     }
 
     public function store(StorePayPeriodBillRequest $request, PayPeriod $payPeriod, Bill $bill): PayPeriodResource
