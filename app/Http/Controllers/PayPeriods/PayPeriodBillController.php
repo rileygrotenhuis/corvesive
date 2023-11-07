@@ -23,10 +23,9 @@ class PayPeriodBillController extends Controller
     public function index(PayPeriod $payPeriod): AnonymousResourceCollection
     {
         return PayPeriodBillResource::collection(
-            PayPeriodBill::where(
-                'pay_period_id',
-                $payPeriod->id
-            )->get()
+            PayPeriodBill::with('bill')
+                ->where('pay_period_id', $payPeriod->id)
+                ->get()
         );
     }
 

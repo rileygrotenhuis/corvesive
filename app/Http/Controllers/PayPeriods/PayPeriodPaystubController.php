@@ -22,10 +22,9 @@ class PayPeriodPaystubController extends Controller
     public function index(PayPeriod $payPeriod): AnonymousResourceCollection
     {
         return PayPeriodPaystubResource::collection(
-            PayPeriodPaystub::where(
-                'pay_period_id',
-                $payPeriod->id
-            )->get()
+            PayPeriodPaystub::with('paystub')
+                ->where('pay_period_id', $payPeriod->id)
+                ->get()
         );
     }
 
