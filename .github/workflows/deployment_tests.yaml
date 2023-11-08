@@ -31,21 +31,26 @@ jobs:
           php-version: '8.2'
 
       - name: Copy .env
-        run: cp .env.example .env
+        run: cp api.corvesive.com/.env.example api.corvesive.com/.env
 
       - name: Install Dependencies
+        working-directory: api.corvesive.com
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Generate key
+        working-directory: api.corvesive.com
         run: php artisan key:generate
 
       - name: Directory Permissions
+        working-directory: api.corvesive.com
         run: chmod -R 777 storage bootstrap/cache
 
       - name: Optimize Project
+        working-directory: api.corvesive.com
         run: php artisan optimize:clear
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
+        working-directory: api.corvesive.com
         env:
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1
