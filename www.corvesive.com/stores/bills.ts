@@ -9,7 +9,7 @@ const useBillsStore = defineStore('useBillsStore', {
       id: -1,
       issuer: '',
       name: '',
-      amount: 0,
+      amount: '',
       due_date: '',
       notes: '',
       isLoading: false,
@@ -28,7 +28,7 @@ const useBillsStore = defineStore('useBillsStore', {
       const createBillResponse = await new BillsService().createBill(
         this.form.issuer,
         this.form.name,
-        this.form.amount,
+        parseInt(this.form.amount),
         this.form.due_date,
         this.form?.notes ?? null
       );
@@ -50,7 +50,7 @@ const useBillsStore = defineStore('useBillsStore', {
         this.form.id,
         this.form.issuer,
         this.form.name,
-        this.form.amount,
+        parseInt(this.form.amount),
         this.form.due_date,
         this.form?.notes ?? null
       );
@@ -99,7 +99,7 @@ const useBillsStore = defineStore('useBillsStore', {
       this.form.id = -1;
       this.form.issuer = '';
       this.form.name = '';
-      this.form.amount = 0;
+      this.form.amount = '';
       this.form.due_date = '';
       this.form.notes = '';
     },

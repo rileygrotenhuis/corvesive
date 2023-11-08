@@ -8,7 +8,7 @@ const useBudgetsStore = defineStore('useBudgetsStore', {
     form: {
       id: -1,
       name: '',
-      amount: 0,
+      amount: '',
       notes: '',
       isLoading: false,
       errors: null,
@@ -25,7 +25,7 @@ const useBudgetsStore = defineStore('useBudgetsStore', {
 
       const createBudgetResponse = await new BudgetsService().createBudget(
         this.form.name,
-        this.form.amount,
+        parseInt(this.form.amount),
         this.form?.notes ?? null
       );
 
@@ -45,7 +45,7 @@ const useBudgetsStore = defineStore('useBudgetsStore', {
       const updateBudgetResponse = await new BudgetsService().updateBudget(
         this.form.id,
         this.form.name,
-        this.form.amount,
+        parseInt(this.form.amount),
         this.form?.notes ?? null
       );
 
@@ -88,7 +88,7 @@ const useBudgetsStore = defineStore('useBudgetsStore', {
     resetFormFields() {
       this.form.id = -1;
       this.form.name = '';
-      this.form.amount = 0;
+      this.form.amount = '';
       this.form.notes = '';
     },
   },

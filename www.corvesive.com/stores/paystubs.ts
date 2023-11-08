@@ -8,7 +8,7 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
     form: {
       id: -1,
       issuer: '',
-      amount: 0,
+      amount: '',
       notes: '',
       isLoading: false,
       errors: null,
@@ -25,7 +25,7 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
 
       const createPaystubResponse = await new PaystubsService().createPaystub(
         this.form.issuer,
-        this.form.amount,
+        parseInt(this.form.amount),
         this.form?.notes ?? null
       );
 
@@ -45,7 +45,7 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
       const updatePaystubResponse = await new PaystubsService().updatePaystub(
         this.form.id,
         this.form.issuer,
-        this.form.amount,
+        parseInt(this.form.amount),
         this.form?.notes ?? null
       );
 
@@ -88,7 +88,7 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
     resetFormFields() {
       this.form.id = -1;
       this.form.issuer = '';
-      this.form.amount = 0;
+      this.form.amount = '';
       this.form.notes = '';
     },
   },

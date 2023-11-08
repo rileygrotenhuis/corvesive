@@ -10,8 +10,8 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
     form: {
       payPeriodId: -1,
       budgetId: -1,
-      totalBalance: 0,
-      remainingBalance: 0,
+      totalBalance: '',
+      remainingBalance: '',
       isLoading: false,
       errors: null,
     },
@@ -32,7 +32,7 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
         await new PayPeriodBudgetsService().attachBudgetToPayPeriod(
           this.form.payPeriodId,
           this.form.budgetId,
-          this.form.totalBalance
+          parseInt(this.form.totalBalance)
         );
 
       this.form.isLoading = false;
@@ -54,8 +54,8 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
         await new PayPeriodBudgetsService().updatePayPeriodBudget(
           this.form.payPeriodId,
           this.form.budgetId,
-          this.form.totalBalance,
-          this.form.remainingBalance
+          parseInt(this.form.totalBalance),
+          parseInt(this.form.remainingBalance)
         );
 
       this.form.isLoading = false;
@@ -108,8 +108,8 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
     resetFormFields() {
       this.form.payPeriodId = -1;
       this.form.budgetId = -1;
-      this.form.totalBalance = 0;
-      this.form.remainingBalance = 0;
+      this.form.totalBalance = '';
+      this.form.remainingBalance = '';
     },
   },
 });

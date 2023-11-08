@@ -10,7 +10,7 @@ const usePayPeriodBillsStore = defineStore('usePayPeriodBillsStore', {
     form: {
       payPeriodId: -1,
       billId: -1,
-      amount: 0,
+      amount: '',
       dueDate: '',
       isLoading: false,
       errors: null,
@@ -32,7 +32,7 @@ const usePayPeriodBillsStore = defineStore('usePayPeriodBillsStore', {
         await new PayPeriodBillsService().attachBillToPayPeriod(
           this.form.payPeriodId,
           this.form.billId,
-          this.form.amount,
+          parseInt(this.form.amount),
           this.form.dueDate
         );
 
@@ -55,7 +55,7 @@ const usePayPeriodBillsStore = defineStore('usePayPeriodBillsStore', {
         await new PayPeriodBillsService().updatePayPeriodBill(
           this.form.payPeriodId,
           this.form.billId,
-          this.form.amount,
+          parseInt(this.form.amount),
           this.form.dueDate
         );
 
@@ -109,7 +109,7 @@ const usePayPeriodBillsStore = defineStore('usePayPeriodBillsStore', {
     resetFormFields() {
       this.form.payPeriodId = -1;
       this.form.billId = -1;
-      this.form.amount = 0;
+      this.form.amount = '';
       this.form.dueDate = '';
     },
   },

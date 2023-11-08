@@ -10,7 +10,7 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
     form: {
       id: -1,
       payPeriodExpense: '',
-      amount: 0,
+      amount: '',
       notes: '',
       isLoading: false,
       errors: null,
@@ -51,7 +51,7 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
         await new TransactionsService().createBudgetTransaction(
           usePayPeriodsStore().currentPayPeriod.id,
           this.form.payPeriodExpense.id,
-          this.form.amount
+          parseInt(this.form.amount)
         );
 
       this.form.isLoading = false;
@@ -70,7 +70,7 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
       const makePayPeriodDepositResponse =
         await new TransactionsService().makePayPeriodDeposit(
           usePayPeriodsStore().currentPayPeriod.id,
-          this.form.amount,
+          parseInt(this.form.amount),
           this.form.notes
         );
 
@@ -91,7 +91,7 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
         await new TransactionsService().updateTransaction(
           usePayPeriodsStore().currentPayPeriod.id,
           this.form.id,
-          this.form.amount,
+          parseInt(this.form.amount),
           this.form.notes
         );
 
@@ -127,7 +127,7 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
       this.form.notes = notes;
     },
     resetFormFields() {
-      this.form.amount = 0;
+      this.form.amount = '';
     },
   },
 });

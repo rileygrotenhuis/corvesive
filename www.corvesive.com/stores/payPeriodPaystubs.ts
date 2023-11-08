@@ -10,7 +10,7 @@ const usePayPeriodPaystubsStore = defineStore('usePayPeriodPaystubsStore', {
     form: {
       payPeriodId: -1,
       paystubId: -1,
-      amount: 0,
+      amount: '',
       isLoading: false,
       errors: null,
     },
@@ -31,7 +31,7 @@ const usePayPeriodPaystubsStore = defineStore('usePayPeriodPaystubsStore', {
         await new PayPeriodPaystubsService().attachPaystubToPayPeriod(
           this.form.payPeriodId,
           this.form.paystubId,
-          this.form.amount
+          parseInt(this.form.amount)
         );
 
       this.form.isLoading = false;
@@ -53,7 +53,7 @@ const usePayPeriodPaystubsStore = defineStore('usePayPeriodPaystubsStore', {
         await new PayPeriodPaystubsService().updatePayPeriodPaystub(
           this.form.payPeriodId,
           this.form.paystubId,
-          this.form.amount
+          parseInt(this.form.amount)
         );
 
       this.form.isLoading = false;
@@ -100,7 +100,7 @@ const usePayPeriodPaystubsStore = defineStore('usePayPeriodPaystubsStore', {
     resetFormFields() {
       this.form.payPeriodId = -1;
       this.form.paystubId = -1;
-      this.form.amount = 0;
+      this.form.amount = '';
     },
   },
 });
