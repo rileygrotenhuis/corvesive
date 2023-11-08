@@ -1,5 +1,5 @@
 <script setup>
-import usePayPeriodsStore from '~/stores/payPeriods';
+import usePayPeriodsStore from "~/stores/payPeriods";
 
 const form = usePayPeriodsStore().form;
 </script>
@@ -7,7 +7,10 @@ const form = usePayPeriodsStore().form;
 <template>
   <div class="w-11/12 max-w-lg mx-auto">
     <h3 class="text-xl font-bold mb-4">Modify current Pay Period</h3>
-    <form @submit.prevent="usePayPeriodsStore().updatePayPeriod()" class="flex flex-col gap-4">
+    <form
+      @submit.prevent="usePayPeriodsStore().updatePayPeriod()"
+      class="flex flex-col gap-4"
+    >
       <FormsDoubleInput>
         <div>
           <FormsInputLabel resource="start_date" text="Start Date" />

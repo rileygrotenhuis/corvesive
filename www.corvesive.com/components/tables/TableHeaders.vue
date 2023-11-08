@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-  headers: Array
+  headers: Array,
 });
 </script>
 
@@ -14,7 +14,7 @@ defineProps({
         class="px-6 py-3"
         :class="{
           'rounded-tl-md': index === 0,
-          'rounded-tr-md': index === headers.length - 1
+          'rounded-tr-md': index === headers.length - 1,
         }"
       >
         {{ header }}

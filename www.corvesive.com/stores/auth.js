@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia';
-import AuthService from '~/services/auth';
-import useAccountStore from '~/stores/account';
+import { defineStore } from "pinia";
+import AuthService from "~/services/auth";
+import useAccountStore from "~/stores/account";
 
-const useAuthStore = defineStore('useAuthStore', {
+const useAuthStore = defineStore("useAuthStore", {
   state: () => ({
     registrationForm: {
       firstName: undefined,
@@ -12,14 +12,14 @@ const useAuthStore = defineStore('useAuthStore', {
       password: undefined,
       passwordConfirmation: undefined,
       isLoading: false,
-      errors: undefined
+      errors: undefined,
     },
     loginForm: {
       email: undefined,
       password: undefined,
       isLoading: false,
-      errors: undefined
-    }
+      errors: undefined,
+    },
   }),
   actions: {
     async register() {
@@ -31,7 +31,7 @@ const useAuthStore = defineStore('useAuthStore', {
         this.registrationForm.email,
         this.registrationForm.phoneNumber,
         this.registrationForm.password,
-        this.registrationForm.passwordConfirmation
+        this.registrationForm.passwordConfirmation,
       );
 
       this.registrationForm.isLoading = false;
@@ -40,8 +40,8 @@ const useAuthStore = defineStore('useAuthStore', {
 
       if (!this.registrationForm.errors) {
         useAccountStore().setUser(registrationResponse.user ?? {});
-        useCookie('corvesive_access_token').value = registrationResponse.token;
-        await navigateTo('/dashboard');
+        useCookie("corvesive_access_token").value = registrationResponse.token;
+        await navigateTo("/dashboard");
       }
     },
     async login() {
@@ -49,7 +49,7 @@ const useAuthStore = defineStore('useAuthStore', {
 
       const loginResponse = await new AuthService().login(
         this.loginForm.email,
-        this.loginForm.password
+        this.loginForm.password,
       );
 
       this.loginForm.isLoading = false;
@@ -58,15 +58,15 @@ const useAuthStore = defineStore('useAuthStore', {
 
       if (!this.loginForm.errors) {
         useAccountStore().setUser(loginResponse.user ?? {});
-        useCookie('corvesive_access_token').value = loginResponse.token;
-        await navigateTo('/dashboard');
+        useCookie("corvesive_access_token").value = loginResponse.token;
+        await navigateTo("/dashboard");
       }
     },
     async logout() {
       await new AuthService().logout();
-      await navigateTo('/login');
-    }
-  }
+      await navigateTo("/login");
+    },
+  },
 });
 
 export default useAuthStore;

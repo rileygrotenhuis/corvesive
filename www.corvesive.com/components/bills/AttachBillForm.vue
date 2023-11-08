@@ -1,6 +1,6 @@
 <script setup>
-import usePayPeriodBillsStore from '~/stores/payPeriodBills';
-import useBillsStore from '~/stores/bills.js';
+import usePayPeriodBillsStore from "~/stores/payPeriodBills";
+import useBillsStore from "~/stores/bills.js";
 
 await useBillsStore().getBills();
 </script>

@@ -1,6 +1,6 @@
 <script setup>
-import useTransactionsStore from '~/stores/transactions';
-import usePayPeriodBillsStore from '~/stores/payPeriodBills.js';
+import useTransactionsStore from "~/stores/transactions";
+import usePayPeriodBillsStore from "~/stores/payPeriodBills.js";
 
 await usePayPeriodBillsStore().getPayPeriodBills();
 </script>
@@ -32,12 +32,16 @@ await usePayPeriodBillsStore().getPayPeriodBills();
         <h5 class="text-lg">
           <strong>Due Date: </strong>
           {{
-            useTransactionsStore().form.payPeriodExpense?.dates?.due?.pretty?.short ?? '--/--/--'
+            useTransactionsStore().form.payPeriodExpense?.dates?.due?.pretty
+              ?.short ?? "--/--/--"
           }}
         </h5>
         <h5 class="text-lg">
           <strong>Amount: </strong>
-          {{ useTransactionsStore().form.payPeriodExpense?.amount?.pretty ?? '$0.00' }}
+          {{
+            useTransactionsStore().form.payPeriodExpense?.amount?.pretty ??
+            "$0.00"
+          }}
         </h5>
       </div>
       <FormsFormErrors

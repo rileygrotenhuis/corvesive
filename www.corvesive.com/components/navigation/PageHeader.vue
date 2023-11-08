@@ -1,12 +1,12 @@
 <script setup>
-import useModalsStore from '~/stores/modals.js';
+import useModalsStore from "~/stores/modals.js";
 
 defineProps({
   icon: Object,
   title: String,
   subtext: String,
   buttonColor: String,
-  modalKey: String
+  modalKey: String,
 });
 </script>
 

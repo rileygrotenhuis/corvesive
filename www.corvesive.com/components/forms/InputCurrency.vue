@@ -2,10 +2,10 @@
 defineProps({
   modelValue: String,
   name: String,
-  disabled: Boolean
+  disabled: Boolean,
 });
 
-const emits = defineEmits(['update:modelValue']);
+const emits = defineEmits(["update:modelValue"]);
 </script>
 
 <template>

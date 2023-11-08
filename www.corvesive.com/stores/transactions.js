@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia';
-import usePayPeriodsStore from './payPeriods';
-import useModalsStore from './modals';
-import TransactionsService from '../services/transactions';
-import handlePayPeriodAction from '~/util/handlePayPeriodAction.js';
+import { defineStore } from "pinia";
+import usePayPeriodsStore from "./payPeriods";
+import useModalsStore from "./modals";
+import TransactionsService from "../services/transactions";
+import handlePayPeriodAction from "~/util/handlePayPeriodAction.js";
 
-const useTransactionsStore = defineStore('useTransactionsStore', {
+const useTransactionsStore = defineStore("useTransactionsStore", {
   state: () => ({
     transactions: [],
     form: {
@@ -13,14 +13,14 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
       amount: undefined,
       notes: undefined,
       isLoading: false,
-      errors: false
-    }
+      errors: false,
+    },
   }),
   actions: {
     async getPayPeriodTransactions() {
       const getPayPeriodTransactionsResponse =
         await new TransactionsService().getPayPeriodTransactions(
-          usePayPeriodsStore().currentPayPeriod.id
+          usePayPeriodsStore().currentPayPeriod.id,
         );
 
       this.transactions = getPayPeriodTransactionsResponse.data;
@@ -28,10 +28,11 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
     async createBillTransaction() {
       this.form.isLoading = true;
 
-      const createBillTransactionResponse = await new TransactionsService().createBillTransaction(
-        usePayPeriodsStore().currentPayPeriod.id,
-        this.form.payPeriodExpense.id
-      );
+      const createBillTransactionResponse =
+        await new TransactionsService().createBillTransaction(
+          usePayPeriodsStore().currentPayPeriod.id,
+          this.form.payPeriodExpense.id,
+        );
 
       this.form.isLoading = false;
 
@@ -50,7 +51,7 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
         await new TransactionsService().createBudgetTransaction(
           usePayPeriodsStore().currentPayPeriod.id,
           this.form.payPeriodExpense.id,
-          this.form.amount
+          this.form.amount,
         );
 
       this.form.isLoading = false;
@@ -66,11 +67,12 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
     async makePayPeriodDeposit() {
       this.form.isLoading = true;
 
-      const makePayPeriodDepositResponse = await new TransactionsService().makePayPeriodDeposit(
-        usePayPeriodsStore().currentPayPeriod.id,
-        this.form.amount,
-        this.form.notes
-      );
+      const makePayPeriodDepositResponse =
+        await new TransactionsService().makePayPeriodDeposit(
+          usePayPeriodsStore().currentPayPeriod.id,
+          this.form.amount,
+          this.form.notes,
+        );
 
       this.form.isLoading = false;
 
@@ -85,12 +87,13 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
     async updateTransaction() {
       this.form.isLoading = true;
 
-      const updateTransactionResponse = await new TransactionsService().updateTransaction(
-        usePayPeriodsStore().currentPayPeriod.id,
-        this.form.id,
-        this.form.amount,
-        this.form.notes
-      );
+      const updateTransactionResponse =
+        await new TransactionsService().updateTransaction(
+          usePayPeriodsStore().currentPayPeriod.id,
+          this.form.id,
+          this.form.amount,
+          this.form.notes,
+        );
 
       this.form.isLoading = false;
 
@@ -103,12 +106,12 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
       }
     },
     async deleteTransaction() {
-      if (window.confirm('Are you sure you want to delete this bill?')) {
+      if (window.confirm("Are you sure you want to delete this bill?")) {
         this.form.isLoading = true;
 
         await new TransactionsService().deleteTransaction(
           usePayPeriodsStore().currentPayPeriod.id,
-          this.form.id
+          this.form.id,
         );
 
         this.form.isLoading = false;
@@ -122,15 +125,15 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
       this.form = {
         id: id,
         amount: (amount / 100).toFixed(2),
-        notes: notes
+        notes: notes,
       };
     },
     resetFormFields() {
       this.form = {
-        amount: undefined
+        amount: undefined,
       };
-    }
-  }
+    },
+  },
 });
 
 export default useTransactionsStore;

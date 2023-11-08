@@ -8,7 +8,11 @@
     stroke="#ffffff"
   >
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    ></g>
     <g id="SVGRepo_iconCarrier">
       <g clip-path="url(#clip0_15_82)">
         <g filter="url(#filter0_d_15_82)">
@@ -53,7 +57,9 @@
             result="shape"
           ></feBlend>
         </filter>
-        <clipPath id="clip0_15_82"><rect width="24" height="24" fill="white"></rect></clipPath>
+        <clipPath id="clip0_15_82">
+          <rect width="24" height="24" fill="white"></rect>
+        </clipPath>
       </defs>
     </g>
   </svg>

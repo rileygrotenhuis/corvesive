@@ -1,29 +1,29 @@
 <script setup>
-import useModalsStore from '~/stores/modals';
-import usePayPeriodsStore from '~/stores/payPeriods';
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import useModalsStore from "~/stores/modals";
+import usePayPeriodsStore from "~/stores/payPeriods";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const isPayPeriodMenuOpen = ref(false);
 
 onMounted(() => {
-  document.addEventListener('click', closeMenuOnClickOutside);
+  document.addEventListener("click", closeMenuOnClickOutside);
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener('click', closeMenuOnClickOutside);
+  document.removeEventListener("click", closeMenuOnClickOutside);
 });
 
 const closeMenuOnClickOutside = (event) => {
   if (
     isPayPeriodMenuOpen.value &&
-    !document.querySelector('#pay-period-menu').contains(event.target)
+    !document.querySelector("#pay-period-menu").contains(event.target)
   ) {
     isPayPeriodMenuOpen.value = false;
   }
 };
 
 const openUpdateModal = () => {
-  useModalsStore().openModal('payPeriods.update');
+  useModalsStore().openModal("payPeriods.update");
 
   usePayPeriodsStore().populateFormFields();
 };

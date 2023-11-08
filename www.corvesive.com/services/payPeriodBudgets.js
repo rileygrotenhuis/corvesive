@@ -3,65 +3,76 @@ class PayPeriodBudgetsService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/budgets`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`
-        }
-      }
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+        },
+      },
     );
     return await response.json();
   }
 
   async attachBudgetToPayPeriod(payPeriodId, budgetId, totalBalance) {
     const response = await fetch(
-      `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/budgets/${budgetId}`,
+      `${
+        useRuntimeConfig().public.apiUrl
+      }/pay-periods/${payPeriodId}/budgets/${budgetId}`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
         },
         body: JSON.stringify({
-          total_balance: totalBalance * 100
-        })
-      }
+          total_balance: totalBalance * 100,
+        }),
+      },
     );
     return await response.json();
   }
 
-  async updatePayPeriodBudget(payPeriodId, budgetId, totalBalance, remainingBalance) {
+  async updatePayPeriodBudget(
+    payPeriodId,
+    budgetId,
+    totalBalance,
+    remainingBalance,
+  ) {
     const response = await fetch(
-      `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/budgets/${budgetId}`,
+      `${
+        useRuntimeConfig().public.apiUrl
+      }/pay-periods/${payPeriodId}/budgets/${budgetId}`,
       {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
         },
         body: JSON.stringify({
           total_balance: totalBalance * 100,
-          remaining_balance: remainingBalance * 100
-        })
-      }
+          remaining_balance: remainingBalance * 100,
+        }),
+      },
     );
     return await response.json();
   }
 
   async detachBudgetFromPayPeriod(payPeriodId, budgetId) {
     const response = await fetch(
-      `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/budgets/${budgetId}`,
+      `${
+        useRuntimeConfig().public.apiUrl
+      }/pay-periods/${payPeriodId}/budgets/${budgetId}`,
       {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`
-        }
-      }
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+        },
+      },
     );
     return await response.json();
   }

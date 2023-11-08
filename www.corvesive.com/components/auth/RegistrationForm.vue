@@ -1,5 +1,5 @@
 <script setup>
-import useAuthStore from '~/stores/auth.js';
+import useAuthStore from "~/stores/auth.js";
 
 const form = useAuthStore().registrationForm;
 </script>
@@ -12,21 +12,38 @@ const form = useAuthStore().registrationForm;
     <FormsDoubleInput>
       <div>
         <FormsInputLabel resource="firstName" text="First Name" />
-        <FormsInputText v-model="form.firstName" name="firstName" :disabled="form.isLoading" />
+        <FormsInputText
+          v-model="form.firstName"
+          name="firstName"
+          :disabled="form.isLoading"
+        />
       </div>
       <div>
         <FormsInputLabel resource="lastName" text="Last Name" />
-        <FormsInputText v-model="form.lastName" name="lastName" :disabled="form.isLoading" />
+        <FormsInputText
+          v-model="form.lastName"
+          name="lastName"
+          :disabled="form.isLoading"
+        />
       </div>
     </FormsDoubleInput>
     <FormsDoubleInput>
       <div>
         <FormsInputLabel resource="email" text="Email" />
-        <FormsInputText v-model="form.email" type="email" name="email" :disabled="form.isLoading" />
+        <FormsInputText
+          v-model="form.email"
+          type="email"
+          name="email"
+          :disabled="form.isLoading"
+        />
       </div>
       <div>
         <FormsInputLabel resource="phoneNumber" text="Phone Number" />
-        <FormsInputText v-model="form.phoneNumber" name="phoneNumber" :disabled="form.isLoading" />
+        <FormsInputText
+          v-model="form.phoneNumber"
+          name="phoneNumber"
+          :disabled="form.isLoading"
+        />
       </div>
     </FormsDoubleInput>
     <div>
@@ -39,7 +56,10 @@ const form = useAuthStore().registrationForm;
       />
     </div>
     <div>
-      <FormsInputLabel resource="passwordConfirmation" text="Confirm Password" />
+      <FormsInputLabel
+        resource="passwordConfirmation"
+        text="Confirm Password"
+      />
       <FormsInputText
         v-model="form.passwordConfirmation"
         type="password"

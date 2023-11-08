@@ -1,6 +1,6 @@
 <script setup>
-import useTransactionsStore from '~/stores/transactions';
-import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets.js';
+import useTransactionsStore from "~/stores/transactions";
+import usePayPeriodBudgetsStore from "~/stores/payPeriodBudgets.js";
 
 await usePayPeriodBudgetsStore().getPayPeriodBudgets();
 </script>
@@ -30,11 +30,17 @@ await usePayPeriodBudgetsStore().getPayPeriodBudgets();
       <div class="flex flex-col gap-4">
         <h5 class="text-lg">
           <strong>Total Balance: </strong>
-          {{ useTransactionsStore().form.payPeriodExpense?.total_balance?.pretty ?? '$0.00' }}
+          {{
+            useTransactionsStore().form.payPeriodExpense?.total_balance
+              ?.pretty ?? "$0.00"
+          }}
         </h5>
         <h5 class="text-lg">
           <strong>Remaining Balance: </strong>
-          {{ useTransactionsStore().form.payPeriodExpense?.remaining_balance?.pretty ?? '$0.00' }}
+          {{
+            useTransactionsStore().form.payPeriodExpense?.remaining_balance
+              ?.pretty ?? "$0.00"
+          }}
         </h5>
       </div>
       <div>

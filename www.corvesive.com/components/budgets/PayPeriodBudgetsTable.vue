@@ -1,22 +1,22 @@
 <script setup>
-import useAlertsStore from '~/stores/alerts';
-import useModalsStore from '~/stores/modals';
-import usePayPeriodsStore from '~/stores/payPeriods';
-import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets';
+import useAlertsStore from "~/stores/alerts";
+import useModalsStore from "~/stores/modals";
+import usePayPeriodsStore from "~/stores/payPeriods";
+import usePayPeriodBudgetsStore from "~/stores/payPeriodBudgets";
 
 const openUpdateModal = (payPeriodBudget) => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
-    useAlertsStore().addAlert('payPeriodIsCompleted');
+    useAlertsStore().addAlert("payPeriodIsCompleted");
     return;
   }
 
-  useModalsStore().openModal('payPeriods.budgets.update');
+  useModalsStore().openModal("payPeriods.budgets.update");
 
   usePayPeriodBudgetsStore().populateFormFields(
     usePayPeriodsStore().currentPayPeriod.id,
     payPeriodBudget.budget.id,
     payPeriodBudget.total_balance.raw,
-    payPeriodBudget.remaining_balance.raw
+    payPeriodBudget.remaining_balance.raw,
   );
 
   usePayPeriodBudgetsStore().setSelectedPayPeriodBudget(payPeriodBudget.budget);
@@ -24,24 +24,26 @@ const openUpdateModal = (payPeriodBudget) => {
 
 const getPayPeriodBudgetRowColor = (remainingBalance) => {
   if (remainingBalance === 0) {
-    return 'bg-green-200';
+    return "bg-green-200";
   }
 
   if (remainingBalance < 0) {
-    return 'bg-red-200';
+    return "bg-red-200";
   }
 
   if (remainingBalance > 0 && remainingBalance <= 1000) {
-    return 'bg-yellow-100';
+    return "bg-yellow-100";
   }
 
-  return 'bg-white';
+  return "bg-white";
 };
 </script>
 
 <template>
   <TablesTableWrapper>
-    <TablesTableHeaders :headers="['Name', 'Total Balance', 'Remaining Balance']" />
+    <TablesTableHeaders
+      :headers="['Name', 'Total Balance', 'Remaining Balance']"
+    />
     <tbody>
       <TablesEmptyTableRow
         v-if="usePayPeriodBudgetsStore().payPeriodBudgets.length === 0"
@@ -50,7 +52,9 @@ const getPayPeriodBudgetRowColor = (remainingBalance) => {
       <TablesTableRow
         v-for="payPeriodBudget in usePayPeriodBudgetsStore().payPeriodBudgets"
         :key="payPeriodBudget.id"
-        :rowColor="getPayPeriodBudgetRowColor(payPeriodBudget.remaining_balance.raw)"
+        :rowColor="
+          getPayPeriodBudgetRowColor(payPeriodBudget.remaining_balance.raw)
+        "
       >
         <TablesTableData @click="openUpdateModal(payPeriodBudget)">
           {{ payPeriodBudget.budget.name }}

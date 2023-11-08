@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   buttonText: String,
-  buttonColor: String
+  buttonColor: String,
 });
 </script>
 

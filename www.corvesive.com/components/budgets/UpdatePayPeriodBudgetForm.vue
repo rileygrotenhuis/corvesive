@@ -1,18 +1,22 @@
 <script setup>
-import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets';
-import usePayPeriodsStore from '~/stores/payPeriods.js';
-import useAlertsStore from '~/stores/alerts.js';
+import usePayPeriodBudgetsStore from "~/stores/payPeriodBudgets";
+import usePayPeriodsStore from "~/stores/payPeriods.js";
+import useAlertsStore from "~/stores/alerts.js";
 
 const deletePayPeriodBudget = async () => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
-    useAlertsStore().addAlert('payPeriodIsCompleted');
+    useAlertsStore().addAlert("payPeriodIsCompleted");
     return;
   }
 
-  if (window.confirm('Are you sure you want to remove this budget from this pay period?')) {
+  if (
+    window.confirm(
+      "Are you sure you want to remove this budget from this pay period?",
+    )
+  ) {
     await usePayPeriodBudgetsStore().detachBudgetToPayPeriod(
       usePayPeriodsStore().currentPayPeriod.id,
-      usePayPeriodBudgetsStore().selectedPayPeriodBudget.id
+      usePayPeriodBudgetsStore().selectedPayPeriodBudget.id,
     );
   }
 };
@@ -37,7 +41,10 @@ const deletePayPeriodBudget = async () => {
           />
         </div>
         <div>
-          <FormsInputLabel resource="remaining_balance" text="Remaining Balance" />
+          <FormsInputLabel
+            resource="remaining_balance"
+            text="Remaining Balance"
+          />
           <FormsInputCurrency
             v-model="usePayPeriodBudgetsStore().form.remainingBalance"
             name="remaining_balance"

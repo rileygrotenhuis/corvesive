@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue';
-import useAccountStore from '~/stores/account.js';
+import { ref } from "vue";
+import useAccountStore from "~/stores/account.js";
 
 const isResponsiveNavigationExpanded = ref(false);
 </script>
@@ -21,7 +21,10 @@ const isResponsiveNavigationExpanded = ref(false);
             text="Monthly"
           />
           <NavigationNavbarLink
-            v-if="!$route.path.includes('/dashboard') && useAccountStore().user.pay_period?.id"
+            v-if="
+              !$route.path.includes('/dashboard') &&
+              useAccountStore().user.pay_period?.id
+            "
             to="/dashboard"
             text="Pay Period"
           />
@@ -29,7 +32,9 @@ const isResponsiveNavigationExpanded = ref(false);
         <div class="flex items-center gap-8">
           <NavigationProfileMenu />
           <IconsHamburgerIcon
-            @click="isResponsiveNavigationExpanded = !isResponsiveNavigationExpanded"
+            @click="
+              isResponsiveNavigationExpanded = !isResponsiveNavigationExpanded
+            "
             class="relative md:hidden hover:cursor-pointer hover:shadow-xl"
           />
         </div>
@@ -39,7 +44,7 @@ const isResponsiveNavigationExpanded = ref(false);
       class="inline-block md:hidden"
       :class="{
         flex: isResponsiveNavigationExpanded,
-        hidden: !isResponsiveNavigationExpanded
+        hidden: !isResponsiveNavigationExpanded,
       }"
     />
   </nav>

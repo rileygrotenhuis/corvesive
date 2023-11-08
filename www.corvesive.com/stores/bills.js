@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia';
-import BillsService from '~/services/bills';
-import useModalsStore from '~/stores/modals';
+import { defineStore } from "pinia";
+import BillsService from "~/services/bills";
+import useModalsStore from "~/stores/modals";
 
-const useBillsStore = defineStore('useBillsStore', {
+const useBillsStore = defineStore("useBillsStore", {
   state: () => ({
     bills: [],
     form: {
@@ -13,8 +13,8 @@ const useBillsStore = defineStore('useBillsStore', {
       due_date: undefined,
       notes: undefined,
       isLoading: false,
-      errors: false
-    }
+      errors: false,
+    },
   }),
   actions: {
     async getBills() {
@@ -30,7 +30,7 @@ const useBillsStore = defineStore('useBillsStore', {
         this.form.name,
         this.form.amount,
         this.form.due_date,
-        this.form?.notes ?? null
+        this.form?.notes ?? null,
       );
 
       this.form.isLoading = false;
@@ -52,7 +52,7 @@ const useBillsStore = defineStore('useBillsStore', {
         this.form.name,
         this.form.amount,
         this.form.due_date,
-        this.form?.notes ?? null
+        this.form?.notes ?? null,
       );
 
       this.form.isLoading = false;
@@ -66,7 +66,7 @@ const useBillsStore = defineStore('useBillsStore', {
       }
     },
     async deleteBill() {
-      if (window.confirm('Are you sure you want to delete this bill?')) {
+      if (window.confirm("Are you sure you want to delete this bill?")) {
         this.form.isLoading = true;
 
         await new BillsService().deleteBill(this.form.id);
@@ -87,7 +87,7 @@ const useBillsStore = defineStore('useBillsStore', {
         name: name,
         amount: (amount / 100).toFixed(2),
         due_date: dueDate.toString(),
-        notes: notes
+        notes: notes,
       };
     },
     resetFormFields() {
@@ -97,10 +97,10 @@ const useBillsStore = defineStore('useBillsStore', {
         name: undefined,
         amount: undefined,
         due_date: undefined,
-        notes: undefined
+        notes: undefined,
       };
-    }
-  }
+    },
+  },
 });
 
 export default useBillsStore;

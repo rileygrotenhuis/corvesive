@@ -1,18 +1,22 @@
 <script setup>
-import usePayPeriodBillsStore from '~/stores/payPeriodBills';
-import usePayPeriodsStore from '~/stores/payPeriods.js';
-import useAlertsStore from '~/stores/alerts.js';
+import usePayPeriodBillsStore from "~/stores/payPeriodBills";
+import usePayPeriodsStore from "~/stores/payPeriods.js";
+import useAlertsStore from "~/stores/alerts.js";
 
 const deletePayPeriodBill = async () => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
-    useAlertsStore().addAlert('payPeriodIsCompleted');
+    useAlertsStore().addAlert("payPeriodIsCompleted");
     return;
   }
 
-  if (window.confirm('Are you sure you want to remove this bill from this pay period?')) {
+  if (
+    window.confirm(
+      "Are you sure you want to remove this bill from this pay period?",
+    )
+  ) {
     await usePayPeriodBillsStore().detachBillToPayPeriod(
       usePayPeriodsStore().currentPayPeriod.id,
-      usePayPeriodBillsStore().selectedPayPeriodBill.id
+      usePayPeriodBillsStore().selectedPayPeriodBill.id,
     );
   }
 };

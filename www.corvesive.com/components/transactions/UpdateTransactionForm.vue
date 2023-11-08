@@ -1,5 +1,5 @@
 <script setup>
-import useTransactionsStore from '~/stores/transactions.js';
+import useTransactionsStore from "~/stores/transactions.js";
 
 const form = useTransactionsStore();
 </script>
@@ -7,7 +7,10 @@ const form = useTransactionsStore();
 <template>
   <div class="w-11/12 max-w-lg mx-auto">
     <h3 class="text-xl font-bold mb-4">Modify Transaction</h3>
-    <form @submit.prevent="useTransactionsStore().updateTransaction()" class="flex flex-col gap-4">
+    <form
+      @submit.prevent="useTransactionsStore().updateTransaction()"
+      class="flex flex-col gap-4"
+    >
       <div>
         <FormsInputLabel resource="amount" text="Amount" />
         <FormsInputCurrency

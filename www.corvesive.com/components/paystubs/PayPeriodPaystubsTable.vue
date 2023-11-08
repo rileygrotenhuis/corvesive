@@ -1,24 +1,26 @@
 <script setup>
-import useModalsStore from '~/stores/modals.js';
-import useAlertsStore from '~/stores/alerts.js';
-import usePayPeriodsStore from '~/stores/payPeriods.js';
-import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs.js';
+import useModalsStore from "~/stores/modals.js";
+import useAlertsStore from "~/stores/alerts.js";
+import usePayPeriodsStore from "~/stores/payPeriods.js";
+import usePayPeriodPaystubsStore from "~/stores/payPeriodPaystubs.js";
 
 const openUpdateModal = (payPeriodPaystub) => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
-    useAlertsStore().addAlert('payPeriodIsCompleted');
+    useAlertsStore().addAlert("payPeriodIsCompleted");
     return;
   }
 
-  useModalsStore().openModal('payPeriods.paystubs.update');
+  useModalsStore().openModal("payPeriods.paystubs.update");
 
   usePayPeriodPaystubsStore().populateFormFields(
     usePayPeriodsStore().currentPayPeriod.id,
     payPeriodPaystub.paystub.id,
-    payPeriodPaystub.amount.raw
+    payPeriodPaystub.amount.raw,
   );
 
-  usePayPeriodPaystubsStore().setSelectedPayPeriodPaystub(payPeriodPaystub.paystub);
+  usePayPeriodPaystubsStore().setSelectedPayPeriodPaystub(
+    payPeriodPaystub.paystub,
+  );
 };
 </script>
 
@@ -31,7 +33,8 @@ const openUpdateModal = (payPeriodPaystub) => {
         message="No Paystubs have been selected for this Pay Period."
       />
       <TablesTableRow
-        v-for="payPeriodPaystub in usePayPeriodPaystubsStore().payPeriodPaystubs"
+        v-for="payPeriodPaystub in usePayPeriodPaystubsStore()
+          .payPeriodPaystubs"
         :key="payPeriodPaystub.id"
       >
         <TablesTableData @click="openUpdateModal(payPeriodPaystub)">

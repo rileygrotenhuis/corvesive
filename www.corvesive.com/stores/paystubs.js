@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia';
-import useModalsStore from '~/stores/modals';
-import PaystubsService from '~/services/paystubs';
+import { defineStore } from "pinia";
+import useModalsStore from "~/stores/modals";
+import PaystubsService from "~/services/paystubs";
 
-const usePaystubsStore = defineStore('usePaystubsStore', {
+const usePaystubsStore = defineStore("usePaystubsStore", {
   state: () => ({
     paystubs: [],
     form: {
@@ -11,8 +11,8 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
       amount: undefined,
       notes: undefined,
       isLoading: false,
-      errors: false
-    }
+      errors: false,
+    },
   }),
   actions: {
     async getPaystubs() {
@@ -26,7 +26,7 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
       const createPaystubResponse = await new PaystubsService().createPaystub(
         this.form.issuer,
         this.form.amount,
-        this.form?.notes ?? null
+        this.form?.notes ?? null,
       );
 
       this.form.isLoading = false;
@@ -46,7 +46,7 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
         this.form.id,
         this.form.issuer,
         this.form.amount,
-        this.form?.notes ?? null
+        this.form?.notes ?? null,
       );
 
       this.form.isLoading = false;
@@ -60,7 +60,7 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
       }
     },
     async deletePaystub() {
-      if (window.confirm('Are you sure you want to delete this paystub?')) {
+      if (window.confirm("Are you sure you want to delete this paystub?")) {
         this.form.isLoading = true;
 
         await new PaystubsService().deletePaystub(this.form.id);
@@ -79,7 +79,7 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
         id: id,
         issuer: issuer,
         amount: (amount / 100).toFixed(2),
-        notes: notes
+        notes: notes,
       };
     },
     resetFormFields() {
@@ -87,10 +87,10 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
         id: undefined,
         issuer: undefined,
         amount: undefined,
-        notes: undefined
+        notes: undefined,
       };
-    }
-  }
+    },
+  },
 });
 
 export default usePaystubsStore;

@@ -1,15 +1,15 @@
 <script setup>
-import useModalsStore from '~/stores/modals';
-import usePaystubsStore from '~/stores/paystubs';
+import useModalsStore from "~/stores/modals";
+import usePaystubsStore from "~/stores/paystubs";
 
 const openUpdateModal = (paystub) => {
-  useModalsStore().openModal('paystubs.update');
+  useModalsStore().openModal("paystubs.update");
 
   usePaystubsStore().populateFormFields(
     paystub.id,
     paystub.issuer,
     paystub.amount.raw,
-    paystub.notes
+    paystub.notes,
   );
 };
 </script>

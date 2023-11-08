@@ -1,11 +1,16 @@
 <script setup>
-import useModalsStore from '~/stores/modals';
-import useBudgetsStore from '~/stores/budgets.js';
+import useModalsStore from "~/stores/modals";
+import useBudgetsStore from "~/stores/budgets.js";
 
 const openUpdateModal = (budget) => {
-  useModalsStore().openModal('budgets.update');
+  useModalsStore().openModal("budgets.update");
 
-  useBudgetsStore().populateFormFields(budget.id, budget.name, budget.amount.raw, budget.notes);
+  useBudgetsStore().populateFormFields(
+    budget.id,
+    budget.name,
+    budget.amount.raw,
+    budget.notes,
+  );
 };
 </script>
 

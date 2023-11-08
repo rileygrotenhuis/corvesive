@@ -1,14 +1,14 @@
 <script setup>
-import MetricsIcon from '~/components/icons/MetricsIcon.vue';
-import useMonthlyMetricsStore from '~/stores/monthlyMetrics.js';
-import copy from '~/libs/locales/copy.js';
+import MetricsIcon from "~/components/icons/MetricsIcon.vue";
+import useMonthlyMetricsStore from "~/stores/monthlyMetrics.js";
+import copy from "~/libs/locales/copy.js";
 
 useHead({
-  title: 'Corvesive - Budgets'
+  title: "Corvesive - Budgets",
 });
 
 definePageMeta({
-  layout: 'monthly'
+  layout: "monthly",
 });
 
 await useMonthlyMetricsStore().getMonthlyMetrics();

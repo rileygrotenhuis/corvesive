@@ -10,7 +10,11 @@
     fill="#000000"
   >
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    ></g>
     <g id="SVGRepo_iconCarrier">
       <defs id="defs2"></defs>
       <g id="layer1" transform="translate(36,-148)">

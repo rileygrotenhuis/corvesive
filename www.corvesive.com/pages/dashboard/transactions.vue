@@ -1,14 +1,14 @@
 <script setup>
-import useTransactionsStore from '~/stores/transactions.js';
-import PaymentIcon from '~/components/icons/PaymentIcon.vue';
-import copy from '~/libs/locales/copy.js';
+import useTransactionsStore from "~/stores/transactions.js";
+import PaymentIcon from "~/components/icons/PaymentIcon.vue";
+import copy from "~/libs/locales/copy.js";
 
 useHead({
-  title: 'Corvesive - Pay Period Transactions'
+  title: "Corvesive - Pay Period Transactions",
 });
 
 definePageMeta({
-  layout: 'dashboard'
+  layout: "dashboard",
 });
 
 await useTransactionsStore().getPayPeriodTransactions();

@@ -2,7 +2,7 @@
 defineProps({
   question: String,
   action: String,
-  to: String
+  to: String,
 });
 </script>
 

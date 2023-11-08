@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-  tabs: Array
+  tabs: Array,
 });
 </script>
 

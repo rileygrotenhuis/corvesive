@@ -1,14 +1,14 @@
 <script setup>
-import usePayPeriodMetricsStore from '~/stores/payPeriodMetrics.js';
-import MetricsIcon from '~/components/icons/MetricsIcon.vue';
-import copy from '~/libs/locales/copy.js';
+import usePayPeriodMetricsStore from "~/stores/payPeriodMetrics.js";
+import MetricsIcon from "~/components/icons/MetricsIcon.vue";
+import copy from "~/libs/locales/copy.js";
 
 useHead({
-  title: 'Corvesive - Pay Period Dashboard'
+  title: "Corvesive - Pay Period Dashboard",
 });
 
 definePageMeta({
-  layout: 'dashboard'
+  layout: "dashboard",
 });
 
 await usePayPeriodMetricsStore().getPayPeriodMetrics();

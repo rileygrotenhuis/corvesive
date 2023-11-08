@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia';
-import useAlertsStore from '~/stores/alerts';
-import usePayPeriodsStore from '~/stores/payPeriods';
-import PayPeriodBudgetsService from '~/services/payPeriodBudgets';
-import useModalsStore from '~/stores/modals.js';
+import { defineStore } from "pinia";
+import useAlertsStore from "~/stores/alerts";
+import usePayPeriodsStore from "~/stores/payPeriods";
+import PayPeriodBudgetsService from "~/services/payPeriodBudgets";
+import useModalsStore from "~/stores/modals.js";
 
-const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
+const usePayPeriodBudgetsStore = defineStore("usePayPeriodBudgetsStore", {
   state: () => ({
     payPeriodBudgets: [],
     selectedPayPeriodBudget: undefined,
@@ -14,14 +14,15 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
       totalBalance: undefined,
       remainingBalance: undefined,
       isLoading: false,
-      errors: false
-    }
+      errors: false,
+    },
   }),
   actions: {
     async getPayPeriodBudgets() {
-      const payPeriodBudgetsResponse = await new PayPeriodBudgetsService().getPayPeriodBudgets(
-        usePayPeriodsStore().currentPayPeriod.id
-      );
+      const payPeriodBudgetsResponse =
+        await new PayPeriodBudgetsService().getPayPeriodBudgets(
+          usePayPeriodsStore().currentPayPeriod.id,
+        );
 
       this.payPeriodBudgets = payPeriodBudgetsResponse.data;
     },
@@ -32,7 +33,7 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
         await new PayPeriodBudgetsService().attachBudgetToPayPeriod(
           this.form.payPeriodId,
           this.form.budgetId,
-          this.form.totalBalance
+          this.form.totalBalance,
         );
 
       this.form.isLoading = false;
@@ -42,7 +43,9 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
       if (!this.form.errors) {
         useModalsStore().closeModal();
         await this.getPayPeriodBudgets();
-        await usePayPeriodsStore().setCurrentPayPeriod(attachBudgetToPayPeriodResponse.data);
+        await usePayPeriodsStore().setCurrentPayPeriod(
+          attachBudgetToPayPeriodResponse.data,
+        );
       }
     },
     async updatePayPeriodBudget() {
@@ -53,7 +56,7 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
           this.form.payPeriodId,
           this.form.budgetId,
           this.form.totalBalance,
-          this.form.remainingBalance
+          this.form.remainingBalance,
         );
 
       this.form.isLoading = false;
@@ -63,14 +66,19 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
       if (!this.form.errors) {
         useModalsStore().closeModal();
         await this.getPayPeriodBudgets();
-        await usePayPeriodsStore().setCurrentPayPeriod(updatePayPeriodBudgetResponse.data);
+        await usePayPeriodsStore().setCurrentPayPeriod(
+          updatePayPeriodBudgetResponse.data,
+        );
       }
     },
     async detachBudgetToPayPeriod(payPeriodId, budgetId) {
       this.form.isLoading = true;
 
       const detachBudgetToPayPeriodResponse =
-        await new PayPeriodBudgetsService().detachBudgetFromPayPeriod(payPeriodId, budgetId);
+        await new PayPeriodBudgetsService().detachBudgetFromPayPeriod(
+          payPeriodId,
+          budgetId,
+        );
 
       this.form.isLoading = false;
 
@@ -79,7 +87,9 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
       if (!this.form.errors) {
         useModalsStore().closeModal();
         await this.getPayPeriodBudgets();
-        await usePayPeriodsStore().setCurrentPayPeriod(detachBudgetToPayPeriodResponse.data);
+        await usePayPeriodsStore().setCurrentPayPeriod(
+          detachBudgetToPayPeriodResponse.data,
+        );
       }
     },
     setSelectedPayPeriodBudget(selectedPayPeriodBudget) {
@@ -90,7 +100,7 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
         payPeriodId: payPeriodId,
         budgetId: budgetId,
         totalBalance: (totalBalance / 100).toFixed(2),
-        remainingBalance: (remainingBalance / 100).toFixed(2)
+        remainingBalance: (remainingBalance / 100).toFixed(2),
       };
     },
     resetFormFields() {
@@ -98,10 +108,10 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
         payPeriodId: undefined,
         budgetId: undefined,
         totalBalance: undefined,
-        remainingBalance: undefined
+        remainingBalance: undefined,
       };
-    }
-  }
+    },
+  },
 });
 
 export default usePayPeriodBudgetsStore;

@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   buttonText: String,
-  disabled: Boolean
+  disabled: Boolean,
 });
 </script>
 

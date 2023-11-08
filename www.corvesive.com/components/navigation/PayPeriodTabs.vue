@@ -1,29 +1,29 @@
 <script setup>
 const tabs = [
   {
-    url: '/dashboard',
-    text: 'Dashboard'
+    url: "/dashboard",
+    text: "Dashboard",
   },
   {
-    url: '/dashboard/paystubs',
-    text: 'Paystubs'
+    url: "/dashboard/paystubs",
+    text: "Paystubs",
   },
   {
-    url: '/dashboard/bills',
-    text: 'Bills'
+    url: "/dashboard/bills",
+    text: "Bills",
   },
   {
-    url: '/dashboard/budgets',
-    text: 'Budgets'
+    url: "/dashboard/budgets",
+    text: "Budgets",
   },
   {
-    url: '/dashboard/metrics',
-    text: 'Metrics'
+    url: "/dashboard/metrics",
+    text: "Metrics",
   },
   {
-    url: '/dashboard/transactions',
-    text: 'Transactions'
-  }
+    url: "/dashboard/transactions",
+    text: "Transactions",
+  },
 ];
 </script>
 

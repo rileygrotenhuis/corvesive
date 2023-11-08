@@ -1,14 +1,14 @@
 <script setup>
-import usePaystubsStore from '~/stores/paystubs.js';
-import PaystubsIcon from '~/components/icons/PaystubsIcon.vue';
-import copy from '~/libs/locales/copy.js';
+import usePaystubsStore from "~/stores/paystubs.js";
+import PaystubsIcon from "~/components/icons/PaystubsIcon.vue";
+import copy from "~/libs/locales/copy.js";
 
 useHead({
-  title: 'Corvesive - Budgets'
+  title: "Corvesive - Budgets",
 });
 
 definePageMeta({
-  layout: 'monthly'
+  layout: "monthly",
 });
 
 await usePaystubsStore().getPaystubs();

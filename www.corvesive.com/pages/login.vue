@@ -1,10 +1,10 @@
 <script setup>
 useHead({
-  title: 'Corvesive - Login'
+  title: "Corvesive - Login",
 });
 
 definePageMeta({
-  layout: 'guest'
+  layout: "guest",
 });
 </script>
 

@@ -1,9 +1,12 @@
 <script setup>
-import useAccountStore from '~/stores/account';
+import useAccountStore from "~/stores/account";
 </script>
 
 <template>
-  <form @submit.prevent="useAccountStore().updateAccount()" class="flex flex-col gap-4 max-w-xl">
+  <form
+    @submit.prevent="useAccountStore().updateAccount()"
+    class="flex flex-col gap-4 max-w-xl"
+  >
     <FormsDoubleInput>
       <div>
         <FormsInputLabel resource="first_name" text="First Name" />
@@ -48,6 +51,9 @@ import useAccountStore from '~/stores/account';
       v-if="useAccountStore().form.errors"
       :formErrors="useAccountStore().form.errors"
     />
-    <ButtonsFormSubmitButton buttonText="Save" :disabled="useAccountStore().form.isLoading" />
+    <ButtonsFormSubmitButton
+      buttonText="Save"
+      :disabled="useAccountStore().form.isLoading"
+    />
   </form>
 </template>

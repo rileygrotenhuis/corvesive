@@ -1,5 +1,5 @@
 <script setup>
-import useTransactionsStore from '~/stores/transactions';
+import useTransactionsStore from "~/stores/transactions";
 </script>
 
 <template>
@@ -7,7 +7,10 @@ import useTransactionsStore from '~/stores/transactions';
     <div>
       <h3 class="text-xl font-bold mb-4">Deposit</h3>
     </div>
-    <form @submit.prevent="useTransactionsStore().makePayPeriodDeposit" class="flex flex-col gap-4">
+    <form
+      @submit.prevent="useTransactionsStore().makePayPeriodDeposit"
+      class="flex flex-col gap-4"
+    >
       <div>
         <FormsInputLabel resource="amount" text="Amount" />
         <FormsInputCurrency

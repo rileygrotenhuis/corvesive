@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import usePayPeriodDashboardStore from '~/stores/payPeriodDashboard';
+import usePayPeriodDashboardStore from "~/stores/payPeriodDashboard";
 </script>
 
 <template>
@@ -11,7 +11,9 @@ import usePayPeriodDashboardStore from '~/stores/payPeriodDashboard';
           v-if="usePayPeriodDashboardStore().data?.upcoming_bills.length > 0"
           v-for="bill in usePayPeriodDashboardStore().data?.upcoming_bills"
         >
-          {{ bill.bill.issuer }} - {{ bill.bill.name }} ({{ bill.amount.pretty }})
+          {{ bill.bill.issuer }} - {{ bill.bill.name }} ({{
+            bill.amount.pretty
+          }})
         </li>
         <li v-else>No upcoming Bills</li>
       </ul>

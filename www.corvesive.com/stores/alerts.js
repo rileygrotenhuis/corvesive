@@ -1,9 +1,9 @@
-import { defineStore } from 'pinia';
-import alerts from '~/libs/locales/alerts.js';
+import { defineStore } from "pinia";
+import alerts from "~/libs/locales/alerts.js";
 
-const useAlertsStore = defineStore('useAlertsStore', {
+const useAlertsStore = defineStore("useAlertsStore", {
   state: () => ({
-    alerts: []
+    alerts: [],
   }),
   actions: {
     addAlert(error) {
@@ -15,8 +15,8 @@ const useAlertsStore = defineStore('useAlertsStore', {
     },
     removeAlert(index) {
       this.alerts.splice(index, 1);
-    }
-  }
+    },
+  },
 });
 
 export default useAlertsStore;

@@ -1,21 +1,21 @@
 <script setup>
-import { ref, watch } from 'vue';
-import usePaystubsStore from '~/stores/paystubs';
-import usePayPeriodsStore from '~/stores/payPeriods';
-import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs';
+import { ref, watch } from "vue";
+import usePaystubsStore from "~/stores/paystubs";
+import usePayPeriodsStore from "~/stores/payPeriods";
+import usePayPeriodPaystubsStore from "~/stores/payPeriodPaystubs";
 
 const selectedPaystub = ref(undefined);
 watch(selectedPaystub, (newValue) => {
   usePayPeriodPaystubsStore().populateFormFields(
     usePayPeriodsStore().currentPayPeriod.id,
     newValue.id,
-    newValue.amount.raw
+    newValue.amount.raw,
   );
 });
 
 const isPaystubDisabled = (paystubId) => {
   return usePayPeriodPaystubsStore().payPeriodPaystubs.some(
-    (paystub) => paystub['paystub']['id'] === paystubId
+    (paystub) => paystub["paystub"]["id"] === paystubId,
   );
 };
 </script>

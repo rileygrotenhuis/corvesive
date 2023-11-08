@@ -1,5 +1,5 @@
 <script setup>
-import useAuthStore from '~/stores/auth';
+import useAuthStore from "~/stores/auth";
 
 const form = useAuthStore().loginForm;
 </script>
@@ -11,7 +11,11 @@ const form = useAuthStore().loginForm;
   >
     <div>
       <FormsInputLabel resource="email" text="Email" />
-      <FormsInputText v-model="form.email" name="email" :disabled="form.isLoading" />
+      <FormsInputText
+        v-model="form.email"
+        name="email"
+        :disabled="form.isLoading"
+      />
     </div>
     <div>
       <FormsInputLabel resource="password" text="Password" />

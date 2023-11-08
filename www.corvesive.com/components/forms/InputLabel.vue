@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   resource: String,
-  text: String
+  text: String,
 });
 </script>
 

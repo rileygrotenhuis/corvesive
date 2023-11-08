@@ -1,19 +1,21 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import usePayPeriodsStore from '~/stores/payPeriods.js';
-import useModalsStore from '~/stores/modals.js';
-import useAlertsStore from '~/stores/alerts.js';
+import { ref, onMounted } from "vue";
+import usePayPeriodsStore from "~/stores/payPeriods.js";
+import useModalsStore from "~/stores/modals.js";
+import useAlertsStore from "~/stores/alerts.js";
 
 onMounted(async () => {
   await usePayPeriodsStore().getPayPeriods();
 
   if (usePayPeriodsStore().payPeriods.length === 0) {
-    useAlertsStore().addAlert('noPayPeriodsAvailable');
-    useModalsStore().setModalType('payPeriods.create');
+    useAlertsStore().addAlert("noPayPeriodsAvailable");
+    useModalsStore().setModalType("payPeriods.create");
   }
 });
 
-const selectedPayPeriod = ref(usePayPeriodsStore()?.currentPayPeriod?.id ?? undefined);
+const selectedPayPeriod = ref(
+  usePayPeriodsStore()?.currentPayPeriod?.id ?? undefined,
+);
 </script>
 
 <template>
@@ -32,10 +34,12 @@ const selectedPayPeriod = ref(usePayPeriodsStore()?.currentPayPeriod?.id ?? unde
         @click.prevent="selectedPayPeriod = payPeriod.id"
       >
         <span class="hidden md:inline-block">
-          {{ payPeriod.dates.start.pretty.full }} - {{ payPeriod.dates.end.pretty.full }}
+          {{ payPeriod.dates.start.pretty.full }} -
+          {{ payPeriod.dates.end.pretty.full }}
         </span>
         <span class="inline-block md:hidden">
-          {{ payPeriod.dates.start.pretty.short }} - {{ payPeriod.dates.end.pretty.short }}
+          {{ payPeriod.dates.start.pretty.short }} -
+          {{ payPeriod.dates.end.pretty.short }}
         </span>
       </button>
     </div>
@@ -44,7 +48,9 @@ const selectedPayPeriod = ref(usePayPeriodsStore()?.currentPayPeriod?.id ?? unde
         !selectedPayPeriod ? 'bg-gray-200' : 'bg-black'
       }`"
       :disabled="!selectedPayPeriod"
-      @click.prevent="usePayPeriodsStore().setPayPeriodToCurrent(selectedPayPeriod)"
+      @click.prevent="
+        usePayPeriodsStore().setPayPeriodToCurrent(selectedPayPeriod)
+      "
     >
       Select
     </button>
