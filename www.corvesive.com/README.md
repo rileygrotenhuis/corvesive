@@ -1,7 +1,5 @@
 # Corvesive - Nuxt
 
-Corvesive is a budgeting application that focuses on reporting and tracking your personal finances over the course of customizable segments of times.
-
 ## Prerequisites
 
 Before you can run this application, ensure you have the following software installed on your system:
