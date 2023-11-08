@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useTransactionsStore from '~/stores/transactions.js';
 import PaymentIcon from '~/components/icons/PaymentIcon.vue';
 import copy from '~/libs/locales/copy.js';

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const tabs = [
   {
     url: '/monthly',

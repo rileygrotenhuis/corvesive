@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useAccountStore from '~/stores/account.js';
 import ProfileBlackIcon from '~/components/icons/ProfileBlackIcon.vue';
 import copy from '~/libs/locales/copy.js';

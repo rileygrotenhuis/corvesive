@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useBudgetsStore from '~/stores/budgets';
 
 const form = useBudgetsStore().form;

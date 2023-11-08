@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import usePaystubsStore from '~/stores/paystubs';
 
 const form = usePaystubsStore().form;

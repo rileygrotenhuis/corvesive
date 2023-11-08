@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useModalsStore from '~/stores/modals.js';
 import ModalWrapper from '~/components/modals/ModalWrapper.vue';
 import PayPeriodSelection from '~/components/payPeriods/PayPeriodSelection.vue';

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useAlertsStore from '~/stores/alerts.js';
 
 const getToastClass = (type) => {

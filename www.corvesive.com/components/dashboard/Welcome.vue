@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useAccountStore from '~/stores/account.js';
 
 const getStarted = async () => {

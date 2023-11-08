@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import usePaystubsStore from '~/stores/paystubs.js';
 import PaystubsIcon from '~/components/icons/PaystubsIcon.vue';
 import copy from '~/libs/locales/copy.js';

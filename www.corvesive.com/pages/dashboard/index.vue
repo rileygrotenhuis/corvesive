@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import usePayPeriodDashboardStore from '~/stores/payPeriodDashboard.js';
 import DashboardIcon from '~/components/icons/DashboardIcon.vue';
 import copy from '~/libs/locales/copy.js';

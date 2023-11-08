@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import usePayPeriodsStore from '~/stores/payPeriods';
 
 const form = usePayPeriodsStore().form;

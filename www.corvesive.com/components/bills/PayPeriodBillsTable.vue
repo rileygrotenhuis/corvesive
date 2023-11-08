@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useModalsStore from '~/stores/modals';
 import useAlertsStore from '~/stores/alerts';
 import usePayPeriodsStore from '~/stores/payPeriods';

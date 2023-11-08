@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useModalsStore from '~/stores/modals.js';
 
 defineProps({

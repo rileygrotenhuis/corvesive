@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import usePayPeriodsStore from '~/stores/payPeriods.js';
 import useModalsStore from '~/stores/modals.js';

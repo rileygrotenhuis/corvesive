@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useMonthlyMetricsStore from '~/stores/monthlyMetrics.js';
 </script>
 

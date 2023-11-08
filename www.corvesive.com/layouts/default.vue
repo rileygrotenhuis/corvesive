@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import GuestNavbar from '~/components/navigation/GuestNavbar.vue';
 import UtilityWrapper from '~/components/util/UtilityWrapper.vue';
 

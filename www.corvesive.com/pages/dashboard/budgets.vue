@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import BudgetsIcon from '~/components/icons/BudgetsIcon.vue';
 import copy from '~/libs/locales/copy.js';
 import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets.js';

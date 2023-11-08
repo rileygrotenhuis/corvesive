@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import usePayPeriodBillsStore from '~/stores/payPeriodBills';
 import useBillsStore from '~/stores/bills.js';
 

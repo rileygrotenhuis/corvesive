@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useTransactionsStore from '~/stores/transactions.js';
 import useModalsStore from '~/stores/modals.js';
 

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import usePayPeriodMetricsStore from '~/stores/payPeriodMetrics.js';
 </script>
 

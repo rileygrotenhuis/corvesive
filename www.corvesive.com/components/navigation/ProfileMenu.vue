@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useAuthStore from '~/stores/auth';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
