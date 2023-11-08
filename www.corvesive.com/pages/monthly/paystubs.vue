@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import usePaystubsStore from '~/stores/paystubs.js';
 import PaystubsIcon from '~/components/icons/PaystubsIcon.vue';
-import copy from '~/libs/locales/copy.js';
+import copy from '~/libs/locales/copy.ts';
 
 useHead({
   title: 'Corvesive - Budgets',

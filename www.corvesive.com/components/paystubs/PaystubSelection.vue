@@ -5,7 +5,7 @@ import usePayPeriodsStore from '~/stores/payPeriods';
 import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs';
 
 const selectedPaystub = ref(undefined);
-watch(selectedPaystub, (newValue) => {
+watch(selectedPaystub, (newValue: Object) => {
   usePayPeriodPaystubsStore().populateFormFields(
     usePayPeriodsStore().currentPayPeriod.id,
     newValue.id,
@@ -13,9 +13,9 @@ watch(selectedPaystub, (newValue) => {
   );
 });
 
-const isPaystubDisabled = (paystubId) => {
+const isPaystubDisabled = (paystubId: Number) => {
   return usePayPeriodPaystubsStore().payPeriodPaystubs.some(
-    (paystub) => paystub['paystub']['id'] === paystubId
+    (paystub: Object) => paystub['paystub']['id'] === paystubId
   );
 };
 </script>

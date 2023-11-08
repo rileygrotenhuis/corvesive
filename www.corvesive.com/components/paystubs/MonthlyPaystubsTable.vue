@@ -2,7 +2,7 @@
 import useModalsStore from '~/stores/modals';
 import usePaystubsStore from '~/stores/paystubs';
 
-const openUpdateModal = (paystub) => {
+const openUpdateModal = (paystub: Object) => {
   useModalsStore().openModal('paystubs.update');
 
   usePaystubsStore().populateFormFields(

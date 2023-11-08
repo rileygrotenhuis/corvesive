@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useTransactionsStore from '~/stores/transactions.js';
 import PaymentIcon from '~/components/icons/PaymentIcon.vue';
-import copy from '~/libs/locales/copy.js';
+import copy from '~/libs/locales/copy.ts';
 
 useHead({
   title: 'Corvesive - Pay Period Transactions',

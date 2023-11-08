@@ -10,7 +10,7 @@ import useBudgetsStore from '~/stores/budgets.js';
 import usePaystubsStore from '~/stores/paystubs.js';
 
 export default async function () {
-  const dataReloadMappings = {
+  const dataReloadMappings: Object = {
     '/dashboard': usePayPeriodDashboardStore().getPayPeriodDashboardMetrics,
     '/dashboard/paystubs': usePayPeriodPaystubsStore().getPayPeriodPaystubs,
     '/dashboard/bills': usePayPeriodBillsStore().getPayPeriodBills,

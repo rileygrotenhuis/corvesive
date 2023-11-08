@@ -4,7 +4,7 @@ import useAlertsStore from '~/stores/alerts';
 import usePayPeriodsStore from '~/stores/payPeriods';
 import usePayPeriodBillsStore from '~/stores/payPeriodBills';
 
-const openUpdateModal = (payPeriodBill) => {
+const openUpdateModal = (payPeriodBill: Object) => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
     useAlertsStore().addAlert('payPeriodIsCompleted');
     return;
@@ -22,8 +22,8 @@ const openUpdateModal = (payPeriodBill) => {
   usePayPeriodBillsStore().setSelectedPayPeriodBill(payPeriodBill.bill);
 };
 
-const getPayPeriodBillRowColor = (status) => {
-  const payPeriodBillStatusColorMappings = {
+const getPayPeriodBillRowColor = (status: String): String => {
+  const payPeriodBillStatusColorMappings: Object = {
     unpayed: 'bg-white',
     upcoming: 'bg-yellow-100',
     payed: 'bg-green-200',

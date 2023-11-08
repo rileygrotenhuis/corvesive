@@ -21,7 +21,7 @@ import DepositTransactionForm from '~/components/transactions/DepositTransaction
 import UpdatePayPeriodPaystubForm from '~/components/paystubs/UpdatePayPeriodPaystubForm.vue';
 import UpdateTransactionForm from '~/components/transactions/UpdateTransactionForm.vue';
 
-const modalMappings = {
+const modalMappings: Object = {
   'payPeriods.create': CreatePayPeriodForm,
   'payPeriods.update': UpdatePayPeriodForm,
   'payPeriods.select': PayPeriodSelection,

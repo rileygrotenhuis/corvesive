@@ -4,7 +4,7 @@ import useModalsStore from '~/stores/modals';
 import usePayPeriodsStore from '~/stores/payPeriods';
 import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets';
 
-const openUpdateModal = (payPeriodBudget) => {
+const openUpdateModal = (payPeriodBudget: Object) => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
     useAlertsStore().addAlert('payPeriodIsCompleted');
     return;
@@ -22,7 +22,7 @@ const openUpdateModal = (payPeriodBudget) => {
   usePayPeriodBudgetsStore().setSelectedPayPeriodBudget(payPeriodBudget.budget);
 };
 
-const getPayPeriodBudgetRowColor = (remainingBalance) => {
+const getPayPeriodBudgetRowColor = (remainingBalance: Number): String => {
   if (remainingBalance === 0) {
     return 'bg-green-200';
   }

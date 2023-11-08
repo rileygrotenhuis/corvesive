@@ -3,7 +3,7 @@ import useAlertsStore from '~/stores/alerts';
 import useModalsStore from '~/stores/modals';
 import PayPeriodsService from '~/services/payPeriods';
 import usePayPeriodMetricsStore from './payPeriodMetrics';
-import handlePayPeriodAction from '~/util/handlePayPeriodAction.js';
+import handlePayPeriodAction from '~/util/handlePayPeriodAction.ts';
 
 const usePayPeriodsStore = defineStore('usePayPeriodsStore', {
   state: () => ({

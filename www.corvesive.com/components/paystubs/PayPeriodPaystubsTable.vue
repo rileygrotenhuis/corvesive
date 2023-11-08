@@ -4,7 +4,7 @@ import useAlertsStore from '~/stores/alerts.js';
 import usePayPeriodsStore from '~/stores/payPeriods.js';
 import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs.js';
 
-const openUpdateModal = (payPeriodPaystub) => {
+const openUpdateModal = (payPeriodPaystub: Object) => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
     useAlertsStore().addAlert('payPeriodIsCompleted');
     return;

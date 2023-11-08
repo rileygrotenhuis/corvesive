@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import PaystubsIcon from '~/components/icons/PaystubsIcon.vue';
-import copy from '~/libs/locales/copy.js';
+import copy from '~/libs/locales/copy.ts';
 import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs.js';
 
 useHead({

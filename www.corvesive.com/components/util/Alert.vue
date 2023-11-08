@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useAlertsStore from '~/stores/alerts.js';
 
-const getToastClass = (type) => {
+const getToastClass = (type: String): String => {
   if (type === 'info') {
     return 'bg-blue-100 border-blue-400 text-blue-700';
   } else if (type === 'warning') {

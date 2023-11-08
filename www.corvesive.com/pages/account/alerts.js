@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import alerts from '~/libs/locales/alerts.ts';
 
 const useAlertsStore = defineStore('useAlertsStore', {
   state: () => ({

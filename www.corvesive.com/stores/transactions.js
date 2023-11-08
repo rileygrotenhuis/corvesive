@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import usePayPeriodsStore from './payPeriods';
 import useModalsStore from './modals';
 import TransactionsService from '../services/transactions';
-import handlePayPeriodAction from '~/util/handlePayPeriodAction.js';
+import handlePayPeriodAction from '~/util/handlePayPeriodAction.ts';
 
 const useTransactionsStore = defineStore('useTransactionsStore', {
   state: () => ({

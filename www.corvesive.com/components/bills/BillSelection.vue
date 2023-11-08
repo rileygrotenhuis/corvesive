@@ -5,7 +5,7 @@ import usePayPeriodsStore from '~/stores/payPeriods';
 import usePayPeriodBillsStore from '~/stores/payPeriodBills';
 
 const selectedBill = ref(undefined);
-watch(selectedBill, (newValue) => {
+watch(selectedBill, (newValue: Object) => {
   usePayPeriodBillsStore().populateFormFields(
     usePayPeriodsStore().currentPayPeriod.id,
     newValue.id,

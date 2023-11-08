@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BudgetsIcon from '~/components/icons/BudgetsIcon.vue';
-import copy from '~/libs/locales/copy.js';
+import copy from '~/libs/locales/copy.ts';
 import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets.js';
 
 useHead({

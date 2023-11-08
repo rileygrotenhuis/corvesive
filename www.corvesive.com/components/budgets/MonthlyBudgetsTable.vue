@@ -2,7 +2,7 @@
 import useModalsStore from '~/stores/modals';
 import useBudgetsStore from '~/stores/budgets.js';
 
-const openUpdateModal = (budget) => {
+const openUpdateModal = (budget: Object) => {
   useModalsStore().openModal('budgets.update');
 
   useBudgetsStore().populateFormFields(

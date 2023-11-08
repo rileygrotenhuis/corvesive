@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const tabs = [
+import type { PageTabs } from '~/types/PageTabs';
+
+const tabs: PageTabs[] = [
   {
     url: '/dashboard',
     text: 'Dashboard',

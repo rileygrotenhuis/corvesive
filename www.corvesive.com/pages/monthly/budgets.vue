@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useBudgetsStore from '~/stores/budgets.js';
 import BudgetsIcon from '~/components/icons/BudgetsIcon.vue';
-import copy from '~/libs/locales/copy.js';
+import copy from '~/libs/locales/copy.ts';
 
 useHead({
   title: 'Corvesive - Budgets',

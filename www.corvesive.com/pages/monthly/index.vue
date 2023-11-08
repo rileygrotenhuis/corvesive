@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MetricsIcon from '~/components/icons/MetricsIcon.vue';
 import useMonthlyMetricsStore from '~/stores/monthlyMetrics.js';
-import copy from '~/libs/locales/copy.js';
+import copy from '~/libs/locales/copy.ts';
 
 useHead({
   title: 'Corvesive - Budgets',

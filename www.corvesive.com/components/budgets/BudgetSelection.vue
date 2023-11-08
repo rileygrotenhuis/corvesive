@@ -5,7 +5,7 @@ import usePayPeriodsStore from '~/stores/payPeriods';
 import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets';
 
 const selectedBudget = ref(undefined);
-watch(selectedBudget, (newValue) => {
+watch(selectedBudget, (newValue: Object) => {
   usePayPeriodBudgetsStore().populateFormFields(
     usePayPeriodsStore().currentPayPeriod.id,
     newValue.id,
@@ -14,9 +14,9 @@ watch(selectedBudget, (newValue) => {
   );
 });
 
-const isBudgetDisabled = (budgetId) => {
+const isBudgetDisabled = (budgetId: Number) => {
   return usePayPeriodBudgetsStore().payPeriodBudgets.some(
-    (budget) => budget['budget']['id'] === budgetId
+    (budget: Object) => budget['budget']['id'] === budgetId
   );
 };
 </script>
