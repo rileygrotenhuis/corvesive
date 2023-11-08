@@ -14,7 +14,7 @@ class PayPeriodsService {
     return await response.json();
   }
 
-  async getPayPeriod(payPeriodId) {
+  async getPayPeriod(payPeriodId: Number) {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}`,
       {
@@ -29,7 +29,7 @@ class PayPeriodsService {
     return await response.json();
   }
 
-  async createPayPeriod(startDate, endDate) {
+  async createPayPeriod(startDate: String, endDate: String) {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods`,
       {
@@ -48,7 +48,11 @@ class PayPeriodsService {
     return await response.json();
   }
 
-  async updatePayPeriod(payPeriodId, startDate, endDate) {
+  async updatePayPeriod(
+    payPeriodId: Number,
+    startDate: String,
+    endDate: String
+  ) {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}`,
       {
@@ -67,7 +71,7 @@ class PayPeriodsService {
     return await response.json();
   }
 
-  async deletePayPeriod(payPeriodId) {
+  async deletePayPeriod(payPeriodId: Number) {
     await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}`,
       {
@@ -81,7 +85,7 @@ class PayPeriodsService {
     );
   }
 
-  async completePayPeriod(payPeriodId) {
+  async completePayPeriod(payPeriodId: Number) {
     await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/complete`,
       {
@@ -95,7 +99,7 @@ class PayPeriodsService {
     );
   }
 
-  async incompletePayPeriod(payPeriodId) {
+  async incompletePayPeriod(payPeriodId: Number) {
     await fetch(
       `${
         useRuntimeConfig().public.apiUrl
@@ -111,7 +115,7 @@ class PayPeriodsService {
     );
   }
 
-  async setPayPeriodToCurrent(payPeriodId) {
+  async setPayPeriodToCurrent(payPeriodId: Number) {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/current`,
       {

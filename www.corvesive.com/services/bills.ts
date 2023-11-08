@@ -11,7 +11,13 @@ class BillsService {
     return await response.json();
   }
 
-  async createBill(issuer, name, amount, dueDate, notes) {
+  async createBill(
+    issuer: String,
+    name: String,
+    amount: Number,
+    dueDate: String,
+    notes: String
+  ) {
     const response = await fetch(`${useRuntimeConfig().public.apiUrl}/bills`, {
       method: 'POST',
       headers: {
@@ -30,7 +36,14 @@ class BillsService {
     return await response.json();
   }
 
-  async updateBill(billId, issuer, name, amount, dueDate, notes) {
+  async updateBill(
+    billId: Number,
+    issuer: String,
+    name: String,
+    amount: Number,
+    dueDate: String,
+    notes: String
+  ) {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/bills/${billId}`,
       {
@@ -52,7 +65,7 @@ class BillsService {
     return await response.json();
   }
 
-  async deleteBill(billId) {
+  async deleteBill(billId: Number) {
     await fetch(`${useRuntimeConfig().public.apiUrl}/bills/${billId}`, {
       method: 'DELETE',
       headers: {

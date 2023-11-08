@@ -1,5 +1,5 @@
 class TransactionsService {
-  async getPayPeriodTransactions(payPeriodId) {
+  async getPayPeriodTransactions(payPeriodId: Number) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl
@@ -16,7 +16,7 @@ class TransactionsService {
     return await response.json();
   }
 
-  async createBillTransaction(payPeriodId, payPeriodBillId) {
+  async createBillTransaction(payPeriodId: Number, payPeriodBillId: Number) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl
@@ -33,7 +33,11 @@ class TransactionsService {
     return await response.json();
   }
 
-  async createBudgetTransaction(payPeriodId, payPeriodBudgetId, amount) {
+  async createBudgetTransaction(
+    payPeriodId: Number,
+    payPeriodBudgetId: Number,
+    amount: Number
+  ) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl
@@ -53,7 +57,11 @@ class TransactionsService {
     return await response.json();
   }
 
-  async makePayPeriodDeposit(payPeriodId, amount, notes) {
+  async makePayPeriodDeposit(
+    payPeriodId: Number,
+    amount: Number,
+    notes: String
+  ) {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/deposit`,
       {
@@ -72,7 +80,12 @@ class TransactionsService {
     return await response.json();
   }
 
-  async updateTransaction(payPeriodId, transactionId, amount, notes) {
+  async updateTransaction(
+    payPeriodId: Number,
+    transactionId: Number,
+    amount: Number,
+    notes: String
+  ) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl
@@ -93,7 +106,7 @@ class TransactionsService {
     return await response.json();
   }
 
-  async deleteTransaction(payPeriodId, transactionId) {
+  async deleteTransaction(payPeriodId: Number, transactionId: Number) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl

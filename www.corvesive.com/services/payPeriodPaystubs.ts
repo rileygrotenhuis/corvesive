@@ -1,5 +1,5 @@
 class PayPeriodPaystubsService {
-  async getPayPeriodPaystub(payPeriodId) {
+  async getPayPeriodPaystub(payPeriodId: Number) {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/paystubs`,
       {
@@ -14,7 +14,11 @@ class PayPeriodPaystubsService {
     return await response.json();
   }
 
-  async attachPaystubToPayPeriod(payPeriodId, paystubId, amount) {
+  async attachPaystubToPayPeriod(
+    payPeriodId: Number,
+    paystubId: Number,
+    amount: Number
+  ) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl
@@ -34,7 +38,11 @@ class PayPeriodPaystubsService {
     return await response.json();
   }
 
-  async updatePayPeriodPaystub(payPeriodId, paystubId, amount) {
+  async updatePayPeriodPaystub(
+    payPeriodId: Number,
+    paystubId: Number,
+    amount: Number
+  ) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl
@@ -54,7 +62,7 @@ class PayPeriodPaystubsService {
     return await response.json();
   }
 
-  async detachPaystubFromPayPeriod(payPeriodId, paystubId) {
+  async detachPaystubFromPayPeriod(payPeriodId: Number, paystubId: Number) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl

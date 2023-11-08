@@ -1,11 +1,11 @@
 class AuthService {
   async register(
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    password,
-    passwordConfirmation
+    firstName: String,
+    lastName: String,
+    email: String,
+    phoneNumber: String,
+    password: String,
+    passwordConfirmation: String
   ) {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/register`,
@@ -28,7 +28,7 @@ class AuthService {
     return await response.json();
   }
 
-  async login(email, password) {
+  async login(email: String, password: String) {
     const response = await fetch(`${useRuntimeConfig().public.apiUrl}/login`, {
       method: 'POST',
       headers: {

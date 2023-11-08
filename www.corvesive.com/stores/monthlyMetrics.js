@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import MonthlyMetricsService from '~/services/monthlyMetrics.js';
+import MonthlyMetricsService from '~/services/monthlyMetrics';
 
 const useMonthlyMetricsStore = defineStore('useMonthlyMetricsStore', {
   state: () => ({

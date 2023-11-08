@@ -1,7 +1,7 @@
-class PayPeriodBillsService {
-  async getPayPeriodBills(payPeriodId) {
+class PaystubsService {
+  async getPaystubs() {
     const response = await fetch(
-      `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/bills`,
+      `${useRuntimeConfig().public.apiUrl}/paystubs`,
       {
         method: 'GET',
         headers: {
@@ -14,11 +14,9 @@ class PayPeriodBillsService {
     return await response.json();
   }
 
-  async attachBillToPayPeriod(payPeriodId, billId, amount, dueDate) {
+  async createPaystub(issuer: String, amount: Number, notes: String) {
     const response = await fetch(
-      `${
-        useRuntimeConfig().public.apiUrl
-      }/pay-periods/${payPeriodId}/bills/${billId}`,
+      `${useRuntimeConfig().public.apiUrl}/paystubs`,
       {
         method: 'POST',
         headers: {
@@ -27,19 +25,23 @@ class PayPeriodBillsService {
           Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
+          issuer: issuer,
           amount: amount * 100,
-          due_date: dueDate,
+          notes: notes,
         }),
       }
     );
     return await response.json();
   }
 
-  async updatePayPeriodBill(payPeriodId, billId, amount, dueDate) {
+  async updatePaystub(
+    paystubId: Number,
+    issuer: String,
+    amount: Number,
+    notes: String
+  ) {
     const response = await fetch(
-      `${
-        useRuntimeConfig().public.apiUrl
-      }/pay-periods/${payPeriodId}/bills/${billId}`,
+      `${useRuntimeConfig().public.apiUrl}/paystubs/${paystubId}`,
       {
         method: 'PUT',
         headers: {
@@ -48,30 +50,25 @@ class PayPeriodBillsService {
           Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
+          issuer: issuer,
           amount: amount * 100,
-          due_date: dueDate,
+          notes: notes,
         }),
       }
     );
     return await response.json();
   }
 
-  async detachBillFromPayPeriod(payPeriodId, billId) {
-    const response = await fetch(
-      `${
-        useRuntimeConfig().public.apiUrl
-      }/pay-periods/${payPeriodId}/bills/${billId}`,
-      {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
-        },
-      }
-    );
-    return await response.json();
+  async deletePaystub(paystubId: Number) {
+    await fetch(`${useRuntimeConfig().public.apiUrl}/paystubs/${paystubId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
+      },
+    });
   }
 }
 
-export default PayPeriodBillsService;
+export default PaystubsService;

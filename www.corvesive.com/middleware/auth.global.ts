@@ -1,5 +1,5 @@
-import publicRoutes from '~/libs/routes/publicRoutes.ts';
-import AccountService from '~/services/account.js';
+import publicRoutes from '~/libs/routes/publicRoutes';
+import AccountService from '~/services/account';
 import useAccountStore from '~/stores/account.js';
 import usePayPeriodsStore from '~/stores/payPeriods.js';
 import type { RouteLocationNormalized } from 'vue-router';

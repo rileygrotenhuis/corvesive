@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import PayPeriodDashboardService from '~/services/payPeriodDashboard.js';
+import PayPeriodDashboardService from '~/services/payPeriodDashboard';
 import usePayPeriodsStore from '~/stores/payPeriods.js';
 
 const usePayPeriodDashboardStore = defineStore('usePayPeriodDashboardStore', {

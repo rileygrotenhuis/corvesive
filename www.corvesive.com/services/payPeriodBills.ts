@@ -1,7 +1,7 @@
-class PayPeriodBudgetsService {
-  async getPayPeriodBudgets(payPeriodId) {
+class PayPeriodBillsService {
+  async getPayPeriodBills(payPeriodId: Number) {
     const response = await fetch(
-      `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/budgets`,
+      `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/bills`,
       {
         method: 'GET',
         headers: {
@@ -14,11 +14,16 @@ class PayPeriodBudgetsService {
     return await response.json();
   }
 
-  async attachBudgetToPayPeriod(payPeriodId, budgetId, totalBalance) {
+  async attachBillToPayPeriod(
+    payPeriodId: Number,
+    billId: Number,
+    amount: Number,
+    dueDate: String
+  ) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl
-      }/pay-periods/${payPeriodId}/budgets/${budgetId}`,
+      }/pay-periods/${payPeriodId}/bills/${billId}`,
       {
         method: 'POST',
         headers: {
@@ -27,23 +32,24 @@ class PayPeriodBudgetsService {
           Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
-          total_balance: totalBalance * 100,
+          amount: amount * 100,
+          due_date: dueDate,
         }),
       }
     );
     return await response.json();
   }
 
-  async updatePayPeriodBudget(
-    payPeriodId,
-    budgetId,
-    totalBalance,
-    remainingBalance
+  async updatePayPeriodBill(
+    payPeriodId: Number,
+    billId: Number,
+    amount: Number,
+    dueDate: String
   ) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl
-      }/pay-periods/${payPeriodId}/budgets/${budgetId}`,
+      }/pay-periods/${payPeriodId}/bills/${billId}`,
       {
         method: 'PUT',
         headers: {
@@ -52,19 +58,19 @@ class PayPeriodBudgetsService {
           Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
-          total_balance: totalBalance * 100,
-          remaining_balance: remainingBalance * 100,
+          amount: amount * 100,
+          due_date: dueDate,
         }),
       }
     );
     return await response.json();
   }
 
-  async detachBudgetFromPayPeriod(payPeriodId, budgetId) {
+  async detachBillFromPayPeriod(payPeriodId: Number, billId: Number) {
     const response = await fetch(
       `${
         useRuntimeConfig().public.apiUrl
-      }/pay-periods/${payPeriodId}/budgets/${budgetId}`,
+      }/pay-periods/${payPeriodId}/bills/${billId}`,
       {
         method: 'DELETE',
         headers: {
@@ -78,4 +84,4 @@ class PayPeriodBudgetsService {
   }
 }
 
-export default PayPeriodBudgetsService;
+export default PayPeriodBillsService;

@@ -14,7 +14,12 @@ class AccountService {
     return await response.json();
   }
 
-  async updateAccount(firstName, lastName, email, phoneNumber) {
+  async updateAccount(
+    firstName: String,
+    lastName: String,
+    email: String,
+    phoneNumber: String
+  ) {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/account`,
       {

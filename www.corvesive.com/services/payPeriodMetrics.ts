@@ -1,9 +1,7 @@
-class PayPeriodDashboardService {
-  async getPayPeriodDashboardMetrics(payPeriodId) {
+class PayPeriodMetricsService {
+  async getPayPeriodMetrics(payPeriodId: Number) {
     const response = await fetch(
-      `${
-        useRuntimeConfig().public.apiUrl
-      }/pay-periods/${payPeriodId}/dashboard`,
+      `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/metrics`,
       {
         method: 'GET',
         headers: {
@@ -17,4 +15,4 @@ class PayPeriodDashboardService {
   }
 }
 
-export default PayPeriodDashboardService;
+export default PayPeriodMetricsService;

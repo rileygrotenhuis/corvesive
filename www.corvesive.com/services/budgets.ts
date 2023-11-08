@@ -1,7 +1,7 @@
-class PaystubsService {
-  async getPaystubs() {
+class BudgetsService {
+  async getBudgets() {
     const response = await fetch(
-      `${useRuntimeConfig().public.apiUrl}/paystubs`,
+      `${useRuntimeConfig().public.apiUrl}/budgets`,
       {
         method: 'GET',
         headers: {
@@ -14,9 +14,9 @@ class PaystubsService {
     return await response.json();
   }
 
-  async createPaystub(issuer, amount, notes) {
+  async createBudget(name: String, amount: Number, notes: String) {
     const response = await fetch(
-      `${useRuntimeConfig().public.apiUrl}/paystubs`,
+      `${useRuntimeConfig().public.apiUrl}/budgets`,
       {
         method: 'POST',
         headers: {
@@ -25,7 +25,7 @@ class PaystubsService {
           Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
-          issuer: issuer,
+          name: name,
           amount: amount * 100,
           notes: notes,
         }),
@@ -34,9 +34,14 @@ class PaystubsService {
     return await response.json();
   }
 
-  async updatePaystub(paystubId, issuer, amount, notes) {
+  async updateBudget(
+    budgetId: Number,
+    name: String,
+    amount: Number,
+    notes: String
+  ) {
     const response = await fetch(
-      `${useRuntimeConfig().public.apiUrl}/paystubs/${paystubId}`,
+      `${useRuntimeConfig().public.apiUrl}/budgets/${budgetId}`,
       {
         method: 'PUT',
         headers: {
@@ -45,7 +50,7 @@ class PaystubsService {
           Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
-          issuer: issuer,
+          name: name,
           amount: amount * 100,
           notes: notes,
         }),
@@ -54,8 +59,8 @@ class PaystubsService {
     return await response.json();
   }
 
-  async deletePaystub(paystubId) {
-    await fetch(`${useRuntimeConfig().public.apiUrl}/paystubs/${paystubId}`, {
+  async deleteBudget(budgetId: Number) {
+    await fetch(`${useRuntimeConfig().public.apiUrl}/budgets/${budgetId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -66,4 +71,4 @@ class PaystubsService {
   }
 }
 
-export default PaystubsService;
+export default BudgetsService;
