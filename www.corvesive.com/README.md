@@ -67,7 +67,3 @@ To run Prettier and format your code, run the following command:
 ```bash
 npm run format
 ```
-
-## License
-
-[MIT License](LICENSE.txt)

@@ -18,8 +18,8 @@ class PayPeriodMetricsController extends Controller
         if ($payPeriod->is_complete) {
             return new PayPeriodMetricResource(
                 PayPeriodMetric::where('user_id', auth()->user()->id)
-                ->where('pay_period_id', $payPeriod->id)
-                ->first()
+                    ->where('pay_period_id', $payPeriod->id)
+                    ->first()
             );
         }
 

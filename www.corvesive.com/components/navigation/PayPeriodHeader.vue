@@ -15,9 +15,7 @@ import usePayPeriodsStore from "~/stores/payPeriods";
           class="text-sm inline-block md:hidden"
           v-if="usePayPeriodsStore().currentPayPeriod"
         >
-          {{
-            usePayPeriodsStore().currentPayPeriod?.dates.start.pretty.short
-          }}
+          {{ usePayPeriodsStore().currentPayPeriod?.dates.start.pretty.short }}
           -
           {{ usePayPeriodsStore().currentPayPeriod?.dates.end.pretty.short }}
         </h3>

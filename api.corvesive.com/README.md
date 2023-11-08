@@ -105,7 +105,3 @@ To run Pint and format your code, run the following command:
 Telescope is a debugging assistant for the Laravel framework. Using the Telescope dashboard (i.e. `/telescope`) you can view and measure multiple metrics from requests, commands, scheduled jobs, logs, and much more.
 
 Telescope if installed and enabled by default but can be disabled if desired by changing the `TELESCOPE_ENABLED` environment variable to `false`.
-
-## License
-
-[MIT License](LICENSE.txt)
