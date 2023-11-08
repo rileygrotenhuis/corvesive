@@ -19,8 +19,7 @@ logs
 .idea
 
 # Local env files
-.env*
-!.env.example
+.env
 
 # Laravel specific
 /public/build
@@ -28,7 +27,6 @@ logs
 /public/storage
 /storage/*.key
 /vendor
-.env.*
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
