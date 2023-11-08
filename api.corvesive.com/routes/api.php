@@ -25,13 +25,13 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
-
     Route::prefix('account')->group(function () {
         Route::get('/me', [AccountController::class, 'me'])->name('me');
         Route::put('/', [AccountController::class, 'update'])->name('account.update');
         Route::put('/onboard', [AccountController::class, 'onboard'])->name('account.onboard');
     });
+
+    Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::apiResources([
         'paystubs' => PaystubController::class,
@@ -54,25 +54,33 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::post('current', [PayPeriodCurrentController::class, 'store'])->name('pay-periods.current');
 
-        Route::get('transactions', [TransactionController::class, 'payPeriodTransactions'])->name('pay-periods.transactions');
-        Route::put('transactions/{transaction}', [TransactionController::class, 'update'])->name('pay-periods.transactions.update');
-        Route::delete('transactions/{transaction}', [TransactionController::class, 'destroy'])->name('pay-periods.transactions.destroy');
+        Route::prefix('transactions')->group(function () {
+            Route::get('/', [TransactionController::class, 'payPeriodTransactions'])->name('pay-periods.transactions');
+            Route::put('{transaction}', [TransactionController::class, 'update'])->name('pay-periods.transactions.update');
+            Route::delete('{transaction}', [TransactionController::class, 'destroy'])->name('pay-periods.transactions.destroy');
+        });
 
-        Route::get('paystubs', [PayPeriodPaystubController::class, 'index'])->name('pay-periods.paystubs.index');
-        Route::post('paystubs/{paystub}', [PayPeriodPaystubController::class, 'store'])->name('pay-periods.paystubs.store');
-        Route::put('paystubs/{paystub}', [PayPeriodPaystubController::class, 'update'])->name('pay-periods.paystubs.update');
-        Route::delete('paystubs/{paystub}', [PayPeriodPaystubController::class, 'destroy'])->name('pay-periods.paystubs.destroy');
+        Route::prefix('paystubs')->group(function () {
+            Route::get('/', [PayPeriodPaystubController::class, 'index'])->name('pay-periods.paystubs.index');
+            Route::post('{paystub}', [PayPeriodPaystubController::class, 'store'])->name('pay-periods.paystubs.store');
+            Route::put('{paystub}', [PayPeriodPaystubController::class, 'update'])->name('pay-periods.paystubs.update');
+            Route::delete('{paystub}', [PayPeriodPaystubController::class, 'destroy'])->name('pay-periods.paystubs.destroy');
+        });
 
-        Route::get('bills', [PayPeriodBillController::class, 'index'])->name('pay-periods.bills.index');
-        Route::post('bills/{bill}', [PayPeriodBillController::class, 'store'])->name('pay-periods.bills.store');
-        Route::put('bills/{bill}', [PayPeriodBillController::class, 'update'])->name('pay-periods.bills.update');
-        Route::delete('bills/{bill}', [PayPeriodBillController::class, 'destroy'])->name('pay-periods.bills.destroy');
-        Route::post('bills/{payPeriodBill}/transaction', [TransactionController::class, 'billTransaction'])->name('pay-periods.bills.transaction');
+        Route::prefix('bills')->group(function () {
+            Route::get('/', [PayPeriodBillController::class, 'index'])->name('pay-periods.bills.index');
+            Route::post('{bill}', [PayPeriodBillController::class, 'store'])->name('pay-periods.bills.store');
+            Route::put('{bill}', [PayPeriodBillController::class, 'update'])->name('pay-periods.bills.update');
+            Route::delete('{bill}', [PayPeriodBillController::class, 'destroy'])->name('pay-periods.bills.destroy');
+            Route::post('{payPeriodBill}/transaction', [TransactionController::class, 'billTransaction'])->name('pay-periods.bills.transaction');
+        });
 
-        Route::get('budgets', [PayPeriodBudgetController::class, 'index'])->name('pay-periods.budgets.index');
-        Route::post('budgets/{budget}', [PayPeriodBudgetController::class, 'store'])->name('pay-periods.budgets.store');
-        Route::put('budgets/{budget}', [PayPeriodBudgetController::class, 'update'])->name('pay-periods.budgets.update');
-        Route::delete('budgets/{budget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-periods.budgets.destroy');
-        Route::post('budgets/{payPeriodBudget}/transaction', [TransactionController::class, 'budgetTransaction'])->name('pay-periods.budgets.transaction');
+        Route::prefix('budgets')->group(function () {
+            Route::get('/', [PayPeriodBudgetController::class, 'index'])->name('pay-periods.budgets.index');
+            Route::post('{budget}', [PayPeriodBudgetController::class, 'store'])->name('pay-periods.budgets.store');
+            Route::put('{budget}', [PayPeriodBudgetController::class, 'update'])->name('pay-periods.budgets.update');
+            Route::delete('{budget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-periods.budgets.destroy');
+            Route::post('{payPeriodBudget}/transaction', [TransactionController::class, 'budgetTransaction'])->name('pay-periods.budgets.transaction');
+        });
     });
 });
