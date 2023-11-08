@@ -1,14 +1,14 @@
 <script setup>
-import PaystubsIcon from "~/components/icons/PaystubsIcon.vue";
-import copy from "~/libs/locales/copy.js";
-import usePayPeriodPaystubsStore from "~/stores/payPeriodPaystubs.js";
+import PaystubsIcon from '~/components/icons/PaystubsIcon.vue';
+import copy from '~/libs/locales/copy.js';
+import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs.js';
 
 useHead({
-  title: "Corvesive - Pay Period Income",
+  title: 'Corvesive - Pay Period Income',
 });
 
 definePageMeta({
-  layout: "dashboard",
+  layout: 'dashboard',
 });
 
 await usePayPeriodPaystubsStore().getPayPeriodPaystubs();

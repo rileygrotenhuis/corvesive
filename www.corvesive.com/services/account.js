@@ -3,13 +3,13 @@ class AccountService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/account/me`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
-      },
+      }
     );
     return await response.json();
   }
@@ -18,11 +18,11 @@ class AccountService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/account`,
       {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
           first_name: firstName,
@@ -30,7 +30,7 @@ class AccountService {
           email: email,
           phone_number: phoneNumber,
         }),
-      },
+      }
     );
     return await response.json();
   }
@@ -39,13 +39,13 @@ class AccountService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/account/onboard`,
       {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
-      },
+      }
     );
     return await response.json();
   }

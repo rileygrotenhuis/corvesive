@@ -1,21 +1,21 @@
 <script setup>
-import useModalsStore from "~/stores/modals";
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import useModalsStore from '~/stores/modals';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const isTransactionsMenuOpen = ref(false);
 
 onMounted(() => {
-  document.addEventListener("click", closeMenuOnClickOutside);
+  document.addEventListener('click', closeMenuOnClickOutside);
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener("click", closeMenuOnClickOutside);
+  document.removeEventListener('click', closeMenuOnClickOutside);
 });
 
 const closeMenuOnClickOutside = (event) => {
   if (
     isTransactionsMenuOpen.value &&
-    !document.querySelector("#transactions-dropdown").contains(event.target)
+    !document.querySelector('#transactions-dropdown').contains(event.target)
   ) {
     isTransactionsMenuOpen.value = false;
   }

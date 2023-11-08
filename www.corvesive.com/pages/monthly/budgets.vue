@@ -1,14 +1,14 @@
 <script setup>
-import useBudgetsStore from "~/stores/budgets.js";
-import BudgetsIcon from "~/components/icons/BudgetsIcon.vue";
-import copy from "~/libs/locales/copy.js";
+import useBudgetsStore from '~/stores/budgets.js';
+import BudgetsIcon from '~/components/icons/BudgetsIcon.vue';
+import copy from '~/libs/locales/copy.js';
 
 useHead({
-  title: "Corvesive - Budgets",
+  title: 'Corvesive - Budgets',
 });
 
 definePageMeta({
-  layout: "monthly",
+  layout: 'monthly',
 });
 
 await useBudgetsStore().getBudgets();

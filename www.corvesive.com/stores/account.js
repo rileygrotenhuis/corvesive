@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import AccountService from "~/services/account";
-import useModalsStore from "~/stores/modals";
+import { defineStore } from 'pinia';
+import AccountService from '~/services/account';
+import useModalsStore from '~/stores/modals';
 
-const useAccountStore = defineStore("useAccountStore", {
+const useAccountStore = defineStore('useAccountStore', {
   state: () => ({
     user: undefined,
     form: {
@@ -30,7 +30,7 @@ const useAccountStore = defineStore("useAccountStore", {
         this.form.firstName,
         this.form.lastName,
         this.form.email,
-        this.form.phoneNumber,
+        this.form.phoneNumber
       );
 
       this.form.isLoading = false;

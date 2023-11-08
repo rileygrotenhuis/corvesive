@@ -2,7 +2,7 @@
 defineProps({
   rowColor: {
     type: String,
-    default: "bg-white",
+    default: 'bg-white',
   },
 });
 </script>

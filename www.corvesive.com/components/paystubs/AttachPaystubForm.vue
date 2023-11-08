@@ -1,6 +1,6 @@
 <script setup>
-import usePayPeriodPaystubsStore from "~/stores/payPeriodPaystubs.js";
-import usePaystubsStore from "~/stores/paystubs.js";
+import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs.js';
+import usePaystubsStore from '~/stores/paystubs.js';
 
 await usePaystubsStore().getPaystubs();
 </script>

@@ -1,5 +1,5 @@
 <script setup>
-import useBillsStore from "~/stores/bills";
+import useBillsStore from '~/stores/bills';
 
 const form = useBillsStore().form;
 </script>

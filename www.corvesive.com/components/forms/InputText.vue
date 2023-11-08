@@ -6,7 +6,7 @@ defineProps({
   disabled: Boolean,
 });
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(['update:modelValue']);
 </script>
 
 <template>

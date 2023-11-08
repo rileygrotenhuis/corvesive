@@ -1,8 +1,8 @@
 <script setup>
-import { ref, watch } from "vue";
-import useBillsStore from "~/stores/bills";
-import usePayPeriodsStore from "~/stores/payPeriods";
-import usePayPeriodBillsStore from "~/stores/payPeriodBills";
+import { ref, watch } from 'vue';
+import useBillsStore from '~/stores/bills';
+import usePayPeriodsStore from '~/stores/payPeriods';
+import usePayPeriodBillsStore from '~/stores/payPeriodBills';
 
 const selectedBill = ref(undefined);
 watch(selectedBill, (newValue) => {
@@ -10,13 +10,13 @@ watch(selectedBill, (newValue) => {
     usePayPeriodsStore().currentPayPeriod.id,
     newValue.id,
     newValue.amount.raw,
-    undefined,
+    undefined
   );
 });
 
 const isBillDisabled = (billId) => {
   return usePayPeriodBillsStore().payPeriodBills.some(
-    (bill) => bill["bill"]["id"] === billId,
+    (bill) => bill['bill']['id'] === billId
   );
 };
 </script>

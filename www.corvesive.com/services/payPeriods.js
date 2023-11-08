@@ -3,13 +3,13 @@ class PayPeriodsService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
-      },
+      }
     );
     return await response.json();
   }
@@ -18,13 +18,13 @@ class PayPeriodsService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
-      },
+      }
     );
     return await response.json();
   }
@@ -33,17 +33,17 @@ class PayPeriodsService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
           start_date: startDate,
           end_date: endDate,
         }),
-      },
+      }
     );
     return await response.json();
   }
@@ -52,17 +52,17 @@ class PayPeriodsService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}`,
       {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
           start_date: startDate,
           end_date: endDate,
         }),
-      },
+      }
     );
     return await response.json();
   }
@@ -71,13 +71,13 @@ class PayPeriodsService {
     await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
-      },
+      }
     );
   }
 
@@ -85,13 +85,13 @@ class PayPeriodsService {
     await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/complete`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
-      },
+      }
     );
   }
 
@@ -101,13 +101,13 @@ class PayPeriodsService {
         useRuntimeConfig().public.apiUrl
       }/pay-periods/${payPeriodId}/incomplete`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
-      },
+      }
     );
   }
 
@@ -115,13 +115,13 @@ class PayPeriodsService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/pay-periods/${payPeriodId}/current`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
-      },
+      }
     );
     return await response.json();
   }

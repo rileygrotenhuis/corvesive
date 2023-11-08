@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import BillsService from "~/services/bills";
-import useModalsStore from "~/stores/modals";
+import { defineStore } from 'pinia';
+import BillsService from '~/services/bills';
+import useModalsStore from '~/stores/modals';
 
-const useBillsStore = defineStore("useBillsStore", {
+const useBillsStore = defineStore('useBillsStore', {
   state: () => ({
     bills: [],
     form: {
@@ -30,7 +30,7 @@ const useBillsStore = defineStore("useBillsStore", {
         this.form.name,
         this.form.amount,
         this.form.due_date,
-        this.form?.notes ?? null,
+        this.form?.notes ?? null
       );
 
       this.form.isLoading = false;
@@ -52,7 +52,7 @@ const useBillsStore = defineStore("useBillsStore", {
         this.form.name,
         this.form.amount,
         this.form.due_date,
-        this.form?.notes ?? null,
+        this.form?.notes ?? null
       );
 
       this.form.isLoading = false;
@@ -66,7 +66,7 @@ const useBillsStore = defineStore("useBillsStore", {
       }
     },
     async deleteBill() {
-      if (window.confirm("Are you sure you want to delete this bill?")) {
+      if (window.confirm('Are you sure you want to delete this bill?')) {
         this.form.isLoading = true;
 
         await new BillsService().deleteBill(this.form.id);

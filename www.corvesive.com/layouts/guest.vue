@@ -1,10 +1,10 @@
 <script setup>
-import GuestNavbar from "~/components/navigation/GuestNavbar.vue";
-import UtilityWrapper from "~/components/util/UtilityWrapper.vue";
+import GuestNavbar from '~/components/navigation/GuestNavbar.vue';
+import UtilityWrapper from '~/components/util/UtilityWrapper.vue';
 
 useHead({
   htmlAttrs: {
-    lang: "en",
+    lang: 'en',
   },
 });
 </script>

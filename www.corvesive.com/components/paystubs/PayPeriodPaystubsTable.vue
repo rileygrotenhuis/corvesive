@@ -1,25 +1,25 @@
 <script setup>
-import useModalsStore from "~/stores/modals.js";
-import useAlertsStore from "~/stores/alerts.js";
-import usePayPeriodsStore from "~/stores/payPeriods.js";
-import usePayPeriodPaystubsStore from "~/stores/payPeriodPaystubs.js";
+import useModalsStore from '~/stores/modals.js';
+import useAlertsStore from '~/stores/alerts.js';
+import usePayPeriodsStore from '~/stores/payPeriods.js';
+import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs.js';
 
 const openUpdateModal = (payPeriodPaystub) => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
-    useAlertsStore().addAlert("payPeriodIsCompleted");
+    useAlertsStore().addAlert('payPeriodIsCompleted');
     return;
   }
 
-  useModalsStore().openModal("payPeriods.paystubs.update");
+  useModalsStore().openModal('payPeriods.paystubs.update');
 
   usePayPeriodPaystubsStore().populateFormFields(
     usePayPeriodsStore().currentPayPeriod.id,
     payPeriodPaystub.paystub.id,
-    payPeriodPaystub.amount.raw,
+    payPeriodPaystub.amount.raw
   );
 
   usePayPeriodPaystubsStore().setSelectedPayPeriodPaystub(
-    payPeriodPaystub.paystub,
+    payPeriodPaystub.paystub
   );
 };
 </script>

@@ -1,20 +1,20 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import usePayPeriodsStore from "~/stores/payPeriods.js";
-import useModalsStore from "~/stores/modals.js";
-import useAlertsStore from "~/stores/alerts.js";
+import { ref, onMounted } from 'vue';
+import usePayPeriodsStore from '~/stores/payPeriods.js';
+import useModalsStore from '~/stores/modals.js';
+import useAlertsStore from '~/stores/alerts.js';
 
 onMounted(async () => {
   await usePayPeriodsStore().getPayPeriods();
 
   if (usePayPeriodsStore().payPeriods.length === 0) {
-    useAlertsStore().addAlert("noPayPeriodsAvailable");
-    useModalsStore().setModalType("payPeriods.create");
+    useAlertsStore().addAlert('noPayPeriodsAvailable');
+    useModalsStore().setModalType('payPeriods.create');
   }
 });
 
 const selectedPayPeriod = ref(
-  usePayPeriodsStore()?.currentPayPeriod?.id ?? undefined,
+  usePayPeriodsStore()?.currentPayPeriod?.id ?? undefined
 );
 </script>
 

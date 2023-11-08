@@ -1,21 +1,21 @@
 <script setup>
-import useAuthStore from "~/stores/auth";
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import useAuthStore from '~/stores/auth';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const isNavigationMenuOpen = ref(false);
 
 onMounted(() => {
-  document.addEventListener("click", closeMenuOnClickOutside);
+  document.addEventListener('click', closeMenuOnClickOutside);
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener("click", closeMenuOnClickOutside);
+  document.removeEventListener('click', closeMenuOnClickOutside);
 });
 
 const closeMenuOnClickOutside = (event) => {
   if (
     isNavigationMenuOpen.value &&
-    !document.querySelector("#profile-dropdown").contains(event.target)
+    !document.querySelector('#profile-dropdown').contains(event.target)
   ) {
     isNavigationMenuOpen.value = false;
   }

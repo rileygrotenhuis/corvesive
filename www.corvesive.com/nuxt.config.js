@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css: ["~/assets/main.css"],
+  css: ['~/assets/main.css'],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -13,5 +13,5 @@ export default defineNuxtConfig({
       analyticsEnabled: process.env.VITE_ANALYTICS_ENABLED,
     },
   },
-  modules: ["@pinia/nuxt"],
+  modules: ['@pinia/nuxt'],
 });

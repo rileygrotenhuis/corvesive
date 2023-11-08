@@ -6,7 +6,7 @@ defineProps({
   rows: Number,
 });
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(['update:modelValue']);
 </script>
 
 <template>

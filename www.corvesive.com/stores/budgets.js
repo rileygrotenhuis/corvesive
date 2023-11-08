@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import BudgetsService from "~/services/budgets";
-import useModalsStore from "~/stores/modals";
+import { defineStore } from 'pinia';
+import BudgetsService from '~/services/budgets';
+import useModalsStore from '~/stores/modals';
 
-const useBudgetsStore = defineStore("useBudgetsStore", {
+const useBudgetsStore = defineStore('useBudgetsStore', {
   state: () => ({
     budgets: [],
     form: {
@@ -26,7 +26,7 @@ const useBudgetsStore = defineStore("useBudgetsStore", {
       const createBudgetResponse = await new BudgetsService().createBudget(
         this.form.name,
         this.form.amount,
-        this.form?.notes ?? null,
+        this.form?.notes ?? null
       );
 
       this.form.isLoading = false;
@@ -46,7 +46,7 @@ const useBudgetsStore = defineStore("useBudgetsStore", {
         this.form.id,
         this.form.name,
         this.form.amount,
-        this.form?.notes ?? null,
+        this.form?.notes ?? null
       );
 
       this.form.isLoading = false;
@@ -60,7 +60,7 @@ const useBudgetsStore = defineStore("useBudgetsStore", {
       }
     },
     async deleteBudget() {
-      if (window.confirm("Are you sure you want to delete this budget?")) {
+      if (window.confirm('Are you sure you want to delete this budget?')) {
         this.form.isLoading = true;
 
         await new BudgetsService().deleteBudget(this.form.id);

@@ -3,13 +3,13 @@ class PaystubsService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/paystubs`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
-      },
+      }
     );
     return await response.json();
   }
@@ -18,18 +18,18 @@ class PaystubsService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/paystubs`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
           issuer: issuer,
           amount: amount * 100,
           notes: notes,
         }),
-      },
+      }
     );
     return await response.json();
   }
@@ -38,29 +38,29 @@ class PaystubsService {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/paystubs/${paystubId}`,
       {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
         },
         body: JSON.stringify({
           issuer: issuer,
           amount: amount * 100,
           notes: notes,
         }),
-      },
+      }
     );
     return await response.json();
   }
 
   async deletePaystub(paystubId) {
     await fetch(`${useRuntimeConfig().public.apiUrl}/paystubs/${paystubId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
       },
     });
   }

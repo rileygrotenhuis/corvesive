@@ -1,10 +1,10 @@
-import { defineStore } from "pinia";
-import useAlertsStore from "~/stores/alerts";
-import usePayPeriodsStore from "~/stores/payPeriods";
-import PayPeriodBudgetsService from "~/services/payPeriodBudgets";
-import useModalsStore from "~/stores/modals.js";
+import { defineStore } from 'pinia';
+import useAlertsStore from '~/stores/alerts';
+import usePayPeriodsStore from '~/stores/payPeriods';
+import PayPeriodBudgetsService from '~/services/payPeriodBudgets';
+import useModalsStore from '~/stores/modals.js';
 
-const usePayPeriodBudgetsStore = defineStore("usePayPeriodBudgetsStore", {
+const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
   state: () => ({
     payPeriodBudgets: [],
     selectedPayPeriodBudget: undefined,
@@ -21,7 +21,7 @@ const usePayPeriodBudgetsStore = defineStore("usePayPeriodBudgetsStore", {
     async getPayPeriodBudgets() {
       const payPeriodBudgetsResponse =
         await new PayPeriodBudgetsService().getPayPeriodBudgets(
-          usePayPeriodsStore().currentPayPeriod.id,
+          usePayPeriodsStore().currentPayPeriod.id
         );
 
       this.payPeriodBudgets = payPeriodBudgetsResponse.data;
@@ -33,7 +33,7 @@ const usePayPeriodBudgetsStore = defineStore("usePayPeriodBudgetsStore", {
         await new PayPeriodBudgetsService().attachBudgetToPayPeriod(
           this.form.payPeriodId,
           this.form.budgetId,
-          this.form.totalBalance,
+          this.form.totalBalance
         );
 
       this.form.isLoading = false;
@@ -44,7 +44,7 @@ const usePayPeriodBudgetsStore = defineStore("usePayPeriodBudgetsStore", {
         useModalsStore().closeModal();
         await this.getPayPeriodBudgets();
         await usePayPeriodsStore().setCurrentPayPeriod(
-          attachBudgetToPayPeriodResponse.data,
+          attachBudgetToPayPeriodResponse.data
         );
       }
     },
@@ -56,7 +56,7 @@ const usePayPeriodBudgetsStore = defineStore("usePayPeriodBudgetsStore", {
           this.form.payPeriodId,
           this.form.budgetId,
           this.form.totalBalance,
-          this.form.remainingBalance,
+          this.form.remainingBalance
         );
 
       this.form.isLoading = false;
@@ -67,7 +67,7 @@ const usePayPeriodBudgetsStore = defineStore("usePayPeriodBudgetsStore", {
         useModalsStore().closeModal();
         await this.getPayPeriodBudgets();
         await usePayPeriodsStore().setCurrentPayPeriod(
-          updatePayPeriodBudgetResponse.data,
+          updatePayPeriodBudgetResponse.data
         );
       }
     },
@@ -77,7 +77,7 @@ const usePayPeriodBudgetsStore = defineStore("usePayPeriodBudgetsStore", {
       const detachBudgetToPayPeriodResponse =
         await new PayPeriodBudgetsService().detachBudgetFromPayPeriod(
           payPeriodId,
-          budgetId,
+          budgetId
         );
 
       this.form.isLoading = false;
@@ -88,7 +88,7 @@ const usePayPeriodBudgetsStore = defineStore("usePayPeriodBudgetsStore", {
         useModalsStore().closeModal();
         await this.getPayPeriodBudgets();
         await usePayPeriodsStore().setCurrentPayPeriod(
-          detachBudgetToPayPeriodResponse.data,
+          detachBudgetToPayPeriodResponse.data
         );
       }
     },

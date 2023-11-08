@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-  title: "Corvesive",
+  title: 'Corvesive',
 });
 </script>
 

@@ -1,6 +1,6 @@
 <script setup>
-import usePayPeriodBudgetsStore from "~/stores/payPeriodBudgets";
-import useBudgetsStore from "~/stores/budgets.js";
+import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets';
+import useBudgetsStore from '~/stores/budgets.js';
 
 await useBudgetsStore().getBudgets();
 </script>

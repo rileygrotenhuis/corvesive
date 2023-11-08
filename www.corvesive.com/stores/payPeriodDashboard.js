@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import PayPeriodDashboardService from "~/services/payPeriodDashboard.js";
-import usePayPeriodsStore from "~/stores/payPeriods.js";
+import { defineStore } from 'pinia';
+import PayPeriodDashboardService from '~/services/payPeriodDashboard.js';
+import usePayPeriodsStore from '~/stores/payPeriods.js';
 
-const usePayPeriodDashboardStore = defineStore("usePayPeriodDashboardStore", {
+const usePayPeriodDashboardStore = defineStore('usePayPeriodDashboardStore', {
   state: () => ({
     data: undefined,
   }),
@@ -10,7 +10,7 @@ const usePayPeriodDashboardStore = defineStore("usePayPeriodDashboardStore", {
     async getPayPeriodDashboardMetrics() {
       const payPeriodDashboardMetricsResponse =
         await new PayPeriodDashboardService().getPayPeriodDashboardMetrics(
-          usePayPeriodsStore().currentPayPeriod.id,
+          usePayPeriodsStore().currentPayPeriod.id
         );
 
       this.data = payPeriodDashboardMetricsResponse.data;

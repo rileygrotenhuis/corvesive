@@ -1,5 +1,5 @@
 <script setup>
-import usePaystubsStore from "~/stores/paystubs";
+import usePaystubsStore from '~/stores/paystubs';
 
 const form = usePaystubsStore().form;
 </script>

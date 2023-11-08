@@ -1,5 +1,5 @@
 <script setup>
-import useMonthlyMetricsStore from "~/stores/monthlyMetrics.js";
+import useMonthlyMetricsStore from '~/stores/monthlyMetrics.js';
 </script>
 
 <template>

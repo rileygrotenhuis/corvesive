@@ -5,15 +5,15 @@ class AuthService {
     email,
     phoneNumber,
     password,
-    passwordConfirmation,
+    passwordConfirmation
   ) {
     const response = await fetch(
       `${useRuntimeConfig().public.apiUrl}/register`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           first_name: firstName,
@@ -23,17 +23,17 @@ class AuthService {
           password: password,
           password_confirmation: passwordConfirmation,
         }),
-      },
+      }
     );
     return await response.json();
   }
 
   async login(email, password) {
     const response = await fetch(`${useRuntimeConfig().public.apiUrl}/login`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify({
         email: email,
@@ -45,11 +45,11 @@ class AuthService {
 
   async logout() {
     await fetch(`${useRuntimeConfig().public.apiUrl}/logout`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${useCookie("corvesive_access_token").value}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
       },
     });
   }

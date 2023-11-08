@@ -1,5 +1,5 @@
 <script setup>
-import useAccountStore from "~/stores/account";
+import useAccountStore from '~/stores/account';
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup>
-import useAuthStore from "~/stores/auth";
-import useAccountStore from "~/stores/account.js";
+import useAuthStore from '~/stores/auth';
+import useAccountStore from '~/stores/account.js';
 </script>
 
 <template>

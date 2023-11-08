@@ -1,5 +1,5 @@
 <script setup>
-import useBudgetsStore from "~/stores/budgets";
+import useBudgetsStore from '~/stores/budgets';
 
 const form = useBudgetsStore().form;
 </script>

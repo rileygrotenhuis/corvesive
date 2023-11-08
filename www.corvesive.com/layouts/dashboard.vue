@@ -1,14 +1,14 @@
 <script setup>
-import AuthenticatedNavbar from "~/components/navigation/AuthenticatedNavbar.vue";
-import PayPeriodHeader from "~/components/navigation/PayPeriodHeader.vue";
-import PayPeriodTabs from "~/components/navigation/PayPeriodTabs.vue";
-import UtilityWrapper from "~/components/util/UtilityWrapper.vue";
-import Welcome from "~/components/dashboard/Welcome.vue";
-import useAccountStore from "~/stores/account.js";
+import AuthenticatedNavbar from '~/components/navigation/AuthenticatedNavbar.vue';
+import PayPeriodHeader from '~/components/navigation/PayPeriodHeader.vue';
+import PayPeriodTabs from '~/components/navigation/PayPeriodTabs.vue';
+import UtilityWrapper from '~/components/util/UtilityWrapper.vue';
+import Welcome from '~/components/dashboard/Welcome.vue';
+import useAccountStore from '~/stores/account.js';
 
 useHead({
   htmlAttrs: {
-    lang: "en",
+    lang: 'en',
   },
 });
 </script>

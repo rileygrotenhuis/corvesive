@@ -1,14 +1,14 @@
 <script setup>
-import BudgetsIcon from "~/components/icons/BudgetsIcon.vue";
-import copy from "~/libs/locales/copy.js";
-import usePayPeriodBudgetsStore from "~/stores/payPeriodBudgets.js";
+import BudgetsIcon from '~/components/icons/BudgetsIcon.vue';
+import copy from '~/libs/locales/copy.js';
+import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets.js';
 
 useHead({
-  title: "Corvesive - Pay Period Expenses",
+  title: 'Corvesive - Pay Period Expenses',
 });
 
 definePageMeta({
-  layout: "dashboard",
+  layout: 'dashboard',
 });
 
 await usePayPeriodBudgetsStore().getPayPeriodBudgets();

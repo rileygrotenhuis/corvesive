@@ -1,22 +1,22 @@
 <script setup>
-import usePayPeriodPaystubsStore from "~/stores/payPeriodPaystubs";
-import usePayPeriodsStore from "~/stores/payPeriods.js";
-import useAlertsStore from "~/stores/alerts.js";
+import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs';
+import usePayPeriodsStore from '~/stores/payPeriods.js';
+import useAlertsStore from '~/stores/alerts.js';
 
 const deletePayPeriodPaystub = async () => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
-    useAlertsStore().addAlert("payPeriodIsCompleted");
+    useAlertsStore().addAlert('payPeriodIsCompleted');
     return;
   }
 
   if (
     window.confirm(
-      "Are you sure you want to remove this paystub from this pay period?",
+      'Are you sure you want to remove this paystub from this pay period?'
     )
   ) {
     await usePayPeriodPaystubsStore().detachPaystubFromPayPeriod(
       usePayPeriodsStore().currentPayPeriod.id,
-      usePayPeriodPaystubsStore().selectedPayPeriodPaystub.id,
+      usePayPeriodPaystubsStore().selectedPayPeriodPaystub.id
     );
   }
 };

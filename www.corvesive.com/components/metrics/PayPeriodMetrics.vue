@@ -1,5 +1,5 @@
 <script setup>
-import usePayPeriodMetricsStore from "~/stores/payPeriodMetrics.js";
+import usePayPeriodMetricsStore from '~/stores/payPeriodMetrics.js';
 </script>
 
 <template>

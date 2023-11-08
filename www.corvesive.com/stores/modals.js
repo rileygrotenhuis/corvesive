@@ -1,6 +1,6 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
-const useModalsStore = defineStore("useModalsStore", {
+const useModalsStore = defineStore('useModalsStore', {
   state: () => ({
     open: false,
     type: undefined,

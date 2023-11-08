@@ -1,5 +1,5 @@
 <script setup>
-import usePayPeriodsStore from "~/stores/payPeriods";
+import usePayPeriodsStore from '~/stores/payPeriods';
 
 const form = usePayPeriodsStore().form;
 </script>

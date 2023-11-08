@@ -1,14 +1,14 @@
 <script setup>
-import BillsIcon from "~/components/icons/BillsIcon.vue";
-import useBillsStore from "~/stores/bills.js";
-import copy from "~/libs/locales/copy.js";
+import BillsIcon from '~/components/icons/BillsIcon.vue';
+import useBillsStore from '~/stores/bills.js';
+import copy from '~/libs/locales/copy.js';
 
 useHead({
-  title: "Corvesive - Bills",
+  title: 'Corvesive - Bills',
 });
 
 definePageMeta({
-  layout: "monthly",
+  layout: 'monthly',
 });
 
 await useBillsStore().getBills();

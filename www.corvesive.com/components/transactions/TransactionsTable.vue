@@ -1,14 +1,14 @@
 <script setup>
-import useTransactionsStore from "~/stores/transactions.js";
-import useModalsStore from "~/stores/modals.js";
+import useTransactionsStore from '~/stores/transactions.js';
+import useModalsStore from '~/stores/modals.js';
 
 const openUpdateModal = (transaction) => {
-  useModalsStore().openModal("transactions.update");
+  useModalsStore().openModal('transactions.update');
 
   useTransactionsStore().populateFormFields(
     transaction.id,
     transaction.amount.raw,
-    transaction.notes,
+    transaction.notes
   );
 };
 </script>
@@ -42,10 +42,10 @@ const openUpdateModal = (transaction) => {
         <TablesTableData>
           {{
             transaction.pay_period_budget?.id
-              ? "Budget"
+              ? 'Budget'
               : transaction.pay_period_bill?.id
-              ? "Bill"
-              : "--"
+              ? 'Bill'
+              : '--'
           }}
         </TablesTableData>
         <TablesTableData>
@@ -54,7 +54,7 @@ const openUpdateModal = (transaction) => {
               ? transaction.pay_period_budget?.budget?.name
               : transaction.pay_period_bill?.id
               ? transaction.pay_period_bill?.bill?.name
-              : "--"
+              : '--'
           }}
         </TablesTableData>
         <TablesTableData>

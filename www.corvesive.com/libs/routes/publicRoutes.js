@@ -1,1 +1,1 @@
-export default ["/", "/login", "/register"];
+export default ['/', '/login', '/register'];

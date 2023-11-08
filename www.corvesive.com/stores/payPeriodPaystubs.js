@@ -1,10 +1,10 @@
-import { defineStore } from "pinia";
-import useAlertsStore from "~/stores/alerts";
-import usePayPeriodsStore from "~/stores/payPeriods";
-import PayPeriodPaystubsService from "~/services/payPeriodPaystubs";
-import useModalsStore from "~/stores/modals.js";
+import { defineStore } from 'pinia';
+import useAlertsStore from '~/stores/alerts';
+import usePayPeriodsStore from '~/stores/payPeriods';
+import PayPeriodPaystubsService from '~/services/payPeriodPaystubs';
+import useModalsStore from '~/stores/modals.js';
 
-const usePayPeriodPaystubsStore = defineStore("usePayPeriodPaystubsStore", {
+const usePayPeriodPaystubsStore = defineStore('usePayPeriodPaystubsStore', {
   state: () => ({
     payPeriodPaystubs: [],
     selectedPayPeriodPaystub: undefined,
@@ -20,7 +20,7 @@ const usePayPeriodPaystubsStore = defineStore("usePayPeriodPaystubsStore", {
     async getPayPeriodPaystubs() {
       const payPeriodPaystubsResponse =
         await new PayPeriodPaystubsService().getPayPeriodPaystub(
-          usePayPeriodsStore().currentPayPeriod.id,
+          usePayPeriodsStore().currentPayPeriod.id
         );
 
       this.payPeriodPaystubs = payPeriodPaystubsResponse.data;
@@ -32,7 +32,7 @@ const usePayPeriodPaystubsStore = defineStore("usePayPeriodPaystubsStore", {
         await new PayPeriodPaystubsService().attachPaystubToPayPeriod(
           this.form.payPeriodId,
           this.form.paystubId,
-          this.form.amount,
+          this.form.amount
         );
 
       this.form.isLoading = false;
@@ -43,7 +43,7 @@ const usePayPeriodPaystubsStore = defineStore("usePayPeriodPaystubsStore", {
         useModalsStore().closeModal();
         await this.getPayPeriodPaystubs();
         await usePayPeriodsStore().setCurrentPayPeriod(
-          attachPaystubToPayPeriodResponse.data,
+          attachPaystubToPayPeriodResponse.data
         );
       }
     },
@@ -54,7 +54,7 @@ const usePayPeriodPaystubsStore = defineStore("usePayPeriodPaystubsStore", {
         await new PayPeriodPaystubsService().updatePayPeriodPaystub(
           this.form.payPeriodId,
           this.form.paystubId,
-          this.form.amount,
+          this.form.amount
         );
 
       this.form.isLoading = false;
@@ -65,7 +65,7 @@ const usePayPeriodPaystubsStore = defineStore("usePayPeriodPaystubsStore", {
         useModalsStore().closeModal();
         await this.getPayPeriodPaystubs();
         await usePayPeriodsStore().setCurrentPayPeriod(
-          updatePayPeriodPaystubResponse.data,
+          updatePayPeriodPaystubResponse.data
         );
       }
     },
@@ -75,7 +75,7 @@ const usePayPeriodPaystubsStore = defineStore("usePayPeriodPaystubsStore", {
       const detachPaystubFromPayPeriodResponse =
         await new PayPeriodPaystubsService().detachPaystubFromPayPeriod(
           payPeriodId,
-          paystubId,
+          paystubId
         );
 
       this.form.isLoading = false;
@@ -86,7 +86,7 @@ const usePayPeriodPaystubsStore = defineStore("usePayPeriodPaystubsStore", {
         useModalsStore().closeModal();
         await this.getPayPeriodPaystubs();
         await usePayPeriodsStore().setCurrentPayPeriod(
-          detachPaystubFromPayPeriodResponse.data,
+          detachPaystubFromPayPeriodResponse.data
         );
       }
     },

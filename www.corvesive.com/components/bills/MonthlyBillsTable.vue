@@ -1,9 +1,9 @@
 <script setup>
-import useBillsStore from "~/stores/bills";
-import useModalsStore from "~/stores/modals";
+import useBillsStore from '~/stores/bills';
+import useModalsStore from '~/stores/modals';
 
 const openUpdateModal = (bill) => {
-  useModalsStore().openModal("bills.update");
+  useModalsStore().openModal('bills.update');
 
   useBillsStore().populateFormFields(
     bill.id,
@@ -11,7 +11,7 @@ const openUpdateModal = (bill) => {
     bill.name,
     bill.amount.raw,
     bill.due_date.raw,
-    bill.notes,
+    bill.notes
   );
 };
 </script>

@@ -1,8 +1,8 @@
 <script setup>
 const tabs = [
   {
-    url: "/account/profile",
-    text: "Profile",
+    url: '/account/profile',
+    text: 'Profile',
   },
 ];
 </script>

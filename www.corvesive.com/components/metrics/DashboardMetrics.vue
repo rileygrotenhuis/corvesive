@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import usePayPeriodDashboardStore from "~/stores/payPeriodDashboard";
+import usePayPeriodDashboardStore from '~/stores/payPeriodDashboard';
 </script>
 
 <template>

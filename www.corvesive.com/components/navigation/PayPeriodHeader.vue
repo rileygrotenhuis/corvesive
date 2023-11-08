@@ -1,6 +1,6 @@
 <script setup>
-import useModalsStore from "~/stores/modals";
-import usePayPeriodsStore from "~/stores/payPeriods";
+import useModalsStore from '~/stores/modals';
+import usePayPeriodsStore from '~/stores/payPeriods';
 </script>
 
 <template>

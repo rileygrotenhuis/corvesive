@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import PayPeriodMetricsService from "../services/payPeriodMetrics";
-import usePayPeriodsStore from "./payPeriods";
+import { defineStore } from 'pinia';
+import PayPeriodMetricsService from '../services/payPeriodMetrics';
+import usePayPeriodsStore from './payPeriods';
 
-const usePayPeriodMetricsStore = defineStore("usePayPeriodMetricsStore", {
+const usePayPeriodMetricsStore = defineStore('usePayPeriodMetricsStore', {
   state: () => ({
     metrics: undefined,
   }),
@@ -10,7 +10,7 @@ const usePayPeriodMetricsStore = defineStore("usePayPeriodMetricsStore", {
     async getPayPeriodMetrics() {
       const payPeriodMetricsResponse =
         await new PayPeriodMetricsService().getPayPeriodMetrics(
-          usePayPeriodsStore().currentPayPeriod.id,
+          usePayPeriodsStore().currentPayPeriod.id
         );
 
       this.metrics = payPeriodMetricsResponse.data;

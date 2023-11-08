@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
-import alerts from "~/libs/locales/alerts.js";
+import { defineStore } from 'pinia';
+import alerts from '~/libs/locales/alerts.js';
 
-const useAlertsStore = defineStore("useAlertsStore", {
+const useAlertsStore = defineStore('useAlertsStore', {
   state: () => ({
     alerts: [],
   }),

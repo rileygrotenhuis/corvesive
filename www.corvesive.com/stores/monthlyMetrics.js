@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
-import MonthlyMetricsService from "~/services/monthlyMetrics.js";
+import { defineStore } from 'pinia';
+import MonthlyMetricsService from '~/services/monthlyMetrics.js';
 
-const useMonthlyMetricsStore = defineStore("useMonthlyMetricsStore", {
+const useMonthlyMetricsStore = defineStore('useMonthlyMetricsStore', {
   state: () => ({
     metrics: undefined,
   }),

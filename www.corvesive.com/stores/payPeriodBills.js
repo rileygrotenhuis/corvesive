@@ -1,10 +1,10 @@
-import { defineStore } from "pinia";
-import useAlertsStore from "~/stores/alerts";
-import usePayPeriodsStore from "~/stores/payPeriods";
-import PayPeriodBillsService from "~/services/payPeriodBills";
-import useModalsStore from "~/stores/modals.js";
+import { defineStore } from 'pinia';
+import useAlertsStore from '~/stores/alerts';
+import usePayPeriodsStore from '~/stores/payPeriods';
+import PayPeriodBillsService from '~/services/payPeriodBills';
+import useModalsStore from '~/stores/modals.js';
 
-const usePayPeriodBillsStore = defineStore("usePayPeriodBillsStore", {
+const usePayPeriodBillsStore = defineStore('usePayPeriodBillsStore', {
   state: () => ({
     payPeriodBills: [],
     selectedPayPeriodBill: undefined,
@@ -21,7 +21,7 @@ const usePayPeriodBillsStore = defineStore("usePayPeriodBillsStore", {
     async getPayPeriodBills() {
       const payPeriodBillsResponse =
         await new PayPeriodBillsService().getPayPeriodBills(
-          usePayPeriodsStore().currentPayPeriod.id,
+          usePayPeriodsStore().currentPayPeriod.id
         );
 
       this.payPeriodBills = payPeriodBillsResponse.data;
@@ -34,7 +34,7 @@ const usePayPeriodBillsStore = defineStore("usePayPeriodBillsStore", {
           this.form.payPeriodId,
           this.form.billId,
           this.form.amount,
-          this.form.dueDate,
+          this.form.dueDate
         );
 
       this.form.isLoading = false;
@@ -45,7 +45,7 @@ const usePayPeriodBillsStore = defineStore("usePayPeriodBillsStore", {
         useModalsStore().closeModal();
         await this.getPayPeriodBills();
         await usePayPeriodsStore().setCurrentPayPeriod(
-          attachBillToPayPeriodResponse.data,
+          attachBillToPayPeriodResponse.data
         );
       }
     },
@@ -57,7 +57,7 @@ const usePayPeriodBillsStore = defineStore("usePayPeriodBillsStore", {
           this.form.payPeriodId,
           this.form.billId,
           this.form.amount,
-          this.form.dueDate,
+          this.form.dueDate
         );
 
       this.form.isLoading = false;
@@ -68,7 +68,7 @@ const usePayPeriodBillsStore = defineStore("usePayPeriodBillsStore", {
         useModalsStore().closeModal();
         await this.getPayPeriodBills();
         await usePayPeriodsStore().setCurrentPayPeriod(
-          updatePayPeriodBillResponse.data,
+          updatePayPeriodBillResponse.data
         );
       }
     },
@@ -78,7 +78,7 @@ const usePayPeriodBillsStore = defineStore("usePayPeriodBillsStore", {
       const detachBillToPayPeriodResponse =
         await new PayPeriodBillsService().detachBillFromPayPeriod(
           payPeriodId,
-          billId,
+          billId
         );
 
       this.form.isLoading = false;
@@ -89,7 +89,7 @@ const usePayPeriodBillsStore = defineStore("usePayPeriodBillsStore", {
         useModalsStore().closeModal();
         await this.getPayPeriodBills();
         await usePayPeriodsStore().setCurrentPayPeriod(
-          detachBillToPayPeriodResponse.data,
+          detachBillToPayPeriodResponse.data
         );
       }
     },
