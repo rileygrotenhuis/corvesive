@@ -3,18 +3,18 @@ import { defineStore } from 'pinia';
 const useModalsStore = defineStore('useModalsStore', {
   state: () => ({
     open: false,
-    type: undefined,
+    type: '',
   }),
   actions: {
-    openModal(type) {
+    openModal(type: String) {
       this.open = true;
       this.type = type;
     },
     closeModal() {
       this.open = false;
-      this.type = undefined;
+      this.type = '';
     },
-    setModalType(type) {
+    setModalType(type: String) {
       this.type = type;
     },
   },

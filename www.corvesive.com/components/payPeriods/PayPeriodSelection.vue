@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import usePayPeriodsStore from '~/stores/payPeriods.js';
-import useModalsStore from '~/stores/modals.js';
-import useAlertsStore from '~/stores/alerts.js';
+import usePayPeriodsStore from '~/stores/payPeriods.ts';
+import useModalsStore from '~/stores/modals.ts';
+import useAlertsStore from '~/stores/alerts.ts';
 
 onMounted(async () => {
   await usePayPeriodsStore().getPayPeriods();

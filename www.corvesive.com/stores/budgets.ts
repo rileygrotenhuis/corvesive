@@ -6,12 +6,12 @@ const useBudgetsStore = defineStore('useBudgetsStore', {
   state: () => ({
     budgets: [],
     form: {
-      id: undefined,
-      name: undefined,
-      amount: undefined,
-      notes: undefined,
+      id: -1,
+      name: '',
+      amount: 0,
+      notes: '',
       isLoading: false,
-      errors: false,
+      errors: null,
     },
   }),
   actions: {
@@ -74,21 +74,22 @@ const useBudgetsStore = defineStore('useBudgetsStore', {
         await this.getBudgets();
       }
     },
-    populateFormFields(id, name, amount, notes) {
-      this.form = {
-        id: id,
-        name: name,
-        amount: (amount / 100).toFixed(2),
-        notes: notes,
-      };
+    populateFormFields(
+      id: Number,
+      name: String,
+      amount: Number,
+      notes: String
+    ) {
+      this.form.id = id;
+      this.form.name = name;
+      this.form.amount = (amount / 100).toFixed(2);
+      this.form.notes = notes;
     },
     resetFormFields() {
-      this.form = {
-        id: undefined,
-        name: undefined,
-        amount: undefined,
-        notes: undefined,
-      };
+      this.form.id = -1;
+      this.form.name = '';
+      this.form.amount = 0;
+      this.form.notes = '';
     },
   },
 });

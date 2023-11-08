@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useModalsStore from '~/stores/modals.js';
+import useModalsStore from '~/stores/modals.ts';
 
 defineProps({
   icon: Object,

@@ -4,7 +4,7 @@ import usePayPeriodsStore from './payPeriods';
 
 const usePayPeriodMetricsStore = defineStore('usePayPeriodMetricsStore', {
   state: () => ({
-    metrics: undefined,
+    metrics: {},
   }),
   actions: {
     async getPayPeriodMetrics() {

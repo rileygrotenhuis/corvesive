@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useAuthStore from '~/stores/auth.js';
+import useAuthStore from '~/stores/auth.ts';
 
 const form = useAuthStore().registrationForm;
 </script>

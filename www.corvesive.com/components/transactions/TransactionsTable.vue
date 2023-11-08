@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import useTransactionsStore from '~/stores/transactions.js';
-import useModalsStore from '~/stores/modals.js';
+import useTransactionsStore from '~/stores/transactions.ts';
+import useModalsStore from '~/stores/modals.ts';
 
 const openUpdateModal = (transaction) => {
   useModalsStore().openModal('transactions.update');

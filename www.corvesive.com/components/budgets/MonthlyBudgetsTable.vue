@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useModalsStore from '~/stores/modals';
-import useBudgetsStore from '~/stores/budgets.js';
+import useBudgetsStore from '~/stores/budgets.ts';
 
 const openUpdateModal = (budget: Object) => {
   useModalsStore().openModal('budgets.update');

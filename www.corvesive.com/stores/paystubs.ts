@@ -6,12 +6,12 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
   state: () => ({
     paystubs: [],
     form: {
-      id: undefined,
-      issuer: undefined,
-      amount: undefined,
-      notes: undefined,
+      id: -1,
+      issuer: '',
+      amount: 0,
+      notes: '',
       isLoading: false,
-      errors: false,
+      errors: null,
     },
   }),
   actions: {
@@ -74,21 +74,22 @@ const usePaystubsStore = defineStore('usePaystubsStore', {
         await this.getPaystubs();
       }
     },
-    populateFormFields(id, issuer, amount, notes) {
-      this.form = {
-        id: id,
-        issuer: issuer,
-        amount: (amount / 100).toFixed(2),
-        notes: notes,
-      };
+    populateFormFields(
+      id: Number,
+      issuer: String,
+      amount: Number,
+      notes: String
+    ) {
+      this.form.id = id;
+      this.form.issuer = issuer;
+      this.form.amount = (amount / 100).toFixed(2);
+      this.form.notes = notes;
     },
     resetFormFields() {
-      this.form = {
-        id: undefined,
-        issuer: undefined,
-        amount: undefined,
-        notes: undefined,
-      };
+      this.form.id = -1;
+      this.form.issuer = '';
+      this.form.amount = 0;
+      this.form.notes = '';
     },
   },
 });

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MetricsIcon from '~/components/icons/MetricsIcon.vue';
-import useMonthlyMetricsStore from '~/stores/monthlyMetrics.js';
+import useMonthlyMetricsStore from '~/stores/monthlyMetrics.ts';
 import copy from '~/libs/locales/copy.ts';
 
 useHead({

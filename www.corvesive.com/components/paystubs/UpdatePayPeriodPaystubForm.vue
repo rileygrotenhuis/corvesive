@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs';
-import usePayPeriodsStore from '~/stores/payPeriods.js';
-import useAlertsStore from '~/stores/alerts.js';
+import usePayPeriodsStore from '~/stores/payPeriods.ts';
+import useAlertsStore from '~/stores/alerts.ts';
 
 const deletePayPeriodPaystub = async () => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useAccountStore from '~/stores/account.js';
+import useAccountStore from '~/stores/account.ts';
 
 const getStarted = async () => {
   await useAccountStore().onboardUser();

@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import PayPeriodDashboardService from '~/services/payPeriodDashboard';
-import usePayPeriodsStore from '~/stores/payPeriods.js';
+import usePayPeriodsStore from '~/stores/payPeriods.ts';
 
 const usePayPeriodDashboardStore = defineStore('usePayPeriodDashboardStore', {
   state: () => ({
-    data: undefined,
+    data: {},
   }),
   actions: {
     async getPayPeriodDashboardMetrics() {

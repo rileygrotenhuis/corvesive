@@ -1,7 +1,7 @@
 import publicRoutes from '~/libs/routes/publicRoutes';
 import AccountService from '~/services/account';
-import useAccountStore from '~/stores/account.js';
-import usePayPeriodsStore from '~/stores/payPeriods.js';
+import useAccountStore from '~/stores/account.ts';
+import usePayPeriodsStore from '~/stores/payPeriods.ts';
 import type { RouteLocationNormalized } from 'vue-router';
 
 export default defineNuxtRouteMiddleware(

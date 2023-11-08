@@ -1,19 +1,18 @@
 import { defineStore } from 'pinia';
-import useAlertsStore from '~/stores/alerts';
 import usePayPeriodsStore from '~/stores/payPeriods';
 import PayPeriodPaystubsService from '~/services/payPeriodPaystubs';
-import useModalsStore from '~/stores/modals.js';
+import useModalsStore from '~/stores/modals.ts';
 
 const usePayPeriodPaystubsStore = defineStore('usePayPeriodPaystubsStore', {
   state: () => ({
     payPeriodPaystubs: [],
-    selectedPayPeriodPaystub: undefined,
+    selectedPayPeriodPaystub: {},
     form: {
-      payPeriodId: undefined,
-      paystubId: undefined,
-      amount: undefined,
+      payPeriodId: -1,
+      paystubId: -1,
+      amount: 0,
       isLoading: false,
-      errors: false,
+      errors: null,
     },
   }),
   actions: {
@@ -94,18 +93,14 @@ const usePayPeriodPaystubsStore = defineStore('usePayPeriodPaystubsStore', {
       this.selectedPayPeriodPaystub = selectedPayPeriodPaystub;
     },
     populateFormFields(payPeriodId, paystubId, amount) {
-      this.form = {
-        payPeriodId: payPeriodId,
-        paystubId: paystubId,
-        amount: (amount / 100).toFixed(2),
-      };
+      this.form.payPeriodId = payPeriodId;
+      this.form.paystubId = paystubId;
+      this.form.amount = (amount / 100).toFixed(2);
     },
     resetFormFields() {
-      this.form = {
-        payPeriodId: undefined,
-        paystubId: undefined,
-        amount: undefined,
-      };
+      this.form.payPeriodId = -1;
+      this.form.paystubId = -1;
+      this.form.amount = 0;
     },
   },
 });

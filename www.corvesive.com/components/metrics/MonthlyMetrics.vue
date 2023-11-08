@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useMonthlyMetricsStore from '~/stores/monthlyMetrics.js';
+import useMonthlyMetricsStore from '~/stores/monthlyMetrics.ts';
 </script>
 
 <template>

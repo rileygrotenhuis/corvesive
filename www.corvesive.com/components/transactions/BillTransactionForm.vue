@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useTransactionsStore from '~/stores/transactions';
-import usePayPeriodBillsStore from '~/stores/payPeriodBills.js';
+import usePayPeriodBillsStore from '~/stores/payPeriodBills.ts';
 
 await usePayPeriodBillsStore().getPayPeriodBills();
 </script>

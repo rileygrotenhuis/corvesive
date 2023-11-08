@@ -1,20 +1,19 @@
 import { defineStore } from 'pinia';
-import useAlertsStore from '~/stores/alerts';
 import usePayPeriodsStore from '~/stores/payPeriods';
 import PayPeriodBillsService from '~/services/payPeriodBills';
-import useModalsStore from '~/stores/modals.js';
+import useModalsStore from '~/stores/modals.ts';
 
 const usePayPeriodBillsStore = defineStore('usePayPeriodBillsStore', {
   state: () => ({
     payPeriodBills: [],
-    selectedPayPeriodBill: undefined,
+    selectedPayPeriodBill: {},
     form: {
-      payPeriodId: undefined,
-      billId: undefined,
-      amount: undefined,
-      dueDate: undefined,
+      payPeriodId: -1,
+      billId: -1,
+      amount: 0,
+      dueDate: '',
       isLoading: false,
-      errors: false,
+      errors: null,
     },
   }),
   actions: {
@@ -96,21 +95,22 @@ const usePayPeriodBillsStore = defineStore('usePayPeriodBillsStore', {
     setSelectedPayPeriodBill(selectedPayPeriodBill) {
       this.selectedPayPeriodBill = selectedPayPeriodBill;
     },
-    populateFormFields(payPeriodId, billId, amount, dueDate) {
-      this.form = {
-        payPeriodId: payPeriodId,
-        billId: billId,
-        amount: (amount / 100).toFixed(2),
-        dueDate: dueDate,
-      };
+    populateFormFields(
+      payPeriodId: Number,
+      billId: Number,
+      amount: Number,
+      dueDate: String
+    ) {
+      this.form.payPeriodId = payPeriodId;
+      this.form.billId = billId;
+      this.form.amount = (amount / 100).toFixed(2);
+      this.form.dueDate = dueDate;
     },
     resetFormFields() {
-      this.form = {
-        payPeriodId: undefined,
-        billId: undefined,
-        totalBalance: undefined,
-        remainaingBalance: undefined,
-      };
+      this.form.payPeriodId = -1;
+      this.form.billId = -1;
+      this.form.amount = 0;
+      this.form.dueDate = '';
     },
   },
 });

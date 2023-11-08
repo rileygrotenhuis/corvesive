@@ -8,12 +8,12 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
   state: () => ({
     transactions: [],
     form: {
-      id: undefined,
-      payPeriodExpense: undefined,
-      amount: undefined,
-      notes: undefined,
+      id: -1,
+      payPeriodExpense: '',
+      amount: 0,
+      notes: '',
       isLoading: false,
-      errors: false,
+      errors: null,
     },
   }),
   actions: {
@@ -121,17 +121,13 @@ const useTransactionsStore = defineStore('useTransactionsStore', {
         await handlePayPeriodAction();
       }
     },
-    populateFormFields(id, amount, notes) {
-      this.form = {
-        id: id,
-        amount: (amount / 100).toFixed(2),
-        notes: notes,
-      };
+    populateFormFields(id: Number, amount: Number, notes: String) {
+      this.form.id = id;
+      this.form.amount = (amount / 100).toFixed(2);
+      this.form.notes = notes;
     },
     resetFormFields() {
-      this.form = {
-        amount: undefined,
-      };
+      this.form.amount = 0;
     },
   },
 });

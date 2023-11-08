@@ -1,20 +1,19 @@
 import { defineStore } from 'pinia';
-import useAlertsStore from '~/stores/alerts';
 import usePayPeriodsStore from '~/stores/payPeriods';
 import PayPeriodBudgetsService from '~/services/payPeriodBudgets';
-import useModalsStore from '~/stores/modals.js';
+import useModalsStore from '~/stores/modals.ts';
 
 const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
   state: () => ({
     payPeriodBudgets: [],
-    selectedPayPeriodBudget: undefined,
+    selectedPayPeriodBudget: {},
     form: {
-      payPeriodId: undefined,
-      budgetId: undefined,
-      totalBalance: undefined,
-      remainingBalance: undefined,
+      payPeriodId: -1,
+      budgetId: -1,
+      totalBalance: 0,
+      remainingBalance: 0,
       isLoading: false,
-      errors: false,
+      errors: null,
     },
   }),
   actions: {
@@ -95,21 +94,22 @@ const usePayPeriodBudgetsStore = defineStore('usePayPeriodBudgetsStore', {
     setSelectedPayPeriodBudget(selectedPayPeriodBudget) {
       this.selectedPayPeriodBudget = selectedPayPeriodBudget;
     },
-    populateFormFields(payPeriodId, budgetId, totalBalance, remainingBalance) {
-      this.form = {
-        payPeriodId: payPeriodId,
-        budgetId: budgetId,
-        totalBalance: (totalBalance / 100).toFixed(2),
-        remainingBalance: (remainingBalance / 100).toFixed(2),
-      };
+    populateFormFields(
+      payPeriodId: Number,
+      budgetId: Number,
+      totalBalance: Number,
+      remainingBalance: Number
+    ) {
+      this.form.payPeriodId = payPeriodId;
+      this.form.budgetId = budgetId;
+      this.form.totalBalance = (totalBalance / 100).toFixed(2);
+      this.form.remainingBalance = (remainingBalance / 100).toFixed(2);
     },
     resetFormFields() {
-      this.form = {
-        payPeriodId: undefined,
-        budgetId: undefined,
-        totalBalance: undefined,
-        remainingBalance: undefined,
-      };
+      this.form.payPeriodId = -1;
+      this.form.budgetId = -1;
+      this.form.totalBalance = 0;
+      this.form.remainingBalance = 0;
     },
   },
 });

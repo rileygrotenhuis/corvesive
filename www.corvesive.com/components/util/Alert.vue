@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useAlertsStore from '~/stores/alerts.js';
+import useAlertsStore from '~/stores/alerts.ts';
 
 const getToastClass = (type: String): String => {
   if (type === 'info') {

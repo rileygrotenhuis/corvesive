@@ -4,7 +4,7 @@ import PayPeriodHeader from '~/components/navigation/PayPeriodHeader.vue';
 import MonthlyTabs from '~/components/navigation/MonthlyTabs.vue';
 import UtilityWrapper from '~/components/util/UtilityWrapper.vue';
 import Welcome from '~/components/dashboard/Welcome.vue';
-import useAccountStore from '~/stores/account.js';
+import useAccountStore from '~/stores/account.ts';
 
 useHead({
   htmlAttrs: {

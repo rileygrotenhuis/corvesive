@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BillsIcon from '~/components/icons/BillsIcon.vue';
-import useBillsStore from '~/stores/bills.js';
+import useBillsStore from '~/stores/bills.ts';
 import copy from '~/libs/locales/copy.ts';
 
 useHead({

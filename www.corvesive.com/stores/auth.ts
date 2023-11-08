@@ -5,20 +5,20 @@ import useAccountStore from '~/stores/account';
 const useAuthStore = defineStore('useAuthStore', {
   state: () => ({
     registrationForm: {
-      firstName: undefined,
-      lastName: undefined,
-      email: undefined,
-      phoneNumber: undefined,
-      password: undefined,
-      passwordConfirmation: undefined,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      password: '',
+      passwordConfirmation: '',
       isLoading: false,
-      errors: undefined,
+      errors: null,
     },
     loginForm: {
-      email: undefined,
-      password: undefined,
+      email: '',
+      password: '',
       isLoading: false,
-      errors: undefined,
+      errors: null,
     },
   }),
   actions: {

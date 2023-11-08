@@ -6,12 +6,12 @@ const useAccountStore = defineStore('useAccountStore', {
   state: () => ({
     user: undefined,
     form: {
-      firstName: undefined,
-      lastName: undefined,
-      email: undefined,
-      phoneNumber: undefined,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
       isLoading: false,
-      errors: undefined,
+      errors: null,
     },
   }),
   actions: {
@@ -57,12 +57,10 @@ const useAccountStore = defineStore('useAccountStore', {
       }
     },
     populateFormFields() {
-      this.form = {
-        firstName: this.user.names.first,
-        lastName: this.user.names.last,
-        email: this.user.email,
-        phoneNumber: this.user.phone_number,
-      };
+      this.form.firstName = this.user.names.first;
+      this.form.lastName = this.user.names.last;
+      this.form.email = this.user.email;
+      this.form.phoneNumber = this.user.phone_number;
     },
   },
 });

@@ -1,13 +1,13 @@
-import usePayPeriodDashboardStore from '~/stores/payPeriodDashboard.js';
-import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs.js';
-import usePayPeriodBillsStore from '~/stores/payPeriodBills.js';
-import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets.js';
-import usePayPeriodMetricsStore from '~/stores/payPeriodMetrics.js';
-import useTransactionsStore from '~/stores/transactions.js';
-import useMonthlyMetricsStore from '~/stores/monthlyMetrics.js';
-import useBillsStore from '~/stores/bills.js';
-import useBudgetsStore from '~/stores/budgets.js';
-import usePaystubsStore from '~/stores/paystubs.js';
+import usePayPeriodDashboardStore from '~/stores/payPeriodDashboard.ts';
+import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs.ts';
+import usePayPeriodBillsStore from '~/stores/payPeriodBills.ts';
+import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets.ts';
+import usePayPeriodMetricsStore from '~/stores/payPeriodMetrics.ts';
+import useTransactionsStore from '~/stores/transactions.ts';
+import useMonthlyMetricsStore from '~/stores/monthlyMetrics.ts';
+import useBillsStore from '~/stores/bills.ts';
+import useBudgetsStore from '~/stores/budgets.ts';
+import usePaystubsStore from '~/stores/paystubs.ts';
 
 export default async function () {
   const dataReloadMappings: Object = {

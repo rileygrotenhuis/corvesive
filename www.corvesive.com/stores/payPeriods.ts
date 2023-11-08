@@ -10,11 +10,11 @@ const usePayPeriodsStore = defineStore('usePayPeriodsStore', {
     currentPayPeriod: undefined,
     payPeriods: [],
     form: {
-      id: undefined,
-      start_date: undefined,
-      end_date: undefined,
+      id: -1,
+      start_date: '',
+      end_date: '',
       isLoading: false,
-      errors: false,
+      errors: null,
     },
   }),
   actions: {
@@ -149,19 +149,15 @@ const usePayPeriodsStore = defineStore('usePayPeriodsStore', {
       useModalsStore().closeModal();
     },
     populateFormFields() {
-      this.form = {
-        id: this.currentPayPeriod.id,
-        start_date: this.currentPayPeriod.dates.start.pretty.input,
-        end_date: this.currentPayPeriod.dates.end.pretty.input,
-      };
+      this.form.id = this.currentPayPeriod.id;
+      this.form.start_date = this.currentPayPeriod.dates.start.pretty.input;
+      this.form.end_date = this.currentPayPeriod.dates.end.pretty.input;
     },
     resetFormFields() {
       this.currentPayPeriod = undefined;
-      this.form = {
-        id: undefined,
-        start_date: undefined,
-        end_date: undefined,
-      };
+      this.form.id = -1;
+      this.form.start_date = '';
+      this.form.end_date = '';
     },
   },
 });

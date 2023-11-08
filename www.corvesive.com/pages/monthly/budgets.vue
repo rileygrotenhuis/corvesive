@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useBudgetsStore from '~/stores/budgets.js';
+import useBudgetsStore from '~/stores/budgets.ts';
 import BudgetsIcon from '~/components/icons/BudgetsIcon.vue';
 import copy from '~/libs/locales/copy.ts';
 

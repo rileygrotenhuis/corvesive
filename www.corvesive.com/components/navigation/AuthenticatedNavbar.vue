@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import useAccountStore from '~/stores/account.js';
+import useAccountStore from '~/stores/account.ts';
 
 const isResponsiveNavigationExpanded = ref(false);
 </script>

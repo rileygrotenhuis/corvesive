@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import useModalsStore from '~/stores/modals.js';
-import useAlertsStore from '~/stores/alerts.js';
-import usePayPeriodsStore from '~/stores/payPeriods.js';
-import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs.js';
+import useModalsStore from '~/stores/modals.ts';
+import useAlertsStore from '~/stores/alerts.ts';
+import usePayPeriodsStore from '~/stores/payPeriods.ts';
+import usePayPeriodPaystubsStore from '~/stores/payPeriodPaystubs.ts';
 
 const openUpdateModal = (payPeriodPaystub: Object) => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {

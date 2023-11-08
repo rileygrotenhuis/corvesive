@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import usePayPeriodDashboardStore from '~/stores/payPeriodDashboard.js';
+import usePayPeriodDashboardStore from '~/stores/payPeriodDashboard.ts';
 import DashboardIcon from '~/components/icons/DashboardIcon.vue';
 import copy from '~/libs/locales/copy.ts';
-import usePayPeriodsStore from '~/stores/payPeriods.js';
+import usePayPeriodsStore from '~/stores/payPeriods.ts';
 
 useHead({
   title: 'Corvesive - Pay Period Dashboard',

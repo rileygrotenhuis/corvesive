@@ -6,12 +6,12 @@ const useBillsStore = defineStore('useBillsStore', {
   state: () => ({
     bills: [],
     form: {
-      id: undefined,
-      issuer: undefined,
-      name: undefined,
-      amount: undefined,
-      due_date: undefined,
-      notes: undefined,
+      id: -1,
+      issuer: '',
+      name: '',
+      amount: 0,
+      due_date: '',
+      notes: '',
       isLoading: false,
       errors: false,
     },
@@ -80,25 +80,28 @@ const useBillsStore = defineStore('useBillsStore', {
         await this.getBills();
       }
     },
-    populateFormFields(id, issuer, name, amount, dueDate, notes) {
-      this.form = {
-        id: id,
-        issuer: issuer,
-        name: name,
-        amount: (amount / 100).toFixed(2),
-        due_date: dueDate.toString(),
-        notes: notes,
-      };
+    populateFormFields(
+      id: Number,
+      issuer: String,
+      name: String,
+      amount: Number,
+      dueDate: String,
+      notes: String
+    ) {
+      this.form.id = id;
+      this.form.issuer = issuer;
+      this.form.name = name;
+      this.form.amount = (amount / 100).toFixed(2);
+      this.form.due_date = dueDate.toString();
+      this.form.notes = notes;
     },
     resetFormFields() {
-      this.form = {
-        id: undefined,
-        issuer: undefined,
-        name: undefined,
-        amount: undefined,
-        due_date: undefined,
-        notes: undefined,
-      };
+      this.form.id = -1;
+      this.form.issuer = '';
+      this.form.name = '';
+      this.form.amount = 0;
+      this.form.due_date = '';
+      this.form.notes = '';
     },
   },
 });

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useTransactionsStore from '~/stores/transactions.js';
+import useTransactionsStore from '~/stores/transactions.ts';
 
 const form = useTransactionsStore();
 </script>

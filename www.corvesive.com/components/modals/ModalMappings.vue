@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useModalsStore from '~/stores/modals.js';
+import useModalsStore from '~/stores/modals.ts';
 import ModalWrapper from '~/components/modals/ModalWrapper.vue';
 import PayPeriodSelection from '~/components/payPeriods/PayPeriodSelection.vue';
 import CreatePayPeriodForm from '~/components/payPeriods/CreatePayPeriodForm.vue';
