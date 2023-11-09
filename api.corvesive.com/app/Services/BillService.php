@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Bill;
+use App\Models\PayPeriodBill;
 
 class BillService
 {
@@ -46,6 +47,8 @@ class BillService
 
     public function deleteBill(Bill $bill): bool
     {
+        PayPeriodBill::where('bill_id', $bill->id)->delete();
+
         return $bill->delete();
     }
 }

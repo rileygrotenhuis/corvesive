@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Budget;
+use App\Models\PayPeriodBudget;
 
 class BudgetService
 {
@@ -38,6 +39,8 @@ class BudgetService
 
     public function deleteBudget(Budget $budget): bool
     {
+        PayPeriodBudget::where('budget_id', $budget->id)->delete();
+
         return $budget->delete();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\PayPeriodPaystub;
 use App\Models\Paystub;
 
 class PaystubService
@@ -38,6 +39,8 @@ class PaystubService
 
     public function deletePaystub(Paystub $paystub): bool
     {
+        PayPeriodPaystub::where('paystub_id', $paystub->id)->delete();
+
         return $paystub->delete();
     }
 }
