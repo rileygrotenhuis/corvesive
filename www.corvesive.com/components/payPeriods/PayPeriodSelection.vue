@@ -2,13 +2,11 @@
 import { ref, onMounted } from 'vue';
 import usePayPeriodsStore from '~/stores/payPeriods.ts';
 import useModalsStore from '~/stores/modals.ts';
-import useAlertsStore from '~/stores/alerts.ts';
 
 onMounted(async () => {
   await usePayPeriodsStore().getPayPeriods();
 
   if (usePayPeriodsStore().payPeriods.length === 0) {
-    useAlertsStore().addAlert('noPayPeriodsAvailable');
     useModalsStore().setModalType('payPeriods.create');
   }
 });

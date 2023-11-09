@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import useAlertsStore from '~/stores/alerts';
 import useModalsStore from '~/stores/modals';
 import usePayPeriodsStore from '~/stores/payPeriods';
 import usePayPeriodBudgetsStore from '~/stores/payPeriodBudgets';
 
 const openUpdateModal = (payPeriodBudget: Object) => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
-    useAlertsStore().addAlert('payPeriodIsCompleted');
     return;
   }
 

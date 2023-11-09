@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import usePayPeriodBillsStore from '~/stores/payPeriodBills';
 import usePayPeriodsStore from '~/stores/payPeriods.ts';
-import useAlertsStore from '~/stores/alerts.ts';
 
 const deletePayPeriodBill = async () => {
   if (usePayPeriodsStore().currentPayPeriod.is_complete) {
-    useAlertsStore().addAlert('payPeriodIsCompleted');
     return;
   }
 

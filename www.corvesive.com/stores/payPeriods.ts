@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import useAlertsStore from '~/stores/alerts';
 import useModalsStore from '~/stores/modals';
 import PayPeriodsService from '~/services/payPeriods';
 import usePayPeriodMetricsStore from './payPeriodMetrics';
@@ -46,7 +45,6 @@ const usePayPeriodsStore = defineStore('usePayPeriodsStore', {
       this.form.errors = createPayPeriodResponse.errors ?? undefined;
 
       if (!this.form.errors) {
-        useAlertsStore().addAlert('createPayPeriodSuccess');
         this.resetFormFields();
         useModalsStore().closeModal();
         await this.getPayPeriods();
