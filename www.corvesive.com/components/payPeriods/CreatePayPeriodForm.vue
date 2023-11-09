@@ -31,6 +31,18 @@ const form = usePayPeriodsStore().form;
           />
         </div>
       </FormsDoubleInput>
+      <div class="flex gap-2 items-center">
+        <FormsInputLabel
+          resource="auto_generate_resources"
+          text="Auto Generate Pay Period Resources?"
+        />
+        <input
+          v-model="form.auto_generate_resources"
+          type="checkbox"
+          name="auto_generate_resources"
+          :disabled="form.isLoading"
+        />
+      </div>
       <FormsFormErrors v-if="form.errors" :formErrors="form.errors" />
       <ButtonsFormSubmitButton buttonText="Save" :disabled="form.isLoading" />
     </form>

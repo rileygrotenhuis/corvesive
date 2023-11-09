@@ -29,9 +29,15 @@ class PayPeriodsService {
     return await response.json();
   }
 
-  async createPayPeriod(startDate: String, endDate: String) {
+  async createPayPeriod(
+    startDate: String,
+    endDate: String,
+    autoGenerateResources: Boolean = false
+  ) {
     const response = await fetch(
-      `${useRuntimeConfig().public.apiUrl}/pay-periods`,
+      `${useRuntimeConfig().public.apiUrl}/pay-periods?${
+        autoGenerateResources ? 'auto_generate_resources=1' : ''
+      }`,
       {
         method: 'POST',
         headers: {

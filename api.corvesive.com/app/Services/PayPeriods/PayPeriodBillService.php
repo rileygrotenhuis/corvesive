@@ -21,8 +21,6 @@ class PayPeriodBillService
         $payPeriodBill->amount = $amount;
         $payPeriodBill->due_date = $dueDate;
         $payPeriodBill->save();
-
-        logger($payPeriodBill);
     }
 
     public function updatePayPeriodBill(

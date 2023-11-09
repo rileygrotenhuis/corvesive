@@ -12,6 +12,7 @@ const usePayPeriodsStore = defineStore('usePayPeriodsStore', {
       id: -1,
       start_date: '',
       end_date: '',
+      auto_generate_resources: false,
       isLoading: false,
       errors: null,
     },
@@ -37,7 +38,8 @@ const usePayPeriodsStore = defineStore('usePayPeriodsStore', {
       const createPayPeriodResponse =
         await new PayPeriodsService().createPayPeriod(
           this.form.start_date,
-          this.form.end_date
+          this.form.end_date,
+          this.form.auto_generate_resources
         );
 
       this.form.isLoading = false;
