@@ -51,6 +51,7 @@ const usePayPeriodsStore = defineStore('usePayPeriodsStore', {
         useModalsStore().closeModal();
         await this.getPayPeriods();
         this.currentPayPeriod = createPayPeriodResponse.data;
+        await handlePayPeriodAction();
       }
     },
     async updatePayPeriod() {
