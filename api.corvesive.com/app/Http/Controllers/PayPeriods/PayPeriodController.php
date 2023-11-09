@@ -7,9 +7,7 @@ use App\Http\Requests\PayPeriods\StorePayPeriodRequest;
 use App\Http\Requests\PayPeriods\UpdatePayPeriodRequest;
 use App\Http\Resources\PayPeriods\PayPeriodResource;
 use App\Models\PayPeriod;
-use App\Services\PayPeriods\PayPeriodBillService;
-use App\Services\PayPeriods\PayPeriodBudgetService;
-use App\Services\PayPeriods\PayPeriodPaystubService;
+use App\Services\PayPeriods\AutoGenerateResourceService;
 use App\Services\PayPeriods\PayPeriodService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -39,9 +37,7 @@ class PayPeriodController extends Controller
                 $request->end_date
             );
 
-        resolve(PayPeriodPaystubService::class)->autoGeneratePayPeriodPaystubs($payPeriod);
-        resolve(PayPeriodBillService::class)->autoGeneratePayPeriodBills($payPeriod);
-        resolve(PayPeriodBudgetService::class)->autoGeneratePayPeriodBudgets($payPeriod);
+        resolve(AutoGenerateResourceService::class)->autoGenerateAllPayPeriodResources($payPeriod);
 
         return new PayPeriodResource($payPeriod);
     }

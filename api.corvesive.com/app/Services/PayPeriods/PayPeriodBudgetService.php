@@ -44,19 +44,6 @@ class PayPeriodBudgetService
             ->delete();
     }
 
-    public function autoGeneratePayPeriodBudgets(PayPeriod $payPeriod): void
-    {
-        $budgets = Budget::where('user_id', auth()->user()->id)->get();
-
-        $budgets->each(function ($budget) use ($payPeriod) {
-            $this->addBudgetToPayPeriod(
-                $payPeriod,
-                $budget,
-                $budget->amount * $payPeriod->monthCoveragePercentage()
-            );
-        });
-    }
-
     public function budgetIsAlreadyAttachedToPayPeriod(PayPeriod $payPeriod, Budget $budget): bool
     {
         return PayPeriodBudget::withoutTrashed()
