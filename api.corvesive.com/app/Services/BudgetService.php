@@ -39,8 +39,13 @@ class BudgetService
 
     public function deleteBudget(Budget $budget): bool
     {
-        PayPeriodBudget::where('budget_id', $budget->id)->delete();
+        $this->removeAttachedPayPeriodBudgets($budget);
 
         return $budget->delete();
+    }
+
+    protected function removeAttachedPayPeriodBudgets(Budget $budget): void
+    {
+        PayPeriodBudget::where('budget_id', $budget->id)->delete();
     }
 }

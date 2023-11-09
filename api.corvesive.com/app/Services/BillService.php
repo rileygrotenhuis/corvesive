@@ -47,8 +47,13 @@ class BillService
 
     public function deleteBill(Bill $bill): bool
     {
-        PayPeriodBill::where('bill_id', $bill->id)->delete();
+        $this->removeAttachedPayPeriodBills($bill);
 
         return $bill->delete();
+    }
+
+    protected function removeAttachedPayPeriodBills(Bill $bill): void
+    {
+        PayPeriodBill::where('bill_id', $bill->id)->delete();
     }
 }

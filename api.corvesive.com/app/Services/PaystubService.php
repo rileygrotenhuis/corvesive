@@ -39,8 +39,13 @@ class PaystubService
 
     public function deletePaystub(Paystub $paystub): bool
     {
-        PayPeriodPaystub::where('paystub_id', $paystub->id)->delete();
+        $this->removeAttachedPayPeriodPaystubs($paystub);
 
         return $paystub->delete();
+    }
+
+    protected function removeAttachedPayPeriodPaystubs(Paystub $paystub): void
+    {
+        PayPeriodPaystub::where('paystub_id', $paystub->id)->delete();
     }
 }
