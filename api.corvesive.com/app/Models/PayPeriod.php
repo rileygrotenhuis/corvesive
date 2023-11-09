@@ -58,4 +58,9 @@ class PayPeriod extends Model
                 Carbon::parse($this->end_date)
             );
     }
+
+    public function monthCoveragePercentage(): float
+    {
+        return $this->numberOfDays() / Carbon::now()->daysInMonth;
+    }
 }

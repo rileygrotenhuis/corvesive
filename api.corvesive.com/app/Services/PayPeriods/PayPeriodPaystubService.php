@@ -49,7 +49,7 @@ class PayPeriodPaystubService
             $this->addPaystubToPayPeriod(
                 $payPeriod,
                 $paystub,
-                $paystub->amount / $payPeriod->numberOfDays()
+                $paystub->amount * $payPeriod->monthCoveragePercentage()
             );
         });
     }

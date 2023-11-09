@@ -52,7 +52,7 @@ class PayPeriodBudgetService
             $this->addBudgetToPayPeriod(
                 $payPeriod,
                 $budget,
-                $budget->amount / $payPeriod->numberOfDays()
+                $budget->amount * $payPeriod->monthCoveragePercentage()
             );
         });
     }
