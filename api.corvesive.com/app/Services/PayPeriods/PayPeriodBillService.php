@@ -21,6 +21,8 @@ class PayPeriodBillService
         $payPeriodBill->amount = $amount;
         $payPeriodBill->due_date = $dueDate;
         $payPeriodBill->save();
+
+        logger($payPeriodBill);
     }
 
     public function updatePayPeriodBill(
@@ -44,6 +46,23 @@ class PayPeriodBillService
         PayPeriodBill::where('pay_period_id', $payPeriodId)
             ->where('bill_id', $billId)
             ->delete();
+    }
+
+    public function autoGeneratePayPeriodBills(PayPeriod $payPeriod): void
+    {
+        $bills = Bill::where('user_id', auth()->user()->id)
+            ->where('due_date', '>=', Carbon::parse($payPeriod->start_date)->day)
+            ->where('due_date', '<=', Carbon::parse($payPeriod->end_date)->day)
+            ->get();
+
+        $bills->each(function ($bill) use ($payPeriod) {
+            $this->addBillToPayPeriod(
+                $payPeriod->id,
+                $bill->id,
+                $bill->amount,
+                $this->getPayPeriodBillDueDate($bill->due_date)
+            );
+        });
     }
 
     public function getPayPeriodBillStatus(bool $hasPayed, string $dueDate): string
@@ -71,5 +90,14 @@ class PayPeriodBillService
             ->where('pay_period_id', $payPeriod->id)
             ->where('bill_id', $bill->id)
             ->exists();
+    }
+
+    protected function getPayPeriodBillDueDate(string $dueDate): Carbon
+    {
+        return Carbon::create(
+            Carbon::now()->year,
+            Carbon::now()->month,
+            $dueDate
+        );
     }
 }

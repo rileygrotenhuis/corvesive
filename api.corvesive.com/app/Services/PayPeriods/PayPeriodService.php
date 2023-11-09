@@ -25,6 +25,8 @@ class PayPeriodService
         $user->pay_period_id = $payPeriod->id;
         $user->save();
 
+        resolve(PayPeriodBillService::class)->autoGeneratePayPeriodBills($payPeriod);
+
         return $payPeriod;
     }
 
