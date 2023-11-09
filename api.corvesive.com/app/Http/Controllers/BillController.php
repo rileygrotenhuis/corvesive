@@ -22,7 +22,7 @@ class BillController extends Controller
             Bill::where(
                 'user_id',
                 auth()->user()->id
-            )->get()
+            )->orderBy('due_date', 'asc')->get()
         );
     }
 

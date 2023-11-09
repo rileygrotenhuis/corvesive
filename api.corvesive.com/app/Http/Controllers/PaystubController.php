@@ -22,7 +22,7 @@ class PaystubController extends Controller
             Paystub::where(
                 'user_id',
                 auth()->user()->id
-            )->get()
+            )->orderBy('amount', 'desc')->get()
         );
     }
 

@@ -22,7 +22,7 @@ class BudgetController extends Controller
             Budget::where(
                 'user_id',
                 auth()->user()->id
-            )->get()
+            )->orderBy('amount', 'desc')->get()
         );
     }
 

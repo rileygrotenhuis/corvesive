@@ -24,6 +24,7 @@ class PayPeriodPaystubController extends Controller
         return PayPeriodPaystubResource::collection(
             PayPeriodPaystub::with('paystub')
                 ->where('pay_period_id', $payPeriod->id)
+                ->orderBy('pay_period_paystub.amount', 'desc')
                 ->get()
         );
     }
