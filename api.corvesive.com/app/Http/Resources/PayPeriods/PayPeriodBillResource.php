@@ -28,7 +28,7 @@ class PayPeriodBillResource extends JsonResource
                 ],
             ],
             'has_payed' => $this->has_payed,
-            'status' => (new PayPeriodBillService())
+            'status' => resolve(PayPeriodBillService::class)
                 ->getPayPeriodBillStatus(
                     $this->has_payed,
                     $this->due_date
