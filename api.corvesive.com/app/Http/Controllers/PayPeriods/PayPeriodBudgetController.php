@@ -47,8 +47,8 @@ class PayPeriodBudgetController extends Controller
 
         $this->payPeriodBudgetService
             ->addBudgetToPayPeriod(
-                $payPeriod->id,
-                $budget->id,
+                $payPeriod,
+                $budget,
                 $request->total_balance,
             );
 

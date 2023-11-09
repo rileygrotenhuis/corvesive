@@ -41,6 +41,19 @@ class PayPeriodPaystubService
             ->delete();
     }
 
+    public function autoGeneratePayPeriodPaystubs(PayPeriod $payPeriod): void
+    {
+        $paystubs = Paystub::where('user_id', auth()->user()->id)->get();
+
+        $paystubs->each(function ($paystub) use ($payPeriod) {
+            $this->addPaystubToPayPeriod(
+                $payPeriod,
+                $paystub,
+                $paystub->amount / $payPeriod->numberOfDays()
+            );
+        });
+    }
+
     public function paystubIsAlreadyAttachedToPayPeriod(PayPeriod $payPeriod, Paystub $paystub): bool
     {
         return PayPeriodPaystub::withoutTrashed()

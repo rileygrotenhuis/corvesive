@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -48,5 +49,13 @@ class PayPeriod extends Model
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function numberOfDays(): int
+    {
+        return Carbon::parse($this->start_date)
+            ->diffInDays(
+                Carbon::parse($this->end_date)
+            );
     }
 }

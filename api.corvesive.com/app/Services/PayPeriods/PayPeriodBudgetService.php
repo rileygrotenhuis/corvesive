@@ -9,13 +9,13 @@ use App\Models\PayPeriodBudget;
 class PayPeriodBudgetService
 {
     public function addBudgetToPayPeriod(
-        int $payPeriodId,
-        int $budgetId,
+        PayPeriod $payPeriod,
+        Budget $budget,
         int $totalBalance
     ): void {
         $payPeriodBudget = new PayPeriodBudget();
-        $payPeriodBudget->pay_period_id = $payPeriodId;
-        $payPeriodBudget->budget_id = $budgetId;
+        $payPeriodBudget->pay_period_id = $payPeriod->id;
+        $payPeriodBudget->budget_id = $budget->id;
         $payPeriodBudget->total_balance = $totalBalance;
         $payPeriodBudget->remaining_balance = $totalBalance;
         $payPeriodBudget->save();
@@ -42,6 +42,19 @@ class PayPeriodBudgetService
         PayPeriodBudget::where('pay_period_id', $payPeriod->id)
             ->where('budget_id', $budget->id)
             ->delete();
+    }
+
+    public function autoGeneratePayPeriodBudgets(PayPeriod $payPeriod): void
+    {
+        $budgets = Budget::where('user_id', auth()->user()->id)->get();
+
+        $budgets->each(function ($budget) use ($payPeriod) {
+            $this->addBudgetToPayPeriod(
+                $payPeriod,
+                $budget,
+                $budget->amount / $payPeriod->numberOfDays()
+            );
+        });
     }
 
     public function budgetIsAlreadyAttachedToPayPeriod(PayPeriod $payPeriod, Budget $budget): bool
