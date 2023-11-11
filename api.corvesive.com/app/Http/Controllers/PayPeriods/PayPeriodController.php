@@ -38,7 +38,7 @@ class PayPeriodController extends Controller
             );
 
         if ($request->auto_generate_resources) {
-            resolve(AutoGenerateResourceService::class)->autoGenerateAllPayPeriodResources($payPeriod);
+            resolve(AutoGenerateResourceService::class)->autoGenerateAllPayPeriodResources($payPeriod, auth()->user());
         }
 
         return new PayPeriodResource($payPeriod);

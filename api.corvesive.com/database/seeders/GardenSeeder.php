@@ -4,8 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\Bill;
 use App\Models\Budget;
+use App\Models\PayPeriod;
 use App\Models\Paystub;
 use App\Models\User;
+use App\Services\PayPeriods\AutoGenerateResourceService;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
@@ -13,110 +16,129 @@ class GardenSeeder extends Seeder
 {
     protected User $user;
 
-    protected Collection $paystubs;
-
-    protected Collection $bills;
-
-    protected Collection $budgets;
-
     public function run(): void
     {
-        $this->createAdminUser();
-        $this->paystubs = $this->createPaystubs();
-        $this->bills = $this->createBills();
-        $this->budgets = $this->createBudgets();
+        $this->user = $this->createAdminUser();
+        $this->createPaystubs();
+        $this->createBills();
+        $this->createBudgets();
+
+        $this->createPayPeriods()->each(function ($payPeriod) {
+            resolve(AutoGenerateResourceService::class)->autoGenerateAllPayPeriodResources($payPeriod, $this->user);
+        });
     }
 
-    protected function createAdminUser(): void
+    protected function createAdminUser(): User
     {
-        $this->user = User::factory()->create([
+        return User::factory()->create([
             'first_name' => 'Dev',
             'last_name' => 'Admin',
             'email' => 'dev@corvesive.com',
             'phone_number' => '8888888888',
             'password' => bcrypt('password'),
+            'is_onboarding' => 0,
         ]);
     }
 
-    protected function createPaystubs(): Collection
+    protected function createPaystubs(): void
     {
-        $x = Paystub::factory()->for($this->user)->create([
+        Paystub::factory()->for($this->user)->create([
             'issuer' => 'Company #1',
             'amount' => 350000,
         ]);
 
-        $y = Paystub::factory()->for($this->user)->create([
+        Paystub::factory()->for($this->user)->create([
             'issuer' => 'Side Hustle',
             'amount' => 150000,
         ]);
-
-        return collect([$x, $y]);
     }
 
-    protected function createBills(): Collection
+    protected function createBills(): void
     {
-        $a = Bill::factory()->for($this->user)->create([
+        Bill::factory()->for($this->user)->create([
             'issuer' => 'Apartment',
             'name' => 'Rent',
             'amount' => 125000,
             'due_date' => 1,
         ]);
 
-        $b = Bill::factory()->for($this->user)->create([
+        Bill::factory()->for($this->user)->create([
             'issuer' => 'City Utilities',
             'name' => 'Electricity',
             'amount' => 15000,
             'due_date' => 5,
         ]);
 
-        $c = Bill::factory()->for($this->user)->create([
+        Bill::factory()->for($this->user)->create([
             'issuer' => 'Evil Inc.',
             'name' => 'Auto Insurance',
             'amount' => 10000,
             'due_date' => 10,
         ]);
 
-        $d = Bill::factory()->for($this->user)->create([
+        Bill::factory()->for($this->user)->create([
             'issuer' => 'YouTube',
             'name' => 'Premium',
             'amount' => 1599,
             'due_date' => 15,
         ]);
 
-        $e = Bill::factory()->for($this->user)->create([
+        Bill::factory()->for($this->user)->create([
             'issuer' => 'Netflix',
             'name' => 'Membership',
             'amount' => 2599,
             'due_date' => 17,
         ]);
 
-        $f = Bill::factory()->for($this->user)->create([
+        Bill::factory()->for($this->user)->create([
             'issuer' => 'Big Muscles Gym',
             'name' => 'Membership',
             'amount' => 1500,
             'due_date' => 20,
         ]);
-
-        return collect([$a, $b, $c, $d, $d, $f]);
     }
 
-    protected function createBudgets(): Collection
+    protected function createBudgets(): void
     {
-        $a = Budget::factory()->for($this->user)->create([
+        Budget::factory()->for($this->user)->create([
             'name' => 'Groceries',
             'amount' => 50000,
         ]);
 
-        $b = Budget::factory()->for($this->user)->create([
+        Budget::factory()->for($this->user)->create([
             'name' => 'Gas',
             'amount' => 15000,
         ]);
 
-        $c = Budget::factory()->for($this->user)->create([
+        Budget::factory()->for($this->user)->create([
             'name' => 'Entertainment',
             'amount' => 30000,
         ]);
+    }
 
-        return collect([$a, $b, $c]);
+    protected function createPayPeriods(): Collection
+    {
+        $a = PayPeriod::factory()->for($this->user)->create([
+            'start_date' => Carbon::today()->firstOfMonth()->toDateString(),
+            'end_date' => Carbon::create(
+                Carbon::now()->year,
+                Carbon::now()->month,
+                15
+            )->toDateString(),
+        ]);
+
+        $this->user->pay_period_id = $a->id;
+        $this->user->save();
+
+        $b = PayPeriod::factory()->for($this->user)->create([
+            'start_date' => Carbon::create(
+                Carbon::now()->year,
+                Carbon::now()->month,
+                15
+            )->toDateString(),
+            'end_date' => Carbon::today()->lastOfMonth()->toDateString(),
+        ]);
+
+        return collect([$a, $b]);
     }
 }
