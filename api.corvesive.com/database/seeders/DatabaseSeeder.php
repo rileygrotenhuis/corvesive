@@ -5,123 +5,140 @@ namespace Database\Seeders;
 use App\Models\Bill;
 use App\Models\Budget;
 use App\Models\PayPeriod;
-use App\Models\PayPeriodBill;
-use App\Models\PayPeriodBudget;
-use App\Models\PayPeriodPaystub;
 use App\Models\Paystub;
 use App\Models\User;
+use App\Services\PayPeriods\AutoGenerateResourceService;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
 class DatabaseSeeder extends Seeder
 {
-    protected User $adminUser;
-
-    protected Paystub $paystub;
-
-    protected Collection $budgets;
-
-    protected Collection $bills;
+    protected User $user;
 
     public function run(): void
     {
-        // Admin User
-        $this->adminUser = User::factory()->create([
+        $this->user = $this->createAdminUser();
+        $this->createPaystubs();
+        $this->createBills();
+        $this->createBudgets();
+
+        $this->createPayPeriods()->each(function ($payPeriod) {
+            resolve(AutoGenerateResourceService::class)->autoGenerateAllPayPeriodResources($payPeriod, $this->user);
+        });
+    }
+
+    protected function createAdminUser(): User
+    {
+        return User::factory()->create([
             'first_name' => 'Dev',
             'last_name' => 'Admin',
-            'email' => 'admin@corvesive.com',
+            'email' => 'dev@corvesive.com',
             'phone_number' => '8888888888',
             'password' => bcrypt('password'),
+            'is_onboarding' => 0,
+        ]);
+    }
+
+    protected function createPaystubs(): void
+    {
+        Paystub::factory()->for($this->user)->create([
+            'issuer' => 'Company #1',
+            'amount' => 350000,
         ]);
 
-        // Paystub
-        $this->paystub = Paystub::factory()
-            ->for($this->adminUser)
-            ->create();
-
-        // Monthly Budgets
-        $this->budgets = Budget::factory(3)
-            ->for($this->adminUser)
-            ->create();
-
-        // Monthly Bills
-        $this->bills = Bill::factory(3)
-            ->for($this->adminUser)
-            ->create();
-
-        // Previous Pay Period
-        $this->addExpensesToPayPeriod(
-            $this->createPayPeriod(
-                Carbon::today()->subDays(21)->toDateString(),
-                Carbon::today()->subDays(1)->toDateString(),
-            )
-        );
-
-        // Current Pay Period
-        $this->addExpensesToPayPeriod(
-            $this->createPayPeriod(
-                Carbon::today()->subDays()->toDateString(),
-                Carbon::today()->subDays(20)->toDateString(),
-            )
-        );
-
-        // Future Pay Period
-        $this->addExpensesToPayPeriod(
-            $this->createPayPeriod(
-                Carbon::today()->subDays(21)->toDateString(),
-                Carbon::today()->subDays(41)->toDateString(),
-            )
-        );
+        Paystub::factory()->for($this->user)->create([
+            'issuer' => 'Side Hustle',
+            'amount' => 150000,
+        ]);
     }
 
-    protected function createPayPeriod(string $startDate, string $endDate): PayPeriod
+    protected function createBills(): void
     {
-        return PayPeriod::factory()
-            ->for($this->adminUser)
-            ->create([
-                'start_date' => $startDate,
-                'end_date' => $endDate,
-            ]);
+        Bill::factory()->for($this->user)->create([
+            'issuer' => 'Apartment',
+            'name' => 'Rent',
+            'amount' => 125000,
+            'due_date' => 1,
+        ]);
+
+        Bill::factory()->for($this->user)->create([
+            'issuer' => 'City Utilities',
+            'name' => 'Electricity',
+            'amount' => 15000,
+            'due_date' => 5,
+        ]);
+
+        Bill::factory()->for($this->user)->create([
+            'issuer' => 'Evil Inc.',
+            'name' => 'Auto Insurance',
+            'amount' => 10000,
+            'due_date' => 10,
+        ]);
+
+        Bill::factory()->for($this->user)->create([
+            'issuer' => 'YouTube',
+            'name' => 'Premium',
+            'amount' => 1599,
+            'due_date' => 15,
+        ]);
+
+        Bill::factory()->for($this->user)->create([
+            'issuer' => 'Netflix',
+            'name' => 'Membership',
+            'amount' => 2599,
+            'due_date' => 17,
+        ]);
+
+        Bill::factory()->for($this->user)->create([
+            'issuer' => 'Big Muscles Gym',
+            'name' => 'Membership',
+            'amount' => 1500,
+            'due_date' => 20,
+        ]);
     }
 
-    protected function addExpensesToPayPeriod(PayPeriod $payPeriod): void
+    protected function createBudgets(): void
     {
-        $this->addPaystubToPayPeriod($payPeriod);
-        $this->addBudgetsToPayPeriod($payPeriod);
-        $this->addBillsToPayPeriod($payPeriod);
+        Budget::factory()->for($this->user)->create([
+            'name' => 'Groceries',
+            'amount' => 50000,
+        ]);
+
+        Budget::factory()->for($this->user)->create([
+            'name' => 'Gas',
+            'amount' => 15000,
+        ]);
+
+        Budget::factory()->for($this->user)->create([
+            'name' => 'Entertainment',
+            'amount' => 30000,
+        ]);
     }
 
-    protected function addPaystubToPayPeriod(PayPeriod $payPeriod): void
+    protected function createPayPeriods(): Collection
     {
-        PayPeriodPaystub::factory()
-            ->for($payPeriod)
-            ->for($this->paystub);
-    }
+        $a = PayPeriod::factory()->for($this->user)->create([
+            'start_date' => Carbon::today()->firstOfMonth()->toDateString(),
+            'end_date' => Carbon::create(
+                Carbon::now()->year,
+                Carbon::now()->month,
+                15
+            )->toDateString(),
+        ]);
 
-    protected function addBudgetsToPayPeriod(PayPeriod $payPeriod): void
-    {
-        foreach ($this->budgets as $budget) {
-            PayPeriodBudget::factory()
-                ->for($payPeriod)
-                ->for($budget)
-                ->create([
-                    'total_balance' => $budget->amount,
-                    'remaining_balance' => $budget->amount,
-                ]);
-        }
-    }
+        $this->user->pay_period_id = $a->id;
+        $this->user->save();
 
-    protected function addBillsToPayPeriod(PayPeriod $payPeriod): void
-    {
-        foreach ($this->bills as $bill) {
-            PayPeriodBill::factory()
-                ->for($payPeriod)
-                ->for($bill)
-                ->create([
-                    'amount' => $bill->amount,
-                    'has_payed' => false,
-                ]);
-        }
+        $b = PayPeriod::factory()->for($this->user)->create([
+            'start_date' => Carbon::create(
+                Carbon::now()->year,
+                Carbon::now()->month,
+                15
+            )->toDateString(),
+            'end_date' => Carbon::today()->lastOfMonth()->toDateString(),
+        ]);
+
+        return collect([$a, $b]);
     }
 }
