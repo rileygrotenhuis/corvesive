@@ -1,9 +1,11 @@
 import { $fetch, FetchOptions } from 'ofetch';
 import { defineNuxtPlugin } from '#app';
 import AuthService from '~/services/auth';
+import AccountService from '~/services/account';
 
 interface IApiInstance {
   auth: AuthService;
+  account: AccountService;
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -20,6 +22,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const modules: IApiInstance = {
     auth: new AuthService(apiFetcher),
+    account: new AccountService(apiFetcher),
   };
 
   return {
