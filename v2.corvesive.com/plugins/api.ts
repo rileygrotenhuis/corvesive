@@ -1,10 +1,10 @@
 import { $fetch, FetchOptions } from 'ofetch';
 import { defineNuxtPlugin } from '#app';
-import AuthService from '~/services/auth';
-import AccountService from '~/services/account';
-import PaystubService from '~/services/paystubs';
-import BillService from '~/services/bills';
-import BudgetService from '~/services/budgets';
+import AuthService from '~/services/auth.service';
+import AccountService from '~/services/account.service';
+import PaystubService from '~/services/paystubs.service';
+import BillService from '~/services/bills.service';
+import BudgetService from '~/services/budgets.service';
 
 interface IApiInstance {
   auth: AuthService;

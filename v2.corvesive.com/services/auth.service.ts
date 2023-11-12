@@ -1,5 +1,18 @@
 import HttpFactory from '~/services/factory';
-import type { ILoginRequest, IRegistrationRequest } from '~/requests/auth';
+
+interface IRegistrationRequest {
+  firstName: String;
+  lastName: String;
+  email: String;
+  phoneNumber: String;
+  password: String;
+  passwordConfirmation: String;
+}
+
+interface ILoginRequest {
+  email: String;
+  password: String;
+}
 
 class AuthService extends HttpFactory {
   async register(payload: IRegistrationRequest): Promise {

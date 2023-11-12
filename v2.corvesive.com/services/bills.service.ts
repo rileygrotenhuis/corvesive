@@ -1,5 +1,12 @@
 import HttpFactory from '~/services/factory';
-import type { ICreateOrUpdateBillRequest } from '~/requests/bills';
+
+interface ICreateOrUpdateBillRequest {
+  issuer: String;
+  name: String;
+  amount: Number;
+  dueDate: String;
+  notes: String;
+}
 
 class BillService extends HttpFactory {
   async getBills(): Promise {

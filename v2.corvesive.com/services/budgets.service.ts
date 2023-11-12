@@ -1,5 +1,10 @@
 import HttpFactory from '~/services/factory';
-import type { ICreateOrUpdateBudgetRequest } from '~/requests/budgets';
+
+interface ICreateOrUpdateBudgetRequest {
+  name: String;
+  amount: Number;
+  notes: String;
+}
 
 class BudgetService extends HttpFactory {
   async getBudgets(): Promise {
