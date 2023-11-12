@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiUrl: process.env.VITE_API_URL,
+      apiUrl: process.env.API_URL,
     },
   },
   modules: ['@nuxt/ui', '@pinia/nuxt'],
