@@ -1,9 +1,12 @@
 import type { IUpdateAccountRequest } from '~/http/requests/account.request';
+import type { IUserResource } from '~/http/resources/account.resource';
 import HttpFactory from '~/services/factory';
 
 class AccountService extends HttpFactory {
-  async me() {
-    return await this.call('GET', '/account/me');
+  async me(): Promise<IUserResource> {
+    const response = await this.call('GET', '/account/me');
+
+    return response.data;
   }
 
   async updateAccount(payload: IUpdateAccountRequest) {
