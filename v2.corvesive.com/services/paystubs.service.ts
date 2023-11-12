@@ -6,6 +6,10 @@ interface ICreateOrUpdatePaystubRequest {
   notes: String;
 }
 
+interface IAttachOrUpdatePayPeriodPaystubRequest {
+  amount: Number;
+}
+
 class PaystubService extends HttpFactory {
   async getPaystubs(): Promise {
     return await this.call('GET', '/paystubs');
@@ -24,6 +28,44 @@ class PaystubService extends HttpFactory {
 
   async deletePaystub(id: Number): Promise {
     return await this.call('DELETE', `/paystubs/${id}`, payload);
+  }
+
+  async getPayPeriodPaystubs(payPeriodId: Number): Promise {
+    return await this.call('GET', `/pay-periods/${payPeriodId}/paystubs`);
+  }
+
+  async attachPaystubToPayPeriod(
+    payPeriodId: Number,
+    paystubId: Number,
+    payload: IAttachOrUpdatePayPeriodPaystubRequest
+  ): Promise {
+    return await this.call(
+      'POST',
+      `/pay-periods/${payPeriodId}/paystubs/${paystubId}`,
+      payload
+    );
+  }
+
+  async updatePayPeriodPaystub(
+    payPeriodId: Number,
+    paystubId: Number,
+    payload: IAttachOrUpdatePayPeriodPaystubRequest
+  ): Promise {
+    return await this.call(
+      'PUT',
+      `/pay-periods/${payPeriodId}/paystubs/${paystubId}`,
+      payload
+    );
+  }
+
+  async detachPaystubFromPayPeriod(
+    payPeriodId: Number,
+    paystubId: Number
+  ): Promise {
+    return await this.call(
+      'DELETE',
+      `/pay-periods/${payPeriodId}/paystubs/${paystubId}`
+    );
   }
 }
 
