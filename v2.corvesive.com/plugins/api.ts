@@ -1,4 +1,5 @@
-import { $fetch, FetchOptions } from 'ofetch';
+import { $fetch } from 'ofetch';
+import type { FetchOptions } from 'ofetch';
 import { defineNuxtPlugin } from '#app';
 import AuthService from '~/services/auth.service';
 import AccountService from '~/services/account.service';

@@ -1,8 +1,8 @@
-import { defineStore, StoreDefinition } from 'pinia';
+import { defineStore } from 'pinia';
 
-export const useAccountStore: StoreDefinition = defineStore('useAccountStore', {
+export const useAccountStore = defineStore('useAccountStore', {
   state: () => ({
-    me: null,
+    me: {},
   }),
   actions: {
     async me() {

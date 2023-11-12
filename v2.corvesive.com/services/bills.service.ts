@@ -1,36 +1,36 @@
 import HttpFactory from '~/services/factory';
 
 interface ICreateOrUpdateBillRequest {
-  issuer: String;
-  name: String;
+  issuer: string;
+  name: string;
   amount: Number;
-  dueDate: String;
-  notes: String;
+  dueDate: string;
+  notes: string;
 }
 
 interface IAttachOrUpdatePayPeriodBillRequest {
   amount: Number;
-  due_date: String;
+  due_date: string;
 }
 
 class BillService extends HttpFactory {
-  async getBills(): Promise {
+  async getBills() {
     return await this.call('GET', '/bills');
   }
 
-  async createBill(payload: ICreateOrUpdateBillRequest): Promise {
+  async createBill(payload: ICreateOrUpdateBillRequest) {
     return await this.call('POST', '/bills', payload);
   }
 
-  async updateBill(id: Number, payload: ICreateOrUpdateBillRequest): Promise {
+  async updateBill(id: Number, payload: ICreateOrUpdateBillRequest) {
     return await this.call('PUT', `/bills/${id}`, payload);
   }
 
-  async deleteBill(id: Number): Promise {
-    return await this.call('DELETE', `/bills/${id}`, payload);
+  async deleteBill(id: Number) {
+    return await this.call('DELETE', `/bills/${id}`);
   }
 
-  async getPayPeriodBills(payPeriodId: Number): Promise {
+  async getPayPeriodBills(payPeriodId: Number) {
     return await this.call('GET', `/pay-periods/${payPeriodId}/bills`);
   }
 
@@ -38,7 +38,7 @@ class BillService extends HttpFactory {
     payPeriodId: Number,
     billId: Number,
     payload: IAttachOrUpdatePayPeriodBillRequest
-  ): Promise {
+  ) {
     return await this.call(
       'POST',
       `/pay-periods/${payPeriodId}/bills/${billId}`,
@@ -50,7 +50,7 @@ class BillService extends HttpFactory {
     payPeriodId: Number,
     billId: Number,
     payload: IAttachOrUpdatePayPeriodBillRequest
-  ): Promise {
+  ) {
     return await this.call(
       'PUT',
       `/pay-periods/${payPeriodId}/bills/${billId}`,
@@ -58,7 +58,7 @@ class BillService extends HttpFactory {
     );
   }
 
-  async detachBillFromPayPeriod(payPeriodId: Number, billId: Number): Promise {
+  async detachBillFromPayPeriod(payPeriodId: Number, billId: Number) {
     return await this.call(
       'DELETE',
       `/pay-periods/${payPeriodId}/bills/${billId}`

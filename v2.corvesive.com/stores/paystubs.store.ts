@@ -1,6 +1,6 @@
-import { defineStore, StoreDefinition } from 'pinia';
+import { defineStore } from 'pinia';
 
-export const usePaystubStore: StoreDefinition = defineStore('usePaystubStore', {
+export const usePaystubStore = defineStore('usePaystubStore', {
   state: () => ({
     paystubs: [],
     payPeriodPaystubs: [],

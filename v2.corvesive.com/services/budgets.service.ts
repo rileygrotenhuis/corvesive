@@ -1,9 +1,9 @@
 import HttpFactory from '~/services/factory';
 
 interface ICreateOrUpdateBudgetRequest {
-  name: String;
+  name: string;
   amount: Number;
-  notes: String;
+  notes: string;
 }
 
 interface IAttachPayPeriodBudgetRequest {
@@ -18,26 +18,23 @@ interface IUpdatePayPeriodBudgetRequest {
 }
 
 class BudgetService extends HttpFactory {
-  async getBudgets(): Promise {
+  async getBudgets() {
     return await this.call('GET', '/budgets');
   }
 
-  async createBudget(payload: ICreateOrUpdateBudgetRequest): Promise {
+  async createBudget(payload: ICreateOrUpdateBudgetRequest) {
     return await this.call('POST', '/budgets', payload);
   }
 
-  async updateBudget(
-    id: Number,
-    payload: ICreateOrUpdateBudgetRequest
-  ): Promise {
+  async updateBudget(id: Number, payload: ICreateOrUpdateBudgetRequest) {
     return await this.call('PUT', `/budgets/${id}`, payload);
   }
 
-  async deleteBudget(id: Number): Promise {
-    return await this.call('DELETE', `/budgets/${id}`, payload);
+  async deleteBudget(id: Number) {
+    return await this.call('DELETE', `/budgets/${id}`);
   }
 
-  async getPayPeriodBudgets(payPeriodId: Number): Promise {
+  async getPayPeriodBudgets(payPeriodId: Number) {
     return await this.call('GET', `/pay-periods/${payPeriodId}/budgets`);
   }
 
@@ -45,7 +42,7 @@ class BudgetService extends HttpFactory {
     payPeriodId: Number,
     budgetId: Number,
     payload: IAttachPayPeriodBudgetRequest
-  ): Promise {
+  ) {
     return await this.call(
       'POST',
       `/pay-periods/${payPeriodId}/budgets/${budgetId}`,
@@ -57,7 +54,7 @@ class BudgetService extends HttpFactory {
     payPeriodId: Number,
     budgetId: Number,
     payload: IUpdatePayPeriodBudgetRequest
-  ): Promise {
+  ) {
     return await this.call(
       'PUT',
       `/pay-periods/${payPeriodId}/budgets/${budgetId}`,
@@ -65,10 +62,7 @@ class BudgetService extends HttpFactory {
     );
   }
 
-  async detachBudgetFromPayPeriod(
-    payPeriodId: Number,
-    budgetId: Number
-  ): Promise {
+  async detachBudgetFromPayPeriod(payPeriodId: Number, budgetId: Number) {
     return await this.call(
       'DELETE',
       `/pay-periods/${payPeriodId}/budgets/${budgetId}`

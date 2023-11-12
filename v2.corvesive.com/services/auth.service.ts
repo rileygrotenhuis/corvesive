@@ -1,29 +1,29 @@
 import HttpFactory from '~/services/factory';
 
 interface IRegistrationRequest {
-  firstName: String;
-  lastName: String;
-  email: String;
-  phoneNumber: String;
-  password: String;
-  passwordConfirmation: String;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  passwordConfirmation: string;
 }
 
 interface ILoginRequest {
-  email: String;
-  password: String;
+  email: string;
+  password: string;
 }
 
 class AuthService extends HttpFactory {
-  async register(payload: IRegistrationRequest): Promise {
+  async register(payload: IRegistrationRequest) {
     return await this.call('POST', '/register', payload);
   }
 
-  async login(payload: ILoginRequest): Promise {
+  async login(payload: ILoginRequest) {
     return await this.call('POST', '/login', payload);
   }
 
-  async logout(): Promise {
+  async logout() {
     return await this.call('DELETE', '/logout');
   }
 }

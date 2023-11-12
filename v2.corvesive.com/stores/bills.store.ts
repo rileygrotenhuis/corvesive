@@ -1,6 +1,6 @@
-import { defineStore, StoreDefinition } from 'pinia';
+import { defineStore } from 'pinia';
 
-export const useBillStore: StoreDefinition = defineStore('useBillStore', {
+export const useBillStore = defineStore('useBillStore', {
   state: () => ({
     bills: [],
     payPeriodBills: [],

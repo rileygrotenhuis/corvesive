@@ -1,6 +1,6 @@
-import { defineStore, StoreDefinition } from 'pinia';
+import { defineStore } from 'pinia';
 
-export const useBudgetStore: StoreDefinition = defineStore('useBudgetStore', {
+export const useBudgetStore = defineStore('useBudgetStore', {
   state: () => ({
     budgets: [],
     payPeriodBudgets: [],
@@ -9,9 +9,9 @@ export const useBudgetStore: StoreDefinition = defineStore('useBudgetStore', {
     async getBudgets() {
       this.budgets = await useNuxtApp().$api.budgets.getBudgets();
     },
-    async getPayPeriodBudgets() {
+    async getPayPeriodBudgets(payPeriodId: Number) {
       this.payPeriodBudgets =
-        await useNuxtApp().$api.budgets.getPayPeriodBudgets();
+        await useNuxtApp().$api.budgets.getPayPeriodBudgets(payPeriodId);
     },
   },
 });

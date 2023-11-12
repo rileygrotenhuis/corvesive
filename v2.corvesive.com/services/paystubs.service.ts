@@ -1,9 +1,9 @@
 import HttpFactory from '~/services/factory';
 
 interface ICreateOrUpdatePaystubRequest {
-  issuer: String;
+  issuer: string;
   amount: Number;
-  notes: String;
+  notes: string;
 }
 
 interface IAttachOrUpdatePayPeriodPaystubRequest {
@@ -11,26 +11,23 @@ interface IAttachOrUpdatePayPeriodPaystubRequest {
 }
 
 class PaystubService extends HttpFactory {
-  async getPaystubs(): Promise {
+  async getPaystubs() {
     return await this.call('GET', '/paystubs');
   }
 
-  async createPaystub(payload: ICreateOrUpdatePaystubRequest): Promise {
+  async createPaystub(payload: ICreateOrUpdatePaystubRequest) {
     return await this.call('POST', '/paystubs', payload);
   }
 
-  async updatePaystub(
-    id: Number,
-    payload: ICreateOrUpdatePaystubRequest
-  ): Promise {
+  async updatePaystub(id: Number, payload: ICreateOrUpdatePaystubRequest) {
     return await this.call('PUT', `/paystubs/${id}`, payload);
   }
 
-  async deletePaystub(id: Number): Promise {
-    return await this.call('DELETE', `/paystubs/${id}`, payload);
+  async deletePaystub(id: Number) {
+    return await this.call('DELETE', `/paystubs/${id}`);
   }
 
-  async getPayPeriodPaystubs(payPeriodId: Number): Promise {
+  async getPayPeriodPaystubs(payPeriodId: Number) {
     return await this.call('GET', `/pay-periods/${payPeriodId}/paystubs`);
   }
 
@@ -38,7 +35,7 @@ class PaystubService extends HttpFactory {
     payPeriodId: Number,
     paystubId: Number,
     payload: IAttachOrUpdatePayPeriodPaystubRequest
-  ): Promise {
+  ) {
     return await this.call(
       'POST',
       `/pay-periods/${payPeriodId}/paystubs/${paystubId}`,
@@ -50,7 +47,7 @@ class PaystubService extends HttpFactory {
     payPeriodId: Number,
     paystubId: Number,
     payload: IAttachOrUpdatePayPeriodPaystubRequest
-  ): Promise {
+  ) {
     return await this.call(
       'PUT',
       `/pay-periods/${payPeriodId}/paystubs/${paystubId}`,
@@ -58,10 +55,7 @@ class PaystubService extends HttpFactory {
     );
   }
 
-  async detachPaystubFromPayPeriod(
-    payPeriodId: Number,
-    paystubId: Number
-  ): Promise {
+  async detachPaystubFromPayPeriod(payPeriodId: Number, paystubId: Number) {
     return await this.call(
       'DELETE',
       `/pay-periods/${payPeriodId}/paystubs/${paystubId}`
