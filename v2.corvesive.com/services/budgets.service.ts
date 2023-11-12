@@ -10,7 +10,7 @@ import type {
 import HttpFactory from '~/services/factory';
 
 class BudgetService extends HttpFactory {
-  async getBudgets(): Promise<IBudgetResource> {
+  async getBudgets(): Promise<IBudgetResource[]> {
     const response = await this.call('GET', '/budgets');
 
     return response.data;
@@ -30,7 +30,7 @@ class BudgetService extends HttpFactory {
 
   async getPayPeriodBudgets(
     payPeriodId: Number
-  ): Promise<IPayPeriodBudgetResource> {
+  ): Promise<IPayPeriodBudgetResource[]> {
     const response = await this.call(
       'GET',
       `/pay-periods/${payPeriodId}/budgets`

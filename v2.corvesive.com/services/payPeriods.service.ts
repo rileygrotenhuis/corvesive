@@ -3,13 +3,13 @@ import type { IPayPeriodResource } from '~/http/resources/payPeriods.resource';
 import HttpFactory from '~/services/factory';
 
 class PayPeriodService extends HttpFactory {
-  async getPayPeriods(): Promise<IPayPeriodResource> {
+  async getPayPeriods(): Promise<IPayPeriodResource[]> {
     const response = await this.call('GET', '/pay-periods');
 
     return response.data;
   }
 
-  async getPayPeriod(id: Number) {
+  async getPayPeriod(id: Number): Promise<IPayPeriodResource> {
     return await this.call('GET', `/pay-periods/${id}`);
   }
 

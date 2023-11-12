@@ -9,7 +9,7 @@ import type {
 import HttpFactory from '~/services/factory';
 
 class PaystubService extends HttpFactory {
-  async getPaystubs(): Promise<IPaystubResource> {
+  async getPaystubs(): Promise<IPaystubResource[]> {
     const response = await this.call('GET', '/paystubs');
 
     return response.data;
@@ -29,7 +29,7 @@ class PaystubService extends HttpFactory {
 
   async getPayPeriodPaystubs(
     payPeriodId: Number
-  ): Promise<IPayPeriodPaystubResource> {
+  ): Promise<IPayPeriodPaystubResource[]> {
     const response = await this.call(
       'GET',
       `/pay-periods/${payPeriodId}/paystubs`
