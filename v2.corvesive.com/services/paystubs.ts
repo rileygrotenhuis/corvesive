@@ -1,10 +1,5 @@
 import HttpFactory from '~/services/factory';
-
-interface ICreateOrUpdatePaystubRequest {
-  issuer: String;
-  amount: Number;
-  notes: String;
-}
+import type { ICreateOrUpdatePaystubRequest } from '~/requests/paystubs';
 
 class PaystubService extends HttpFactory {
   async getPaystubs(): Promise {

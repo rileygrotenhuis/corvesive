@@ -1,11 +1,5 @@
 import HttpFactory from '~/services/factory';
-
-interface IUpdateAccountRequest {
-  firstName: String;
-  lastName: String;
-  email: String;
-  phoneNumber: String;
-}
+import type { IUpdateAccountRequest } from '~/requests/account';
 
 class AccountService extends HttpFactory {
   async me(): Promise {
