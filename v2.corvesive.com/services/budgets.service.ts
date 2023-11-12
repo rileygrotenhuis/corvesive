@@ -3,7 +3,10 @@ import type {
   ICreateOrUpdateBudgetRequest,
   IUpdatePayPeriodBudgetRequest,
 } from '~/http/requests/budgets.request';
-import type { IBudgetResource } from '~/http/resources/budgets.resource';
+import type {
+  IBudgetResource,
+  IPayPeriodBudgetResource,
+} from '~/http/resources/budgets.resource';
 import HttpFactory from '~/services/factory';
 
 class BudgetService extends HttpFactory {
@@ -25,8 +28,15 @@ class BudgetService extends HttpFactory {
     return await this.call('DELETE', `/budgets/${id}`);
   }
 
-  async getPayPeriodBudgets(payPeriodId: Number) {
-    return await this.call('GET', `/pay-periods/${payPeriodId}/budgets`);
+  async getPayPeriodBudgets(
+    payPeriodId: Number
+  ): Promise<IPayPeriodBudgetResource> {
+    const response = await this.call(
+      'GET',
+      `/pay-periods/${payPeriodId}/budgets`
+    );
+
+    return response.data;
   }
 
   async attachBudgetToPayPeriod(

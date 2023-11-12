@@ -2,7 +2,10 @@ import type {
   IAttachOrUpdatePayPeriodBillRequest,
   ICreateOrUpdateBillRequest,
 } from '~/http/requests/bills.request';
-import type { IBillResource } from '~/http/resources/bills.resource';
+import type {
+  IBillResource,
+  IPayPeriodBillResource,
+} from '~/http/resources/bills.resource';
 import HttpFactory from '~/services/factory';
 
 class BillService extends HttpFactory {
@@ -24,8 +27,15 @@ class BillService extends HttpFactory {
     return await this.call('DELETE', `/bills/${id}`);
   }
 
-  async getPayPeriodBills(payPeriodId: Number) {
-    return await this.call('GET', `/pay-periods/${payPeriodId}/bills`);
+  async getPayPeriodBills(
+    payPeriodId: Number
+  ): Promise<IPayPeriodBillResource[]> {
+    const response = await this.call(
+      'GET',
+      `/pay-periods/${payPeriodId}/bills`
+    );
+
+    return response.data;
   }
 
   async attachBillToPayPeriod(

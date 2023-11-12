@@ -2,7 +2,10 @@ import type {
   IAttachOrUpdatePayPeriodPaystubRequest,
   ICreateOrUpdatePaystubRequest,
 } from '~/http/requests/paystubs.request';
-import type { IPaystubResource } from '~/http/resources/paystubs.resource';
+import type {
+  IPayPeriodPaystubResource,
+  IPaystubResource,
+} from '~/http/resources/paystubs.resource';
 import HttpFactory from '~/services/factory';
 
 class PaystubService extends HttpFactory {
@@ -24,8 +27,15 @@ class PaystubService extends HttpFactory {
     return await this.call('DELETE', `/paystubs/${id}`);
   }
 
-  async getPayPeriodPaystubs(payPeriodId: Number) {
-    return await this.call('GET', `/pay-periods/${payPeriodId}/paystubs`);
+  async getPayPeriodPaystubs(
+    payPeriodId: Number
+  ): Promise<IPayPeriodPaystubResource> {
+    const response = await this.call(
+      'GET',
+      `/pay-periods/${payPeriodId}/paystubs`
+    );
+
+    return response.data;
   }
 
   async attachPaystubToPayPeriod(
