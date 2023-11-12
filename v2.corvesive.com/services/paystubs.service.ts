@@ -1,14 +1,8 @@
+import type {
+  IAttachOrUpdatePayPeriodPaystubRequest,
+  ICreateOrUpdatePaystubRequest,
+} from '~/http/requests/paystubs.request';
 import HttpFactory from '~/services/factory';
-
-interface ICreateOrUpdatePaystubRequest {
-  issuer: string;
-  amount: Number;
-  notes: string;
-}
-
-interface IAttachOrUpdatePayPeriodPaystubRequest {
-  amount: Number;
-}
 
 class PaystubService extends HttpFactory {
   async getPaystubs() {

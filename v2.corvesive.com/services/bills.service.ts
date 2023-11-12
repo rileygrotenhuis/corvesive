@@ -1,17 +1,8 @@
+import type {
+  IAttachOrUpdatePayPeriodBillRequest,
+  ICreateOrUpdateBillRequest,
+} from '~/http/requests/bills.request';
 import HttpFactory from '~/services/factory';
-
-interface ICreateOrUpdateBillRequest {
-  issuer: string;
-  name: string;
-  amount: Number;
-  dueDate: string;
-  notes: string;
-}
-
-interface IAttachOrUpdatePayPeriodBillRequest {
-  amount: Number;
-  due_date: string;
-}
 
 class BillService extends HttpFactory {
   async getBills() {

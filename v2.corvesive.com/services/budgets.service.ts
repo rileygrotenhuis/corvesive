@@ -1,21 +1,9 @@
+import type {
+  IAttachPayPeriodBudgetRequest,
+  ICreateOrUpdateBudgetRequest,
+  IUpdatePayPeriodBudgetRequest,
+} from '~/http/requests/budgets.request';
 import HttpFactory from '~/services/factory';
-
-interface ICreateOrUpdateBudgetRequest {
-  name: string;
-  amount: Number;
-  notes: string;
-}
-
-interface IAttachPayPeriodBudgetRequest {
-  amount: Number;
-  total_balance: Number;
-}
-
-interface IUpdatePayPeriodBudgetRequest {
-  amount: Number;
-  total_balance: Number;
-  remaining_balance: Number;
-}
 
 class BudgetService extends HttpFactory {
   async getBudgets() {

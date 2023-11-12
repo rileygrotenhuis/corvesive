@@ -1,9 +1,5 @@
+import type { ICreateOrUpdatePayPeriodRequest } from '~/http/requests/payPeriods.request';
 import HttpFactory from '~/services/factory';
-
-interface ICreateOrUpdatePayPeriodRequest {
-  start_date: string;
-  end_date: string;
-}
 
 class PayPeriodService extends HttpFactory {
   async getPayPeriods() {
