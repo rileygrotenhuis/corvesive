@@ -7,6 +7,8 @@ export const useAccountStore = defineStore('useAccountStore', {
   actions: {
     async me() {
       this.me = await useNuxtApp().$api.account.me();
+
+      return this.me;
     },
   },
 });
