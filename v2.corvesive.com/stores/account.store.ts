@@ -2,7 +2,7 @@ import { defineStore, StoreDefinition } from 'pinia';
 
 export const useAccountStore: StoreDefinition = defineStore('useAccountStore', {
   state: () => ({
-    user: null,
+    me: null,
   }),
   actions: {
     async me() {
