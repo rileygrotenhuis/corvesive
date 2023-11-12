@@ -10,6 +10,10 @@ class PayPeriodService extends HttpFactory {
     return await this.call('GET', '/pay-periods');
   }
 
+  async getPayPeriod(id: Number): Promise {
+    return await this.call('GET', `/pay-periods/${id}`);
+  }
+
   async createPayPeriod(
     autoGenerateResources: Boolean,
     payload: ICreateOrUpdatePayPeriodRequest

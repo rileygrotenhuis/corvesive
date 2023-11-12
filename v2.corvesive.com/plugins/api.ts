@@ -5,6 +5,7 @@ import AccountService from '~/services/account.service';
 import PaystubService from '~/services/paystubs.service';
 import BillService from '~/services/bills.service';
 import BudgetService from '~/services/budgets.service';
+import PayPeriodService from '~/services/payPeriods.service';
 
 interface IApiInstance {
   auth: AuthService;
@@ -12,6 +13,7 @@ interface IApiInstance {
   paystubs: PaystubService;
   bills: BillService;
   budgets: BudgetService;
+  payPeriods: PayPeriodService;
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -32,6 +34,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     paystubs: new PaystubService(apiFetcher),
     bills: new BillService(apiFetcher),
     budgets: new BudgetService(apiFetcher),
+    payPeriods: new PayPeriodService(apiFetcher),
   };
 
   return {
