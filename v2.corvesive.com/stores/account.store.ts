@@ -6,7 +6,7 @@ export const useAccountStore = defineStore('useAccountStore', {
     user: {} as IUserResource,
   }),
   actions: {
-    async me() {
+    async me(): Promise<IUserResource> {
       this.user = await useNuxtApp().$api.account.me();
 
       return this.me;

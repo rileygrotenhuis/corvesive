@@ -10,12 +10,14 @@ export const useBudgetStore = defineStore('useBudgetStore', {
     payPeriodBudgets: [] as IPayPeriodBudgetResource[],
   }),
   actions: {
-    async getBudgets() {
+    async getBudgets(): Promise<IBudgetResource[]> {
       this.budgets = await useNuxtApp().$api.budgets.getBudgets();
 
       return this.budgets;
     },
-    async getPayPeriodBudgets(payPeriodId: Number) {
+    async getPayPeriodBudgets(
+      payPeriodId: Number
+    ): Promise<IPayPeriodBudgetResource[]> {
       this.payPeriodBudgets =
         await useNuxtApp().$api.budgets.getPayPeriodBudgets(payPeriodId);
 
