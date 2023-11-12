@@ -2,11 +2,14 @@ import type {
   IAttachOrUpdatePayPeriodPaystubRequest,
   ICreateOrUpdatePaystubRequest,
 } from '~/http/requests/paystubs.request';
+import type { IPaystubResource } from '~/http/resources/paystubs.resource';
 import HttpFactory from '~/services/factory';
 
 class PaystubService extends HttpFactory {
-  async getPaystubs() {
-    return await this.call('GET', '/paystubs');
+  async getPaystubs(): Promise<IPaystubResource> {
+    const response = await this.call('GET', '/paystubs');
+
+    return response.data;
   }
 
   async createPaystub(payload: ICreateOrUpdatePaystubRequest) {

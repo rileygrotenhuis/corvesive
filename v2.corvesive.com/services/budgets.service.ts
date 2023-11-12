@@ -3,11 +3,14 @@ import type {
   ICreateOrUpdateBudgetRequest,
   IUpdatePayPeriodBudgetRequest,
 } from '~/http/requests/budgets.request';
+import type { IBudgetResource } from '~/http/resources/budgets.resource';
 import HttpFactory from '~/services/factory';
 
 class BudgetService extends HttpFactory {
-  async getBudgets() {
-    return await this.call('GET', '/budgets');
+  async getBudgets(): Promise<IBudgetResource> {
+    const response = await this.call('GET', '/budgets');
+
+    return response.data;
   }
 
   async createBudget(payload: ICreateOrUpdateBudgetRequest) {

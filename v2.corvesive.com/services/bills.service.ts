@@ -2,11 +2,14 @@ import type {
   IAttachOrUpdatePayPeriodBillRequest,
   ICreateOrUpdateBillRequest,
 } from '~/http/requests/bills.request';
+import type { IBillResource } from '~/http/resources/bills.resource';
 import HttpFactory from '~/services/factory';
 
 class BillService extends HttpFactory {
-  async getBills() {
-    return await this.call('GET', '/bills');
+  async getBills(): Promise<IBillResource[]> {
+    const response = await this.call('GET', '/bills');
+
+    return response.data;
   }
 
   async createBill(payload: ICreateOrUpdateBillRequest) {

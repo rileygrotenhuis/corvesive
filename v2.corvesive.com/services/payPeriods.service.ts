@@ -1,9 +1,12 @@
 import type { ICreateOrUpdatePayPeriodRequest } from '~/http/requests/payPeriods.request';
+import type { IPayPeriodResource } from '~/http/resources/payPeriods.resource';
 import HttpFactory from '~/services/factory';
 
 class PayPeriodService extends HttpFactory {
-  async getPayPeriods() {
-    return await this.call('GET', '/pay-periods');
+  async getPayPeriods(): Promise<IPayPeriodResource> {
+    const response = await this.call('GET', '/pay-periods');
+
+    return response.data;
   }
 
   async getPayPeriod(id: Number) {
