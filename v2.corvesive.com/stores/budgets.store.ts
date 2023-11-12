@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia';
+import type {
+  IBudgetResource,
+  IPayPeriodBudgetResource,
+} from '~/http/resources/budgets.resource';
 
 export const useBudgetStore = defineStore('useBudgetStore', {
   state: () => ({
-    budgets: [],
-    payPeriodBudgets: [],
+    budgets: [] as IBudgetResource[],
+    payPeriodBudgets: [] as IPayPeriodBudgetResource[],
   }),
   actions: {
     async getBudgets() {

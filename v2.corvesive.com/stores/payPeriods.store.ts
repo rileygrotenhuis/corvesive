@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia';
+import type { IPayPeriodResource } from '~/http/resources/payPeriods.resource';
 
 export const usePayPeriodStore = defineStore('usePayPeriodStore', {
   state: () => ({
-    payPeriods: [],
-    currentPayPeriod: {},
+    payPeriods: [] as IPayPeriodResource[],
+    currentPayPeriod: {} as IPayPeriodResource,
   }),
   actions: {
     async getPayPeriods() {

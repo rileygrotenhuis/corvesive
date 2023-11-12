@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia';
+import type {
+  IPayPeriodPaystubResource,
+  IPaystubResource,
+} from '~/http/resources/paystubs.resource';
 
 export const usePaystubStore = defineStore('usePaystubStore', {
   state: () => ({
-    paystubs: [],
-    payPeriodPaystubs: [],
+    paystubs: [] as IPaystubResource[],
+    payPeriodPaystubs: [] as IPayPeriodPaystubResource[],
   }),
   actions: {
     async getPaystubs() {
