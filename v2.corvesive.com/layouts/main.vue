@@ -8,7 +8,11 @@ useHead({
 
 <template>
   <div>
-    <NavigationNavbar />
+    <NavigationTopNavigationBar>
+      <template #profile-menu>
+        <NavigationProfileMenu />
+      </template>
+    </NavigationTopNavigationBar>
     <div class="w-11/12 max-w-[1000px] mx-auto">
       <slot />
     </div>

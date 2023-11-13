@@ -4,7 +4,7 @@
       class="w-11/12 max-w-[1000px] mx-auto flex justify-between items-center"
     >
       <h2 class="text-2xl font-bold text-primary">Corvesive</h2>
-      <NavigationProfileMenu />
+      <slot name="profile-menu" />
     </div>
   </nav>
 </template>
