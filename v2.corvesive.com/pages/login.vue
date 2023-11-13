@@ -1,14 +1,14 @@
 <template>
   <AuthRegistrationAndLoginCard
-    title="Get started with"
+    title="Login now to"
     subtitle="Corvesive"
     class="mx-auto mt-16"
   >
-    <AuthRegistrationForm />
+    <AuthLoginForm />
   </AuthRegistrationAndLoginCard>
   <FormsFormFooter
-    question="Already have an account?"
-    action="Login"
-    to="/login"
+    question="Don't have an account?"
+    action="Register"
+    to="/register"
   />
 </template>
