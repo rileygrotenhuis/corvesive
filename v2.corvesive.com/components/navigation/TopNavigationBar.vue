@@ -3,7 +3,9 @@
     <div
       class="w-11/12 max-w-[1000px] mx-auto flex justify-between items-center"
     >
-      <h2 class="text-2xl font-bold text-rose-500">Corvesive</h2>
+      <router-link to="/" class="text-2xl font-bold text-rose-500"
+        >Corvesive</router-link
+      >
       <slot name="profile-menu" />
     </div>
   </nav>
