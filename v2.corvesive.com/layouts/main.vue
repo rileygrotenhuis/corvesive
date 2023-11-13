@@ -13,7 +13,7 @@ useHead({
         <NavigationProfileMenu />
       </template>
     </NavigationTopNavigationBar>
-    <div class="w-11/12 max-w-[1000px] mx-auto">
+    <div class="w-11/12 max-w-[1225px] mx-auto">
       <slot />
     </div>
   </div>
