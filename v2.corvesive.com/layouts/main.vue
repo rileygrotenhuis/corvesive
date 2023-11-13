@@ -15,6 +15,9 @@ useHead({
       <template #profile-menu>
         <NavigationProfileMenu />
       </template>
+      <template #responsive-menu>
+        <NavigationResponsiveMenu class="flex md:hidden items-center" />
+      </template>
     </NavigationTopNavigationBar>
     <div class="w-11/12 max-w-[1225px] mx-auto">
       <slot />
