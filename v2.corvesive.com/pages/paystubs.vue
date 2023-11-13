@@ -7,6 +7,12 @@ definePageMeta({
   middleware: 'auth',
   layout: 'main',
 });
+
+const paystubStore = usePaystubStore();
+const payPeriodStore = usePayPeriodStore();
+
+await paystubStore.getPaystubs();
+await paystubStore.getPayPeriodPaystubs(payPeriodStore.currentPayPeriod.id);
 </script>
 
 <template>

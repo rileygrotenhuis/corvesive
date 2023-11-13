@@ -7,6 +7,12 @@ definePageMeta({
   middleware: 'auth',
   layout: 'main',
 });
+
+const billStore = useBillStore();
+const payPeriodStore = usePayPeriodStore();
+
+await billStore.getBills();
+await billStore.getPayPeriodBills(payPeriodStore.currentPayPeriod.id);
 </script>
 
 <template>
