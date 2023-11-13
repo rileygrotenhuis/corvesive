@@ -29,7 +29,7 @@ const handleSubmit = async () => {
     <UFormGroup label="Password" name="password">
       <UInput v-model="form.password" type="password" />
     </UFormGroup>
-    <UButton type="submit"> Login </UButton>
+    <UButton type="submit" color="rose"> Login </UButton>
     <FormsFormErrors :errors="errors" />
   </UForm>
 </template>
