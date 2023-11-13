@@ -11,15 +11,16 @@ export const useBillStore = defineStore('useBillStore', {
   }),
   actions: {
     async getBills(): Promise<IBillResource[]> {
-      this.bills = await useNuxtApp().$api.bills.getBills();
+      this.bills = (await useNuxtApp().$api.bills.getBills()).data;
 
       return this.bills;
     },
     async getPayPeriodBills(
       payPeriodId: Number
     ): Promise<IPayPeriodBillResource[]> {
-      this.payPeriodBills =
-        await useNuxtApp().$api.bills.getPayPeriodBills(payPeriodId);
+      this.payPeriodBills = (
+        await useNuxtApp().$api.bills.getPayPeriodBills(payPeriodId)
+      ).data;
 
       return this.payPeriodBills;
     },

@@ -11,15 +11,16 @@ export const usePaystubStore = defineStore('usePaystubStore', {
   }),
   actions: {
     async getPaystubs(): Promise<IPaystubResource[]> {
-      this.paystubs = await useNuxtApp().$api.paystubs.getPaystubs();
+      this.paystubs = (await useNuxtApp().$api.paystubs.getPaystubs()).data;
 
       return this.paystubs;
     },
     async getPayPeriodPaystubs(
       payPeriodId: Number
     ): Promise<IPayPeriodPaystubResource[]> {
-      this.payPeriodPaystubs =
-        await useNuxtApp().$api.paystubs.getPayPeriodPaystubs(payPeriodId);
+      this.payPeriodPaystubs = (
+        await useNuxtApp().$api.paystubs.getPayPeriodPaystubs(payPeriodId)
+      ).data;
 
       return this.payPeriodPaystubs;
     },

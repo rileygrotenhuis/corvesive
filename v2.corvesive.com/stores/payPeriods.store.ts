@@ -8,13 +8,16 @@ export const usePayPeriodStore = defineStore('usePayPeriodStore', {
   }),
   actions: {
     async getPayPeriods(): Promise<IPayPeriodResource[]> {
-      this.payPeriods = await useNuxtApp().$api.payPeriods.getPayPeriods();
+      this.payPeriods = (
+        await useNuxtApp().$api.payPeriods.getPayPeriods()
+      ).data;
 
       return this.payPeriods;
     },
     async getPayPeriod(id: Number): Promise<IPayPeriodResource> {
-      this.currentPayPeriod =
-        await useNuxtApp().$api.payPeriods.getPayPeriod(id);
+      this.currentPayPeriod = (
+        await useNuxtApp().$api.payPeriods.getPayPeriod(id)
+      ).data;
 
       return this.currentPayPeriod;
     },
