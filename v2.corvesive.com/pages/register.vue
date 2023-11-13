@@ -5,16 +5,18 @@ useHead({
 </script>
 
 <template>
-  <AuthRegistrationAndLoginCard
-    title="Get started with"
-    subtitle="Corvesive"
-    class="mx-auto mt-16"
-  >
-    <AuthRegistrationForm />
-  </AuthRegistrationAndLoginCard>
-  <FormsFormFooter
-    question="Already have an account?"
-    action="Login"
-    to="/login"
-  />
+  <div class="mx-4">
+    <AuthRegistrationAndLoginCard
+      title="Get started with"
+      subtitle="Corvesive"
+      class="mx-auto mt-16"
+    >
+      <AuthRegistrationForm />
+    </AuthRegistrationAndLoginCard>
+    <FormsFormFooter
+      question="Already have an account?"
+      action="Login"
+      to="/login"
+    />
+  </div>
 </template>
