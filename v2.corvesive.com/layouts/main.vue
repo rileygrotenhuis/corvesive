@@ -10,7 +10,7 @@ useHead({
   <div>
     <NavigationTopNavigationBar>
       <template #pay-period-select>
-        <NavigationPayPeriodSelection />
+        <NavigationPayPeriodPopover class="flex items-center" />
       </template>
       <template #profile-menu>
         <NavigationProfileMenu />
