@@ -28,7 +28,7 @@ const menuItems = [
   <UDropdown
     :items="menuItems"
     :ui="{ item: { disabled: 'cursor-text select-text' } }"
-    :popper="{ placement: 'bottom-start' }"
+    :popper="{ placement: 'bottom-end' }"
   >
     <UAvatar :alt="accountStore.user.names.full" size="sm" />
 
