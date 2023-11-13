@@ -10,4 +10,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   if (!me) {
     return await navigateTo('/login');
   }
+
+  await usePayPeriodStore().getPayPeriod(me.pay_period.id);
 });
