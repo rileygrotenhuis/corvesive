@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     return;
   }
 
-  const me: IUserResource = await useNuxtApp().$api.account.me();
+  const me: IUserResource = await useAccountStore().me();
 
   if (!me) {
     return await navigateTo('/login');

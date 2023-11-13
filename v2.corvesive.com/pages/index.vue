@@ -9,5 +9,5 @@ definePageMeta({
 </script>
 
 <template>
-  <h1>Corvesive</h1>
+  <h1>Home Page</h1>
 </template>
