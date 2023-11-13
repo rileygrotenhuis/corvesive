@@ -1,3 +1,9 @@
+<script setup lang="ts">
+useHead({
+  title: 'Corvesive - Register',
+});
+</script>
+
 <template>
   <AuthRegistrationAndLoginCard
     title="Get started with"

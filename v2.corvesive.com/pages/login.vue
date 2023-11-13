@@ -1,3 +1,9 @@
+<script setup lang="ts">
+useHead({
+  title: 'Corvesive - Login',
+});
+</script>
+
 <template>
   <AuthRegistrationAndLoginCard
     title="Login now to"
