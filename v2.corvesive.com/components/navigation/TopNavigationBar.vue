@@ -7,9 +7,21 @@
         >Corvesive</router-link
       >
       <div class="hidden md:flex gap-12 text-sm text-secondary">
-        <router-link to="/paystubs">Paystubs</router-link>
-        <router-link to="/bills">Bills</router-link>
-        <router-link to="/budgets">Budgets</router-link>
+        <router-link
+          :class="$route.path.includes('/paystubs') ? 'text-rose-500' : ''"
+          to="/paystubs"
+          >Paystubs</router-link
+        >
+        <router-link
+          :class="$route.path.includes('/bills') ? 'text-rose-500' : ''"
+          to="/bills"
+          >Bills</router-link
+        >
+        <router-link
+          :class="$route.path.includes('/budgets') ? 'text-rose-500' : ''"
+          to="/budgets"
+          >Budgets</router-link
+        >
       </div>
       <div class="flex gap-8">
         <slot name="pay-period-select" />
