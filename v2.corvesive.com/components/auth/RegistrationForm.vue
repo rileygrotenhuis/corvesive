@@ -10,7 +10,7 @@ const form: IRegistrationRequest = reactive({
   password_confirmation: '',
 });
 
-const errors = ref([]);
+const errors = ref();
 
 const handleSubmit = async () => {
   const response = await useNuxtApp().$api.auth.register(form);

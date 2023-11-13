@@ -6,7 +6,7 @@ const form: ILoginRequest = reactive({
   password: '',
 });
 
-const errors = ref([]);
+const errors = ref();
 
 const handleSubmit = async () => {
   const response = await useNuxtApp().$api.auth.login(form);

@@ -4,7 +4,10 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const accountStore = useAccountStore();
   const payPeriodStore = usePayPeriodStore();
 
-  if (Object.keys(accountStore.user).length < 1 || !useCookie('corvesive_access_token').value) {
+  if (
+    Object.keys(accountStore.user).length < 1 ||
+    !useCookie('corvesive_access_token').value
+  ) {
     const me: IUserResource = await accountStore.me();
 
     if (!me) {

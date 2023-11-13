@@ -2,14 +2,17 @@ import type {
   ILoginRequest,
   IRegistrationRequest,
 } from '~/http/requests/auth.request';
+import type { IRegistrationOrLoginResource } from '~/http/resources/auth.resource';
 import HttpFactory from '~/services/factory';
 
 class AuthService extends HttpFactory {
-  async register(payload: IRegistrationRequest) {
+  async register(
+    payload: IRegistrationRequest
+  ): Promise<IRegistrationOrLoginResource> {
     return await this.call('POST', '/register', payload);
   }
 
-  async login(payload: ILoginRequest) {
+  async login(payload: ILoginRequest): Promise<IRegistrationOrLoginResource> {
     return await this.call('POST', '/login', payload);
   }
 
