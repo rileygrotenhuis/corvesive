@@ -5,7 +5,7 @@ useHead({
 </script>
 
 <template>
-  <div class="mx-4">
+  <div class="my-8 mx-4">
     <AuthRegistrationAndLoginCard
       title="Get started with"
       subtitle="Corvesive"
