@@ -16,6 +16,10 @@ const handleSubmit = async () => {
   const response = await useNuxtApp().$api.auth.register(form);
 
   if (!(errors.value = response.errors)) {
+    useAccountStore().setUser(response.user);
+
+    useCookie('corvesive_access_token').value = response.token;
+
     return await navigateTo('/');
   }
 };

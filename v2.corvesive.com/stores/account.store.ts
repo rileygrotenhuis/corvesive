@@ -9,7 +9,10 @@ export const useAccountStore = defineStore('useAccountStore', {
     async me(): Promise<IUserResource> {
       this.user = await useNuxtApp().$api.account.me();
 
-      return this.me;
+      return this.user;
+    },
+    setUser(user: IUserResource) {
+      this.user = user;
     },
   },
 });
