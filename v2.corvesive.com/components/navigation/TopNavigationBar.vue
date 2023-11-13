@@ -6,7 +6,15 @@
       <router-link to="/" class="text-2xl font-bold text-rose-500"
         >Corvesive</router-link
       >
-      <slot name="profile-menu" />
+      <div class="flex gap-12 text-sm text-secondary">
+        <router-link to="/paystubs">Paystubs</router-link>
+        <router-link to="/bills">Bills</router-link>
+        <router-link to="/budgets">Budgets</router-link>
+      </div>
+      <div class="flex gap-8">
+        <slot name="pay-period-select" />
+        <slot name="profile-menu" />
+      </div>
     </div>
   </nav>
 </template>

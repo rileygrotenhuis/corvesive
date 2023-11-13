@@ -9,6 +9,9 @@ useHead({
 <template>
   <div>
     <NavigationTopNavigationBar>
+      <template #pay-period-select>
+        <NavigationPayPeriodSelection />
+      </template>
       <template #profile-menu>
         <NavigationProfileMenu />
       </template>
