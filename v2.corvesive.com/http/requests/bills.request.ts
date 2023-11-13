@@ -2,7 +2,7 @@ export interface ICreateOrUpdateBillRequest {
   issuer: string;
   name: string;
   amount: Number;
-  dueDate: string;
+  due_date: string;
   notes: string;
 }
 

@@ -1,10 +1,10 @@
 export interface IRegistrationRequest {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  phoneNumber: string;
+  phone_number: string;
   password: string;
-  passwordConfirmation: string;
+  password_confirmation: string;
 }
 
 export interface ILoginRequest {

@@ -1,14 +1,19 @@
-import type { $Fetch } from 'ofetch';
-
 class HttpFactory {
-  private $fetch: $Fetch;
+  async call<T>(method: string, url: string, data?: object) {
+    const response = await fetch(
+      `${useNuxtApp().$config.public.apiUrl + url}`,
+      {
+        method: method,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${useCookie('corvesive_access_token').value}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
 
-  constructor(fetcher: $Fetch) {
-    this.$fetch = fetcher;
-  }
-
-  async call<T>(method: string, url: string, data?: object, extras = {}) {
-    return await this.$fetch(url, { method, body: data, ...extras });
+    return await response.json();
   }
 }
 

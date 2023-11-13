@@ -1,5 +1,8 @@
 <template>
-  <div>
-    <h1>Registration Page</h1>
-  </div>
+  <AuthRegistrationForm class="mx-auto mt-16" />
+  <FormsFormFooter
+    question="Already have an account?"
+    action="Login"
+    to="/login"
+  />
 </template>
