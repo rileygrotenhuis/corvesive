@@ -17,7 +17,7 @@ await billStore.getPayPeriodBills(payPeriodStore.currentPayPeriod.id);
 
 <template>
   <div class="mt-8">
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-6">
       <BillsMonthlyBillCard
         v-for="bill in billStore.bills"
         :key="bill.id.toString()"

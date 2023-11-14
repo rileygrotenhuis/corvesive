@@ -17,7 +17,7 @@ await budgetStore.getPayPeriodBudgets(payPeriodStore.currentPayPeriod.id);
 
 <template>
   <div class="mt-8">
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-6">
       <BudgetsMonthlyBudgetCard
         v-for="budget in budgetStore.budgets"
         :key="budget.id.toString()"
