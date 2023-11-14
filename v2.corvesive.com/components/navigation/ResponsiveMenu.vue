@@ -1,35 +1,56 @@
 <script setup>
-const items = [
-  [
-    {
-      label: 'Paystubs',
-      click: () => {
-        useNuxtApp().$router.push('/paystubs');
-      },
+const isOpen = ref(false);
+
+const router = useNuxtApp().$router;
+
+const links = [
+  {
+    label: 'Dashboard',
+    icon: 'i-heroicons-home',
+    click: () => {
+      isOpen.value = false;
+      router.push('/');
     },
-    {
-      label: 'Bills',
-      click: () => {
-        useNuxtApp().$router.push('/bills');
-      },
+  },
+  {
+    label: 'Paystubs',
+    icon: 'i-heroicons-currency-dollar',
+    click: () => {
+      isOpen.value = false;
+      router.push('/paystubs');
     },
-    {
-      label: 'Budgets',
-      click: () => {
-        useNuxtApp().$router.push('/budgets');
-      },
+  },
+  {
+    label: 'Bills',
+    icon: 'i-heroicons-credit-card',
+    click: () => {
+      isOpen.value = false;
+      router.push('/bills');
     },
-  ],
+  },
+  {
+    label: 'Budgets',
+    icon: 'i-heroicons-banknotes',
+    click: () => {
+      isOpen.value = false;
+      router.push('/budgets');
+    },
+  },
 ];
 </script>
 
 <template>
-  <UDropdown
-    :items="items"
-    :ui="{ item: { disabled: 'cursor-text select-text' } }"
-    :popper="{ placement: 'bottom-end' }"
-    class="items-center"
-  >
-    <UIcon name="i-heroicons-bars-3" class="w-5 h-5" />
-  </UDropdown>
+  <div>
+    <UIcon
+      name="i-heroicons-bars-3"
+      class="w-5 h-5"
+      @click="isOpen = !isOpen"
+    />
+
+    <USlideover v-model="isOpen" side="left">
+      <div class="p-4 flex-1">
+        <UVerticalNavigation :links="links" />
+      </div>
+    </USlideover>
+  </div>
 </template>
