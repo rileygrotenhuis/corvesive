@@ -20,6 +20,9 @@ const handleSubmit = async () => {
 
     useCookie('corvesive_access_token').value = response.token;
 
+    usePayPeriodStore().getPayPeriods();
+    usePayPeriodStore().getPayPeriod(response.user.pay_period.id);
+
     return await navigateTo('/');
   }
 };
