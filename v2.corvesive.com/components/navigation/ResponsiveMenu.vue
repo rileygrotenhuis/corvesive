@@ -3,15 +3,21 @@ const items = [
   [
     {
       label: 'Paystubs',
-      to: '/paystubs',
+      click: () => {
+        useNuxtApp().$router.push('/paystubs');
+      },
     },
     {
       label: 'Bills',
-      to: '/bills',
+      click: () => {
+        useNuxtApp().$router.push('/bills');
+      },
     },
     {
       label: 'Budgets',
-      to: '/budgets',
+      click: () => {
+        useNuxtApp().$router.push('/budgets');
+      },
     },
   ],
 ];
@@ -25,9 +31,5 @@ const items = [
     class="items-center"
   >
     <UIcon name="i-heroicons-bars-3" class="w-5 h-5" />
-
-    <template #item="{ item }">
-      <router-link :to="item.to" class="truncate">{{ item.label }}</router-link>
-    </template>
   </UDropdown>
 </template>

@@ -13,14 +13,18 @@ const menuItems = [
     {
       label: 'Settings',
       icon: 'i-heroicons-cog-8-tooth',
-      url: '#',
+      click: () => {
+        useNuxtApp().$router.push('/profile');
+      },
     },
   ],
   [
     {
       label: 'Sign out',
       icon: 'i-heroicons-arrow-left-on-rectangle',
-      url: '#',
+      click: () => {
+        useNuxtApp().$router.push('/logout');
+      },
     },
   ],
 ];
@@ -46,12 +50,10 @@ const menuItems = [
     <template #item="{ item }">
       <span class="truncate">{{ item.label }}</span>
 
-      <router-link
-        :to="item.url"
+      <UIcon
+        :name="item.icon"
         class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"
-      >
-        <UIcon :name="item.icon" />
-      </router-link>
+      />
     </template>
   </UDropdown>
 </template>

@@ -9,15 +9,15 @@ useHead({
 <template>
   <div>
     <NavigationTopNavigationBar>
-      <template #pay-period-select>
-        <NavigationPayPeriodPopover class="flex items-center" />
-      </template>
-      <template #profile-menu>
-        <NavigationProfileMenu />
-      </template>
-      <template #responsive-menu>
-        <NavigationResponsiveMenu class="flex md:hidden items-center" />
-      </template>
+      <NavigationPayPeriodPopover
+        v-slot:pay-period-popover
+        class="flex items-center"
+      />
+      <NavigationProfileMenu v-slot:profile-menu />
+      <NavigationResponsiveMenu
+        v-slot:responsive-menu
+        class="flex md:hidden items-center"
+      />
     </NavigationTopNavigationBar>
     <div class="w-11/12 max-w-[850px] mx-auto">
       <slot />
