@@ -13,7 +13,7 @@ const selectedPayPeriod = ref(payPeriodStore.currentPayPeriod.id);
 watch(
   selectedPayPeriod,
   async (newPayPeriodId: Number, oldPayPeriodId: Number) => {
-    alert('NEW PAY PERIOD SELECTED');
+    await payPeriodStore.updateCurrentPayPeriod(newPayPeriodId);
   }
 );
 </script>
