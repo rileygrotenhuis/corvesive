@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { setAccessToken } from '~/util/auth.util';
 import type { ILoginRequest } from '~/http/requests/auth.request';
 
 const form: ILoginRequest = reactive({
@@ -14,7 +15,7 @@ const handleSubmit = async () => {
   if (!(errors.value = response.errors)) {
     useAccountStore().setUser(response.user);
 
-    useCookie('corvesive_access_token').value = response.token;
+    await setAccessToken(response.token);
 
     await usePayPeriodStore().getPayPeriods();
     await usePayPeriodStore().getPayPeriod(response.user.pay_period.id);
