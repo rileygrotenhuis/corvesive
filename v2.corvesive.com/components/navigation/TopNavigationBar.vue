@@ -1,5 +1,7 @@
 <template>
-  <nav class="sticky top-0 z-50 py-4 border-b border-gray-800 shadow-md">
+  <nav
+    class="sticky top-0 z-50 py-4 border-b border-gray-800 bg-gray-900 shadow-md"
+  >
     <div
       class="w-11/12 max-w-[850px] mx-auto flex justify-between items-center"
     >
