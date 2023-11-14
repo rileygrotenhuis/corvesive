@@ -18,7 +18,10 @@ defineProps({
           <p class="flex flex-col sm:flex-row gap-1">
             <span class="font-light">{{ name }}</span>
             <span class="hidden sm:inline-block">-</span>
-            <span class="text-rose-500">{{ dueDate }}</span>
+            <span class="text-rose-500 flex items-center gap-1">
+              <UIcon name="i-heroicons-calendar" class="w-4 h-4" />
+              {{ dueDate }}
+            </span>
           </p>
         </div>
         <div>
