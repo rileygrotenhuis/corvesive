@@ -3,11 +3,19 @@ export interface IPayPeriodResource {
   dates: {
     start: {
       raw: string;
-      pretty: string;
+      pretty: {
+        full: string;
+        short: string;
+        input: string;
+      };
     };
     end: {
       raw: string;
-      pretty: string;
+      pretty: {
+        full: string;
+        short: string;
+        input: string;
+      };
     };
   };
   is_complete: Boolean;
