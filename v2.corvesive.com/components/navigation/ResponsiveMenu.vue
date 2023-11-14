@@ -7,6 +7,7 @@ const links = [
   {
     label: 'Dashboard',
     icon: 'i-heroicons-home',
+    class: 'text-xl',
     click: () => {
       isOpen.value = false;
       router.push('/');
@@ -15,6 +16,7 @@ const links = [
   {
     label: 'Paystubs',
     icon: 'i-heroicons-currency-dollar',
+    class: 'text-xl',
     click: () => {
       isOpen.value = false;
       router.push('/paystubs');
@@ -23,6 +25,7 @@ const links = [
   {
     label: 'Bills',
     icon: 'i-heroicons-credit-card',
+    class: 'text-xl',
     click: () => {
       isOpen.value = false;
       router.push('/bills');
@@ -31,6 +34,7 @@ const links = [
   {
     label: 'Budgets',
     icon: 'i-heroicons-banknotes',
+    class: 'text-xl',
     click: () => {
       isOpen.value = false;
       router.push('/budgets');
