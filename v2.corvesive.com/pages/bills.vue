@@ -17,11 +17,15 @@ await billStore.getPayPeriodBills(payPeriodStore.currentPayPeriod.id);
 
 <template>
   <div class="mt-8">
-    <BillsBillTableCell
-      issuer="City Utilities"
-      name="Electricity Bill"
-      dueDate="11/12/2023"
-      amount="$1,122"
-    />
+    <div class="flex flex-col gap-4">
+      <BillsMonthlyBillCard
+        v-for="bill in billStore.bills"
+        :key="bill.id.toString()"
+        :issuer="bill.issuer"
+        :name="bill.name"
+        :dueDate="bill.due_date.pretty"
+        :amount="bill.amount.pretty"
+      />
+    </div>
   </div>
 </template>

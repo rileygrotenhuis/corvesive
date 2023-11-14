@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { stringLiteral } from '@babel/types';
-
 defineProps({
   issuer: String,
   name: String,
@@ -25,7 +23,7 @@ defineProps({
           </p>
         </div>
         <div class="border border-rose-500 py-1 px-2 rounded-lg">
-          <p class="text-2xl text-rose-500 font-bold">{{ amount }}</p>
+          <p class="text-xl text-rose-500 font-bold">{{ amount }}</p>
         </div>
       </div>
     </UCard>
