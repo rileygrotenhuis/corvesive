@@ -16,5 +16,14 @@ await budgetStore.getPayPeriodBudgets(payPeriodStore.currentPayPeriod.id);
 </script>
 
 <template>
-  <h1>Budgets</h1>
+  <div class="mt-8">
+    <div class="flex flex-col gap-4">
+      <BudgetsMonthlyBudgetCard
+        v-for="budget in budgetStore.budgets"
+        :key="budget.id.toString()"
+        :name="budget.name"
+        :amount="budget.amount.pretty"
+      />
+    </div>
+  </div>
 </template>
