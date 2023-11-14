@@ -11,13 +11,13 @@ defineProps({
   >
     <UCard :ui="{ background: 'dark:bg-transparent' }">
       <div
-        class="flex flex-col gap-2 sm:flex-row justify-between items-center text-center sm:text-left"
+        class="flex justify-between items-center text-center sm:text-left md:text-xl"
       >
         <div>
-          <p class="text-xl font-bold">{{ name }}</p>
+          <p class="font-bold">{{ name }}</p>
         </div>
         <div>
-          <p class="text-xl text-rose-500 font-bold">{{ amount }}</p>
+          <p class="text-rose-500 font-bold">{{ amount }}</p>
         </div>
       </div>
     </UCard>

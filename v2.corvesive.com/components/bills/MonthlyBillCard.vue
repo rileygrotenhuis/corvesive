@@ -12,19 +12,17 @@ defineProps({
     class="hover:bg-gray-800 hover:cursor-pointer shadow-sm hover:shadow-2xl"
   >
     <UCard :ui="{ background: 'dark:bg-transparent' }">
-      <div
-        class="flex flex-col gap-2 sm:flex-row justify-between items-center text-center sm:text-left"
-      >
+      <div class="flex justify-between items-center md:text-xl">
         <div>
-          <p class="text-xl font-bold">{{ issuer }}</p>
+          <p class="font-bold">{{ issuer }}</p>
           <p class="flex flex-col sm:flex-row gap-1">
-            <span>{{ name }}</span>
+            <span class="font-light">{{ name }}</span>
             <span class="hidden sm:inline-block">-</span>
             <span class="text-rose-500">{{ dueDate }}</span>
           </p>
         </div>
         <div>
-          <p class="text-xl text-rose-500 font-bold">{{ amount }}</p>
+          <p class="text-rose-500 font-bold">{{ amount }}</p>
         </div>
       </div>
     </UCard>
