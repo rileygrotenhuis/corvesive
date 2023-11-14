@@ -19,7 +19,7 @@ useHead({
         <NavigationResponsiveMenu class="flex md:hidden items-center" />
       </template>
     </NavigationWrapper>
-    <div class="w-11/12 max-w-[850px] mx-auto">
+    <div class="w-11/12 max-w-[850px] mx-auto mt-4">
       <slot />
     </div>
   </div>

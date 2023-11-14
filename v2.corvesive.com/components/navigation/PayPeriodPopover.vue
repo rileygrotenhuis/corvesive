@@ -52,9 +52,7 @@ watch(
         <UButton
           icon="i-heroicons-clock"
           :label="`${
-            useAccountStore().isMonthlyView
-              ? 'Switch to Pay Period'
-              : 'Switch to Monthly'
+            useAccountStore().isMonthlyView ? 'Monthly' : 'Pay Period'
           }`"
           color="rose"
           class="w-full"
