@@ -49,6 +49,20 @@ watch(
             block
           />
         </div>
+        <UButton
+          icon="i-heroicons-clock"
+          :label="`${
+            useAccountStore().isMonthlyView
+              ? 'Switch to Pay Period'
+              : 'Switch to Monthly'
+          }`"
+          color="rose"
+          class="w-full"
+          variant="outline"
+          size="sm"
+          block
+          @click="useAccountStore().toggleMonthlyView()"
+        />
       </div>
     </template>
   </UPopover>
