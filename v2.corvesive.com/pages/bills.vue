@@ -16,5 +16,12 @@ await billStore.getPayPeriodBills(payPeriodStore.currentPayPeriod.id);
 </script>
 
 <template>
-  <h1>Bills</h1>
+  <div class="mt-8">
+    <BillsBillTableCell
+      issuer="City Utilities"
+      name="Electricity Bill"
+      dueDate="11/12/2023"
+      amount="$1,122"
+    />
+  </div>
 </template>
