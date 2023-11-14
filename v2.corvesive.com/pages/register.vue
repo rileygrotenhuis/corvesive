@@ -5,11 +5,11 @@ useHead({
 </script>
 
 <template>
-  <div class="my-8 mx-4">
+  <div class="m-8">
     <AuthRegistrationAndLoginCard
       title="Get started with"
       subtitle="Corvesive"
-      class="mx-auto mt-16"
+      class="mx-auto"
     >
       <AuthRegistrationForm />
     </AuthRegistrationAndLoginCard>
