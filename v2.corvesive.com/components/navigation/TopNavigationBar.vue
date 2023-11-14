@@ -3,7 +3,13 @@
     <div
       class="w-11/12 max-w-[850px] mx-auto flex justify-between items-center"
     >
-      <router-link to="/" class="text-2xl font-bold text-rose-500"
+      <router-link
+        to="/"
+        :class="
+          $route.path === '/'
+            ? 'text-rose-500 text-2xl font-bold'
+            : 'text-white text-2xl font-bold'
+        "
         >Corvesive</router-link
       >
       <div class="hidden md:flex gap-12 text-sm text-secondary">
