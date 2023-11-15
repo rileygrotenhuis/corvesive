@@ -45,8 +45,8 @@ class PayPeriodResource extends JsonResource
             'budgets' => BudgetResource::collection(
                 $this->whenLoaded('budgets')
             ),
-            'savings' => SavingResource::collection(
-                $this->whenLoaded('savings')
+            'saving_accounts' => SavingResource::collection(
+                $this->whenLoaded('savingAccount')
             ),
         ];
     }

@@ -13,7 +13,7 @@ export interface ISavingResource {
 export interface IPayPeriodSavingResource {
   id: Number;
   pay_period: IPayPeriodResource;
-  saving: ISavingResource;
+  saving_account: ISavingResource;
   amount: {
     raw: Number;
     pretty: string;

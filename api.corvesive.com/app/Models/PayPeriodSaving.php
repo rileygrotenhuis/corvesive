@@ -20,6 +20,6 @@ class PayPeriodSaving extends Model
 
     public function savingAccount(): BelongsTo
     {
-        return $this->belongsTo(Saving::class);
+        return $this->belongsTo(Saving::class, 'saving_id', 'id');
     }
 }

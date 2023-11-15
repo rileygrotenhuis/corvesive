@@ -36,7 +36,7 @@ class PayPeriodPolicy
         return $user->id === $payPeriod->user_id && ($payPeriod->user_id === $budget->user_id);
     }
 
-    public function saving(User $user, PayPeriod $payPeriod, Saving $saving): bool
+    public function savingAccount(User $user, PayPeriod $payPeriod, Saving $saving): bool
     {
         return $user->id === $payPeriod->user_id && ($payPeriod->user_id === $saving->user_id);
     }

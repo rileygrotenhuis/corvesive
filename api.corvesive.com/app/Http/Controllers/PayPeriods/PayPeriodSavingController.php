@@ -22,7 +22,7 @@ class PayPeriodSavingController extends Controller
     public function index(PayPeriod $payPeriod): AnonymousResourceCollection
     {
         return PayPeriodSavingResource::collection(
-            PayPeriodSaving::with('saving')
+            PayPeriodSaving::with('savingAccount')
                 ->where('pay_period_id', $payPeriod->id)
                 ->orderBy('pay_period_saving.amount', 'desc')
                 ->get()

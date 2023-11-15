@@ -13,7 +13,7 @@ class PayPeriodSavingResource extends JsonResource
         return [
             'id' => $this->id,
             'pay_period' => $this->payPeriod(),
-            'saving' => $this->savingAccount(),
+            'saving_account' => $this->savingAccount(),
             'amount' => CurrencyUtil::formatCurrencyValues($this->amount),
         ];
     }
@@ -33,7 +33,7 @@ class PayPeriodSavingResource extends JsonResource
 
     protected function savingAccount(): SavingResource|array
     {
-        if (! $this->resource->relationLoaded('saving')) {
+        if (! $this->resource->relationLoaded('savingAccount')) {
             return [
                 'id' => $this->saving_id,
             ];
