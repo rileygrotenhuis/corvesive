@@ -1,0 +1,77 @@
+import type {
+  IAttachPayPeriodSavingRequest,
+  ICreateOrUpdateSavingRequest,
+  IUpdatePayPeriodSavingRequest,
+} from '~/http/requests/savings.request';
+import type {
+  ISavingResource,
+  IPayPeriodSavingResource,
+} from '~/http/resources/savings.resource';
+import type { IHttpResource } from '~/http/resources/http.resource';
+import type { IPayPeriodResource } from '~/http/resources/payPeriods.resource';
+import HttpFactory from '~/services/factory';
+
+class SavingService extends HttpFactory {
+  async getSavings(): Promise<IHttpResource<ISavingResource[]>> {
+    return await this.call('GET', '/savings');
+  }
+
+  async createSaving(
+    payload: ICreateOrUpdateSavingRequest
+  ): Promise<IHttpResource<ISavingResource>> {
+    return await this.call('POST', '/savings', payload);
+  }
+
+  async updateSaving(
+    id: Number,
+    payload: ICreateOrUpdateSavingRequest
+  ): Promise<IHttpResource<ISavingResource>> {
+    return await this.call('PUT', `/savings/${id}`, payload);
+  }
+
+  async deleteSaving(id: Number) {
+    return await this.call('DELETE', `/savings/${id}`);
+  }
+
+  async getPayPeriodSavings(
+    payPeriodId: Number
+  ): Promise<IHttpResource<IPayPeriodSavingResource[]>> {
+    return await this.call('GET', `/pay-periods/${payPeriodId}/savings`);
+  }
+
+  async attachSavingToPayPeriod(
+    payPeriodId: Number,
+    savingId: Number,
+    payload: IAttachPayPeriodSavingRequest
+  ): Promise<IHttpResource<IPayPeriodResource>> {
+    return await this.call(
+      'POST',
+      `/pay-periods/${payPeriodId}/savings/${savingId}`,
+      payload
+    );
+  }
+
+  async updatePayPeriodSaving(
+    payPeriodId: Number,
+    savingId: Number,
+    payload: IUpdatePayPeriodSavingRequest
+  ): Promise<IHttpResource<IPayPeriodResource>> {
+    return await this.call(
+      'PUT',
+      `/pay-periods/${payPeriodId}/savings/${savingId}`,
+      payload
+    );
+  }
+
+  async detachSavingFromPayPeriod(
+    payPeriodId: Number,
+    savingId: Number
+  ): Promise<IHttpResource<IPayPeriodResource>> {
+    return await this.call(
+      'DELETE',
+      `/pay-periods/${payPeriodId}/savings/${savingId}`
+    );
+  }
+}
+
+export default SavingService;
