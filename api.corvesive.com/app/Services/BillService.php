@@ -13,6 +13,7 @@ class BillService
         string $name,
         int $amount,
         int $dueDate,
+        bool $isAutomatic,
         ?string $notes
     ): Bill {
         $bill = new Bill();
@@ -21,6 +22,7 @@ class BillService
         $bill->name = $name;
         $bill->amount = $amount;
         $bill->due_date = $dueDate;
+        $bill->is_automatic = $isAutomatic;
         $bill->notes = $notes;
         $bill->save();
 
@@ -33,12 +35,14 @@ class BillService
         string $name,
         int $amount,
         int $dueDate,
+        bool $isAutomatic,
         ?string $notes
     ): Bill {
         $bill->issuer = $issuer;
         $bill->name = $name;
         $bill->amount = $amount;
         $bill->due_date = $dueDate;
+        $bill->is_automatic = $isAutomatic;
         $bill->notes = $notes;
         $bill->save();
 

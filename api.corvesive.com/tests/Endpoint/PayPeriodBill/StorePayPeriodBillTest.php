@@ -47,6 +47,7 @@ class StorePayPeriodBillTest extends TestCase
         $this->payload = [
             'amount' => 100000,
             'due_date' => $this->dueDate,
+            'is_automatic' => false,
         ];
     }
 
@@ -61,6 +62,7 @@ class StorePayPeriodBillTest extends TestCase
             'amount' => 100000,
             'due_date' => $this->dueDate,
             'has_payed' => false,
+            'is_automatic' => 0,
         ]);
     }
 
@@ -77,6 +79,7 @@ class StorePayPeriodBillTest extends TestCase
             'amount' => 50000,
             'due_date' => $this->dueDate,
             'has_payed' => false,
+            'is_automatic' => 0,
         ]);
     }
 

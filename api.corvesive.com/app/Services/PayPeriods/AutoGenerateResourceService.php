@@ -45,7 +45,8 @@ class AutoGenerateResourceService
                     $payPeriod->id,
                     $bill->id,
                     $bill->amount,
-                    $this->getPayPeriodBillDueDate($bill->due_date)
+                    $this->getPayPeriodBillDueDate($bill->due_date),
+                    $bill->is_automatic
                 );
         });
     }

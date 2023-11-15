@@ -14,12 +14,14 @@ class PayPeriodBillService
         int $billId,
         int $amount,
         string $dueDate,
+        bool $isAutomatic,
     ): void {
         $payPeriodBill = new PayPeriodBill();
         $payPeriodBill->pay_period_id = $payPeriodId;
         $payPeriodBill->bill_id = $billId;
         $payPeriodBill->amount = $amount;
         $payPeriodBill->due_date = $dueDate;
+        $payPeriodBill->is_automatic = $isAutomatic;
         $payPeriodBill->save();
     }
 
@@ -28,12 +30,14 @@ class PayPeriodBillService
         int $billId,
         int $amount,
         string $dueDate,
+        bool $isAutomatic,
     ): void {
         PayPeriodBill::where('pay_period_id', $payPeriodId)
             ->where('bill_id', $billId)
             ->update([
                 'amount' => $amount,
                 'due_date' => $dueDate,
+                'is_automatic' => $isAutomatic,
             ]);
     }
 

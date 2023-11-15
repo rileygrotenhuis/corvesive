@@ -28,6 +28,7 @@ class StoreBillTest extends TestCase
             'name' => 'Test',
             'amount' => 10000,
             'due_date' => 1,
+            'is_automatic' => false,
             'notes' => 'This is a test',
         ];
     }
@@ -42,6 +43,7 @@ class StoreBillTest extends TestCase
             'name' => 'Test',
             'amount' => 10000,
             'due_date' => 1,
+            'is_automatic' => 0,
             'notes' => 'This is a test',
         ]);
     }
@@ -57,6 +59,7 @@ class StoreBillTest extends TestCase
             'issuer' => 'Test',
             'name' => 'Test',
             'amount' => 10000,
+            'is_automatic' => 0,
             'notes' => null,
         ]);
     }

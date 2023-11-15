@@ -34,6 +34,7 @@ class BillController extends Controller
             $request->name,
             $request->amount,
             $request->due_date,
+            $request->is_automatic,
             $request->notes,
         );
 
@@ -57,6 +58,7 @@ class BillController extends Controller
             $request->name,
             $request->amount,
             $request->due_date,
+            $request->is_automatic,
             $request->notes,
         );
 

@@ -56,6 +56,7 @@ class UpdatePayPeriodBillTest extends TestCase
         $this->payload = [
             'amount' => 50000,
             'due_date' => $this->dueDate,
+            'is_automatic' => false,
         ];
     }
 
@@ -70,6 +71,7 @@ class UpdatePayPeriodBillTest extends TestCase
             'amount' => 50000,
             'has_payed' => false,
             'due_date' => $this->dueDate,
+            'is_automatic' => false,
         ]);
     }
 

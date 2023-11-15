@@ -41,6 +41,7 @@ class UpdateBillTest extends TestCase
             'name' => 'Updated Test',
             'amount' => 20000,
             'due_date' => 20,
+            'is_automatic' => false,
             'notes' => 'This is an updated test',
         ];
     }
@@ -55,6 +56,7 @@ class UpdateBillTest extends TestCase
             'name' => 'Updated Test',
             'amount' => 20000,
             'due_date' => 20,
+            'is_automatic' => 0,
             'notes' => 'This is an updated test',
         ]);
     }

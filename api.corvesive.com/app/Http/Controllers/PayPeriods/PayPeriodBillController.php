@@ -47,7 +47,8 @@ class PayPeriodBillController extends Controller
                 $payPeriod->id,
                 $bill->id,
                 $request->amount,
-                $request->due_date
+                $request->due_date,
+                $request->is_automatic
             );
 
         return new PayPeriodResource($payPeriod);
@@ -66,6 +67,7 @@ class PayPeriodBillController extends Controller
                 $bill->id,
                 $request->amount,
                 $request->due_date,
+                $request->is_automatic
             );
 
         return new PayPeriodResource($payPeriod);
