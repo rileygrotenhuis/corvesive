@@ -35,7 +35,7 @@ class PayPeriodSavingController extends Controller
             'amount' => 'required|integer|min:0',
         ]);
 
-        $this->authorize('saving', [
+        $this->authorize('savingAccount', [
             $payPeriod,
             $saving,
         ]);
@@ -60,7 +60,7 @@ class PayPeriodSavingController extends Controller
             'amount' => 'required|integer|min:0',
         ]);
 
-        $this->authorize('saving', [
+        $this->authorize('savingAccount', [
             $payPeriod,
             $saving,
         ]);
@@ -77,7 +77,7 @@ class PayPeriodSavingController extends Controller
 
     public function destroy(PayPeriod $payPeriod, Saving $saving): PayPeriodResource
     {
-        $this->authorize('saving', [
+        $this->authorize('savingAccount', [
             $payPeriod,
             $saving,
         ]);
