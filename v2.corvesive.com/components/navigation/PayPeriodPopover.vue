@@ -24,7 +24,7 @@ watch(
 
     <template #panel>
       <div class="p-4 w-[250px] flex flex-col gap-4">
-        <UFormGroup label="Pay Period">
+        <UFormGroup label="Current Period">
           <USelect
             v-model="selectedPayPeriod"
             :options="payPeriodSelectOptions"
@@ -50,9 +50,15 @@ watch(
           />
         </div>
         <UButton
-          icon="i-heroicons-clock"
+          :icon="`${
+            useAccountStore().isRecurringView
+              ? 'i-heroicons-clock'
+              : 'i-heroicons-calendar'
+          }`"
           :label="`${
-            useAccountStore().isMonthlyView ? 'Monthly' : 'Pay Period'
+            useAccountStore().isRecurringView
+              ? 'View Current Period'
+              : 'View Recurring'
           }`"
           color="rose"
           class="w-full"

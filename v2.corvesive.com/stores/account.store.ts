@@ -4,7 +4,7 @@ import type { IUserResource } from '~/http/resources/account.resource';
 export const useAccountStore = defineStore('useAccountStore', {
   state: () => ({
     user: {} as IUserResource,
-    isMonthlyView: false as Boolean,
+    isRecurringView: false as Boolean,
   }),
   actions: {
     async me(): Promise<IUserResource> {
@@ -18,7 +18,7 @@ export const useAccountStore = defineStore('useAccountStore', {
       return this.user;
     },
     toggleMonthlyView() {
-      this.isMonthlyView = !this.isMonthlyView;
+      this.isRecurringView = !this.isRecurringView;
     },
   },
 });
