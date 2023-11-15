@@ -34,6 +34,7 @@ class PayPeriodBillsService {
         body: JSON.stringify({
           amount: amount * 100,
           due_date: dueDate,
+          is_automatic: false,
         }),
       }
     );
@@ -60,6 +61,7 @@ class PayPeriodBillsService {
         body: JSON.stringify({
           amount: amount * 100,
           due_date: dueDate,
+          is_automatic: false,
         }),
       }
     );

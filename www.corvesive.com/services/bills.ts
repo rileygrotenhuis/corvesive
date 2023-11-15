@@ -30,6 +30,7 @@ class BillsService {
         name: name,
         amount: amount * 100,
         due_date: dueDate,
+        is_automatic: false,
         notes: notes,
       }),
     });
@@ -58,6 +59,7 @@ class BillsService {
           name: name,
           amount: amount * 100,
           due_date: dueDate,
+          is_automatic: false,
           notes: notes,
         }),
       }
