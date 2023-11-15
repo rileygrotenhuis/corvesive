@@ -6,6 +6,7 @@ use App\Models\Bill;
 use App\Models\Budget;
 use App\Models\PayPeriod;
 use App\Models\Paystub;
+use App\Models\Saving;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -16,6 +17,7 @@ class AutoGenerateResourceService
         $this->autoGeneratePayPeriodPaystubs($payPeriod, $user);
         $this->autoGeneratePayPeriodBills($payPeriod, $user);
         $this->autoGeneratePayPeriodBudgets($payPeriod, $user);
+        $this->autoGeneratePayPeriodSavings($payPeriod, $user);
     }
 
     protected function autoGeneratePayPeriodPaystubs(PayPeriod $payPeriod, User $user): void
@@ -61,6 +63,20 @@ class AutoGenerateResourceService
                     $payPeriod,
                     $budget,
                     $budget->amount * $payPeriod->monthCoveragePercentage()
+                );
+        });
+    }
+
+    protected function autoGeneratePayPeriodSavings(PayPeriod $payPeriod, User $user): void
+    {
+        $savings = Saving::where('user_id', $user->id)->get();
+
+        $savings->each(function ($saving) use ($payPeriod) {
+            resolve(PayPeriodSavingService::class)
+                ->addSavingToPayPeriod(
+                    $payPeriod,
+                    $saving,
+                    $saving->amount * $payPeriod->monthCoveragePercentage()
                 );
         });
     }

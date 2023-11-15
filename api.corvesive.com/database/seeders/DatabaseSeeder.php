@@ -6,6 +6,7 @@ use App\Models\Bill;
 use App\Models\Budget;
 use App\Models\PayPeriod;
 use App\Models\Paystub;
+use App\Models\Saving;
 use App\Models\User;
 use App\Services\PayPeriods\AutoGenerateResourceService;
 use Carbon\Carbon;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->createPaystubs();
         $this->createBills();
         $this->createBudgets();
+        $this->createSavings();
 
         $this->createPayPeriods()->each(function ($payPeriod) {
             resolve(AutoGenerateResourceService::class)->autoGenerateAllPayPeriodResources($payPeriod, $this->user);
@@ -113,6 +115,19 @@ class DatabaseSeeder extends Seeder
         Budget::factory()->for($this->user)->create([
             'name' => 'Entertainment',
             'amount' => 30000,
+        ]);
+    }
+
+    protected function createSavings(): void
+    {
+        Saving::factory()->for($this->user)->create([
+            'name' => 'General',
+            'amount' => 25000,
+        ]);
+
+        Saving::factory()->for($this->user)->create([
+            'name' => 'Vacation',
+            'amount' => 10000,
         ]);
     }
 
