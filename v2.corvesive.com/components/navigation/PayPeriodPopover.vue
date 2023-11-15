@@ -34,6 +34,7 @@ watch(
         <div class="flex gap-1">
           <UButton
             icon="i-heroicons-pencil-square"
+            to="/period/settings"
             label="Settings"
             color="rose"
             variant="outline"
@@ -42,6 +43,7 @@ watch(
           />
           <UButton
             icon="i-heroicons-plus"
+            to="/period/new"
             label="Create"
             color="rose"
             class="w-1/2"
