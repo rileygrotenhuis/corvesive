@@ -21,7 +21,14 @@ watch(
 
 <template>
   <UPopover :popper="{ placement: 'bottom-end' }">
-    <UIcon name="i-heroicons-calendar" class="w-5 h-5" />
+    <UIcon
+      :name="`${
+        !accountStore.isRecurringView
+          ? 'i-heroicons-clock'
+          : 'i-heroicons-calendar'
+      }`"
+      class="w-5 h-5"
+    />
 
     <template #panel>
       <div class="p-4 w-[250px] flex flex-col gap-4">
