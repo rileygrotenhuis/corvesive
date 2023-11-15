@@ -19,12 +19,17 @@ export interface IPayPeriodBillResource {
   id: Number;
   pay_period: IPayPeriodResource;
   bill: IBillResource;
+  amount: {
+    raw: Number;
+    pretty: string;
+  };
   dates: {
     due: {
       raw: string;
       pretty: {
         full: string;
         short: string;
+        day: string;
         input: string;
       };
     };
