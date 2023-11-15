@@ -15,7 +15,7 @@ defineProps({
           <p class="font-bold">{{ title }}</p>
           <p v-if="subtitle" class="font-light text-sm">{{ subtitle }}</p>
         </div>
-        <div>
+        <div class="min-w-[100px] text-right">
           <p>{{ amount }}</p>
           <p v-if="amountSubtitle" class="text-xs text-rose-500 font-bold">
             {{ amountSubtitle }}
