@@ -14,30 +14,21 @@ const links = [
     },
   },
   {
-    label: 'Income',
+    label: 'Reporting',
+    icon: 'i-heroicons-chart-bar',
+    class: 'text-xl',
+    click: () => {
+      isOpen.value = false;
+      alert('THIS PAGE DOES NOT EXIST YET');
+    },
+  },
+  {
+    label: 'Transactions',
     icon: 'i-heroicons-currency-dollar',
     class: 'text-xl',
     click: () => {
       isOpen.value = false;
-      router.push('/income');
-    },
-  },
-  {
-    label: 'Expenses',
-    icon: 'i-heroicons-credit-card',
-    class: 'text-xl',
-    click: () => {
-      isOpen.value = false;
-      router.push('/expenses');
-    },
-  },
-  {
-    label: 'Savings',
-    icon: 'i-heroicons-banknotes',
-    class: 'text-xl',
-    click: () => {
-      isOpen.value = false;
-      router.push('/savings');
+      alert('THIS PAGE DOES NOT EXIST YET');
     },
   },
 ];
@@ -47,7 +38,7 @@ const links = [
   <div>
     <UIcon
       name="i-heroicons-bars-3"
-      class="w-5 h-5 hover:cursor-pointer"
+      class="w-6 h-6 hover:cursor-pointer"
       @click="isOpen = !isOpen"
     />
 

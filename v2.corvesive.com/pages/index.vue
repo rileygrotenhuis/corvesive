@@ -10,5 +10,7 @@ definePageMeta({
 </script>
 
 <template>
-  <h1>Home Page</h1>
+  <div class="mt-8">
+    <h1>Dashboard</h1>
+  </div>
 </template>

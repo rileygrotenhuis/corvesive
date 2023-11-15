@@ -14,30 +14,30 @@ const links = [
     },
   },
   {
-    label: 'Income',
+    label: 'Paystubs',
     icon: 'i-heroicons-currency-dollar',
     class: 'text-xl',
     click: () => {
       isOpen.value = false;
-      router.push('/income');
+      router.push('/paystubs');
     },
   },
   {
-    label: 'Expenses',
+    label: 'Bills',
     icon: 'i-heroicons-credit-card',
     class: 'text-xl',
     click: () => {
       isOpen.value = false;
-      router.push('/expenses');
+      router.push('/bills');
     },
   },
   {
-    label: 'Savings',
+    label: 'Budgets',
     icon: 'i-heroicons-banknotes',
     class: 'text-xl',
     click: () => {
       isOpen.value = false;
-      router.push('/savings');
+      router.push('/budgets');
     },
   },
 ];
