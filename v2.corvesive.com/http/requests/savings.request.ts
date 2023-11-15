@@ -4,13 +4,6 @@ export interface ICreateOrUpdateSavingRequest {
   notes: string;
 }
 
-export interface IAttachPayPeriodSavingRequest {
+export interface IAttachOrUpdatePayPeriodSavingRequest {
   amount: Number;
-  total_balance: Number;
-}
-
-export interface IUpdatePayPeriodSavingRequest {
-  amount: Number;
-  total_balance: Number;
-  remaining_balance: Number;
 }

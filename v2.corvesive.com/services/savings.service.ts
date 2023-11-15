@@ -1,7 +1,6 @@
 import type {
-  IAttachPayPeriodSavingRequest,
+  IAttachOrUpdatePayPeriodSavingRequest,
   ICreateOrUpdateSavingRequest,
-  IUpdatePayPeriodSavingRequest,
 } from '~/http/requests/savings.request';
 import type {
   ISavingResource,
@@ -42,7 +41,7 @@ class SavingService extends HttpFactory {
   async attachSavingToPayPeriod(
     payPeriodId: Number,
     savingId: Number,
-    payload: IAttachPayPeriodSavingRequest
+    payload: IAttachOrUpdatePayPeriodSavingRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
       'POST',
@@ -54,7 +53,7 @@ class SavingService extends HttpFactory {
   async updatePayPeriodSaving(
     payPeriodId: Number,
     savingId: Number,
-    payload: IUpdatePayPeriodSavingRequest
+    payload: IAttachOrUpdatePayPeriodSavingRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
       'PUT',
