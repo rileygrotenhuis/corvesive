@@ -8,10 +8,12 @@ definePageMeta({
   layout: 'main',
 });
 
+const accountStore = useAccountStore();
 const paystubStore = usePaystubStore();
+const transactionStore = useTransactionStore();
 
 await paystubStore.getPaystubs();
-await useBudgetStore().getBudgets();
+await transactionStore.getPayPeriodDeposits(accountStore.user.pay_period.id);
 
 const tabs = [
   {
@@ -41,10 +43,10 @@ const tabs = [
             />
             <ExpensesExpenseCard
               v-else-if="item.key === 'deposits'"
-              v-for="budget in useBudgetStore().budgets"
-              :key="budget.id.toString()"
-              :title="budget.name"
-              :amount="budget.amount.pretty"
+              v-for="deposit in transactionStore.deposits"
+              :key="deposit.id.toString()"
+              :title="deposit.dates.created.pretty"
+              :amount="deposit.amount.pretty"
             />
           </div>
         </UCard>

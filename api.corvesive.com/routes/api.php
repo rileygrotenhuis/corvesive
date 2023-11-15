@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::prefix('transactions')->group(function () {
             Route::get('/', [TransactionController::class, 'payPeriodTransactions'])->name('pay-periods.transactions');
+            Route::get('/deposits', [TransactionController::class, 'payPeriodDeposits'])->name('pay-periods.deposits');
             Route::put('{transaction}', [TransactionController::class, 'update'])->name('pay-periods.transactions.update');
             Route::delete('{transaction}', [TransactionController::class, 'destroy'])->name('pay-periods.transactions.destroy');
         });

@@ -35,6 +35,22 @@ class TransactionController extends Controller
         );
     }
 
+    public function payPeriodDeposits(PayPeriod $payPeriod): AnonymousResourceCollection
+    {
+        $this->authorize('user', $payPeriod);
+
+        return TransactionResource::collection(
+            Transaction::with(['payPeriod'])
+                ->where('user_id', auth()->user()->id)
+                ->where('pay_period_id', $payPeriod->id)
+                ->whereNull('pay_period_bill_id')
+                ->whereNull('pay_period_budget_id')
+                ->where('type', 'deposit')
+                ->orderBy('created_at', 'desc')
+                ->get()
+        );
+    }
+
     public function billTransaction(PayPeriod $payPeriod, PayPeriodBill $payPeriodBill): TransactionResource
     {
         $this->authorize('billTransaction', [
