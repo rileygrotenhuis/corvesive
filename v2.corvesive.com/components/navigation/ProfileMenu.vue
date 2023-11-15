@@ -22,8 +22,9 @@ const menuItems = [
     {
       label: 'Sign out',
       icon: 'i-heroicons-arrow-left-on-rectangle',
-      click: () => {
-        useNuxtApp().$router.push('/logout');
+      click: async () => {
+        await useNuxtApp().$api.auth.logout();
+        useNuxtApp().$router.push('/login');
       },
     },
   ],

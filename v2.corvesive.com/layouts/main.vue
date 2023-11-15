@@ -15,7 +15,7 @@ useHead({
       <template #profile-menu>
         <NavigationProfileMenu />
       </template>
-      <template #responsive-menu>
+      <template #sidebar-menu>
         <NavigationSidebarMenu class="flex items-center" />
       </template>
     </NavigationWrapper>

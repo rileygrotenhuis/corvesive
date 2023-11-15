@@ -40,7 +40,7 @@
       <div class="flex gap-8">
         <slot name="pay-period-popover" />
         <slot name="profile-menu" />
-        <slot name="responsive-menu" />
+        <slot name="sidebar-menu" />
       </div>
     </div>
     <div
