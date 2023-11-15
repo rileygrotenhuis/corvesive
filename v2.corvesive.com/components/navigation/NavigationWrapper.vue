@@ -16,17 +16,23 @@
       >
       <div class="hidden md:flex gap-12 text-sm text-secondary">
         <router-link
-          :class="$route.path.includes('/income') ? 'text-rose-500' : ''"
+          :class="`${
+            $route.path.includes('/income') ? 'text-rose-500' : ''
+          } hover:text-rose-500`"
           to="/income"
           >Income</router-link
         >
         <router-link
-          :class="$route.path.includes('/expenses') ? 'text-rose-500' : ''"
+          :class="`${
+            $route.path.includes('/expenses') ? 'text-rose-500' : ''
+          } hover:text-rose-500`"
           to="/expenses"
           >Expenses</router-link
         >
         <router-link
-          :class="$route.path.includes('/savings') ? 'text-rose-500' : ''"
+          :class="`${
+            $route.path.includes('/savings') ? 'text-rose-500' : ''
+          } hover:text-rose-500`"
           to="/savings"
           >Savings</router-link
         >
@@ -36,6 +42,31 @@
         <slot name="profile-menu" />
         <slot name="responsive-menu" />
       </div>
+    </div>
+    <div
+      class="flex md:hidden gap-20 text-sm text-secondary justify-center mt-8"
+    >
+      <router-link
+        :class="`${
+          $route.path.includes('/income') ? 'text-rose-500' : ''
+        } hover:text-rose-500`"
+        to="/income"
+        >Income</router-link
+      >
+      <router-link
+        :class="`${
+          $route.path.includes('/expenses') ? 'text-rose-500' : ''
+        } hover:text-rose-500`"
+        to="/expenses"
+        >Expenses</router-link
+      >
+      <router-link
+        :class="`${
+          $route.path.includes('/savings') ? 'text-rose-500' : ''
+        } hover:text-rose-500`"
+        to="/savings"
+        >Savings</router-link
+      >
     </div>
   </nav>
 </template>
