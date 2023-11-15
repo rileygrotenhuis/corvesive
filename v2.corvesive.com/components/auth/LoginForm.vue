@@ -2,6 +2,9 @@
 import { setAccessToken } from '~/util/auth.util';
 import type { ILoginRequest } from '~/http/requests/auth.request';
 
+const accountStore = useAccountStore();
+const payPeriodStore = usePayPeriodStore();
+
 const form: ILoginRequest = reactive({
   email: '',
   password: '',
@@ -13,12 +16,12 @@ const handleSubmit = async () => {
   const response = await useNuxtApp().$api.auth.login(form);
 
   if (!(errors.value = response.errors)) {
-    useAccountStore().setUser(response.user);
+    accountStore.setUser(response.user);
 
     await setAccessToken(response.token);
 
-    await usePayPeriodStore().getPayPeriods();
-    await usePayPeriodStore().getPayPeriod(response.user.pay_period.id);
+    await payPeriodStore.getPayPeriods();
+    await payPeriodStore.getPayPeriod(response.user.pay_period.id);
 
     return await navigateTo('/');
   }

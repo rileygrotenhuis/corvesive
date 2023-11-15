@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const payPeriodStore = usePayPeriodStore();
+const accountStore = useAccountStore();
 
 const payPeriodSelectOptions = payPeriodStore.payPeriods.map((payPeriod) => {
   return {
@@ -49,12 +50,12 @@ watch(
         </div>
         <UButton
           :icon="`${
-            useAccountStore().isRecurringView
+            accountStore.isRecurringView
               ? 'i-heroicons-clock'
               : 'i-heroicons-calendar'
           }`"
           :label="`${
-            useAccountStore().isRecurringView
+            accountStore.isRecurringView
               ? 'View Current Period'
               : 'View Recurring'
           }`"
@@ -63,7 +64,7 @@ watch(
           variant="outline"
           size="sm"
           block
-          @click="useAccountStore().toggleMonthlyView()"
+          @click="accountStore.toggleMonthlyView()"
         />
       </div>
     </template>
