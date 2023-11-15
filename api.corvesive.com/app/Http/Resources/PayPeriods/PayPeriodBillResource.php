@@ -23,6 +23,7 @@ class PayPeriodBillResource extends JsonResource
                     'pretty' => [
                         'full' => Carbon::parse($this->due_date)->format('F j, Y'),
                         'short' => Carbon::parse($this->due_date)->format('n/j/y'),
+                        'day' => Carbon::parse($this->due_date)->format('jS'),
                         'input' => Carbon::parse($this->due_date)->format('Y-m-d'),
                     ],
                 ],
