@@ -8,9 +8,11 @@ definePageMeta({
   layout: 'main',
 });
 
+const accountStore = useAccountStore();
 const savingStore = useSavingStore();
 
 await savingStore.getSavings();
+await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
 </script>
 
 <template>

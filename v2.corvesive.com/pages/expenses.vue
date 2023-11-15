@@ -61,7 +61,9 @@ const tabs = [
               :amount="budget.amount.pretty"
             />
             <ExpensesExpenseCard
-              v-else-if="!accountStore.isRecurringView && item.key === 'budgets'"
+              v-else-if="
+                !accountStore.isRecurringView && item.key === 'budgets'
+              "
               v-for="budget in budgetStore.payPeriodBudgets"
               :key="`${budget.pay_period.id} - ${budget.id}`"
               :title="budget.budget.name"

@@ -34,22 +34,24 @@ const tabs = [
       <template #item="{ item }">
         <UCard>
           <div class="flex flex-col gap-4">
-              <ExpensesExpenseCard
-                v-if="accountStore.isRecurringView && item.key === 'paystubs'"
-                v-for="paystub in paystubStore.paystubs"
-                :key="paystub.id.toString()"
-                :title="paystub.issuer"
-                :subtitle="paystub.type"
-                :amount="paystub.amount.pretty"
-              />
-              <ExpensesExpenseCard
-                v-else-if="!accountStore.isRecurringView && item.key === 'paystubs'"
-                v-for="paystub in paystubStore.payPeriodPaystubs"
-                :key="`${paystub.pay_period.id} - ${paystub.id}`"
-                :title="paystub.paystub.issuer"
-                :subtitle="paystub.paystub.type"
-                :amount="paystub.amount.pretty"
-              />
+            <ExpensesExpenseCard
+              v-if="accountStore.isRecurringView && item.key === 'paystubs'"
+              v-for="paystub in paystubStore.paystubs"
+              :key="paystub.id.toString()"
+              :title="paystub.issuer"
+              :subtitle="paystub.type"
+              :amount="paystub.amount.pretty"
+            />
+            <ExpensesExpenseCard
+              v-else-if="
+                !accountStore.isRecurringView && item.key === 'paystubs'
+              "
+              v-for="paystub in paystubStore.payPeriodPaystubs"
+              :key="`${paystub.pay_period.id} - ${paystub.id}`"
+              :title="paystub.paystub.issuer"
+              :subtitle="paystub.paystub.type"
+              :amount="paystub.amount.pretty"
+            />
             <ExpensesExpenseCard
               v-else-if="item.key === 'deposits'"
               v-for="deposit in transactionStore.deposits"
