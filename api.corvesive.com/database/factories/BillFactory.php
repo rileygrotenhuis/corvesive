@@ -15,6 +15,7 @@ class BillFactory extends Factory
             'name' => fake()->name(),
             'amount' => fake()->numberBetween(10000, 100000),
             'due_date' => fake()->numberBetween(1, 20),
+            'is_automatic' => false,
             'notes' => fake()->text(),
         ];
     }

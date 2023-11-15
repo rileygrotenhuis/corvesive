@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\UpdateAutoPaymentBillsJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -9,7 +10,9 @@ class Kernel extends ConsoleKernel
 {
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->job(
+            new UpdateAutoPaymentBillsJob()
+        )->dailyAt('0:00');
     }
 
     protected function commands(): void

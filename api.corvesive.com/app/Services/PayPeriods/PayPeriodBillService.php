@@ -5,6 +5,7 @@ namespace App\Services\PayPeriods;
 use App\Models\Bill;
 use App\Models\PayPeriod;
 use App\Models\PayPeriodBill;
+use App\Services\TransactionService;
 use Carbon\Carbon;
 
 class PayPeriodBillService
@@ -75,5 +76,17 @@ class PayPeriodBillService
             ->where('pay_period_id', $payPeriod->id)
             ->where('bill_id', $bill->id)
             ->exists();
+    }
+
+    public function updateAutoPaymentBills(): void
+    {
+        $bills = PayPeriodBill::where('due_date', Carbon::today()->toDateString())->where('is_automatic', 1)->get();
+
+        foreach ($bills as $bill) {
+            resolve(TransactionService::class)->createBillTransaction(
+                $bill->payPeriod,
+                $bill,
+            );
+        }
     }
 }

@@ -17,6 +17,7 @@ class PayPeriodBillFactory extends Factory
             'amount' => fake()->numberBetween(50000, 100000),
             'has_payed' => false,
             'due_date' => Carbon::today()->toDateString(),
+            'is_automatic' => false,
         ];
     }
 }
