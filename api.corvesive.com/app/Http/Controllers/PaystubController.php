@@ -31,6 +31,7 @@ class PaystubController extends Controller
         $paystub = $this->paystubService->createPaystub(
             auth()->user()->id,
             $request->issuer,
+            $request->type,
             $request->amount,
             $request->notes,
         );
@@ -53,6 +54,7 @@ class PaystubController extends Controller
             ->updatePaystub(
                 $paystub,
                 $request->issuer,
+                $request->type,
                 $request->amount,
                 $request->notes,
             );

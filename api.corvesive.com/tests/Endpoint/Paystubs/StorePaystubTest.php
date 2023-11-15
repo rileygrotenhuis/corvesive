@@ -25,6 +25,7 @@ class StorePaystubTest extends TestCase
 
         $this->payload = [
             'issuer' => 'Enron',
+            'type' => 'Paycheck',
             'amount' => 10000,
             'notes' => 'This is a test',
         ];
@@ -38,6 +39,7 @@ class StorePaystubTest extends TestCase
         $this->assertDatabaseHas('paystubs', [
             'user_id' => $this->user->id,
             'issuer' => $this->payload['issuer'],
+            'type' => $this->payload['type'],
             'amount' => $this->payload['amount'],
             'notes' => $this->payload['notes'],
         ]);

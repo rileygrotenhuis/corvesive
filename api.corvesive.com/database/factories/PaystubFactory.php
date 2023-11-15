@@ -12,6 +12,7 @@ class PaystubFactory extends Factory
         return [
             'user_id' => User::factory(),
             'issuer' => fake()->name(),
+            'type' => 'General',
             'amount' => fake()->numberBetween(5000, 25000),
             'notes' => fake()->text(),
         ];
