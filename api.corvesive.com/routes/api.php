@@ -4,7 +4,6 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BudgetController;
-use App\Http\Controllers\SavingController;
 use App\Http\Controllers\MonthlyMetricsController;
 use App\Http\Controllers\PayPeriods\PayPeriodBillController;
 use App\Http\Controllers\PayPeriods\PayPeriodBudgetController;
@@ -15,6 +14,7 @@ use App\Http\Controllers\PayPeriods\PayPeriodDashboardController;
 use App\Http\Controllers\PayPeriods\PayPeriodMetricsController;
 use App\Http\Controllers\PayPeriods\PayPeriodPaystubController;
 use App\Http\Controllers\PaystubController;
+use App\Http\Controllers\SavingController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         'pay-periods' => PayPeriodController::class,
         'bills' => BillController::class,
         'budgets' => BudgetController::class,
-        'savings' => SavingController::class
+        'savings' => SavingController::class,
     ]);
 
     Route::get('monthly/metrics', [MonthlyMetricsController::class, 'index'])->name('monthly-metrics');
