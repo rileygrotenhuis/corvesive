@@ -30,7 +30,7 @@ watch(
             :options="payPeriodSelectOptions"
           />
         </UFormGroup>
-        <div class="flex gap-2">
+        <div class="flex gap-1">
           <UButton
             icon="i-heroicons-pencil-square"
             label="Settings"
@@ -38,15 +38,13 @@ watch(
             variant="outline"
             class="w-1/2"
             size="sm"
-            block
           />
           <UButton
             icon="i-heroicons-plus"
-            label="New"
+            label="Create"
             color="rose"
             class="w-1/2"
             size="sm"
-            block
           />
         </div>
         <UButton
