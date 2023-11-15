@@ -46,6 +46,13 @@ class PayPeriod extends Model
             ->withPivot('id', 'total_balance', 'remaining_balance');
     }
 
+    public function savings(): BelongsToMany
+    {
+        return $this
+            ->belongsToMany(Saving::class, 'pay_period_saving')
+            ->withPivot('id', 'amount');
+    }
+
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);

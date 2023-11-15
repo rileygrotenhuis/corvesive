@@ -20,9 +20,9 @@ class SavingResource extends JsonResource
             'pay_periods' => PayPeriodResource::collection(
                 $this->whenLoaded('payPeriods')
             ),
-            //            'pivot' => $this->whenPivotLoaded(
-            //                'pay_period_saving', new PayPeriodSavingResource($this->pivot)
-            //            ),
+            'pivot' => $this->whenPivotLoaded(
+                'pay_period_saving', new PayPeriodSavingResource($this->pivot)
+            ),
         ];
     }
 

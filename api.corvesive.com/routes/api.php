@@ -13,6 +13,7 @@ use App\Http\Controllers\PayPeriods\PayPeriodCurrentController;
 use App\Http\Controllers\PayPeriods\PayPeriodDashboardController;
 use App\Http\Controllers\PayPeriods\PayPeriodMetricsController;
 use App\Http\Controllers\PayPeriods\PayPeriodPaystubController;
+use App\Http\Controllers\PayPeriods\PayPeriodSavingController;
 use App\Http\Controllers\PaystubController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\TransactionController;
@@ -83,6 +84,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::put('{budget}', [PayPeriodBudgetController::class, 'update'])->name('pay-periods.budgets.update');
             Route::delete('{budget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-periods.budgets.destroy');
             Route::post('{payPeriodBudget}/transaction', [TransactionController::class, 'budgetTransaction'])->name('pay-periods.budgets.transaction');
+        });
+
+        Route::prefix('savings')->group(function () {
+            Route::get('/', [PayPeriodSavingController::class, 'index'])->name('pay-periods.savings.index');
+            Route::post('{saving}', [PayPeriodSavingController::class, 'store'])->name('pay-periods.savings.store');
+            Route::put('{saving}', [PayPeriodSavingController::class, 'update'])->name('pay-periods.savings.update');
+            Route::delete('{saving}', [PayPeriodSavingController::class, 'destroy'])->name('pay-periods.savings.destroy');
         });
     });
 });

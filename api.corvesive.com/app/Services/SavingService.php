@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\PayPeriodSaving;
 use App\Models\Saving;
-
-//use App\Models\PayPeriodSaving;
 
 class SavingService
 {
@@ -40,13 +39,13 @@ class SavingService
 
     public function deleteSaving(Saving $saving): bool
     {
-        //        $this->removeAttachedPayPeriodSavings($saving);
+        $this->removeAttachedPayPeriodSavings($saving);
 
         return $saving->delete();
     }
 
-    //    protected function removeAttachedPayPeriodSavings(Saving $saving): void
-    //    {
-    //        PayPeriodSaving::where('saving_id', $saving->id)->delete();
-    //    }
+    protected function removeAttachedPayPeriodSavings(Saving $saving): void
+    {
+        PayPeriodSaving::where('saving_id', $saving->id)->delete();
+    }
 }
