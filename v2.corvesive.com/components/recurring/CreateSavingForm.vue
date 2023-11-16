@@ -29,6 +29,7 @@ const handleSubmit = async () => {
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
       <h4 class="text-xl font-bold text-rose-500">New Saving</h4>
+      <p class="text-sm font-light">Categorize all of your monthly savings</p>
       <UFormGroup label="Name" name="name">
         <UInput v-model="form.name" />
       </UFormGroup>

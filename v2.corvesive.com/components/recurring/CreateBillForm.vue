@@ -31,6 +31,9 @@ const handleSubmit = async () => {
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
       <h4 class="text-xl font-bold text-rose-500">New Bill</h4>
+      <p class="text-sm font-light">
+        Track all of your one-time payment expenses
+      </p>
       <UFormGroup label="Issuer" name="issuer">
         <UInput v-model="form.issuer" />
       </UFormGroup>
