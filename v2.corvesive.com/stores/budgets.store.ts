@@ -16,7 +16,7 @@ export const useBudgetStore = defineStore('useBudgetStore', {
       return this.budgets;
     },
     async getPayPeriodBudgets(
-      payPeriodId: Number
+      payPeriodId: number
     ): Promise<IPayPeriodBudgetResource[]> {
       this.payPeriodBudgets = (
         await useNuxtApp().$api.budgets.getPayPeriodBudgets(payPeriodId)

@@ -10,7 +10,7 @@ class StoreBudgetRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'amount' => 'required|integer|min:0',
+            'amount' => 'required|numeric|min:0',
             'notes' => 'nullable|string',
         ];
     }

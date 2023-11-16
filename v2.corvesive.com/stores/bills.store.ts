@@ -16,7 +16,7 @@ export const useBillStore = defineStore('useBillStore', {
       return this.bills;
     },
     async getPayPeriodBills(
-      payPeriodId: Number
+      payPeriodId: number
     ): Promise<IPayPeriodBillResource[]> {
       this.payPeriodBills = (
         await useNuxtApp().$api.bills.getPayPeriodBills(payPeriodId)

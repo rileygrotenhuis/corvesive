@@ -23,25 +23,25 @@ class BudgetService extends HttpFactory {
   }
 
   async updateBudget(
-    id: Number,
+    id: number,
     payload: ICreateOrUpdateBudgetRequest
   ): Promise<IHttpResource<IBudgetResource>> {
     return await this.call('PUT', `/budgets/${id}`, payload);
   }
 
-  async deleteBudget(id: Number) {
+  async deleteBudget(id: number) {
     return await this.call('DELETE', `/budgets/${id}`);
   }
 
   async getPayPeriodBudgets(
-    payPeriodId: Number
+    payPeriodId: number
   ): Promise<IHttpResource<IPayPeriodBudgetResource[]>> {
     return await this.call('GET', `/pay-periods/${payPeriodId}/budgets`);
   }
 
   async attachBudgetToPayPeriod(
-    payPeriodId: Number,
-    budgetId: Number,
+    payPeriodId: number,
+    budgetId: number,
     payload: IAttachPayPeriodBudgetRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
@@ -52,8 +52,8 @@ class BudgetService extends HttpFactory {
   }
 
   async updatePayPeriodBudget(
-    payPeriodId: Number,
-    budgetId: Number,
+    payPeriodId: number,
+    budgetId: number,
     payload: IUpdatePayPeriodBudgetRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
@@ -64,8 +64,8 @@ class BudgetService extends HttpFactory {
   }
 
   async detachBudgetFromPayPeriod(
-    payPeriodId: Number,
-    budgetId: Number
+    payPeriodId: number,
+    budgetId: number
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
       'DELETE',

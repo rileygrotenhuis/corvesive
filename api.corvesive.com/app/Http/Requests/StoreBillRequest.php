@@ -11,7 +11,7 @@ class StoreBillRequest extends FormRequest
         return [
             'issuer' => 'required|string',
             'name' => 'required|string',
-            'amount' => 'required|integer|min:0',
+            'amount' => 'required|numeric|min:0',
             'due_date' => 'required|integer|min:1|max:31',
             'is_automatic' => 'required|boolean',
             'notes' => 'nullable|string',

@@ -1,10 +1,10 @@
 export interface ICreateOrUpdatePaystubRequest {
   issuer: string;
   type: string;
-  amount: Number;
+  amount: number;
   notes: string;
 }
 
 export interface IAttachOrUpdatePayPeriodPaystubRequest {
-  amount: Number;
+  amount: number;
 }

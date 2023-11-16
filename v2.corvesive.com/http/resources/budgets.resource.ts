@@ -1,25 +1,25 @@
 import type { IPayPeriodResource } from './payPeriods.resource';
 
 export interface IBudgetResource {
-  id: Number;
+  id: number;
   name: string;
   amount: {
-    raw: Number;
+    raw: number;
     pretty: string;
   };
   notes: string;
 }
 
 export interface IPayPeriodBudgetResource {
-  id: Number;
+  id: number;
   pay_period: IPayPeriodResource;
   budget: IBudgetResource;
   total_balance: {
-    raw: Number;
+    raw: number;
     pretty: string;
   };
   remaining_balance: {
-    raw: Number;
+    raw: number;
     pretty: string;
   };
 }

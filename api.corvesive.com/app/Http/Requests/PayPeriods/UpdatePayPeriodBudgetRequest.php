@@ -9,8 +9,8 @@ class UpdatePayPeriodBudgetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'total_balance' => 'required|integer|min:0',
-            'remaining_balance' => 'required|integer',
+            'total_balance' => 'required|numeric|min:0',
+            'remaining_balance' => 'required|numeric',
         ];
     }
 }

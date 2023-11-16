@@ -16,7 +16,7 @@ export const useSavingStore = defineStore('useSavingStore', {
       return this.savings;
     },
     async getPayPeriodSavings(
-      payPeriodId: Number
+      payPeriodId: number
     ): Promise<IPayPeriodSavingResource[]> {
       this.payPeriodSavings = (
         await useNuxtApp().$api.savings.getPayPeriodSavings(payPeriodId)

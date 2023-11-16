@@ -16,7 +16,7 @@ export const usePaystubStore = defineStore('usePaystubStore', {
       return this.paystubs;
     },
     async getPayPeriodPaystubs(
-      payPeriodId: Number
+      payPeriodId: number
     ): Promise<IPayPeriodPaystubResource[]> {
       this.payPeriodPaystubs = (
         await useNuxtApp().$api.paystubs.getPayPeriodPaystubs(payPeriodId)

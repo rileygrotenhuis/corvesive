@@ -1,7 +1,7 @@
 import type { IPayPeriodResource } from './payPeriods.resource';
 
 export interface IUserResource {
-  id: Number;
+  id: number;
   names: {
     first: string;
     last: string;

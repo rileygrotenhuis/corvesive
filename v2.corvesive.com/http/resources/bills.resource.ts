@@ -1,11 +1,11 @@
 import type { IPayPeriodResource } from './payPeriods.resource';
 
 export interface IBillResource {
-  id: Number;
+  id: number;
   issuer: string;
   name: string;
   amount: {
-    raw: Number;
+    raw: number;
     pretty: string;
   };
   due_date: {
@@ -16,11 +16,11 @@ export interface IBillResource {
 }
 
 export interface IPayPeriodBillResource {
-  id: Number;
+  id: number;
   pay_period: IPayPeriodResource;
   bill: IBillResource;
   amount: {
-    raw: Number;
+    raw: number;
     pretty: string;
   };
   dates: {

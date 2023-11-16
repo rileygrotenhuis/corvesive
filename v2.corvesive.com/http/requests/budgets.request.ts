@@ -1,16 +1,16 @@
 export interface ICreateOrUpdateBudgetRequest {
   name: string;
-  amount: Number;
+  amount: number;
   notes: string;
 }
 
 export interface IAttachPayPeriodBudgetRequest {
-  amount: Number;
-  total_balance: Number;
+  amount: number;
+  total_balance: number;
 }
 
 export interface IUpdatePayPeriodBudgetRequest {
-  amount: Number;
-  total_balance: Number;
-  remaining_balance: Number;
+  amount: number;
+  total_balance: number;
+  remaining_balance: number;
 }

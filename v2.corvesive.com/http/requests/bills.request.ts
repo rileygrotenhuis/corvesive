@@ -1,14 +1,14 @@
 export interface ICreateOrUpdateBillRequest {
   issuer: string;
   name: string;
-  amount: Number;
+  amount: number;
   due_date: string;
   is_automatic: Boolean;
   notes: string;
 }
 
 export interface IAttachOrUpdatePayPeriodBillRequest {
-  amount: Number;
+  amount: number;
   due_date: string;
   is_automatic: Boolean;
 }

@@ -8,7 +8,7 @@ class PayPeriodService extends HttpFactory {
     return await this.call('GET', '/pay-periods');
   }
 
-  async getPayPeriod(id: Number): Promise<IHttpResource<IPayPeriodResource>> {
+  async getPayPeriod(id: number): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call('GET', `/pay-periods/${id}`);
   }
 
@@ -24,18 +24,18 @@ class PayPeriodService extends HttpFactory {
   }
 
   async updatePayPeriod(
-    id: Number,
+    id: number,
     payload: ICreateOrUpdatePayPeriodRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call('PUT', `/pay-periods/${id}`, payload);
   }
 
-  async deletePayPeriod(id: Number) {
+  async deletePayPeriod(id: number) {
     return await this.call('DELETE', `/pay-periods/${id}`);
   }
 
   async updateCurrentPayPeriod(
-    id: Number
+    id: number
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call('POST', `/pay-periods/${id}/current`);
   }

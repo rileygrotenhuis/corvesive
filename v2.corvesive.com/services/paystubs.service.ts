@@ -22,25 +22,25 @@ class PaystubService extends HttpFactory {
   }
 
   async updatePaystub(
-    id: Number,
+    id: number,
     payload: ICreateOrUpdatePaystubRequest
   ): Promise<IHttpResource<IPaystubResource>> {
     return await this.call('PUT', `/paystubs/${id}`, payload);
   }
 
-  async deletePaystub(id: Number) {
+  async deletePaystub(id: number) {
     return await this.call('DELETE', `/paystubs/${id}`);
   }
 
   async getPayPeriodPaystubs(
-    payPeriodId: Number
+    payPeriodId: number
   ): Promise<IHttpResource<IPayPeriodPaystubResource[]>> {
     return await this.call('GET', `/pay-periods/${payPeriodId}/paystubs`);
   }
 
   async attachPaystubToPayPeriod(
-    payPeriodId: Number,
-    paystubId: Number,
+    payPeriodId: number,
+    paystubId: number,
     payload: IAttachOrUpdatePayPeriodPaystubRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
@@ -51,8 +51,8 @@ class PaystubService extends HttpFactory {
   }
 
   async updatePayPeriodPaystub(
-    payPeriodId: Number,
-    paystubId: Number,
+    payPeriodId: number,
+    paystubId: number,
     payload: IAttachOrUpdatePayPeriodPaystubRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
@@ -63,8 +63,8 @@ class PaystubService extends HttpFactory {
   }
 
   async detachPaystubFromPayPeriod(
-    payPeriodId: Number,
-    paystubId: Number
+    payPeriodId: number,
+    paystubId: number
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
       'DELETE',

@@ -12,9 +12,16 @@ const modalStore = useModalStore();
           @click="modalStore.closeRecurringModal()"
         />
       </div>
-      <div>
-        {{ modalStore.recurring.type }}
-      </div>
+      <RecurringCreatePaystubForm
+        v-if="modalStore.recurring.type === 'paystubs'"
+      />
+      <RecurringCreateBillForm v-if="modalStore.recurring.type === 'bills'" />
+      <RecurringCreateBudgetForm
+        v-if="modalStore.recurring.type === 'budgets'"
+      />
+      <RecurringCreateSavingForm
+        v-if="modalStore.recurring.type === 'savings'"
+      />
     </div>
   </UModal>
 </template>

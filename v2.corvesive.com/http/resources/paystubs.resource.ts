@@ -1,22 +1,22 @@
 import type { IPayPeriodResource } from './payPeriods.resource';
 
 export interface IPaystubResource {
-  id: Number;
+  id: number;
   issuer: string;
   type: string;
   amount: {
-    raw: Number;
+    raw: number;
     pretty: string;
   };
   notes: string;
 }
 
 export interface IPayPeriodPaystubResource {
-  id: Number;
+  id: number;
   pay_period: IPayPeriodResource;
   paystub: IPaystubResource;
   amount: {
-    raw: Number;
+    raw: number;
     pretty: string;
   };
 }

@@ -22,25 +22,25 @@ class SavingService extends HttpFactory {
   }
 
   async updateSaving(
-    id: Number,
+    id: number,
     payload: ICreateOrUpdateSavingRequest
   ): Promise<IHttpResource<ISavingResource>> {
     return await this.call('PUT', `/savings/${id}`, payload);
   }
 
-  async deleteSaving(id: Number) {
+  async deleteSaving(id: number) {
     return await this.call('DELETE', `/savings/${id}`);
   }
 
   async getPayPeriodSavings(
-    payPeriodId: Number
+    payPeriodId: number
   ): Promise<IHttpResource<IPayPeriodSavingResource[]>> {
     return await this.call('GET', `/pay-periods/${payPeriodId}/savings`);
   }
 
   async attachSavingToPayPeriod(
-    payPeriodId: Number,
-    savingId: Number,
+    payPeriodId: number,
+    savingId: number,
     payload: IAttachOrUpdatePayPeriodSavingRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
@@ -51,8 +51,8 @@ class SavingService extends HttpFactory {
   }
 
   async updatePayPeriodSaving(
-    payPeriodId: Number,
-    savingId: Number,
+    payPeriodId: number,
+    savingId: number,
     payload: IAttachOrUpdatePayPeriodSavingRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
@@ -63,8 +63,8 @@ class SavingService extends HttpFactory {
   }
 
   async detachSavingFromPayPeriod(
-    payPeriodId: Number,
-    savingId: Number
+    payPeriodId: number,
+    savingId: number
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
       'DELETE',

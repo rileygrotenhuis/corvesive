@@ -11,7 +11,7 @@ export const useTransactionStore = defineStore('useTransactionStore', {
   }),
   actions: {
     async getPayPeriodDeposits(
-      payPeriodId: Number
+      payPeriodId: number
     ): Promise<ITransactionResource[]> {
       this.deposits = (
         await useNuxtApp().$api.transactions.getPayPeriodDeposits(payPeriodId)

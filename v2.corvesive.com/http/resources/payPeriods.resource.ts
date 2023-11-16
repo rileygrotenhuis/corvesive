@@ -1,5 +1,5 @@
 export interface IPayPeriodResource {
-  id: Number;
+  id: number;
   dates: {
     start: {
       raw: string;

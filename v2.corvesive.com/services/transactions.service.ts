@@ -4,7 +4,7 @@ import HttpFactory from '~/services/factory';
 
 class TransactionService extends HttpFactory {
   async getPayPeriodDeposits(
-    payPeriodId: Number
+    payPeriodId: number
   ): Promise<IHttpResource<ITransactionResource[]>> {
     return await this.call(
       'GET',

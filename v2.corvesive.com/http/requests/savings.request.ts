@@ -1,9 +1,9 @@
 export interface ICreateOrUpdateSavingRequest {
   name: string;
-  amount: Number;
+  amount: number;
   notes: string;
 }
 
 export interface IAttachOrUpdatePayPeriodSavingRequest {
-  amount: Number;
+  amount: number;
 }

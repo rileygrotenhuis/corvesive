@@ -22,25 +22,25 @@ class BillService extends HttpFactory {
   }
 
   async updateBill(
-    id: Number,
+    id: number,
     payload: ICreateOrUpdateBillRequest
   ): Promise<IHttpResource<IBillResource>> {
     return await this.call('PUT', `/bills/${id}`, payload);
   }
 
-  async deleteBill(id: Number) {
+  async deleteBill(id: number) {
     return await this.call('DELETE', `/bills/${id}`);
   }
 
   async getPayPeriodBills(
-    payPeriodId: Number
+    payPeriodId: number
   ): Promise<IHttpResource<IPayPeriodBillResource[]>> {
     return await this.call('GET', `/pay-periods/${payPeriodId}/bills`);
   }
 
   async attachBillToPayPeriod(
-    payPeriodId: Number,
-    billId: Number,
+    payPeriodId: number,
+    billId: number,
     payload: IAttachOrUpdatePayPeriodBillRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
@@ -51,8 +51,8 @@ class BillService extends HttpFactory {
   }
 
   async updatePayPeriodBill(
-    payPeriodId: Number,
-    billId: Number,
+    payPeriodId: number,
+    billId: number,
     payload: IAttachOrUpdatePayPeriodBillRequest
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
@@ -63,8 +63,8 @@ class BillService extends HttpFactory {
   }
 
   async detachBillFromPayPeriod(
-    payPeriodId: Number,
-    billId: Number
+    payPeriodId: number,
+    billId: number
   ): Promise<IHttpResource<IPayPeriodResource>> {
     return await this.call(
       'DELETE',

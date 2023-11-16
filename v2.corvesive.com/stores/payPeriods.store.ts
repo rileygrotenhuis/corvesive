@@ -14,14 +14,14 @@ export const usePayPeriodStore = defineStore('usePayPeriodStore', {
 
       return this.payPeriods;
     },
-    async getPayPeriod(id: Number): Promise<IPayPeriodResource> {
+    async getPayPeriod(id: number): Promise<IPayPeriodResource> {
       this.currentPayPeriod = (
         await useNuxtApp().$api.payPeriods.getPayPeriod(id)
       ).data;
 
       return this.currentPayPeriod;
     },
-    async updateCurrentPayPeriod(id: Number): Promise<IPayPeriodResource> {
+    async updateCurrentPayPeriod(id: number): Promise<IPayPeriodResource> {
       this.currentPayPeriod = (
         await useNuxtApp().$api.payPeriods.updateCurrentPayPeriod(id)
       ).data;
