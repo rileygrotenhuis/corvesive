@@ -1,30 +1,31 @@
 <script setup lang="ts">
 const accountStore = useAccountStore();
+const modalStore = useModalStore();
 
 const menuItems = [
   [
     {
       label: 'New Paystub',
       click: () => {
-        alert('New Paystub');
+        modalStore.openRecurringModal('paystubs');
       },
     },
     {
       label: 'New Bill',
       click: () => {
-        alert('New Bill');
+        modalStore.openRecurringModal('bills');
       },
     },
     {
       label: 'New Budget',
       click: () => {
-        alert('New Budget');
+        modalStore.openRecurringModal('budgets');
       },
     },
     {
       label: 'New Saving',
       click: () => {
-        alert('New Saving');
+        modalStore.openRecurringModal('savings');
       },
     },
   ],
