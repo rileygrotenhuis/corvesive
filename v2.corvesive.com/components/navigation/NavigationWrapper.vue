@@ -38,6 +38,7 @@
         >
       </div>
       <div class="flex gap-8">
+        <slot name="create-menu" />
         <slot name="pay-period-popover" />
         <slot name="profile-menu" />
         <slot name="sidebar-menu" />
