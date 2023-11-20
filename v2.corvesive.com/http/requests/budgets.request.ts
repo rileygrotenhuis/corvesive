@@ -5,12 +5,10 @@ export interface ICreateOrUpdateBudgetRequest {
 }
 
 export interface IAttachPayPeriodBudgetRequest {
-  amount: number;
   total_balance: number;
 }
 
 export interface IUpdatePayPeriodBudgetRequest {
-  amount: number;
   total_balance: number;
   remaining_balance: number;
 }

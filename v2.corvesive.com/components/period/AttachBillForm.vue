@@ -30,6 +30,9 @@ const handleSubmit = async () => {
       <UFormGroup label="Amount" name="amount">
         <UInput v-model="form.amount" />
       </UFormGroup>
+      <UFormGroup label="Is this bill automatic?" name="is_automatic">
+        <UCheckbox :v-model="Boolean(form.is_automatic)" />
+      </UFormGroup>
       <UButton type="submit" color="rose"> Attach </UButton>
       <FormsFormErrors :errors="errors" />
     </UForm>
