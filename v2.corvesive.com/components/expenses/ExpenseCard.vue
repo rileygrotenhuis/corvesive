@@ -4,6 +4,7 @@ defineProps({
   subtitle: String,
   amount: String,
   amountSubtitle: String,
+  hasPayed: Boolean,
 });
 </script>
 
@@ -12,7 +13,14 @@ defineProps({
     <UCard>
       <div class="flex flex-row justify-between items-center">
         <div>
-          <p class="font-bold">{{ title }}</p>
+          <div class="flex gap-1 items-center">
+            <p class="font-bold">{{ title }}</p>
+            <UIcon
+              v-if="hasPayed"
+              name="i-heroicons-check-circle"
+              class="w-5 h-5 text-green-500"
+            />
+          </div>
           <p v-if="subtitle" class="font-light text-sm">{{ subtitle }}</p>
         </div>
         <div class="min-w-[100px] text-right">

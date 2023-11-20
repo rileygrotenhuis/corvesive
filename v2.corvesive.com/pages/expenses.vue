@@ -51,7 +51,8 @@ const tabs = [
               :title="bill.bill.issuer"
               :subtitle="bill.bill.name"
               :amount="bill.amount.pretty"
-              :amountSubtitle="bill.dates.due.pretty.day"
+              :amountSubtitle="bill.dates.due.pretty.short"
+              :hasPayed="Boolean(bill.has_payed)"
             />
             <ExpensesExpenseCard
               v-else-if="accountStore.isRecurringView && item.key === 'budgets'"
@@ -67,8 +68,8 @@ const tabs = [
               v-for="budget in budgetStore.payPeriodBudgets"
               :key="`${budget.pay_period.id} - ${budget.id}`"
               :title="budget.budget.name"
-              :amount="budget.total_balance.pretty"
-              :amountSubtitle="budget.remaining_balance.pretty"
+              :amount="budget.remaining_balance.pretty"
+              :amountSubtitle="budget.total_balance.pretty"
             />
           </div>
         </UCard>
