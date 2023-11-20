@@ -2,7 +2,7 @@
 const accountStore = useAccountStore();
 const modalStore = useModalStore();
 
-const menuItems = [
+const recurringMenuItems = [
   [
     {
       label: 'Add new recurring:',
@@ -37,11 +37,49 @@ const menuItems = [
     },
   ],
 ];
+
+const periodMenuItems = [
+  [
+    {
+      label: 'Add to current period:',
+      slot: 'title',
+      disabled: true,
+    },
+  ],
+  [
+    {
+      label: 'Paystub',
+      click: () => {
+        modalStore.openPeriodModal('paystubs');
+      },
+    },
+    {
+      label: 'Bill',
+      click: () => {
+        modalStore.openPeriodModal('bills');
+      },
+    },
+    {
+      label: 'Budget',
+      click: () => {
+        modalStore.openPeriodModal('budgets');
+      },
+    },
+    {
+      label: 'Saving',
+      click: () => {
+        modalStore.openPeriodModal('savings');
+      },
+    },
+  ],
+];
 </script>
 
 <template>
   <UDropdown
-    :items="menuItems"
+    :items="
+      useAccountStore().isRecurringView ? recurringMenuItems : periodMenuItems
+    "
     :ui="{ item: { disabled: 'cursor-text select-text' } }"
     :popper="{ placement: 'bottom-end' }"
   >

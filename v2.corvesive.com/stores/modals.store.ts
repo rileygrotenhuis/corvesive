@@ -1,11 +1,14 @@
 import { defineStore } from 'pinia';
-import type { IUserResource } from '~/http/resources/account.resource';
 
 export const useModalStore = defineStore('useModalStore', {
   state: () => ({
     recurring: {
       open: false,
-      type: 'paystubs',
+      type: '',
+    },
+    period: {
+      open: false,
+      type: '',
     },
   }),
   actions: {
@@ -16,6 +19,14 @@ export const useModalStore = defineStore('useModalStore', {
     closeRecurringModal() {
       this.recurring.open = false;
       this.recurring.type = '';
+    },
+    openPeriodModal(type: string) {
+      this.period.open = true;
+      this.period.type = type;
+    },
+    closePeriodModal() {
+      this.period.open = false;
+      this.period.type = '';
     },
   },
 });

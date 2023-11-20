@@ -7,7 +7,8 @@ useHead({
 </script>
 
 <template>
-  <RecurringCreateRecurringModal />
+  <RecurringModal />
+  <PeriodModal />
   <div>
     <NavigationWrapper>
       <template #create-menu>
