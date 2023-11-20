@@ -11,7 +11,7 @@ useHead({
   <div>
     <NavigationWrapper>
       <template #create-menu>
-        <NavigationCreateMenu class="flex items-center" />
+        <NavigationCreateRecurringMenu class="flex items-center" />
       </template>
       <template #pay-period-popover>
         <NavigationPayPeriodPopover class="flex items-center" />

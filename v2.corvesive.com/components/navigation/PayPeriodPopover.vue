@@ -65,8 +65,8 @@ watch(
           }`"
           :label="`${
             accountStore.isRecurringView
-              ? 'View Current Period'
-              : 'View Recurring'
+              ? 'Switch to Current Period'
+              : 'Switch to Recurring'
           }`"
           color="rose"
           class="w-full"

@@ -5,32 +5,32 @@ const modalStore = useModalStore();
 const menuItems = [
   [
     {
-      label: 'Create Recurring:',
+      label: 'Add new recurring:',
       slot: 'title',
       disabled: true,
     },
   ],
   [
     {
-      label: '+ Paystub',
+      label: 'Paystub',
       click: () => {
         modalStore.openRecurringModal('paystubs');
       },
     },
     {
-      label: '+ Bill',
+      label: 'Bill',
       click: () => {
         modalStore.openRecurringModal('bills');
       },
     },
     {
-      label: '+ Budget',
+      label: 'Budget',
       click: () => {
         modalStore.openRecurringModal('budgets');
       },
     },
     {
-      label: '+ Saving',
+      label: 'Saving',
       click: () => {
         modalStore.openRecurringModal('savings');
       },
@@ -61,11 +61,6 @@ const menuItems = [
 
     <template #item="{ item }">
       <span class="truncate">{{ item.label }}</span>
-
-      <UIcon
-        :name="item.icon"
-        class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"
-      />
     </template>
   </UDropdown>
 </template>
