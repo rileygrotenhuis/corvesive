@@ -33,7 +33,6 @@ const menuItems = [
 
 <template>
   <UDropdown
-    mode="hover"
     :items="menuItems"
     :ui="{ item: { disabled: 'cursor-text select-text' } }"
     :popper="{ placement: 'bottom-end' }"

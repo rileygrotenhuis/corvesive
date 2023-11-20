@@ -20,7 +20,7 @@ watch(
 </script>
 
 <template>
-  <UPopover :popper="{ placement: 'bottom-end' }" mode="hover">
+  <UPopover :popper="{ placement: 'bottom-end' }">
     <UIcon
       :name="`${
         !accountStore.isRecurringView

@@ -77,7 +77,6 @@ const periodMenuItems = [
 
 <template>
   <UDropdown
-    mode="hover"
     :items="
       useAccountStore().isRecurringView ? recurringMenuItems : periodMenuItems
     "
