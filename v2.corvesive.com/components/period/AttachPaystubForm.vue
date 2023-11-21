@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { IAttachOrUpdatePayPeriodPaystubRequest } from '~/http/requests/paystubs.request';
 
+const accountStore = useAccountStore();
 const paystubStore = usePaystubStore();
 const modalStore = useModalStore();
+
+const selectedPaystub: Ref<number> = ref(0);
 
 const form: IAttachOrUpdatePayPeriodPaystubRequest = reactive({
   amount: 0,
@@ -11,7 +14,16 @@ const form: IAttachOrUpdatePayPeriodPaystubRequest = reactive({
 const errors = ref();
 
 const handleSubmit = async () => {
-  alert('testing');
+  const response = await useNuxtApp().$api.paystubs.attachPaystubToPayPeriod(
+    accountStore.user.pay_period.id,
+    selectedPaystub.value,
+    form
+  );
+
+  if (!(errors.value = response.errors)) {
+    modalStore.closePeriodModal();
+    await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
+  }
 };
 </script>
 

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { IAttachOrUpdatePayPeriodSavingRequest } from '~/http/requests/savings.request';
 
+const accountStore = useAccountStore();
 const savingStore = useSavingStore();
 const modalStore = useModalStore();
+
+const selectedSaving: Ref<number> = ref(0);
 
 const form: IAttachOrUpdatePayPeriodSavingRequest = reactive({
   amount: 0,
@@ -11,7 +14,16 @@ const form: IAttachOrUpdatePayPeriodSavingRequest = reactive({
 const errors = ref();
 
 const handleSubmit = async () => {
-  alert('testing');
+  const response = await useNuxtApp().$api.savings.attachSavingToPayPeriod(
+    accountStore.user.pay_period.id,
+    selectedSaving.value,
+    form
+  );
+
+  if (!(errors.value = response.errors)) {
+    modalStore.closePeriodModal();
+    await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
+  }
 };
 </script>
 
@@ -25,7 +37,9 @@ const handleSubmit = async () => {
       <UFormGroup label="Amount" name="amount">
         <UInput v-model="form.amount" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Attach </UButton>
+      <UButton type="submit" color="rose" :disabled="selectedSaving === 0">
+        Attach
+      </UButton>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

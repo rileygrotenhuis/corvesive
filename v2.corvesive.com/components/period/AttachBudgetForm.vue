@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { IAttachPayPeriodBudgetRequest } from '~/http/requests/budgets.request';
 
+const accountStore = useAccountStore();
 const budgetStore = useBudgetStore();
 const modalStore = useModalStore();
+
+const selectedBudget: Ref<number> = ref(0);
 
 const form: IAttachPayPeriodBudgetRequest = reactive({
   total_balance: 0,
@@ -11,7 +14,16 @@ const form: IAttachPayPeriodBudgetRequest = reactive({
 const errors = ref();
 
 const handleSubmit = async () => {
-  alert('testing');
+  const response = await useNuxtApp().$api.budgets.attachBudgetToPayPeriod(
+    accountStore.user.pay_period.id,
+    selectedBudget.value,
+    form
+  );
+
+  if (!(errors.value = response.errors)) {
+    modalStore.closePeriodModal();
+    await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id);
+  }
 };
 </script>
 

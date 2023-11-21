@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { IAttachOrUpdatePayPeriodBillRequest } from '~/http/requests/bills.request';
 
+const accountStore = useAccountStore();
 const billStore = useBillStore();
 const modalStore = useModalStore();
+
+const selectedBill: Ref<number> = ref(0);
 
 const form: IAttachOrUpdatePayPeriodBillRequest = reactive({
   amount: 0,
@@ -13,7 +16,16 @@ const form: IAttachOrUpdatePayPeriodBillRequest = reactive({
 const errors = ref();
 
 const handleSubmit = async () => {
-  alert('testing');
+  const response = await useNuxtApp().$api.bills.attachBillToPayPeriod(
+    accountStore.user.pay_period.id,
+    selectedBill.value,
+    form
+  );
+
+  if (!(errors.value = response.errors)) {
+    modalStore.closePeriodModal();
+    await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
+  }
 };
 </script>
 
