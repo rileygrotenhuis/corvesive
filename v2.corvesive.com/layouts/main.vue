@@ -7,12 +7,10 @@ useHead({
 </script>
 
 <template>
-  <RecurringModal />
-  <PeriodModal />
   <div>
     <NavigationWrapper>
       <template #create-menu>
-        <NavigationCreateRecurringMenu class="flex items-center" />
+        <NavigationCreateMenu class="flex items-center" />
       </template>
       <template #pay-period-popover>
         <NavigationPayPeriodPopover class="flex items-center" />
