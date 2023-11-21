@@ -32,7 +32,7 @@ class PayPeriodPaystubController extends Controller
     public function store(Request $request, PayPeriod $payPeriod, Paystub $paystub): PayPeriodResource
     {
         $request->validate([
-            'amount' => 'required|integer|min:1',
+            'amount' => 'required|numeric|min:1',
         ]);
 
         $this->authorize('paystub', [
@@ -57,7 +57,7 @@ class PayPeriodPaystubController extends Controller
     public function update(Request $request, PayPeriod $payPeriod, Paystub $paystub): PayPeriodResource
     {
         $request->validate([
-            'amount' => 'required|integer|min:1',
+            'amount' => 'required|numeric|min:1',
         ]);
 
         $this->authorize('paystub', [

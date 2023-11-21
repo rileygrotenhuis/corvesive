@@ -33,7 +33,7 @@ class PayPeriodBudgetController extends Controller
     public function store(Request $request, PayPeriod $payPeriod, Budget $budget): PayPeriodResource
     {
         $request->validate([
-            'total_balance' => 'required|integer|min:0',
+            'total_balance' => 'required|numeric|min:0',
         ]);
 
         $this->authorize('budget', [
