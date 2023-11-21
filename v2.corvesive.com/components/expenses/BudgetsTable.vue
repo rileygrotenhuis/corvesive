@@ -12,7 +12,7 @@ const budgetStore = useBudgetStore();
     :amount="budget.amount.pretty"
   />
   <ExpensesExpenseCard
-    v-else="!accountStore.isRecurringView"
+    v-else
     v-for="budget in budgetStore.payPeriodBudgets"
     :key="`${budget.pay_period.id} - ${budget.id}`"
     :title="budget.budget.name"
