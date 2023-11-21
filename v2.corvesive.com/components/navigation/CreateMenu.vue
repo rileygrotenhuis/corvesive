@@ -77,7 +77,7 @@ const periodMenuItems = [
 
 <template>
   <div>
-    <RecurringModal /> 
+    <RecurringModal />
     <PeriodModal />
     <UDropdown
       :items="
