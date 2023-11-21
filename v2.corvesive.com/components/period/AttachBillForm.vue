@@ -6,9 +6,7 @@ const accountStore = useAccountStore();
 const billStore = useBillStore();
 const modalStore = useModalStore();
 
-onMounted(async () => {
-  await billStore.getBills();
-});
+await billStore.getBills();
 
 const billOptions = computed(() => {
   return billStore.bills.map((bill: IBillResource) => {

@@ -6,9 +6,7 @@ const accountStore = useAccountStore();
 const budgetStore = useBudgetStore();
 const modalStore = useModalStore();
 
-onMounted(async () => {
-  await budgetStore.getBudgets();
-});
+await budgetStore.getBudgets();
 
 const budgetOptions = computed(() => {
   return budgetStore.budgets.map((budget: IBudgetResource) => {

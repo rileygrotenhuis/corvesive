@@ -6,9 +6,7 @@ const accountStore = useAccountStore();
 const savingStore = useSavingStore();
 const modalStore = useModalStore();
 
-onMounted(async () => {
-  await savingStore.getSavings();
-});
+await savingStore.getSavings();
 
 const savingOptions = computed(() => {
   return savingStore.savings.map((saving: ISavingResource) => {

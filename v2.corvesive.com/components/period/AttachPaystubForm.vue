@@ -6,9 +6,7 @@ const accountStore = useAccountStore();
 const paystubStore = usePaystubStore();
 const modalStore = useModalStore();
 
-onMounted(async () => {
-  await paystubStore.getPaystubs();
-});
+await paystubStore.getPaystubs();
 
 const paystubOptions = computed(() => {
   return paystubStore.paystubs.map((paystub: IPaystubResource) => {
