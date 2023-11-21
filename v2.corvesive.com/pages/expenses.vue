@@ -35,42 +35,8 @@ const tabs = [
       <template #item="{ item }">
         <UCard>
           <div class="flex flex-col gap-4">
-            <ExpensesExpenseCard
-              v-if="accountStore.isRecurringView && item.key === 'bills'"
-              v-for="bill in billStore.bills"
-              :key="bill.id.toString()"
-              :title="bill.issuer"
-              :subtitle="bill.name"
-              :amount="bill.amount.pretty"
-              :amountSubtitle="bill.due_date.pretty"
-            />
-            <ExpensesExpenseCard
-              v-else-if="!accountStore.isRecurringView && item.key === 'bills'"
-              v-for="bill in billStore.payPeriodBills"
-              :key="`${bill.pay_period.id} - ${bill.id}`"
-              :title="bill.bill.issuer"
-              :subtitle="bill.bill.name"
-              :amount="bill.amount.pretty"
-              :amountSubtitle="bill.dates.due.pretty.short"
-              :hasPayed="Boolean(bill.has_payed)"
-            />
-            <ExpensesExpenseCard
-              v-else-if="accountStore.isRecurringView && item.key === 'budgets'"
-              v-for="budget in budgetStore.budgets"
-              :key="budget.id.toString()"
-              :title="budget.name"
-              :amount="budget.amount.pretty"
-            />
-            <ExpensesExpenseCard
-              v-else-if="
-                !accountStore.isRecurringView && item.key === 'budgets'
-              "
-              v-for="budget in budgetStore.payPeriodBudgets"
-              :key="`${budget.pay_period.id} - ${budget.id}`"
-              :title="budget.budget.name"
-              :amount="budget.remaining_balance.pretty"
-              :amountSubtitle="budget.total_balance.pretty"
-            />
+            <ExpensesBillsTable v-if="item.key === 'bills'" />
+            <ExpensesBudgetsTable v-if="item.key === 'budgets'" />
           </div>
         </UCard>
       </template>
