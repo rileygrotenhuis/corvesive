@@ -44,13 +44,12 @@ const handleSubmit = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">Attach Budget</h4>
-      <p class="text-sm font-light">
-        Attach on of your Budgets to the currently selected Pay Period
-      </p>
-      <UFormGroup label="Budget" name="budget_id">
+      <h4 class="text-xl font-bold text-rose-500">Attach Budget to Period</h4>
+      <UFormGroup label="Select one of your recurring Budgets" name="budget_id">
         <USelect v-model="selectedBudget" :options="budgetOptions" />
       </UFormGroup>
+      <UDivider />
+      <p class="text-sm font-bold">Then fill in the relative details</p>
       <UFormGroup label="Total Balance" name="total_balance">
         <UInput v-model="form.total_balance" />
       </UFormGroup>
