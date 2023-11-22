@@ -14,7 +14,7 @@ const menuItems = [
       label: 'Account',
       icon: 'i-heroicons-cog-8-tooth',
       click: () => {
-        alert('THIS PAGE DOES NOT EXIST YET');
+        useNuxtApp().$router.push('/account');
       },
     },
   ],
