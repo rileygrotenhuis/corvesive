@@ -1,0 +1,20 @@
+<script setup lang="ts">
+useHead({
+  title: 'Corvesive - Account',
+});
+
+definePageMeta({
+  middleware: 'auth',
+  layout: 'main',
+});
+
+await useAccountStore().me();
+</script>
+
+<template>
+  <div class="mt-8">
+    <h3 class="text-xl font-bold">Update your Account Details</h3>
+    <UDivider class="mt-2 mb-2" />
+    <AuthUpdateAccountForm />
+  </div>
+</template>
