@@ -10,6 +10,11 @@ export const useModalStore = defineStore('useModalStore', {
       open: false,
       type: '',
     },
+    settings: {
+      open: false,
+      type: '',
+      data: {},
+    },
   }),
   actions: {
     openRecurringModal(type: string) {
@@ -27,6 +32,16 @@ export const useModalStore = defineStore('useModalStore', {
     closePeriodModal() {
       this.period.open = false;
       this.period.type = '';
+    },
+    openSettingsModal(type: string, data: object) {
+      this.settings.open = true;
+      this.settings.type = type;
+      this.settings.data = data;
+    },
+    closeSettingsModal() {
+      this.settings.open = false;
+      this.settings.type = '';
+      this.settings.data = {};
     },
   },
 });
