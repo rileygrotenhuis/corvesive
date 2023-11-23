@@ -55,6 +55,15 @@ class PayPeriodBudgetController extends Controller
         return new PayPeriodResource($payPeriod);
     }
 
+    public function show(PayPeriod $payPeriod, PayPeriodBudget $payPeriodBudget): PayPeriodBudgetResource
+    {
+        $this->authorize('user', $payPeriod);
+
+        return new PayPeriodBudgetResource(
+            $payPeriodBudget
+        );
+    }
+
     public function update(UpdatePayPeriodBudgetRequest $request, PayPeriod $payPeriod, Budget $budget): PayPeriodResource
     {
         $this->authorize('budget', [

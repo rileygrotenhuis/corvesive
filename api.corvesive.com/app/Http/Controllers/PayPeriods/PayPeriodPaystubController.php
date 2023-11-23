@@ -54,6 +54,15 @@ class PayPeriodPaystubController extends Controller
         return new PayPeriodResource($payPeriod);
     }
 
+    public function show(PayPeriod $payPeriod, PayPeriodPaystub $payPeriodPaystub): PayPeriodPaystubResource
+    {
+        $this->authorize('user', $payPeriod);
+
+        return new PayPeriodPaystubResource(
+            $payPeriodPaystub
+        );
+    }
+
     public function update(Request $request, PayPeriod $payPeriod, Paystub $paystub): PayPeriodResource
     {
         $request->validate([

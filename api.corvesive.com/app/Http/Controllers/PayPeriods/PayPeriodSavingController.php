@@ -54,6 +54,15 @@ class PayPeriodSavingController extends Controller
         return new PayPeriodResource($payPeriod);
     }
 
+    public function show(PayPeriod $payPeriod, PayPeriodSaving $payPeriodSaving): PayPeriodSavingResource
+    {
+        $this->authorize('user', $payPeriod);
+
+        return new PayPeriodSavingResource(
+            $payPeriodSaving
+        );
+    }
+
     public function update(Request $request, PayPeriod $payPeriod, Saving $saving): PayPeriodResource
     {
         $request->validate([

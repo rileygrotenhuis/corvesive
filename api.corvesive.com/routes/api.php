@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('{paystub}', [PayPeriodPaystubController::class, 'store'])->name('pay-periods.paystubs.store');
             Route::put('{paystub}', [PayPeriodPaystubController::class, 'update'])->name('pay-periods.paystubs.update');
             Route::delete('{paystub}', [PayPeriodPaystubController::class, 'destroy'])->name('pay-periods.paystubs.destroy');
+            Route::get('{payPeriodPaystub}', [PayPeriodPaystubController::class, 'show'])->name('pay-periods.paystubs.show');
         });
 
         Route::prefix('bills')->group(function () {
@@ -76,6 +77,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('{bill}', [PayPeriodBillController::class, 'store'])->name('pay-periods.bills.store');
             Route::put('{bill}', [PayPeriodBillController::class, 'update'])->name('pay-periods.bills.update');
             Route::delete('{bill}', [PayPeriodBillController::class, 'destroy'])->name('pay-periods.bills.destroy');
+            Route::get('/{payPeriodBill}', [PayPeriodBillController::class, 'show'])->name('pay-periods.bills.show');
             Route::post('{payPeriodBill}/transaction', [TransactionController::class, 'billTransaction'])->name('pay-periods.bills.transaction');
         });
 
@@ -84,6 +86,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('{budget}', [PayPeriodBudgetController::class, 'store'])->name('pay-periods.budgets.store');
             Route::put('{budget}', [PayPeriodBudgetController::class, 'update'])->name('pay-periods.budgets.update');
             Route::delete('{budget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-periods.budgets.destroy');
+            Route::get('{payPeriodBudget}', [PayPeriodBudgetController::class, 'show'])->name('pay-periods.budgets.show');
             Route::post('{payPeriodBudget}/transaction', [TransactionController::class, 'budgetTransaction'])->name('pay-periods.budgets.transaction');
         });
 
@@ -92,6 +95,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('{saving}', [PayPeriodSavingController::class, 'store'])->name('pay-periods.savings.store');
             Route::put('{saving}', [PayPeriodSavingController::class, 'update'])->name('pay-periods.savings.update');
             Route::delete('{saving}', [PayPeriodSavingController::class, 'destroy'])->name('pay-periods.savings.destroy');
+            Route::get('{payPeriodSaving}', [PayPeriodSavingController::class, 'show'])->name('pay-periods.savings.show');
         });
     });
 });

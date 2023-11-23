@@ -54,6 +54,15 @@ class PayPeriodBillController extends Controller
         return new PayPeriodResource($payPeriod);
     }
 
+    public function show(PayPeriod $payPeriod, PayPeriodBill $payPeriodBill): PayPeriodBillResource
+    {
+        $this->authorize('user', $payPeriod);
+
+        return new PayPeriodBillResource(
+            $payPeriodBill
+        );
+    }
+
     public function update(UpdatePayPeriodBillRequest $request, PayPeriod $payPeriod, Bill $bill): PayPeriodResource
     {
         $this->authorize('bill', [
