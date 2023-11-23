@@ -71,6 +71,16 @@ class SavingService extends HttpFactory {
       `/pay-periods/${payPeriodId}/savings/${savingId}`
     );
   }
+
+  async getPayPeriodSaving(
+    payPeriodId: number,
+    payPeriodSavingId: number
+  ): Promise<IHttpResource<IPayPeriodSavingResource>> {
+    return await this.call(
+      'GET',
+      `/pay-periods/${payPeriodId}/savings/${payPeriodSavingId}`
+    );
+  }
 }
 
 export default SavingService;

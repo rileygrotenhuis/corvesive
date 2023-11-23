@@ -71,6 +71,16 @@ class PaystubService extends HttpFactory {
       `/pay-periods/${payPeriodId}/paystubs/${paystubId}`
     );
   }
+
+  async getPayPeriodPaystub(
+    payPeriodId: number,
+    payPeriodPaystubId: number
+  ): Promise<IHttpResource<IPayPeriodPaystubResource>> {
+    return await this.call(
+      'GET',
+      `/pay-periods/${payPeriodId}/paystubs/${payPeriodPaystubId}`
+    );
+  }
 }
 
 export default PaystubService;

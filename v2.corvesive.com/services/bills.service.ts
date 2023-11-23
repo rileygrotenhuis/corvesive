@@ -71,6 +71,16 @@ class BillService extends HttpFactory {
       `/pay-periods/${payPeriodId}/bills/${billId}`
     );
   }
+
+  async getPayPeriodBill(
+    payPeriodId: number,
+    payPeriodBillId: number
+  ): Promise<IHttpResource<IPayPeriodBillResource>> {
+    return await this.call(
+      'GET',
+      `/pay-periods/${payPeriodId}/bills/${payPeriodBillId}`
+    );
+  }
 }
 
 export default BillService;

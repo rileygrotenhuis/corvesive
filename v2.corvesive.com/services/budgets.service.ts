@@ -72,6 +72,16 @@ class BudgetService extends HttpFactory {
       `/pay-periods/${payPeriodId}/budgets/${budgetId}`
     );
   }
+
+  async getPayPeriodBudget(
+    payPeriodId: number,
+    payPeriodBudgetId: number
+  ): Promise<IHttpResource<IPayPeriodBudgetResource>> {
+    return await this.call(
+      'GET',
+      `/pay-periods/${payPeriodId}/budgets/${payPeriodBudgetId}`
+    );
+  }
 }
 
 export default BudgetService;
