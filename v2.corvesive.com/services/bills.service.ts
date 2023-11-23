@@ -15,6 +15,10 @@ class BillService extends HttpFactory {
     return await this.call('GET', '/bills');
   }
 
+  async getBill(id: number): Promise<IHttpResource<IBillResource>> {
+    return await this.call('GET', `/bills/${id}`);
+  }
+
   async createBill(
     payload: ICreateOrUpdateBillRequest
   ): Promise<IHttpResource<IBillResource>> {
@@ -36,6 +40,16 @@ class BillService extends HttpFactory {
     payPeriodId: number
   ): Promise<IHttpResource<IPayPeriodBillResource[]>> {
     return await this.call('GET', `/pay-periods/${payPeriodId}/bills`);
+  }
+
+  async getPayPeriodBill(
+    payPeriodId: number,
+    payPeriodBillId: number
+  ): Promise<IHttpResource<IPayPeriodBillResource>> {
+    return await this.call(
+      'GET',
+      `/pay-periods/${payPeriodId}/bills/${payPeriodBillId}`
+    );
   }
 
   async attachBillToPayPeriod(
@@ -69,16 +83,6 @@ class BillService extends HttpFactory {
     return await this.call(
       'DELETE',
       `/pay-periods/${payPeriodId}/bills/${billId}`
-    );
-  }
-
-  async getPayPeriodBill(
-    payPeriodId: number,
-    payPeriodBillId: number
-  ): Promise<IHttpResource<IPayPeriodBillResource>> {
-    return await this.call(
-      'GET',
-      `/pay-periods/${payPeriodId}/bills/${payPeriodBillId}`
     );
   }
 }

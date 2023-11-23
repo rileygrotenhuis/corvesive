@@ -15,6 +15,10 @@ class SavingService extends HttpFactory {
     return await this.call('GET', '/savings');
   }
 
+  async getSaving(id: number): Promise<IHttpResource<ISavingResource>> {
+    return await this.call('GET', `/savings/${id}`);
+  }
+
   async createSaving(
     payload: ICreateOrUpdateSavingRequest
   ): Promise<IHttpResource<ISavingResource>> {
@@ -36,6 +40,16 @@ class SavingService extends HttpFactory {
     payPeriodId: number
   ): Promise<IHttpResource<IPayPeriodSavingResource[]>> {
     return await this.call('GET', `/pay-periods/${payPeriodId}/savings`);
+  }
+
+  async getPayPeriodSaving(
+    payPeriodId: number,
+    payPeriodSavingId: number
+  ): Promise<IHttpResource<IPayPeriodSavingResource>> {
+    return await this.call(
+      'GET',
+      `/pay-periods/${payPeriodId}/savings/${payPeriodSavingId}`
+    );
   }
 
   async attachSavingToPayPeriod(
@@ -69,16 +83,6 @@ class SavingService extends HttpFactory {
     return await this.call(
       'DELETE',
       `/pay-periods/${payPeriodId}/savings/${savingId}`
-    );
-  }
-
-  async getPayPeriodSaving(
-    payPeriodId: number,
-    payPeriodSavingId: number
-  ): Promise<IHttpResource<IPayPeriodSavingResource>> {
-    return await this.call(
-      'GET',
-      `/pay-periods/${payPeriodId}/savings/${payPeriodSavingId}`
     );
   }
 }
