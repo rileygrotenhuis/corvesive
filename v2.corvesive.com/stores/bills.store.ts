@@ -8,6 +8,7 @@ export const useBillStore = defineStore('useBillStore', {
   state: () => ({
     bills: [] as IBillResource[],
     payPeriodBills: [] as IPayPeriodBillResource[],
+    payPeriodBill: {} as IPayPeriodBillResource,
   }),
   actions: {
     async getBills(): Promise<IBillResource[]> {
@@ -23,6 +24,19 @@ export const useBillStore = defineStore('useBillStore', {
       ).data;
 
       return this.payPeriodBills;
+    },
+    async getPayPeriodBill(
+      payPeriodId: number,
+      payPeriodBillId: number
+    ): Promise<IPayPeriodBillResource> {
+      this.payPeriodBill = (
+        await useNuxtApp().$api.bills.getPayPeriodBill(
+          payPeriodId,
+          payPeriodBillId
+        )
+      ).data;
+
+      return this.payPeriodBill;
     },
   },
 });

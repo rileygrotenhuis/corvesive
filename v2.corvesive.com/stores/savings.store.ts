@@ -8,6 +8,7 @@ export const useSavingStore = defineStore('useSavingStore', {
   state: () => ({
     savings: [] as ISavingResource[],
     payPeriodSavings: [] as IPayPeriodSavingResource[],
+    payPeriodSaving: {} as IPayPeriodSavingResource,
   }),
   actions: {
     async getSavings(): Promise<ISavingResource[]> {
@@ -23,6 +24,19 @@ export const useSavingStore = defineStore('useSavingStore', {
       ).data;
 
       return this.payPeriodSavings;
+    },
+    async getPayPeriodSaving(
+      payPeriodId: number,
+      payPeriodSavingId: number
+    ): Promise<IPayPeriodSavingResource> {
+      this.payPeriodSaving = (
+        await useNuxtApp().$api.savings.getPayPeriodSaving(
+          payPeriodId,
+          payPeriodSavingId
+        )
+      ).data;
+
+      return this.payPeriodSaving;
     },
   },
 });

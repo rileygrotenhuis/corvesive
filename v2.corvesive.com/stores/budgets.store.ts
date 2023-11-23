@@ -8,6 +8,7 @@ export const useBudgetStore = defineStore('useBudgetStore', {
   state: () => ({
     budgets: [] as IBudgetResource[],
     payPeriodBudgets: [] as IPayPeriodBudgetResource[],
+    payPeriodBudget: {} as IPayPeriodBudgetResource,
   }),
   actions: {
     async getBudgets(): Promise<IBudgetResource[]> {
@@ -23,6 +24,19 @@ export const useBudgetStore = defineStore('useBudgetStore', {
       ).data;
 
       return this.payPeriodBudgets;
+    },
+    async getPayPeriodBudget(
+      payPeriodId: number,
+      payPeriodBudgetId: number
+    ): Promise<IPayPeriodBudgetResource> {
+      this.payPeriodBudget = (
+        await useNuxtApp().$api.budgets.getPayPeriodBudget(
+          payPeriodId,
+          payPeriodBudgetId
+        )
+      ).data;
+
+      return this.payPeriodBudget;
     },
   },
 });

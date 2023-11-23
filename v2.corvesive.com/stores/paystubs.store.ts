@@ -8,6 +8,7 @@ export const usePaystubStore = defineStore('usePaystubStore', {
   state: () => ({
     paystubs: [] as IPaystubResource[],
     payPeriodPaystubs: [] as IPayPeriodPaystubResource[],
+    payPeriodPaystub: {} as IPayPeriodPaystubResource,
   }),
   actions: {
     async getPaystubs(): Promise<IPaystubResource[]> {
@@ -23,6 +24,19 @@ export const usePaystubStore = defineStore('usePaystubStore', {
       ).data;
 
       return this.payPeriodPaystubs;
+    },
+    async getPayPeriodPaystub(
+      payPeriodId: number,
+      payPeriodPaystubId: number
+    ): Promise<IPayPeriodPaystubResource> {
+      this.payPeriodPaystub = (
+        await useNuxtApp().$api.paystubs.getPayPeriodPaystub(
+          payPeriodId,
+          payPeriodPaystubId
+        )
+      ).data;
+
+      return this.payPeriodPaystub;
     },
   },
 });
