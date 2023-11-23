@@ -7,6 +7,7 @@ import type {
 export const useSavingStore = defineStore('useSavingStore', {
   state: () => ({
     savings: [] as ISavingResource[],
+    saving: {} as ISavingResource,
     payPeriodSavings: [] as IPayPeriodSavingResource[],
     payPeriodSaving: {} as IPayPeriodSavingResource,
   }),
@@ -15,6 +16,11 @@ export const useSavingStore = defineStore('useSavingStore', {
       this.savings = (await useNuxtApp().$api.savings.getSavings()).data;
 
       return this.savings;
+    },
+    async getSaving(id: number): Promise<ISavingResource> {
+      this.saving = (await useNuxtApp().$api.savings.getSaving(id)).data;
+
+      return this.saving;
     },
     async getPayPeriodSavings(
       payPeriodId: number

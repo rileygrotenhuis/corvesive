@@ -7,6 +7,7 @@ import type {
 export const useBillStore = defineStore('useBillStore', {
   state: () => ({
     bills: [] as IBillResource[],
+    bill: {} as IBillResource,
     payPeriodBills: [] as IPayPeriodBillResource[],
     payPeriodBill: {} as IPayPeriodBillResource,
   }),
@@ -15,6 +16,11 @@ export const useBillStore = defineStore('useBillStore', {
       this.bills = (await useNuxtApp().$api.bills.getBills()).data;
 
       return this.bills;
+    },
+    async getBill(id: number): Promise<IBillResource> {
+      this.bill = (await useNuxtApp().$api.bills.getBill(id)).data;
+
+      return this.bill;
     },
     async getPayPeriodBills(
       payPeriodId: number
