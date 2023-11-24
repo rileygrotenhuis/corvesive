@@ -32,7 +32,7 @@ const handleSubmit = async () => {
 
 <template>
   <div>
-    <div class="space-y-4" @submit="handleSubmit">
+    <div class="space-y-4">
       <h4 class="text-xl font-bold text-rose-500">Bill Payments</h4>
       <p class="text-sm font-light">
         Pay off one of your bills for the currently selected pay period!
