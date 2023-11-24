@@ -18,6 +18,12 @@ export const useAccountStore = defineStore('useAccountStore', {
       return this.user;
     },
     toggleMonthlyView() {
+      useToast().add({
+        title: `You have switched to your ${
+          this.isRecurringView ? 'Period' : 'Recurring'
+        } view`,
+      });
+      useToast;
       this.isRecurringView = !this.isRecurringView;
     },
   },

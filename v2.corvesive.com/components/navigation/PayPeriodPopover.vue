@@ -14,6 +14,9 @@ const selectedPayPeriod = ref(payPeriodStore.currentPayPeriod.id);
 watch(
   selectedPayPeriod,
   async (newPayPeriodId: number, oldPayPeriodId: number) => {
+    useToast().add({
+      title: 'You have switched your currently selected Pay Period!',
+    });
     await payPeriodStore.updateCurrentPayPeriod(newPayPeriodId);
   }
 );
