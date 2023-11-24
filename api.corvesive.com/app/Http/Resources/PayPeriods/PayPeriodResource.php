@@ -35,7 +35,6 @@ class PayPeriodResource extends JsonResource
                     ],
                 ],
             ],
-            'is_complete' => $this->is_complete,
             'paystubs' => PaystubResource::collection(
                 $this->whenLoaded('paystubs')
             ),

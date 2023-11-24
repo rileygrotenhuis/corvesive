@@ -9,6 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::dropIfExists('pay_period_metrics');
+
+        Schema::table('pay_periods', function (Blueprint $table) {
+            $table->dropColumn('is_complete');
+        });
     }
 
     public function down(): void
@@ -32,6 +36,12 @@ return new class extends Migration
             $table->bigInteger('projected_surplus')->default(0);
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('pay_periods', function (Blueprint $table) {
+            $table->boolean('is_complete')
+                ->default(false)
+                ->after('total_balance');
         });
     }
 };
