@@ -19,6 +19,7 @@ watch(
       title: 'You have switched your currently selected Pay Period!',
     });
     await payPeriodStore.updateCurrentPayPeriod(newPayPeriodId);
+    window.location.reload();
   }
 );
 </script>
