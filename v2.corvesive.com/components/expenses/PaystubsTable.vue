@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const accountStore = useAccountStore();
 const paystubStore = usePaystubStore();
+const modalStore = useModalStore();
 </script>
 
 <template>
@@ -14,10 +15,11 @@ const paystubStore = usePaystubStore();
   />
   <ExpensesExpenseCard
     v-else
-    v-for="paystub in paystubStore.payPeriodPaystubs"
-    :key="`${paystub.pay_period.id} - ${paystub.id}`"
-    :title="paystub.paystub.issuer"
-    :subtitle="paystub.paystub.type"
-    :amount="paystub.amount.pretty"
+    v-for="payPeriodPaystub in paystubStore.payPeriodPaystubs"
+    :key="`${payPeriodPaystub.pay_period.id} - ${payPeriodPaystub.id}`"
+    :title="payPeriodPaystub.paystub.issuer"
+    :subtitle="payPeriodPaystub.paystub.type"
+    :amount="payPeriodPaystub.amount.pretty"
+    @click="modalStore.openSettingsModal('payPeriodPaystub', payPeriodPaystub)"
   />
 </template>
