@@ -1,6 +1,10 @@
 import type { IUserResource } from '~/http/resources/account.resource';
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
+  if (to.path === '/') {
+    return await navigateTo('/income');
+  }
+
   const accountStore = useAccountStore();
   const payPeriodStore = usePayPeriodStore();
   const accessToken = useCookie('corvesive_access_token').value;
