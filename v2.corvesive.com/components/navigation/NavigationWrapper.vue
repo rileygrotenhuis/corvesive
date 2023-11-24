@@ -37,8 +37,9 @@
           >Savings</router-link
         >
       </div>
-      <div class="flex gap-8">
+      <div class="flex gap-6">
         <slot name="create-menu" />
+        <slot name="transaction-menu" />
         <slot name="pay-period-popover" />
         <slot name="profile-menu" />
         <slot name="sidebar-menu" />

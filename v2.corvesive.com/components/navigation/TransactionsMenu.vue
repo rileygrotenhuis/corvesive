@@ -17,7 +17,7 @@ const menuItems = [
       },
     },
     {
-      label: 'Pay off Budget',
+      label: 'Pay Budget',
       click: () => {
         modalStore.openTransactionsModal('budget');
       },
@@ -33,7 +33,7 @@ const menuItems = [
       :ui="{ item: { disabled: 'cursor-text select-text' } }"
       :popper="{ placement: 'bottom-end' }"
     >
-      <UIcon name="i-heroicons-currency-dollar" class="w-7 h-7" />
+      <UIcon name="i-heroicons-currency-dollar" class="w-5 h-5" />
       <template #item="{ item }">
         <span class="truncate">{{ item.label }}</span>
       </template>

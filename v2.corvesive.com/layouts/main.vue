@@ -12,6 +12,9 @@ useHead({
       <template #create-menu>
         <NavigationCreateMenu class="flex items-center" />
       </template>
+      <template #transaction-menu>
+        <NavigationTransactionsMenu class="flex items-center" />
+      </template>
       <template #pay-period-popover>
         <NavigationPayPeriodPopover class="flex items-center" />
       </template>
@@ -23,10 +26,11 @@ useHead({
       </template>
     </NavigationWrapper>
     <div class="w-11/12 max-w-[850px] mx-auto">
-      <NavigationTransactionsMenu class="mt-4 mb-4" />
       <UtilModalUtility />
       <UNotifications />
-      <slot />
+      <div class="mt-8">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
