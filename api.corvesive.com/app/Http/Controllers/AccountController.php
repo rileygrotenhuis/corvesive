@@ -14,7 +14,11 @@ class AccountController extends Controller
 
     public function me(): UserResource
     {
-        return new UserResource(auth()->user());
+        return new UserResource(
+            auth()
+                ->user()
+                ->load('payPeriod')
+        );
     }
 
     public function update(UpdateAccountRequest $request): UserResource

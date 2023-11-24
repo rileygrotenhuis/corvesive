@@ -15,6 +15,10 @@ export const useModalStore = defineStore('useModalStore', {
       type: '',
       data: {} as any,
     },
+    payPeriod: {
+      open: false,
+      type: '',
+    },
   }),
   actions: {
     openRecurringModal(type: string) {
@@ -42,6 +46,14 @@ export const useModalStore = defineStore('useModalStore', {
       this.settings.open = false;
       this.settings.type = '';
       this.settings.data = {};
+    },
+    openPayPeriodModal(type: string) {
+      this.payPeriod.open = true;
+      this.payPeriod.type = type;
+    },
+    closePayPeriodModal() {
+      this.payPeriod.open = false;
+      this.payPeriod.type = '';
     },
   },
 });
