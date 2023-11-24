@@ -12,6 +12,7 @@ const modalStore = useModalStore();
     :title="paystub.issuer"
     :subtitle="paystub.type"
     :amount="paystub.amount.pretty"
+    @click="modalStore.openSettingsModal('paystub', paystub)"
   />
   <ExpensesExpenseCard
     v-else

@@ -25,8 +25,12 @@ const modalStore = useModalStore();
       <PeriodUpdatePayPeriodSavingForm
         v-if="modalStore.settings.type === 'payPeriodSaving'"
       />
+      <RecurringUpdateSavingForm v-if="modalStore.settings.type === 'saving'" />
       <PeriodUpdatePayPeriodPaystubForm
         v-if="modalStore.settings.type === 'payPeriodPaystub'"
+      />
+      <RecurringUpdatePaystubForm
+        v-if="modalStore.settings.type === 'paystub'"
       />
     </div>
   </UModal>

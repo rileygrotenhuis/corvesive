@@ -11,6 +11,7 @@ const modalStore = useModalStore();
     :key="saving.id.toString()"
     :title="saving.name"
     :amount="saving.amount.pretty"
+    @click="modalStore.openSettingsModal('saving', saving)"
   />
   <ExpensesExpenseCard
     v-else
