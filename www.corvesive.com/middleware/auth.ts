@@ -23,7 +23,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       await payPeriodStore.getPayPeriods();
     }
 
-    if (Object.keys(payPeriodStore.currentPayPeriod).length < 1) {
+    if (Object.keys(accountStore.user.pay_period).length < 1) {
       await payPeriodStore.getPayPeriod(me.pay_period.id);
     }
   }

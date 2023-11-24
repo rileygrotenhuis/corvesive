@@ -34,7 +34,8 @@ class AccountController extends Controller
             $request->first_name,
             $request->last_name,
             $request->email,
-            $request->phone_number
+            $request->phone_number,
+            $request->pay_period_id
         );
 
         return new UserResource($user);

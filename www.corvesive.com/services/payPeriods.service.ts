@@ -33,12 +33,6 @@ class PayPeriodService extends HttpFactory {
   async deletePayPeriod(id: number) {
     return await this.call('DELETE', `/pay-periods/${id}`);
   }
-
-  async updateCurrentPayPeriod(
-    id: number
-  ): Promise<IHttpResource<IPayPeriodResource>> {
-    return await this.call('POST', `/pay-periods/${id}/current`);
-  }
 }
 
 export default PayPeriodService;

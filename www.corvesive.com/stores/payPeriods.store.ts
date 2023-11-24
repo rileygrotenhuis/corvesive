@@ -21,12 +21,5 @@ export const usePayPeriodStore = defineStore('usePayPeriodStore', {
 
       return this.currentPayPeriod;
     },
-    async updateCurrentPayPeriod(id: number): Promise<IPayPeriodResource> {
-      this.currentPayPeriod = (
-        await useNuxtApp().$api.payPeriods.updateCurrentPayPeriod(id)
-      ).data;
-
-      return this.currentPayPeriod;
-    },
   },
 });

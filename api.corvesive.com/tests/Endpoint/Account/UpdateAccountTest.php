@@ -2,6 +2,7 @@
 
 namespace Tests\Endpoint\Account;
 
+use App\Models\PayPeriod;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
@@ -28,6 +29,7 @@ class UpdateAccountTest extends TestCase
             'last_name' => 'Admin',
             'email' => 'admin@corvesive.com',
             'phone_number' => '0001112222',
+            'pay_period_id' => PayPeriod::factory()->create()->id,
         ];
     }
 

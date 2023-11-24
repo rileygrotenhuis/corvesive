@@ -8,6 +8,7 @@ const form: IUpdateAccountRequest = reactive({
   last_name: accountStore.user.names.last,
   email: accountStore.user.email,
   phone_number: accountStore.user.phone_number,
+  pay_period_id: accountStore.user.pay_period.id,
 });
 
 const errors = ref();

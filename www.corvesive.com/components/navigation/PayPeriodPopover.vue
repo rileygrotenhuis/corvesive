@@ -10,7 +10,7 @@ const payPeriodSelectOptions = payPeriodStore.payPeriods.map((payPeriod) => {
   };
 });
 
-const selectedPayPeriod = ref(payPeriodStore.currentPayPeriod.id);
+const selectedPayPeriod = ref(accountStore.user.pay_period.id);
 
 watch(
   selectedPayPeriod,
@@ -18,7 +18,13 @@ watch(
     useToast().add({
       title: 'You have switched your currently selected Pay Period!',
     });
-    await payPeriodStore.updateCurrentPayPeriod(newPayPeriodId);
+    await useNuxtApp().$api.account.updateAccount({
+      first_name: accountStore.user.names.first,
+      last_name: accountStore.user.names.last,
+      email: accountStore.user.email,
+      phone_number: accountStore.user.phone_number,
+      pay_period_id: newPayPeriodId,
+    });
     window.location.reload();
   }
 );
