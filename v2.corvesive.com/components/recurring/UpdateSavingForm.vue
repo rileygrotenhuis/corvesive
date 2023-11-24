@@ -37,7 +37,6 @@ const deleteSaving = async () => {
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
       <h4 class="text-xl font-bold text-rose-500">
-        {{ modalStore.settings.data.issuer }} -
         {{ modalStore.settings.data.name }}
       </h4>
       <p class="text-sm font-bold">Update the details below...</p>
