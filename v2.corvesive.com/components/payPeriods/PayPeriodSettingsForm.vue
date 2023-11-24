@@ -20,6 +20,10 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closePayPeriodModal();
+    await payPeriodStore.getPayPeriods();
+    useToast().add({
+      title: 'You have updated your current Pay Period',
+    });
   }
 };
 
@@ -28,6 +32,10 @@ const deletePayPeriod = async () => {
     accountStore.user.pay_period.id
   );
   modalStore.closePayPeriodModal();
+  await payPeriodStore.getPayPeriods();
+  useToast().add({
+    title: 'You have deleted your current Pay Period',
+  });
 };
 </script>
 
