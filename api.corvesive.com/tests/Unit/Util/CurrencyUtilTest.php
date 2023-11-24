@@ -17,6 +17,7 @@ class CurrencyUtilTest extends TestCase
 
         $this->assertEquals(collect([
             'raw' => 10000,
+            'input' => '100.00',
             'pretty' => '$100.00',
         ]), $result);
     }
@@ -28,6 +29,7 @@ class CurrencyUtilTest extends TestCase
 
         $this->assertEquals(collect([
             'raw' => 12550,
+            'input' => '125.50',
             'pretty' => '$125.50',
         ]), $result);
     }
@@ -39,6 +41,7 @@ class CurrencyUtilTest extends TestCase
 
         $this->assertEquals(collect([
             'raw' => 12567,
+            'input' => '125.67',
             'pretty' => '$125.67',
         ]), $result);
     }
@@ -50,6 +53,7 @@ class CurrencyUtilTest extends TestCase
 
         $this->assertEquals(collect([
             'raw' => 0,
+            'input' => '0.00',
             'pretty' => '$0.00',
         ]), $result);
     }
