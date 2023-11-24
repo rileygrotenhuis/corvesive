@@ -32,43 +32,37 @@ Before you can run this application, ensure you have the following software inst
 
 To get started with this application, follow these steps:
 
-1. **Clone the Repository**: Start by cloning this repository to your local machine. You can do this by running the following command in your terminal:
+1. **Navigate to the Project Directory**: Change your working directory to the newly cloned repository:
 
     ```bash
-    git clone https://github.com/rileygrotenhuis/api.corvesive.com.git
+    cd corvesive.com/api.corvesive.com
     ```
 
-2. **Navigate to the Project Directory**: Change your working directory to the newly cloned repository:
-
-    ```bash
-    cd api.corvesive.com
-    ```
-
-3. **Copy Environment Variables**: This application uses environment variables for configuration. Copy the contents from the `.env.example` file into a `.env` file.
+2. **Copy Environment Variables**: This application uses environment variables for configuration. Copy the contents from the `.env.example` file into a `.env` file.
 
     ```bash
     cp .env.example .env
     ```
 
-4. **Install Dependencies**: Now you need to install the project dependencies using Composer. Run the following command:
+3. **Install Dependencies**: Now you need to install the project dependencies using Composer. Run the following command:
 
     ```bash
     composer install
     ```
    
-5. **Generate Encryption Key**: To generate an encryption key that the Laravel application uses for authentication and authorization, run the following command:
+4. **Generate Encryption Key**: To generate an encryption key that the Laravel application uses for authentication and authorization, run the following command:
 
     ```bash
     php artisan key:generate
     ```
    
-6. **Start the Application**: Once the dependencies are installed, you can start the application by running:
+5. **Start the Application**: Once the dependencies are installed, you can start the application by running:
 
     ```bash
     ./vendor/bin/sail up -d
     ```
    
-7. **Run Migrations**: To run the database migrations for this application, run the following command:
+6. **Run Migrations**: To run the database migrations for this application, run the following command:
 
     ```bash
     ./vendor/bin/sail artisan migrate
