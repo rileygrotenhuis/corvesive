@@ -23,6 +23,9 @@ const modalStore = useModalStore();
       <TransactionsBillTransactionForm
         v-if="modalStore.transactions.type === 'bill'"
       />
+      <TransactionsBudgetTransactionForm
+        v-if="modalStore.transactions.type === 'budget'"
+      />
     </div>
   </UModal>
 </template>
