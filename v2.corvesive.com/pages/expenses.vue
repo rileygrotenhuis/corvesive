@@ -30,7 +30,7 @@ const tabs = [
 </script>
 
 <template>
-  <div class="mt-8">
+  <div>
     <UTabs :items="tabs" class="w-full">
       <template #item="{ item }">
         <UCard>

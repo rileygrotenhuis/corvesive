@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const accountStore = useAccountStore();
-const transactionStore = useTransactionStore();
 const billStore = useBillStore();
 const modalStore = useModalStore();
 

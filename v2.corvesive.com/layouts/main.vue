@@ -22,12 +22,9 @@ useHead({
         <NavigationSidebarMenu class="flex items-center" />
       </template>
     </NavigationWrapper>
-    <div class="w-11/12 max-w-[850px] mx-auto mt-4">
-      <PayPeriodsPayPeriodModal />
-      <ExpensesSettingsModal />
-      <TransactionsModal />
-      <RecurringModal />
-      <PeriodModal />
+    <div class="w-11/12 max-w-[850px] mx-auto">
+      <NavigationTransactionsMenu class="mt-4 mb-4" />
+      <UtilModalUtility />
       <UNotifications />
       <slot />
     </div>

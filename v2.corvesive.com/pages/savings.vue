@@ -16,7 +16,7 @@ await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
 </script>
 
 <template>
-  <div class="mt-8">
+  <div>
     <UCard>
       <div class="flex flex-col gap-4">
         <ExpensesSavingsTable />

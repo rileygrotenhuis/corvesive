@@ -10,7 +10,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="mt-8">
+  <div>
     <h1>Dashboard</h1>
     <UButton @click="useModalStore().openTransactionsModal('bill')"
       >Test</UButton
