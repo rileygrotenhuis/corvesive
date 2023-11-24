@@ -1,57 +1,48 @@
 <script setup lang="ts">
-import useTransactionsStore from '~/stores/transactions';
-import usePayPeriodBillsStore from '~/stores/payPeriodBills.ts';
+const accountStore = useAccountStore();
+const billStore = useBillStore();
+const modalStore = useModalStore();
 
-await usePayPeriodBillsStore().getPayPeriodBills();
+const payPeriodBillOptions = (
+  await billStore.getPayPeriodBills(accountStore.user.pay_period.id)
+).map((payPeriodBill) => {
+  return {
+    label: `${payPeriodBill.bill.issuer} ${payPeriodBill.bill.name} (${payPeriodBill.amount.pretty})`,
+    value: payPeriodBill.id,
+    disabled: payPeriodBill.has_payed,
+  };
+});
+
+const selectedPayPeriodBill: Ref<number> = ref(0);
+
+const errors = ref();
+
+const handleSubmit = async () => {
+  const response = await useNuxtApp().$api.transactions.billTransaction(
+    accountStore.user.pay_period.id,
+    selectedPayPeriodBill.value
+  );
+
+  if (!(errors.value = response.errors)) {
+    modalStore.closeTransactionsModal();
+    window.location.reload();
+  }
+};
 </script>
 
 <template>
-  <div class="w-11/12 max-w-lg mx-auto">
-    <h3 class="text-xl font-bold mb-4">Bill Transaction</h3>
-    <form
-      @submit.prevent="useTransactionsStore().createBillTransaction()"
-      class="flex flex-col gap-4"
-    >
-      <div>
-        <FormsInputLabel resource="expense_type" text="Select Bill" />
-        <select
-          v-model="useTransactionsStore().form.payPeriodExpense"
-          class="shadow border rounded w-full py-2 pl-2 pr-16 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
-        >
-          <option
-            v-for="bill in usePayPeriodBillsStore().payPeriodBills"
-            :key="bill.id"
-            :value="bill"
-            :disabled="bill.has_payed"
-          >
-            {{ bill.bill.issuer }} - {{ bill.bill.name }}
-          </option>
-        </select>
-      </div>
-      <div class="flex flex-col gap-4">
-        <h5 class="text-lg">
-          <strong>Due Date: </strong>
-          {{
-            useTransactionsStore().form.payPeriodExpense?.dates?.due?.pretty
-              ?.short ?? '--/--/--'
-          }}
-        </h5>
-        <h5 class="text-lg">
-          <strong>Amount: </strong>
-          {{
-            useTransactionsStore().form.payPeriodExpense?.amount?.pretty ??
-            '$0.00'
-          }}
-        </h5>
-      </div>
-      <FormsFormErrors
-        v-if="useTransactionsStore().form.errors"
-        :formErrors="useTransactionsStore().form.errors"
+  <div>
+    <div class="space-y-4">
+      <h4 class="text-xl font-bold text-rose-500">Bill Payments</h4>
+      <p class="text-sm font-light">
+        Pay off one of your bills for the currently selected pay period!
+      </p>
+      <USelect
+        :options="payPeriodBillOptions"
+        v-model="selectedPayPeriodBill"
       />
-      <ButtonsFormSubmitButton
-        buttonText="Pay Bill"
-        :disabled="useTransactionsStore().form.isLoading"
-      />
-    </form>
+      <UButton @click.prevent="handleSubmit" color="rose"> Submit </UButton>
+      <FormsFormErrors :errors="errors" />
+    </div>
   </div>
 </template>

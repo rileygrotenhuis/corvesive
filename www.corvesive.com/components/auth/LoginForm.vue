@@ -1,32 +1,42 @@
 <script setup lang="ts">
-import useAuthStore from '~/stores/auth';
+import { setAccessToken } from '~/util/auth.util';
+import type { ILoginRequest } from '~/http/requests/auth.request';
 
-const form = useAuthStore().loginForm;
+const accountStore = useAccountStore();
+const payPeriodStore = usePayPeriodStore();
+
+const form: ILoginRequest = reactive({
+  email: '',
+  password: '',
+});
+
+const errors = ref();
+
+const handleSubmit = async () => {
+  const response = await useNuxtApp().$api.auth.login(form);
+
+  if (!(errors.value = response.errors)) {
+    accountStore.setUser(response.user);
+
+    await setAccessToken(response.token);
+
+    await payPeriodStore.getPayPeriods();
+    await payPeriodStore.getPayPeriod(response.user.pay_period.id);
+
+    return await navigateTo('/');
+  }
+};
 </script>
 
 <template>
-  <form
-    @submit.prevent="useAuthStore().login"
-    class="w-3/4 lg:w-1/2 max-w-lg p-8 shadow-xl rounded-xl flex flex-col gap-4"
-  >
-    <div>
-      <FormsInputLabel resource="email" text="Email" />
-      <FormsInputText
-        v-model="form.email"
-        name="email"
-        :disabled="form.isLoading"
-      />
-    </div>
-    <div>
-      <FormsInputLabel resource="password" text="Password" />
-      <FormsInputText
-        v-model="form.password"
-        type="password"
-        name="password"
-        :disabled="form.isLoading"
-      />
-    </div>
-    <FormsFormErrors v-if="form.errors" :formErrors="form.errors" />
-    <ButtonsFormSubmitButton buttonText="Login" :disabled="form.isLoading" />
-  </form>
+  <UForm :state="form" class="space-y-4" @submit="handleSubmit">
+    <UFormGroup label="Email" name="email">
+      <UInput v-model="form.email" />
+    </UFormGroup>
+    <UFormGroup label="Password" name="password">
+      <UInput v-model="form.password" type="password" />
+    </UFormGroup>
+    <UButton type="submit" color="rose"> Login </UButton>
+    <FormsFormErrors :errors="errors" />
+  </UForm>
 </template>

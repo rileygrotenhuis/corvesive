@@ -1,73 +1,58 @@
 <script setup lang="ts">
-import useAuthStore from '~/stores/auth.ts';
+import { setAccessToken } from '~/util/auth.util';
+import type { IRegistrationRequest } from '~/http/requests/auth.request';
 
-const form = useAuthStore().registrationForm;
+const accountStore = useAccountStore();
+const payPeriodStore = usePayPeriodStore();
+
+const form: IRegistrationRequest = reactive({
+  first_name: '',
+  last_name: '',
+  email: '',
+  phone_number: '',
+  password: '',
+  password_confirmation: '',
+});
+
+const errors = ref();
+
+const handleSubmit = async () => {
+  const response = await useNuxtApp().$api.auth.register(form);
+
+  if (!(errors.value = response.errors)) {
+    accountStore.setUser(response.user);
+
+    await setAccessToken(response.token);
+
+    await payPeriodStore.getPayPeriods();
+    await payPeriodStore.getPayPeriod(response.user.pay_period.id);
+
+    return await navigateTo('/');
+  }
+};
 </script>
 
 <template>
-  <form
-    @submit.prevent="useAuthStore().register"
-    class="w-3/4 lg:w-1/2 max-w-lg p-8 shadow-xl rounded-xl flex flex-col gap-4"
-  >
-    <FormsDoubleInput>
-      <div>
-        <FormsInputLabel resource="firstName" text="First Name" />
-        <FormsInputText
-          v-model="form.firstName"
-          name="firstName"
-          :disabled="form.isLoading"
-        />
-      </div>
-      <div>
-        <FormsInputLabel resource="lastName" text="Last Name" />
-        <FormsInputText
-          v-model="form.lastName"
-          name="lastName"
-          :disabled="form.isLoading"
-        />
-      </div>
-    </FormsDoubleInput>
-    <FormsDoubleInput>
-      <div>
-        <FormsInputLabel resource="email" text="Email" />
-        <FormsInputText
-          v-model="form.email"
-          type="email"
-          name="email"
-          :disabled="form.isLoading"
-        />
-      </div>
-      <div>
-        <FormsInputLabel resource="phoneNumber" text="Phone Number" />
-        <FormsInputText
-          v-model="form.phoneNumber"
-          name="phoneNumber"
-          :disabled="form.isLoading"
-        />
-      </div>
-    </FormsDoubleInput>
-    <div>
-      <FormsInputLabel resource="password" text="Password" />
-      <FormsInputText
-        v-model="form.password"
-        type="password"
-        name="password"
-        :disabled="form.isLoading"
-      />
-    </div>
-    <div>
-      <FormsInputLabel
-        resource="passwordConfirmation"
-        text="Confirm Password"
-      />
-      <FormsInputText
-        v-model="form.passwordConfirmation"
-        type="password"
-        name="passwordConfirmation"
-        :disabled="form.isLoading"
-      />
-    </div>
-    <FormsFormErrors v-if="form.errors" :formErrors="form.errors" />
-    <ButtonsFormSubmitButton buttonText="Register" :disabled="form.isLoading" />
-  </form>
+  <UForm :state="form" class="space-y-4" @submit="handleSubmit">
+    <UFormGroup label="First Name" name="first_name">
+      <UInput v-model="form.first_name" />
+    </UFormGroup>
+    <UFormGroup label="Last Name" name="last_name">
+      <UInput v-model="form.last_name" />
+    </UFormGroup>
+    <UFormGroup label="Email" name="email">
+      <UInput v-model="form.email" />
+    </UFormGroup>
+    <UFormGroup label="Phone Number" name="phone_number">
+      <UInput v-model="form.phone_number" />
+    </UFormGroup>
+    <UFormGroup label="Password" name="password">
+      <UInput v-model="form.password" type="password" />
+    </UFormGroup>
+    <UFormGroup label="Confirm Password" name="password_confirmation">
+      <UInput v-model="form.password_confirmation" type="password" />
+    </UFormGroup>
+    <UButton type="submit" color="rose"> Register </UButton>
+    <FormsFormErrors :errors="errors" />
+  </UForm>
 </template>

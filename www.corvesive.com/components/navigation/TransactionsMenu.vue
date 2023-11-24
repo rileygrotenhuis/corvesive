@@ -1,58 +1,58 @@
 <script setup lang="ts">
-import useModalsStore from '~/stores/modals';
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+const accountStore = useAccountStore();
+const modalStore = useModalStore();
 
-const isTransactionsMenuOpen = ref(false);
-
-onMounted(() => {
-  document.addEventListener('click', closeMenuOnClickOutside);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener('click', closeMenuOnClickOutside);
-});
-
-const closeMenuOnClickOutside = (event) => {
-  if (
-    isTransactionsMenuOpen.value &&
-    !document.querySelector('#transactions-dropdown').contains(event.target)
-  ) {
-    isTransactionsMenuOpen.value = false;
-  }
-};
+const menuItems = [
+  [
+    {
+      label: 'Transactions:',
+      slot: 'title',
+      disabled: true,
+    },
+  ],
+  [
+    {
+      label: 'Make Deposit',
+      click: () => {
+        modalStore.openTransactionsModal('deposit');
+      },
+    },
+    {
+      label: 'Pay Bill',
+      click: () => {
+        modalStore.openTransactionsModal('bill');
+      },
+    },
+    {
+      label: 'Pay Budget',
+      click: () => {
+        modalStore.openTransactionsModal('budget');
+      },
+    },
+  ],
+];
 </script>
 
 <template>
-  <div id="transactions-dropdown" class="relative inline-block">
-    <IconsPaymentIcon
-      @click.prevent="isTransactionsMenuOpen = !isTransactionsMenuOpen"
-      class="hover:cursor-pointer"
-    />
-    <div
-      v-if="isTransactionsMenuOpen"
-      @click.prevent="isTransactionsMenuOpen = false"
-      class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50"
+  <div class="w-fit ml-auto">
+    <UDropdown
+      :items="menuItems"
+      :ui="{ item: { disabled: 'cursor-text select-text' } }"
+      :popper="{ placement: 'bottom-end' }"
     >
-      <div class="py-2 flex flex-col p-2 gap-1">
-        <button
-          class="font-light text-left text-sm px-1 py-2 rounded-md hover:bg-slate-200"
-          @click="useModalsStore().openModal('transactions.budget')"
-        >
-          Pay Budget
-        </button>
-        <button
-          class="font-light text-left text-sm px-1 py-2 rounded-md hover:bg-slate-200"
-          @click="useModalsStore().openModal('transactions.bill')"
-        >
-          Pay Bill
-        </button>
-        <button
-          class="font-light text-left text-sm px-1 py-2 rounded-md hover:bg-slate-200"
-          @click="useModalsStore().openModal('transactions.deposit')"
-        >
-          Deposit
-        </button>
-      </div>
-    </div>
+      <UIcon name="i-heroicons-currency-dollar" class="w-5 h-5" />
+
+      <template #title="{ item }">
+        <div class="text-left">
+          <p class="truncate font-medium text-gray-900 dark:text-white">
+            {{ item.label }}
+          </p>
+        </div>
+      </template>
+
+      <template #item="{ item }">
+        <span class="truncate">{{ item.label }}</span>
+      </template>
+    </UDropdown>
   </div>
 </template>

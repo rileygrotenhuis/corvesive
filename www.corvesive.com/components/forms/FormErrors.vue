@@ -1,16 +1,17 @@
 <script setup lang="ts">
 defineProps({
-  formErrors: Object,
+  errors: Object,
 });
 </script>
 
 <template>
   <div
-    class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-md my-2"
+    v-if="errors && Object.keys(errors).length > 0"
+    class="bg-red-600 text-white px-4 py-2 rounded-md my-2"
   >
     <p>Oops! There was an error. Please check the following:</p>
     <ul class="list-disc list-inside">
-      <li v-for="(error, index) in formErrors" :key="index">
+      <li v-for="(error, index) in errors" :key="index">
         {{ error[0] }}
       </li>
     </ul>

@@ -7,12 +7,8 @@ defineProps({
 </script>
 
 <template>
-  <div class="text-sm">
-    <p class="text-gray-600 text-center">
-      {{ question }}
-      <NuxtLink :to="to" class="text-blue-500 hover:text-blue-700">
-        {{ action }}
-      </NuxtLink>
-    </p>
-  </div>
+  <p class="text-gray-200 text-center mt-4">
+    {{ question }}
+    <ULink class="text-rose-500 hover:underline" :to="to">{{ action }}</ULink>
+  </p>
 </template>

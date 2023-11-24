@@ -2,19 +2,21 @@
 useHead({
   title: 'Corvesive - Login',
 });
-
-definePageMeta({
-  layout: 'guest',
-});
 </script>
 
 <template>
-  <h3 class="text-3xl font-bold text-center">Welcome Back!</h3>
-  <AuthLoginForm />
-  <FormsFormFooter
-    question="Don't have an account?"
-    action="Register here"
-    to="/register"
-    class="mt-4"
-  />
+  <div class="m-8">
+    <AuthRegistrationAndLoginCard
+      title="Login now to"
+      subtitle="Corvesive"
+      class="mx-auto"
+    >
+      <AuthLoginForm />
+    </AuthRegistrationAndLoginCard>
+    <FormsFormFooter
+      question="Don't have an account?"
+      action="Register"
+      to="/register"
+    />
+  </div>
 </template>

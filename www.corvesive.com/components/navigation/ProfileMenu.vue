@@ -1,52 +1,60 @@
 <script setup lang="ts">
-import useAuthStore from '~/stores/auth';
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+const accountStore = useAccountStore();
 
-const isNavigationMenuOpen = ref(false);
-
-onMounted(() => {
-  document.addEventListener('click', closeMenuOnClickOutside);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener('click', closeMenuOnClickOutside);
-});
-
-const closeMenuOnClickOutside = (event) => {
-  if (
-    isNavigationMenuOpen.value &&
-    !document.querySelector('#profile-dropdown').contains(event.target)
-  ) {
-    isNavigationMenuOpen.value = false;
-  }
-};
+const menuItems = [
+  [
+    {
+      label: accountStore.user.email,
+      slot: 'account',
+      disabled: true,
+    },
+  ],
+  [
+    {
+      label: 'Account',
+      icon: 'i-heroicons-cog-8-tooth',
+      click: () => {
+        useNuxtApp().$router.push('/account');
+      },
+    },
+  ],
+  [
+    {
+      label: 'Sign out',
+      icon: 'i-heroicons-arrow-left-on-rectangle',
+      click: async () => {
+        await useNuxtApp().$api.auth.logout();
+        useNuxtApp().$router.push('/login');
+      },
+    },
+  ],
+];
 </script>
 
 <template>
-  <div id="profile-dropdown" class="hidden md:relative md:inline-block">
-    <IconsProfileIcon
-      @click.prevent="isNavigationMenuOpen = !isNavigationMenuOpen"
-      class="hover:cursor-pointer"
-    />
-    <div
-      v-if="isNavigationMenuOpen"
-      @click.prevent="isNavigationMenuOpen = false"
-      class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50"
-    >
-      <div class="py-2 flex flex-col p-2">
-        <NuxtLink
-          to="/account/profile"
-          class="font-light text-sm px-1 py-2 rounded-md hover:bg-slate-200 hover:cursor-pointer"
-        >
-          Profile
-        </NuxtLink>
-        <button
-          class="text-left font-light text-sm px-1 py-2 rounded-md hover:bg-slate-200"
-          @click.prevent="useAuthStore().logout"
-        >
-          Logout
-        </button>
+  <UDropdown
+    :items="menuItems"
+    :ui="{ item: { disabled: 'cursor-text select-text' } }"
+    :popper="{ placement: 'bottom-end' }"
+  >
+    <UAvatar :alt="accountStore.user.names.full" size="sm" />
+
+    <template #account="{ item }">
+      <div class="text-left">
+        <p>Signed in as</p>
+        <p class="truncate font-medium text-gray-900 dark:text-white">
+          {{ item.label }}
+        </p>
       </div>
-    </div>
-  </div>
+    </template>
+
+    <template #item="{ item }">
+      <span class="truncate">{{ item.label }}</span>
+
+      <UIcon
+        :name="item.icon"
+        class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"
+      />
+    </template>
+  </UDropdown>
 </template>
