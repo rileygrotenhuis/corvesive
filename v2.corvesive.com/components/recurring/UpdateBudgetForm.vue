@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import type { ICreateOrUpdateBillRequest } from '~/http/requests/bills.request';
+import type { ICreateOrUpdateBudgetRequest } from '~/http/requests/budgets.request';
 
-const billStore = useBillStore();
+const budgetStore = useBudgetStore();
 const modalStore = useModalStore();
 
-const form: ICreateOrUpdateBillRequest = reactive({
-  issuer: modalStore.settings.data.issuer,
+const form: ICreateOrUpdateBudgetRequest = reactive({
   name: modalStore.settings.data.name,
   amount: modalStore.settings.data.amount.input,
-  due_date: modalStore.settings.data.due_date.raw,
-  is_automatic: modalStore.settings.data.is_automatic,
   notes: modalStore.settings.data.notes,
 });
 
@@ -18,13 +15,13 @@ const errors = ref();
 const handleSubmit = async () => {
   form.amount = form.amount * 100;
 
-  const response = await useNuxtApp().$api.bills.updateBill(
+  const response = await useNuxtApp().$api.budgets.updateBudget(
     modalStore.settings.data.id,
     form
   );
 
   if (!(errors.value = response.errors)) {
-    await billStore.getBills();
+    await budgetStore.getBudgets();
     modalStore.closeSettingsModal();
   }
 };
@@ -38,14 +35,8 @@ const handleSubmit = async () => {
         {{ modalStore.settings.data.name }}
       </h4>
       <p class="text-sm font-bold">Update the details below...</p>
-      <UFormGroup label="Issuer" name="issuer">
-        <UInput v-model="form.issuer" />
-      </UFormGroup>
       <UFormGroup label="Name" name="name">
         <UInput v-model="form.name" />
-      </UFormGroup>
-      <UFormGroup label="Due Date" name="due_date">
-        <UInput v-model="form.due_date" />
       </UFormGroup>
       <UFormGroup label="Amount" name="amount">
         <UInput v-model="form.amount" />

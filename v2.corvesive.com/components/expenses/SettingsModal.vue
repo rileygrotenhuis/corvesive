@@ -18,6 +18,7 @@ const modalStore = useModalStore();
       <PeriodUpdatePayPeriodBillForm
         v-if="modalStore.settings.type === 'payPeriodBill'"
       />
+      <RecurringUpdateBudgetForm v-if="modalStore.settings.type === 'budget'" />
       <PeriodUpdatePayPeriodBudgetForm
         v-if="modalStore.settings.type === 'payPeriodBudget'"
       />

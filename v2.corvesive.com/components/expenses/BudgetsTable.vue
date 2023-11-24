@@ -11,6 +11,7 @@ const modalStore = useModalStore();
     :key="budget.id.toString()"
     :title="budget.name"
     :amount="budget.amount.pretty"
+    @click="modalStore.openSettingsModal('budget', budget)"
   />
   <ExpensesExpenseCard
     v-else
