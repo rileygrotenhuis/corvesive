@@ -34,12 +34,12 @@ class TransactionService extends HttpFactory {
 
   async budgetTransaction(
     payPeriodId: number,
-    payPeriodBillId: number,
+    payPeriodBudgetId: number,
     payload: IBudgetTransactionRequest
   ): Promise<IHttpResource<ITransactionResource>> {
     return await this.call(
       'POST',
-      `/pay-periods/${payPeriodId}/bills/${payPeriodBillId}/transaction`,
+      `/pay-periods/${payPeriodId}/budgets/${payPeriodBudgetId}/transaction`,
       payload
     );
   }
