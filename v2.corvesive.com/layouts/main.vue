@@ -21,9 +21,6 @@ useHead({
       <template #profile-menu>
         <NavigationProfileMenu />
       </template>
-      <template #sidebar-menu>
-        <NavigationSidebarMenu class="flex items-center" />
-      </template>
     </NavigationWrapper>
     <div class="w-11/12 max-w-[850px] mx-auto">
       <UtilModalUtility />

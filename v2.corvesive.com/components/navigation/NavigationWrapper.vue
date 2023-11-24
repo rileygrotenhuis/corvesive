@@ -42,7 +42,6 @@
         <slot name="transaction-menu" />
         <slot name="pay-period-popover" />
         <slot name="profile-menu" />
-        <slot name="sidebar-menu" />
       </div>
     </div>
     <div
