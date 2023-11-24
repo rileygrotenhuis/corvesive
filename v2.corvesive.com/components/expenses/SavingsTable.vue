@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const accountStore = useAccountStore();
 const savingStore = useSavingStore();
+const modalStore = useModalStore();
 </script>
 
 <template>
@@ -13,9 +14,10 @@ const savingStore = useSavingStore();
   />
   <ExpensesExpenseCard
     v-else
-    v-for="saving in savingStore.payPeriodSavings"
-    :key="`${saving.pay_period.id} - ${saving.id}`"
-    :title="saving.saving_account.name"
-    :amount="saving.amount.pretty"
+    v-for="payPeriodSaving in savingStore.payPeriodSavings"
+    :key="`${payPeriodSaving.pay_period.id} - ${payPeriodSaving.id}`"
+    :title="payPeriodSaving.saving_account.name"
+    :amount="payPeriodSaving.amount.pretty"
+    @click="modalStore.openSettingsModal('payPeriodSaving', payPeriodSaving)"
   />
 </template>
