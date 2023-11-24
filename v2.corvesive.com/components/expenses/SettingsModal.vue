@@ -17,6 +17,9 @@ const modalStore = useModalStore();
       <PeriodUpdatePayPeriodBillForm
         v-if="modalStore.settings.type === 'payPeriodBill'"
       />
+      <PeriodUpdatePayPeriodBudgetForm
+        v-if="modalStore.settings.type === 'payPeriodBudget'"
+      />
     </div>
   </UModal>
 </template>
