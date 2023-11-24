@@ -25,6 +25,18 @@ const handleSubmit = async () => {
     await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
   }
 };
+
+const detachPayPeriodSaving = async () => {
+  const response = await useNuxtApp().$api.savings.detachSavingFromPayPeriod(
+    accountStore.user.pay_period.id,
+    modalStore.settings.data.id
+  );
+
+  if (!(errors.value = response.errors)) {
+    modalStore.closeSettingsModal();
+    await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
+  }
+};
 </script>
 
 <template>

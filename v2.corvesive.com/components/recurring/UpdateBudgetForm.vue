@@ -25,6 +25,17 @@ const handleSubmit = async () => {
     modalStore.closeSettingsModal();
   }
 };
+
+const deleteBudget = async () => {
+  const response = await useNuxtApp().$api.budgets.deleteBudget(
+    modalStore.settings.data.id
+  );
+
+  if (!(errors.value = response.errors)) {
+    await budgetStore.getBudgets();
+    modalStore.closeSettingsModal();
+  }
+};
 </script>
 
 <template>

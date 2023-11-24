@@ -28,6 +28,17 @@ const handleSubmit = async () => {
     modalStore.closeSettingsModal();
   }
 };
+
+const deleteBill = async () => {
+  const response = await useNuxtApp().$api.bills.deleteBill(
+    modalStore.settings.data.id
+  );
+
+  if (!(errors.value = response.errors)) {
+    await billStore.getBills();
+    modalStore.closeSettingsModal();
+  }
+};
 </script>
 
 <template>

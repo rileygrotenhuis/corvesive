@@ -25,6 +25,18 @@ const handleSubmit = async () => {
     await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
   }
 };
+
+const detachPayPeriodPaystub = async () => {
+  const response = await useNuxtApp().$api.paystubs.detachPaystubFromPayPeriod(
+    accountStore.user.pay_period.id,
+    modalStore.settings.data.id
+  );
+
+  if (!(errors.value = response.errors)) {
+    modalStore.closeSettingsModal();
+    await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
+  }
+};
 </script>
 
 <template>

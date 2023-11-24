@@ -25,6 +25,17 @@ const handleSubmit = async () => {
     modalStore.closeSettingsModal();
   }
 };
+
+const deleteSaving = async () => {
+  const response = await useNuxtApp().$api.savings.deleteSaving(
+    modalStore.settings.data.id
+  );
+
+  if (!(errors.value = response.errors)) {
+    await savingStore.getSavings();
+    modalStore.closeSettingsModal();
+  }
+};
 </script>
 
 <template>

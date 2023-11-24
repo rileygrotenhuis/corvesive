@@ -27,6 +27,18 @@ const handleSubmit = async () => {
     await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
   }
 };
+
+const detachPayPeriodBill = async () => {
+  const response = await useNuxtApp().$api.bills.detachBillFromPayPeriod(
+    accountStore.user.pay_period.id,
+    modalStore.settings.data.id
+  );
+
+  if (!(errors.value = response.errors)) {
+    modalStore.closeSettingsModal();
+    await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
+  }
+};
 </script>
 
 <template>

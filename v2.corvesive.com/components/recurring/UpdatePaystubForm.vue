@@ -26,6 +26,17 @@ const handleSubmit = async () => {
     modalStore.closeSettingsModal();
   }
 };
+
+const deletePaystub = async () => {
+  const response = await useNuxtApp().$api.paystubs.deletePaystub(
+    modalStore.settings.data.id
+  );
+
+  if (!(errors.value = response.errors)) {
+    await paystubStore.getPaystubs();
+    modalStore.closeSettingsModal();
+  }
+};
 </script>
 
 <template>
