@@ -37,8 +37,7 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Admin',
             'email' => 'dev@corvesive.com',
             'phone_number' => '8888888888',
-            'password' => bcrypt('password'),
-            'is_onboarding' => 0,
+            'password' => bcrypt('password')
         ]);
     }
 

@@ -40,11 +40,4 @@ class AccountController extends Controller
 
         return new UserResource($user);
     }
-
-    public function onboard(): UserResource
-    {
-        auth()->user()->onboardUser();
-
-        return new UserResource(auth()->user());
-    }
 }

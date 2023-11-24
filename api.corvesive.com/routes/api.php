@@ -21,7 +21,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('account')->group(function () {
         Route::get('/me', [AccountController::class, 'me'])->name('me');
         Route::put('/', [AccountController::class, 'update'])->name('account.update');
-        Route::put('/onboard', [AccountController::class, 'onboard'])->name('account.onboard');
     });
 
     Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');

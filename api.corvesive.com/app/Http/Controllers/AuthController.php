@@ -24,7 +24,6 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->password = bcrypt($request->password);
-        $user->is_onboarding = true;
         $user->save();
 
         $token = $user->createToken('myapptoken')->plainTextToken;
