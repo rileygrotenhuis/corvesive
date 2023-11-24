@@ -5,7 +5,7 @@ import HttpFactory from '~/services/factory';
 
 class AccountService extends HttpFactory {
   async me(): Promise<IHttpResource<IUserResource>> {
-    return await this.call('GET', '/account/me');
+    return await this.call('GET', '/account');
   }
 
   async updateAccount(
