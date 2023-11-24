@@ -7,6 +7,12 @@ import type { ITransactionResource } from '~/http/resources/transactions.resourc
 import HttpFactory from '~/services/factory';
 
 class TransactionService extends HttpFactory {
+  async getPayPeriodTransactions(
+    payPeriodId: number
+  ): Promise<IHttpResource<ITransactionResource[]>> {
+    return await this.call('GET', `/pay-periods/${payPeriodId}/transactions`);
+  }
+
   async getPayPeriodDeposits(
     payPeriodId: number
   ): Promise<IHttpResource<ITransactionResource[]>> {
