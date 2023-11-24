@@ -22,7 +22,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div>
+  <div class="w-full max-w-xl">
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
       <UFormGroup label="First Name" name="first_name">
         <UInput v-model="form.first_name" />
@@ -36,7 +36,7 @@ const handleSubmit = async () => {
       <UFormGroup label="Phone Number" name="phone_number">
         <UInput v-model="form.phone_number" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Create </UButton>
+      <UButton type="submit" color="rose"> Save </UButton>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

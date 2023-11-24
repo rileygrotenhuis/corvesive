@@ -13,7 +13,7 @@ await useAccountStore().me();
 
 <template>
   <div>
-    <h3 class="text-xl font-bold">Update your Account Details</h3>
+    <h3 class="text-xl font-bold">Account Details</h3>
     <UDivider class="mt-2 mb-2" />
     <AuthUpdateAccountForm />
   </div>
