@@ -13,7 +13,7 @@ export const useModalStore = defineStore('useModalStore', {
     settings: {
       open: false,
       type: '',
-      data: {},
+      data: {} as any,
     },
   }),
   actions: {
@@ -34,9 +34,9 @@ export const useModalStore = defineStore('useModalStore', {
       this.period.type = '';
     },
     openSettingsModal(type: string, data: object) {
+      this.settings.data = data;
       this.settings.open = true;
       this.settings.type = type;
-      this.settings.data = data;
     },
     closeSettingsModal() {
       this.settings.open = false;

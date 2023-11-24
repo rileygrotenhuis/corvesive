@@ -7,6 +7,7 @@ export interface IPaystubResource {
   amount: {
     raw: number;
     pretty: string;
+    input: number;
   };
   notes: string;
 }
@@ -18,5 +19,6 @@ export interface IPayPeriodPaystubResource {
   amount: {
     raw: number;
     pretty: string;
+    input: number;
   };
 }

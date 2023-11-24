@@ -14,6 +14,9 @@ const modalStore = useModalStore();
         class="w-8 h-8 hover:cursor-pointer absolute top-5 right-3"
         @click="modalStore.closeSettingsModal()"
       />
+      <PeriodUpdatePayPeriodBillForm
+        v-if="modalStore.settings.type === 'payPeriodBill'"
+      />
     </div>
   </UModal>
 </template>

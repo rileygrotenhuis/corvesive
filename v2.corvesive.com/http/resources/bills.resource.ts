@@ -7,11 +7,13 @@ export interface IBillResource {
   amount: {
     raw: number;
     pretty: string;
+    input: number;
   };
   due_date: {
     raw: string;
     pretty: string;
   };
+  is_automatic: boolean;
   notes: string;
 }
 
@@ -22,6 +24,7 @@ export interface IPayPeriodBillResource {
   amount: {
     raw: number;
     pretty: string;
+    input: number;
   };
   dates: {
     due: {
@@ -36,4 +39,5 @@ export interface IPayPeriodBillResource {
   };
   has_payed: Boolean;
   status: string;
+  is_automatic: boolean;
 }

@@ -6,6 +6,7 @@ export interface IBudgetResource {
   amount: {
     raw: number;
     pretty: string;
+    input: number;
   };
   notes: string;
 }
@@ -17,9 +18,11 @@ export interface IPayPeriodBudgetResource {
   total_balance: {
     raw: number;
     pretty: string;
+    input: number;
   };
   remaining_balance: {
     raw: number;
     pretty: string;
+    input: number;
   };
 }

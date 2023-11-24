@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const accountStore = useAccountStore();
 const billStore = useBillStore();
+const modalStore = useModalStore();
 </script>
 
 <template>
@@ -15,12 +16,13 @@ const billStore = useBillStore();
   />
   <ExpensesExpenseCard
     v-else
-    v-for="bill in billStore.payPeriodBills"
-    :key="`${bill.pay_period.id} - ${bill.id}`"
-    :title="bill.bill.issuer"
-    :subtitle="bill.bill.name"
-    :amount="bill.amount.pretty"
-    :amountSubtitle="bill.dates.due.pretty.short"
-    :hasPayed="Boolean(bill.has_payed)"
+    v-for="payPeriodBill in billStore.payPeriodBills"
+    :key="`${payPeriodBill.pay_period.id} - ${payPeriodBill.id}`"
+    :title="payPeriodBill.bill.issuer"
+    :subtitle="payPeriodBill.bill.name"
+    :amount="payPeriodBill.amount.pretty"
+    :amountSubtitle="payPeriodBill.dates.due.pretty.short"
+    :hasPayed="Boolean(payPeriodBill.has_payed)"
+    @click="modalStore.openSettingsModal('payPeriodBill', payPeriodBill)"
   />
 </template>

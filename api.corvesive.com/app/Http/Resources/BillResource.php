@@ -22,6 +22,7 @@ class BillResource extends JsonResource
                 'raw' => $this->due_date,
                 'pretty' => DayOfMonthUtil::convertDayOfMonthToPrettyString($this->due_date),
             ],
+            'is_automatic' => $this->is_automatic,
             'notes' => $this->notes,
             'pay_periods' => PayPeriodResource::collection(
                 $this->whenLoaded('payPeriods')

@@ -34,6 +34,7 @@ class PayPeriodBillResource extends JsonResource
                     $this->has_payed,
                     $this->due_date
                 ),
+            'is_automatic' => $this->is_automatic,
         ];
     }
 

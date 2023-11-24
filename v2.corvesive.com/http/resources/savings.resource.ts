@@ -6,6 +6,7 @@ export interface ISavingResource {
   amount: {
     raw: number;
     pretty: string;
+    input: number;
   };
   notes: string;
 }
@@ -17,5 +18,6 @@ export interface IPayPeriodSavingResource {
   amount: {
     raw: number;
     pretty: string;
+    input: number;
   };
 }
