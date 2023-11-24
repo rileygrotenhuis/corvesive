@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Endpoint\PayPeriodPaystub;
+namespace Tests\Endpoint\PayPeriods\PayPeriodPaystub;
 
 use App\Models\PayPeriod;
 use App\Models\Paystub;

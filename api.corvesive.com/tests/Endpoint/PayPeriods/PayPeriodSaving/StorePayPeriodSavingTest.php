@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Endpoint\PayPeriodBudget;
+namespace Tests\Endpoint\PayPeriods\PayPeriodSaving;
 
-use App\Models\Budget;
 use App\Models\PayPeriod;
+use App\Models\Saving;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class StorePayPeriodBudgetTest extends TestCase
+class StorePayPeriodSavingTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,7 +17,7 @@ class StorePayPeriodBudgetTest extends TestCase
 
     protected PayPeriod $payPeriod;
 
-    protected Budget $budget;
+    protected Saving $saving;
 
     protected array $payload = [];
 
@@ -33,46 +33,45 @@ class StorePayPeriodBudgetTest extends TestCase
             ->for($this->user)
             ->create();
 
-        $this->budget = Budget::factory()
+        $this->saving = Saving::factory()
             ->for($this->user)
             ->create();
 
         $this->payload = [
-            'total_balance' => 100000,
+            'amount' => 100000,
         ];
     }
 
-    public function test_successful_pay_period_to_budget_link(): void
+    public function test_successful_pay_period_to_saving_link(): void
     {
-        $this->submitRequest($this->budget)
+        $this->submitRequest($this->saving)
             ->assertStatus(200);
 
-        $this->assertDatabaseHas('pay_period_budget', [
+        $this->assertDatabaseHas('pay_period_saving', [
             'pay_period_id' => $this->payPeriod->id,
-            'budget_id' => $this->budget->id,
-            'total_balance' => 100000,
-            'remaining_balance' => 100000,
+            'saving_id' => $this->saving->id,
+            'amount' => 100000,
         ]);
     }
 
-    public function test_failed_pay_period_to_budget_link_with_failed_authorization(): void
+    public function test_failed_pay_period_to_saving_link_with_failed_authorization(): void
     {
         $newUser = User::factory()->create();
         $this->authenticatesUser($newUser);
 
-        $newBudget = Budget::factory()
+        $newSaving = Saving::factory()
             ->for($newUser)
             ->create();
 
-        $this->submitRequest($newBudget)
+        $this->submitRequest($newSaving)
             ->assertStatus(403);
     }
 
-    protected function submitRequest(Budget $budget): TestResponse
+    protected function submitRequest(Saving $saving): TestResponse
     {
         return $this->postJson(
-            route('pay-periods.budgets.store', [
-                $this->payPeriod, $budget,
+            route('pay-periods.savings.store', [
+                $this->payPeriod, $saving,
             ]),
             $this->payload
         );

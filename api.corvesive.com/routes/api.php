@@ -4,14 +4,10 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BudgetController;
-use App\Http\Controllers\MonthlyMetricsController;
 use App\Http\Controllers\PayPeriods\PayPeriodBillController;
 use App\Http\Controllers\PayPeriods\PayPeriodBudgetController;
-use App\Http\Controllers\PayPeriods\PayPeriodCompleteController;
 use App\Http\Controllers\PayPeriods\PayPeriodController;
 use App\Http\Controllers\PayPeriods\PayPeriodCurrentController;
-use App\Http\Controllers\PayPeriods\PayPeriodDashboardController;
-use App\Http\Controllers\PayPeriods\PayPeriodMetricsController;
 use App\Http\Controllers\PayPeriods\PayPeriodPaystubController;
 use App\Http\Controllers\PayPeriods\PayPeriodSavingController;
 use App\Http\Controllers\PaystubController;
@@ -43,22 +39,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         'savings' => SavingController::class,
     ]);
 
-    Route::get('monthly/metrics', [MonthlyMetricsController::class, 'index'])->name('monthly-metrics');
-
     Route::prefix('pay-periods/{payPeriod}')->group(function () {
-        Route::get('dashboard', [PayPeriodDashboardController::class, 'index'])->name('pay-periods.dashboard');
-
-        Route::get('metrics', [PayPeriodMetricsController::class, 'index'])->name('pay-periods.metrics');
-
-        Route::post('deposit', [TransactionController::class, 'payPeriodDeposit'])->name('pay-periods.deposit');
-
-        Route::post('complete', [PayPeriodCompleteController::class, 'complete'])->name('pay-periods.complete');
-        Route::post('incomplete', [PayPeriodCompleteController::class, 'incomplete'])->name('pay-periods.incomplete');
-
         Route::post('current', [PayPeriodCurrentController::class, 'store'])->name('pay-periods.current');
 
         Route::prefix('transactions')->group(function () {
             Route::get('/', [TransactionController::class, 'payPeriodTransactions'])->name('pay-periods.transactions');
+            Route::post('deposits', [TransactionController::class, 'payPeriodDeposit'])->name('pay-periods.deposit');
             Route::get('/deposits', [TransactionController::class, 'payPeriodDeposits'])->name('pay-periods.deposits');
             Route::put('{transaction}', [TransactionController::class, 'update'])->name('pay-periods.transactions.update');
             Route::delete('{transaction}', [TransactionController::class, 'destroy'])->name('pay-periods.transactions.destroy');

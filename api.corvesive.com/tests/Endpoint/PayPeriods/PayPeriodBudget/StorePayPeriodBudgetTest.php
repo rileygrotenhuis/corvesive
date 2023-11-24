@@ -1,16 +1,15 @@
 <?php
 
-namespace Tests\Endpoint\PayPeriodBudget;
+namespace Tests\Endpoint\PayPeriods\PayPeriodBudget;
 
 use App\Models\Budget;
 use App\Models\PayPeriod;
-use App\Models\PayPeriodBudget;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class DestroyPayPeriodBudgetTest extends TestCase
+class StorePayPeriodBudgetTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,6 +18,8 @@ class DestroyPayPeriodBudgetTest extends TestCase
     protected PayPeriod $payPeriod;
 
     protected Budget $budget;
+
+    protected array $payload = [];
 
     public function setUp(): void
     {
@@ -36,18 +37,22 @@ class DestroyPayPeriodBudgetTest extends TestCase
             ->for($this->user)
             ->create();
 
-        PayPeriodBudget::factory()->create([
-            'pay_period_id' => $this->payPeriod->id,
-            'budget_id' => $this->budget->id,
-        ]);
+        $this->payload = [
+            'total_balance' => 100000,
+        ];
     }
 
-    public function test_successful_pay_period_to_budget_unlink(): void
+    public function test_successful_pay_period_to_budget_link(): void
     {
-        $this->submitRequest()
+        $this->submitRequest($this->budget)
             ->assertStatus(200);
 
-        $this->assertEquals(0, PayPeriodBudget::count());
+        $this->assertDatabaseHas('pay_period_budget', [
+            'pay_period_id' => $this->payPeriod->id,
+            'budget_id' => $this->budget->id,
+            'total_balance' => 100000,
+            'remaining_balance' => 100000,
+        ]);
     }
 
     public function test_failed_pay_period_to_budget_link_with_failed_authorization(): void
@@ -55,21 +60,21 @@ class DestroyPayPeriodBudgetTest extends TestCase
         $newUser = User::factory()->create();
         $this->authenticatesUser($newUser);
 
-        $this->budget = Budget::factory()
+        $newBudget = Budget::factory()
             ->for($newUser)
             ->create();
 
-        $this->submitRequest()
+        $this->submitRequest($newBudget)
             ->assertStatus(403);
     }
 
-    protected function submitRequest(): TestResponse
+    protected function submitRequest(Budget $budget): TestResponse
     {
-        return $this->deleteJson(
-            route('pay-periods.budgets.destroy', [
-                $this->payPeriod,
-                $this->budget,
-            ])
+        return $this->postJson(
+            route('pay-periods.budgets.store', [
+                $this->payPeriod, $budget,
+            ]),
+            $this->payload
         );
     }
 }

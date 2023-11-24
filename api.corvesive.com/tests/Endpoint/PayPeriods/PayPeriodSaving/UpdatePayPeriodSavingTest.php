@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Endpoint\PayPeriodSaving;
+namespace Tests\Endpoint\PayPeriods\PayPeriodSaving;
 
 use App\Models\PayPeriod;
 use App\Models\PayPeriodSaving;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class DestroyPayPeriodSavingTest extends TestCase
+class UpdatePayPeriodSavingTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,6 +19,8 @@ class DestroyPayPeriodSavingTest extends TestCase
     protected PayPeriod $payPeriod;
 
     protected Saving $saving;
+
+    protected array $payload = [];
 
     public function setUp(): void
     {
@@ -39,15 +41,40 @@ class DestroyPayPeriodSavingTest extends TestCase
         PayPeriodSaving::factory()->create([
             'pay_period_id' => $this->payPeriod->id,
             'saving_id' => $this->saving->id,
+            'amount' => 50000,
         ]);
+
+        $this->payload = [
+            'amount' => 100000,
+        ];
     }
 
-    public function test_successful_pay_period_to_saving_unlink(): void
+    public function test_successful_pay_period_saving_update(): void
     {
         $this->submitRequest()
             ->assertStatus(200);
 
-        $this->assertEquals(0, PayPeriodSaving::count());
+        $this->assertDatabaseHas('pay_period_saving', [
+            'pay_period_id' => $this->payPeriod->id,
+            'saving_id' => $this->saving->id,
+            'amount' => 100000,
+        ]);
+    }
+
+    public function test_failed_pay_period_to_saving_link_with_missing_amount_value(): void
+    {
+        unset($this->payload['amount']);
+
+        $this->submitRequest()
+            ->assertJsonValidationErrorFor('amount');
+    }
+
+    public function test_failed_pay_period_to_saving_link_with_invalid_amount_value(): void
+    {
+        $this->payload['amount'] = 'invalid';
+
+        $this->submitRequest()
+            ->assertJsonValidationErrorFor('amount');
     }
 
     public function test_failed_pay_period_to_saving_link_with_failed_authorization(): void
@@ -65,11 +92,12 @@ class DestroyPayPeriodSavingTest extends TestCase
 
     protected function submitRequest(): TestResponse
     {
-        return $this->deleteJson(
-            route('pay-periods.savings.destroy', [
+        return $this->putJson(
+            route('pay-periods.savings.update', [
                 $this->payPeriod,
                 $this->saving,
-            ])
+            ]),
+            $this->payload
         );
     }
 }

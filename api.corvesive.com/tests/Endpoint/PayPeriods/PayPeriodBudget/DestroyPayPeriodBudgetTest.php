@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Endpoint\PayPeriodPaystub;
+namespace Tests\Endpoint\PayPeriods\PayPeriodBudget;
 
+use App\Models\Budget;
 use App\Models\PayPeriod;
-use App\Models\PayPeriodPaystub;
-use App\Models\Paystub;
+use App\Models\PayPeriodBudget;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class DestroyPayPeriodPaystubTest extends TestCase
+class DestroyPayPeriodBudgetTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -18,7 +18,7 @@ class DestroyPayPeriodPaystubTest extends TestCase
 
     protected PayPeriod $payPeriod;
 
-    protected Paystub $paystub;
+    protected Budget $budget;
 
     public function setUp(): void
     {
@@ -28,34 +28,34 @@ class DestroyPayPeriodPaystubTest extends TestCase
 
         $this->authenticatesUser($this->user);
 
-        $this->paystub = Paystub::factory()
-            ->for($this->user)
-            ->create();
-
         $this->payPeriod = PayPeriod::factory()
             ->for($this->user)
             ->create();
 
-        PayPeriodPaystub::factory()->create([
+        $this->budget = Budget::factory()
+            ->for($this->user)
+            ->create();
+
+        PayPeriodBudget::factory()->create([
             'pay_period_id' => $this->payPeriod->id,
-            'paystub_id' => $this->paystub->id,
+            'budget_id' => $this->budget->id,
         ]);
     }
 
-    public function test_successful_pay_period_to_paystub_unlink(): void
+    public function test_successful_pay_period_to_budget_unlink(): void
     {
         $this->submitRequest()
             ->assertStatus(200);
 
-        $this->assertEquals(0, PayPeriodPaystub::count());
+        $this->assertEquals(0, PayPeriodBudget::count());
     }
 
-    public function test_failed_pay_period_to_paystub_link_with_failed_authorization(): void
+    public function test_failed_pay_period_to_budget_link_with_failed_authorization(): void
     {
         $newUser = User::factory()->create();
         $this->authenticatesUser($newUser);
 
-        $this->paystub = Paystub::factory()
+        $this->budget = Budget::factory()
             ->for($newUser)
             ->create();
 
@@ -66,9 +66,9 @@ class DestroyPayPeriodPaystubTest extends TestCase
     protected function submitRequest(): TestResponse
     {
         return $this->deleteJson(
-            route('pay-periods.paystubs.destroy', [
+            route('pay-periods.budgets.destroy', [
                 $this->payPeriod,
-                $this->paystub,
+                $this->budget,
             ])
         );
     }

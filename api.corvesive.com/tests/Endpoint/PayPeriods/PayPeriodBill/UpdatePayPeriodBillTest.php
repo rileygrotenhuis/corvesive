@@ -1,16 +1,17 @@
 <?php
 
-namespace Tests\Endpoint\PayPeriodBill;
+namespace Tests\Endpoint\PayPeriods\PayPeriodBill;
 
 use App\Models\Bill;
 use App\Models\PayPeriod;
+use App\Models\PayPeriodBill;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class StorePayPeriodBillTest extends TestCase
+class UpdatePayPeriodBillTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -22,7 +23,7 @@ class StorePayPeriodBillTest extends TestCase
 
     protected string $dueDate;
 
-    protected array $payload;
+    protected array $payload = [];
 
     public function setUp(): void
     {
@@ -42,48 +43,39 @@ class StorePayPeriodBillTest extends TestCase
                 'amount' => 100000,
             ]);
 
-        $this->dueDate = Carbon::today()->addDays(5)->toDateString();
+        $this->dueDate = Carbon::today()->addDays(10)->toDateString();
+
+        PayPeriodBill::factory()->create([
+            'pay_period_id' => $this->payPeriod->id,
+            'bill_id' => $this->bill->id,
+            'amount' => 100000,
+            'due_date' => Carbon::today()->toDateString(),
+            'has_payed' => false,
+        ]);
 
         $this->payload = [
-            'amount' => 100000,
+            'amount' => 50000,
             'due_date' => $this->dueDate,
             'is_automatic' => false,
         ];
     }
 
-    public function test_successful_pay_period_to_bill_link(): void
+    public function test_successful_pay_period_bill_update(): void
     {
-        $this->submitRequest($this->bill)
-            ->assertStatus(200);
-
-        $this->assertDatabaseHas('pay_period_bill', [
-            'pay_period_id' => $this->payPeriod->id,
-            'bill_id' => $this->bill->id,
-            'amount' => 100000,
-            'due_date' => $this->dueDate,
-            'has_payed' => false,
-            'is_automatic' => 0,
-        ]);
-    }
-
-    public function test_successful_pay_period_to_bill_link_with_partial_amount(): void
-    {
-        $this->payload['amount'] = 50000;
-
-        $this->submitRequest($this->bill)
+        $this->submitRequest()
             ->assertStatus(200);
 
         $this->assertDatabaseHas('pay_period_bill', [
             'pay_period_id' => $this->payPeriod->id,
             'bill_id' => $this->bill->id,
             'amount' => 50000,
-            'due_date' => $this->dueDate,
             'has_payed' => false,
-            'is_automatic' => 0,
+            'due_date' => $this->dueDate,
+            'is_automatic' => false,
         ]);
     }
 
-    public function test_failed_pay_period_to_bill_link_with_invalid_amount_field(): void
+    public function test_failed_pay_period_bill_update_with_invalid_amount_value(): void
     {
         $this->payload['amount'] = 'invalid';
 
@@ -92,7 +84,7 @@ class StorePayPeriodBillTest extends TestCase
             ->assertJsonValidationErrorFor('amount');
     }
 
-    public function test_failed_pay_period_to_bill_link_with_out_of_range_amount_field(): void
+    public function test_failed_pay_period_bill_update_with_out_of_range_amount_value(): void
     {
         $this->payload['amount'] = -100;
 
@@ -101,20 +93,11 @@ class StorePayPeriodBillTest extends TestCase
             ->assertJsonValidationErrorFor('amount');
     }
 
-    public function test_failed_pay_period_to_bill_link_with_missing_due_date_field(): void
-    {
-        unset($this->payload['due_date']);
-
-        $this->submitRequest($this->bill)
-            ->assertStatus(422)
-            ->assertJsonValidationErrorFor('due_date');
-    }
-
     public function test_failed_pay_period_to_bill_link_with_invalid_due_date_field(): void
     {
         $this->payload['due_date'] = 'invalid';
 
-        $this->submitRequest($this->bill)
+        $this->submitRequest()
             ->assertStatus(422)
             ->assertJsonValidationErrorFor('due_date');
     }
@@ -124,20 +107,20 @@ class StorePayPeriodBillTest extends TestCase
         $newUser = User::factory()->create();
         $this->authenticatesUser($newUser);
 
-        $newBill = Bill::factory()
+        $this->bill = Bill::factory()
             ->for($newUser)
             ->create();
 
-        $this->submitRequest($newBill)
+        $this->submitRequest()
             ->assertStatus(403);
     }
 
-    protected function submitRequest(Bill $bill): TestResponse
+    protected function submitRequest(): TestResponse
     {
-        return $this->postJson(
-            route('pay-periods.bills.store', [
+        return $this->putJson(
+            route('pay-periods.bills.update', [
                 $this->payPeriod,
-                $bill,
+                $this->bill,
             ]),
             $this->payload
         );

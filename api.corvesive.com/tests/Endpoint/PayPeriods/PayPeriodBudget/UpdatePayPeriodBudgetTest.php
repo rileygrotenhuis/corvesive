@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Endpoint\PayPeriodBudget;
+namespace Tests\Endpoint\PayPeriods\PayPeriodBudget;
 
 use App\Models\Budget;
 use App\Models\PayPeriod;

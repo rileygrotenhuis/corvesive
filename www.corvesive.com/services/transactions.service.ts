@@ -50,7 +50,7 @@ class TransactionService extends HttpFactory {
   ): Promise<IHttpResource<ITransactionResource>> {
     return await this.call(
       'POST',
-      `/pay-periods/${payPeriodId}/deposit`,
+      `/pay-periods/${payPeriodId}/transactions/deposits`,
       payload
     );
   }

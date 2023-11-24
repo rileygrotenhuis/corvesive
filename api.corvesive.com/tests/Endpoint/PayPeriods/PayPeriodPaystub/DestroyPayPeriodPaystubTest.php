@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Endpoint\PayPeriodBill;
+namespace Tests\Endpoint\PayPeriods\PayPeriodPaystub;
 
-use App\Models\Bill;
 use App\Models\PayPeriod;
-use App\Models\PayPeriodBill;
+use App\Models\PayPeriodPaystub;
+use App\Models\Paystub;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class DestroyPayPeriodBillTest extends TestCase
+class DestroyPayPeriodPaystubTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -18,7 +18,7 @@ class DestroyPayPeriodBillTest extends TestCase
 
     protected PayPeriod $payPeriod;
 
-    protected Bill $bill;
+    protected Paystub $paystub;
 
     public function setUp(): void
     {
@@ -28,34 +28,34 @@ class DestroyPayPeriodBillTest extends TestCase
 
         $this->authenticatesUser($this->user);
 
+        $this->paystub = Paystub::factory()
+            ->for($this->user)
+            ->create();
+
         $this->payPeriod = PayPeriod::factory()
             ->for($this->user)
             ->create();
 
-        $this->bill = Bill::factory()
-            ->for($this->user)
-            ->create();
-
-        PayPeriodBill::factory()->create([
+        PayPeriodPaystub::factory()->create([
             'pay_period_id' => $this->payPeriod->id,
-            'bill_id' => $this->bill->id,
+            'paystub_id' => $this->paystub->id,
         ]);
     }
 
-    public function test_successful_pay_period_to_bill_unlink(): void
+    public function test_successful_pay_period_to_paystub_unlink(): void
     {
         $this->submitRequest()
             ->assertStatus(200);
 
-        $this->assertEquals(0, PayPeriodBill::count());
+        $this->assertEquals(0, PayPeriodPaystub::count());
     }
 
-    public function test_failed_pay_period_to_bill_link_with_failed_authorization(): void
+    public function test_failed_pay_period_to_paystub_link_with_failed_authorization(): void
     {
         $newUser = User::factory()->create();
         $this->authenticatesUser($newUser);
 
-        $this->bill = Bill::factory()
+        $this->paystub = Paystub::factory()
             ->for($newUser)
             ->create();
 
@@ -66,9 +66,9 @@ class DestroyPayPeriodBillTest extends TestCase
     protected function submitRequest(): TestResponse
     {
         return $this->deleteJson(
-            route('pay-periods.bills.destroy', [
+            route('pay-periods.paystubs.destroy', [
                 $this->payPeriod,
-                $this->bill,
+                $this->paystub,
             ])
         );
     }

@@ -1,15 +1,14 @@
 <?php
 
-namespace Tests\Endpoint\PayPeriodComplete;
+namespace Tests\Endpoint\PayPeriods\PayPeriodCurrent;
 
 use App\Models\PayPeriod;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class CompletePayPeriodTest extends TestCase
+class StorePayPeriodCurrentTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -27,32 +26,26 @@ class CompletePayPeriodTest extends TestCase
 
         $this->payPeriod = PayPeriod::factory()
             ->for($this->user)
-            ->create([
-                'start_date' => Carbon::today()->subDays(20)->toDateString(),
-                'end_date' => Carbon::today()->toDateString(),
-            ]);
+            ->create();
     }
 
-    public function test_successful_pay_period_completion(): void
+    public function test_successful_seting_pay_period_to_current(): void
     {
-        $this->assertDatabaseHas('pay_periods', [
-            'id' => $this->payPeriod->id,
-            'is_complete' => 0,
-        ]);
-
         $this->submitRequest()
             ->assertStatus(200);
 
-        $this->assertDatabaseHas('pay_periods', [
-            'id' => $this->payPeriod->id,
-            'is_complete' => 1,
+        $this->assertDatabaseHas('users', [
+            'id' => $this->user->id,
+            'pay_period_id' => $this->payPeriod->id,
         ]);
     }
 
     protected function submitRequest(): TestResponse
     {
         return $this->postJson(
-            route('pay-periods.complete', $this->payPeriod)
+            route('pay-periods.current', [
+                $this->payPeriod->id,
+            ])
         );
     }
 }
