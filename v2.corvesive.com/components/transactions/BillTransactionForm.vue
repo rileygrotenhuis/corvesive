@@ -26,10 +26,7 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closeTransactionsModal();
-    await transactionStore.getPayPeriodTransactions(
-      accountStore.user.pay_period.id
-    );
-    await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
+    window.location.reload();
   }
 };
 </script>
