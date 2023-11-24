@@ -28,14 +28,9 @@ const handleSubmit = async () => {
 };
 
 const deletePaystub = async () => {
-  const response = await useNuxtApp().$api.paystubs.deletePaystub(
-    modalStore.settings.data.id
-  );
-
-  if (!(errors.value = response.errors)) {
-    await paystubStore.getPaystubs();
-    modalStore.closeSettingsModal();
-  }
+  await useNuxtApp().$api.paystubs.deletePaystub(modalStore.settings.data.id);
+  await paystubStore.getPaystubs();
+  modalStore.closeSettingsModal();
 };
 </script>
 
@@ -58,7 +53,12 @@ const deletePaystub = async () => {
       <UFormGroup label="Notes" name="notes">
         <UTextarea v-model="form.notes" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Save </UButton>
+      <div class="flex gap-2">
+        <UButton @click="deletePaystub" variant="outline" color="rose">
+          Delete Paystub
+        </UButton>
+        <UButton type="submit" color="rose"> Save </UButton>
+      </div>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

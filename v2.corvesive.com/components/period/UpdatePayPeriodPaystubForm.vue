@@ -27,15 +27,12 @@ const handleSubmit = async () => {
 };
 
 const detachPayPeriodPaystub = async () => {
-  const response = await useNuxtApp().$api.paystubs.detachPaystubFromPayPeriod(
+  await useNuxtApp().$api.paystubs.detachPaystubFromPayPeriod(
     accountStore.user.pay_period.id,
     modalStore.settings.data.id
   );
-
-  if (!(errors.value = response.errors)) {
-    modalStore.closeSettingsModal();
-    await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
-  }
+  modalStore.closeSettingsModal();
+  await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
 };
 </script>
 
@@ -49,7 +46,12 @@ const detachPayPeriodPaystub = async () => {
       <UFormGroup label="Amount" name="amount">
         <UInput v-model="form.amount" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Save </UButton>
+      <div class="flex gap-2">
+        <UButton @click="detachPayPeriodPaystub" variant="outline" color="rose">
+          Remove Paystub
+        </UButton>
+        <UButton type="submit" color="rose"> Save </UButton>
+      </div>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

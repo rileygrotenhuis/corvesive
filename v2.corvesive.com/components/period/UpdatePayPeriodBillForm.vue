@@ -29,15 +29,12 @@ const handleSubmit = async () => {
 };
 
 const detachPayPeriodBill = async () => {
-  const response = await useNuxtApp().$api.bills.detachBillFromPayPeriod(
+  await useNuxtApp().$api.bills.detachBillFromPayPeriod(
     accountStore.user.pay_period.id,
     modalStore.settings.data.id
   );
-
-  if (!(errors.value = response.errors)) {
-    modalStore.closeSettingsModal();
-    await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
-  }
+  modalStore.closeSettingsModal();
+  await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
 };
 </script>
 
@@ -58,7 +55,12 @@ const detachPayPeriodBill = async () => {
       <UFormGroup label="Is this bill automatic?" name="is_automatic">
         <UCheckbox :v-model="Boolean(form.is_automatic)" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Save </UButton>
+      <div class="flex gap-2">
+        <UButton @click="detachPayPeriodBill" variant="outline" color="rose">
+          Remove Bill
+        </UButton>
+        <UButton type="submit" color="rose"> Save </UButton>
+      </div>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

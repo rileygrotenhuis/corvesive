@@ -29,15 +29,12 @@ const handleSubmit = async () => {
 };
 
 const detachPayPeriodBudget = async () => {
-  const response = await useNuxtApp().$api.budgets.detachBudgetFromPayPeriod(
+  await useNuxtApp().$api.budgets.detachBudgetFromPayPeriod(
     accountStore.user.pay_period.id,
     modalStore.settings.data.id
   );
-
-  if (!(errors.value = response.errors)) {
-    modalStore.closeSettingsModal();
-    await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id);
-  }
+  modalStore.closeSettingsModal();
+  await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id);
 };
 </script>
 
@@ -54,7 +51,12 @@ const detachPayPeriodBudget = async () => {
       <UFormGroup label="Remaining Balance" name="remaining_balance">
         <UInput v-model="form.remaining_balance" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Save </UButton>
+      <div class="flex gap-2">
+        <UButton @click="detachPayPeriodBudget" variant="outline" color="rose">
+          Remove Budget
+        </UButton>
+        <UButton type="submit" color="rose"> Save </UButton>
+      </div>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

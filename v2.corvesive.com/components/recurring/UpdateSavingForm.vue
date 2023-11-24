@@ -27,14 +27,9 @@ const handleSubmit = async () => {
 };
 
 const deleteSaving = async () => {
-  const response = await useNuxtApp().$api.savings.deleteSaving(
-    modalStore.settings.data.id
-  );
-
-  if (!(errors.value = response.errors)) {
-    await savingStore.getSavings();
-    modalStore.closeSettingsModal();
-  }
+  await useNuxtApp().$api.savings.deleteSaving(modalStore.settings.data.id);
+  await savingStore.getSavings();
+  modalStore.closeSettingsModal();
 };
 </script>
 
@@ -55,7 +50,12 @@ const deleteSaving = async () => {
       <UFormGroup label="Notes" name="notes">
         <UTextarea v-model="form.notes" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Save </UButton>
+      <div class="flex gap-2">
+        <UButton @click="deleteSaving" variant="outline" color="rose">
+          Delete Saving
+        </UButton>
+        <UButton type="submit" color="rose"> Save </UButton>
+      </div>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

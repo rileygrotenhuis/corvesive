@@ -27,14 +27,9 @@ const handleSubmit = async () => {
 };
 
 const deleteBudget = async () => {
-  const response = await useNuxtApp().$api.budgets.deleteBudget(
-    modalStore.settings.data.id
-  );
-
-  if (!(errors.value = response.errors)) {
-    await budgetStore.getBudgets();
-    modalStore.closeSettingsModal();
-  }
+  await useNuxtApp().$api.budgets.deleteBudget(modalStore.settings.data.id);
+  await budgetStore.getBudgets();
+  modalStore.closeSettingsModal();
 };
 </script>
 
@@ -55,7 +50,12 @@ const deleteBudget = async () => {
       <UFormGroup label="Notes" name="notes">
         <UTextarea v-model="form.notes" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Create </UButton>
+      <div class="flex gap-2">
+        <UButton @click="deleteBudget" variant="outline" color="rose">
+          Delete Budget
+        </UButton>
+        <UButton type="submit" color="rose"> Save </UButton>
+      </div>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>
