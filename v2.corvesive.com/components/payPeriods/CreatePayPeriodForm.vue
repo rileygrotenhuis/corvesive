@@ -9,11 +9,13 @@ const form: ICreateOrUpdatePayPeriodRequest = reactive({
   end_date: '',
 });
 
+const autoGenerateResources: Ref<boolean> = ref(false);
+
 const errors = ref();
 
 const handleSubmit = async () => {
   const response = await useNuxtApp().$api.payPeriods.createPayPeriod(
-    true,
+    autoGenerateResources.value,
     form
   );
 
@@ -40,6 +42,12 @@ const handleSubmit = async () => {
       </UFormGroup>
       <UFormGroup label="End Date" name="end_date">
         <UInput v-model="form.end_date" type="date" />
+      </UFormGroup>
+      <UFormGroup
+        label="Would you like to auto generate your period resources?"
+        name="auto_generate"
+      >
+        <UCheckbox v-model="autoGenerateResources" />
       </UFormGroup>
       <UButton type="submit" color="rose"> Create </UButton>
       <FormsFormErrors :errors="errors" />
