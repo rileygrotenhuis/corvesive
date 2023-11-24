@@ -25,6 +25,7 @@ useHead({
     <div class="w-11/12 max-w-[850px] mx-auto mt-4">
       <PayPeriodsPayPeriodModal />
       <ExpensesSettingsModal />
+      <TransactionsModal />
       <RecurringModal />
       <PeriodModal />
       <UNotifications />

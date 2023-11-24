@@ -19,6 +19,10 @@ export const useModalStore = defineStore('useModalStore', {
       open: false,
       type: '',
     },
+    transactions: {
+      open: true,
+      type: 'start',
+    },
   }),
   actions: {
     openRecurringModal(type: string) {
@@ -54,6 +58,14 @@ export const useModalStore = defineStore('useModalStore', {
     closePayPeriodModal() {
       this.payPeriod.open = false;
       this.payPeriod.type = '';
+    },
+    openTransactionsModal(type: string) {
+      this.transactions.open = true;
+      this.transactions.type = type;
+    },
+    closeTransactionsModal() {
+      this.transactions.open = false;
+      this.transactions.type = '';
     },
   },
 });
