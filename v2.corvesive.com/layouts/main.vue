@@ -23,7 +23,10 @@ useHead({
       </template>
     </NavigationWrapper>
     <div class="w-11/12 max-w-[850px] mx-auto mt-4">
+      <PayPeriodsPayPeriodModal />
       <ExpensesSettingsModal />
+      <RecurringModal />
+      <PeriodModal />
       <UNotifications />
       <slot />
     </div>

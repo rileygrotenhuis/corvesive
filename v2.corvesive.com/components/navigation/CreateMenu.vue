@@ -76,33 +76,29 @@ const periodMenuItems = [
 </script>
 
 <template>
-  <div>
-    <RecurringModal />
-    <PeriodModal />
-    <UDropdown
-      :items="
-        useAccountStore().isRecurringView ? recurringMenuItems : periodMenuItems
-      "
-      :ui="{ item: { disabled: 'cursor-text select-text' } }"
-      :popper="{ placement: 'bottom-end' }"
-    >
-      <UIcon
-        name="i-heroicons-plus"
-        :alt="accountStore.user.names.full"
-        class="w-5 h-5"
-      />
+  <UDropdown
+    :items="
+      useAccountStore().isRecurringView ? recurringMenuItems : periodMenuItems
+    "
+    :ui="{ item: { disabled: 'cursor-text select-text' } }"
+    :popper="{ placement: 'bottom-end' }"
+  >
+    <UIcon
+      name="i-heroicons-plus"
+      :alt="accountStore.user.names.full"
+      class="w-5 h-5"
+    />
 
-      <template #title="{ item }">
-        <div class="text-left">
-          <p class="truncate font-medium text-gray-900 dark:text-white">
-            {{ item.label }}
-          </p>
-        </div>
-      </template>
+    <template #title="{ item }">
+      <div class="text-left">
+        <p class="truncate font-medium text-gray-900 dark:text-white">
+          {{ item.label }}
+        </p>
+      </div>
+    </template>
 
-      <template #item="{ item }">
-        <span class="truncate">{{ item.label }}</span>
-      </template>
-    </UDropdown>
-  </div>
+    <template #item="{ item }">
+      <span class="truncate">{{ item.label }}</span>
+    </template>
+  </UDropdown>
 </template>
