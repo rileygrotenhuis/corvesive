@@ -20,8 +20,8 @@ export const useModalStore = defineStore('useModalStore', {
       type: '',
     },
     transactions: {
-      open: true,
-      type: 'start',
+      open: false,
+      type: '',
     },
   }),
   actions: {
