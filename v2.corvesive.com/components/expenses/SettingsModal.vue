@@ -14,6 +14,7 @@ const modalStore = useModalStore();
         class="w-8 h-8 hover:cursor-pointer absolute top-5 right-3"
         @click="modalStore.closeSettingsModal()"
       />
+      <RecurringUpdateBillForm v-if="modalStore.settings.type === 'bill'" />
       <PeriodUpdatePayPeriodBillForm
         v-if="modalStore.settings.type === 'payPeriodBill'"
       />

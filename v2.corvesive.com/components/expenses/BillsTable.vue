@@ -13,6 +13,7 @@ const modalStore = useModalStore();
     :subtitle="bill.name"
     :amount="bill.amount.pretty"
     :amountSubtitle="bill.due_date.pretty"
+    @click="modalStore.openSettingsModal('bill', bill)"
   />
   <ExpensesExpenseCard
     v-else
