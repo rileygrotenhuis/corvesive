@@ -33,7 +33,7 @@ const menuItems = [
       :ui="{ item: { disabled: 'cursor-text select-text' } }"
       :popper="{ placement: 'bottom-end' }"
     >
-      <UIcon name="i-heroicons-currency-dollar" class="w-6 h-6" />
+      <UIcon name="i-heroicons-currency-dollar" class="w-7 h-7" />
       <template #item="{ item }">
         <span class="truncate">{{ item.label }}</span>
       </template>

@@ -12,8 +12,5 @@ definePageMeta({
 <template>
   <div>
     <h1>Dashboard</h1>
-    <UButton @click="useModalStore().openTransactionsModal('bill')"
-      >Test</UButton
-    >
   </div>
 </template>
