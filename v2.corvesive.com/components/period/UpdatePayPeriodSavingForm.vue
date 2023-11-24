@@ -27,12 +27,18 @@ const handleSubmit = async () => {
 };
 
 const detachPayPeriodSaving = async () => {
-  await useNuxtApp().$api.savings.detachSavingFromPayPeriod(
-    accountStore.user.pay_period.id,
-    modalStore.settings.data.id
-  );
-  modalStore.closeSettingsModal();
-  await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
+  if (
+    window.confirm(
+      'Are you sure you want to remove this saving from the selected pay period?'
+    )
+  ) {
+    await useNuxtApp().$api.savings.detachSavingFromPayPeriod(
+      accountStore.user.pay_period.id,
+      modalStore.settings.data.id
+    );
+    modalStore.closeSettingsModal();
+    await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
+  }
 };
 </script>
 
@@ -46,7 +52,7 @@ const detachPayPeriodSaving = async () => {
       <UFormGroup label="Amount" name="amount">
         <UInput v-model="form.amount" />
       </UFormGroup>
-      <div class="flex gap-2">
+      <div class="flex justify-between">
         <UButton @click="detachPayPeriodSaving" variant="outline" color="rose">
           Remove Saving
         </UButton>

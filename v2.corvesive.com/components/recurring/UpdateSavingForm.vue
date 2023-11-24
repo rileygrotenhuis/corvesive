@@ -28,10 +28,12 @@ const handleSubmit = async () => {
 };
 
 const deleteSaving = async () => {
-  await useNuxtApp().$api.savings.deleteSaving(modalStore.settings.data.id);
-  await savingStore.getSavings();
-  await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
-  modalStore.closeSettingsModal();
+  if (window.confirm('Are you sure you want to delete this saving?')) {
+    await useNuxtApp().$api.savings.deleteSaving(modalStore.settings.data.id);
+    await savingStore.getSavings();
+    await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
+    modalStore.closeSettingsModal();
+  }
 };
 </script>
 
@@ -51,7 +53,7 @@ const deleteSaving = async () => {
       <UFormGroup label="Notes" name="notes">
         <UTextarea v-model="form.notes" />
       </UFormGroup>
-      <div class="flex gap-2">
+      <div class="flex justify-between">
         <UButton @click="deleteSaving" variant="outline" color="rose">
           Delete Saving
         </UButton>

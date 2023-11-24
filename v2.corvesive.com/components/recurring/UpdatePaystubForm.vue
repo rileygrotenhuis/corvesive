@@ -29,10 +29,12 @@ const handleSubmit = async () => {
 };
 
 const deletePaystub = async () => {
-  await useNuxtApp().$api.paystubs.deletePaystub(modalStore.settings.data.id);
-  await paystubStore.getPaystubs();
-  await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
-  modalStore.closeSettingsModal();
+  if (window.confirm('Are you sure you want to delete this paystub?')) {
+    await useNuxtApp().$api.paystubs.deletePaystub(modalStore.settings.data.id);
+    await paystubStore.getPaystubs();
+    await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
+    modalStore.closeSettingsModal();
+  }
 };
 </script>
 
@@ -55,7 +57,7 @@ const deletePaystub = async () => {
       <UFormGroup label="Notes" name="notes">
         <UTextarea v-model="form.notes" />
       </UFormGroup>
-      <div class="flex gap-2">
+      <div class="flex justify-between">
         <UButton @click="deletePaystub" variant="outline" color="rose">
           Delete Paystub
         </UButton>

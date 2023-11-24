@@ -31,10 +31,12 @@ const handleSubmit = async () => {
 };
 
 const deleteBill = async () => {
-  await useNuxtApp().$api.bills.deleteBill(modalStore.settings.data.id);
-  await billStore.getBills();
-  await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
-  modalStore.closeSettingsModal();
+  if (window.confirm('Are you sure you want to delete this bill?')) {
+    await useNuxtApp().$api.bills.deleteBill(modalStore.settings.data.id);
+    await billStore.getBills();
+    await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
+    modalStore.closeSettingsModal();
+  }
 };
 </script>
 
@@ -61,7 +63,7 @@ const deleteBill = async () => {
       <UFormGroup label="Notes" name="notes">
         <UTextarea v-model="form.notes" />
       </UFormGroup>
-      <div class="flex gap-2">
+      <div class="flex justify-between">
         <UButton @click="deleteBill" variant="outline" color="rose">
           Delete Bill
         </UButton>

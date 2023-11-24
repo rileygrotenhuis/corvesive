@@ -28,10 +28,12 @@ const handleSubmit = async () => {
 };
 
 const deleteBudget = async () => {
-  await useNuxtApp().$api.budgets.deleteBudget(modalStore.settings.data.id);
-  await budgetStore.getBudgets();
-  await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id);
-  modalStore.closeSettingsModal();
+  if (window.confirm('Are you sure you want to delete this budget?')) {
+    await useNuxtApp().$api.budgets.deleteBudget(modalStore.settings.data.id);
+    await budgetStore.getBudgets();
+    await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id);
+    modalStore.closeSettingsModal();
+  }
 };
 </script>
 
@@ -51,7 +53,7 @@ const deleteBudget = async () => {
       <UFormGroup label="Notes" name="notes">
         <UTextarea v-model="form.notes" />
       </UFormGroup>
-      <div class="flex gap-2">
+      <div class="flex justify-between">
         <UButton @click="deleteBudget" variant="outline" color="rose">
           Delete Budget
         </UButton>
