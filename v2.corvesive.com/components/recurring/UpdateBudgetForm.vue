@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ICreateOrUpdateBudgetRequest } from '~/http/requests/budgets.request';
 
+const accountStore = useAccountStore();
 const budgetStore = useBudgetStore();
 const modalStore = useModalStore();
 
@@ -29,6 +30,7 @@ const handleSubmit = async () => {
 const deleteBudget = async () => {
   await useNuxtApp().$api.budgets.deleteBudget(modalStore.settings.data.id);
   await budgetStore.getBudgets();
+  await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id);
   modalStore.closeSettingsModal();
 };
 </script>

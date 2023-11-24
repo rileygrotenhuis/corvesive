@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ICreateOrUpdateBillRequest } from '~/http/requests/bills.request';
 
+const accountStore = useAccountStore();
 const billStore = useBillStore();
 const modalStore = useModalStore();
 
@@ -32,6 +33,7 @@ const handleSubmit = async () => {
 const deleteBill = async () => {
   await useNuxtApp().$api.bills.deleteBill(modalStore.settings.data.id);
   await billStore.getBills();
+  await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
   modalStore.closeSettingsModal();
 };
 </script>

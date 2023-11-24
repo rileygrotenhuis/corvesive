@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ICreateOrUpdateSavingRequest } from '~/http/requests/savings.request';
 
+const accountStore = useAccountStore();
 const savingStore = useSavingStore();
 const modalStore = useModalStore();
 
@@ -29,6 +30,7 @@ const handleSubmit = async () => {
 const deleteSaving = async () => {
   await useNuxtApp().$api.savings.deleteSaving(modalStore.settings.data.id);
   await savingStore.getSavings();
+  await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
   modalStore.closeSettingsModal();
 };
 </script>

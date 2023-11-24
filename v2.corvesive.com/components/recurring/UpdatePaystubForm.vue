@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ICreateOrUpdatePaystubRequest } from '~/http/requests/paystubs.request';
 
+const accountStore = useAccountStore();
 const paystubStore = usePaystubStore();
 const modalStore = useModalStore();
 
@@ -30,6 +31,7 @@ const handleSubmit = async () => {
 const deletePaystub = async () => {
   await useNuxtApp().$api.paystubs.deletePaystub(modalStore.settings.data.id);
   await paystubStore.getPaystubs();
+  await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
   modalStore.closeSettingsModal();
 };
 </script>
