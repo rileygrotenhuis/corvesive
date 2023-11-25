@@ -44,7 +44,7 @@ const deletePaystub = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">
+      <h4 class="text-xl font-bold text-fuchsia-500">
         {{ modalStore.settings.data.issuer }}
       </h4>
       <p class="text-sm font-bold">Update the details below...</p>
@@ -61,10 +61,10 @@ const deletePaystub = async () => {
         <UTextarea v-model="form.notes" />
       </UFormGroup>
       <div class="flex justify-between">
-        <UButton @click="deletePaystub" variant="outline" color="rose">
+        <UButton @click="deletePaystub" variant="outline" color="fuchsia">
           Delete Paystub
         </UButton>
-        <UButton type="submit" color="rose"> Save </UButton>
+        <UButton type="submit" color="fuchsia"> Save </UButton>
       </div>
       <FormsFormErrors :errors="errors" />
     </UForm>

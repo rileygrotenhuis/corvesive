@@ -28,7 +28,7 @@ const handleSubmit = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">New Paystub</h4>
+      <h4 class="text-xl font-bold text-fuchsia-500">New Paystub</h4>
       <p class="text-sm font-light">Add a new source of income</p>
       <UFormGroup label="Issuer" name="issuer">
         <UInput v-model="form.issuer" />
@@ -42,7 +42,7 @@ const handleSubmit = async () => {
       <UFormGroup label="Notes" name="notes">
         <UTextarea v-model="form.notes" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Create </UButton>
+      <UButton type="submit" color="fuchsia"> Create </UButton>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

@@ -51,7 +51,7 @@ const detachPayPeriodPaystub = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">
+      <h4 class="text-xl font-bold text-fuchsia-500">
         {{ modalStore.settings.data.paystub.issuer }}
       </h4>
       <p class="text-sm font-bold">Update the details below...</p>
@@ -59,10 +59,14 @@ const detachPayPeriodPaystub = async () => {
         <UInput v-model="form.amount" />
       </UFormGroup>
       <div class="flex justify-between">
-        <UButton @click="detachPayPeriodPaystub" variant="outline" color="rose">
+        <UButton
+          @click="detachPayPeriodPaystub"
+          variant="outline"
+          color="fuchsia"
+        >
           Remove Paystub
         </UButton>
-        <UButton type="submit" color="rose"> Save </UButton>
+        <UButton type="submit" color="fuchsia"> Save </UButton>
       </div>
       <FormsFormErrors :errors="errors" />
     </UForm>

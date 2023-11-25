@@ -37,7 +37,7 @@ const handleSubmit = async () => {
       <UFormGroup label="Phone Number" name="phone_number">
         <UInput v-model="form.phone_number" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Save </UButton>
+      <UButton type="submit" color="fuchsia"> Save </UButton>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

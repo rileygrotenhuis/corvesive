@@ -42,7 +42,7 @@ const deletePayPeriod = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">
+      <h4 class="text-xl font-bold text-fuchsia-500">
         Current Pay Period Settings
       </h4>
       <p class="text-sm font-light">
@@ -55,10 +55,10 @@ const deletePayPeriod = async () => {
         <UInput v-model="form.end_date" type="date" />
       </UFormGroup>
       <div class="flex gap-2">
-        <UButton @click="deletePayPeriod" variant="outline" color="rose">
+        <UButton @click="deletePayPeriod" variant="outline" color="fuchsia">
           Delete Pay Period
         </UButton>
-        <UButton type="submit" color="rose"> Save </UButton>
+        <UButton type="submit" color="fuchsia"> Save </UButton>
       </div>
       <FormsFormErrors :errors="errors" />
     </UForm>

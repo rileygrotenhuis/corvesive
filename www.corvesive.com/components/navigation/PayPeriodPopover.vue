@@ -38,7 +38,7 @@ watch(
           ? 'i-heroicons-clock'
           : 'i-heroicons-calendar'
       }`"
-      class="w-5 h-5 text-rose-500"
+      class="w-5 h-5 text-fuchsia-500"
     />
 
     <template #panel>
@@ -53,7 +53,7 @@ watch(
           <UButton
             icon="i-heroicons-pencil-square"
             label="Settings"
-            color="rose"
+            color="fuchsia"
             variant="outline"
             class="w-1/2"
             size="sm"
@@ -62,7 +62,7 @@ watch(
           <UButton
             icon="i-heroicons-plus"
             label="Create"
-            color="rose"
+            color="fuchsia"
             class="w-1/2"
             size="sm"
             @click="modalStore.openPayPeriodModal('create')"
@@ -79,7 +79,7 @@ watch(
               ? 'Switch to Current Period'
               : 'Switch to Recurring'
           }`"
-          color="rose"
+          color="fuchsia"
           class="w-full"
           variant="outline"
           size="sm"

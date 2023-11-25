@@ -47,7 +47,9 @@ const handleSubmit = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">Attach Budget to Period</h4>
+      <h4 class="text-xl font-bold text-fuchsia-500">
+        Attach Budget to Period
+      </h4>
       <UFormGroup label="Select one of your recurring Budgets" name="budget_id">
         <USelect v-model="selectedBudget" :options="budgetOptions" />
       </UFormGroup>
@@ -56,7 +58,7 @@ const handleSubmit = async () => {
       <UFormGroup label="Total Balance" name="total_balance">
         <UInput v-model="form.total_balance" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Attach </UButton>
+      <UButton type="submit" color="fuchsia"> Attach </UButton>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

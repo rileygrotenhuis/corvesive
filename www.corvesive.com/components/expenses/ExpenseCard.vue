@@ -25,7 +25,7 @@ defineProps({
         </div>
         <div class="min-w-[100px] text-right">
           <p>{{ amount }}</p>
-          <p v-if="amountSubtitle" class="text-xs text-rose-500 font-bold">
+          <p v-if="amountSubtitle" class="text-xs text-fuchsia-500 font-bold">
             {{ amountSubtitle }}
           </p>
         </div>

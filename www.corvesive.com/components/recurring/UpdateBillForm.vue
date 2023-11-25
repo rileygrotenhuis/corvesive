@@ -43,7 +43,7 @@ const deleteBill = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">
+      <h4 class="text-xl font-bold text-fuchsia-500">
         {{ modalStore.settings.data.issuer }} -
         {{ modalStore.settings.data.name }}
       </h4>
@@ -64,10 +64,10 @@ const deleteBill = async () => {
         <UTextarea v-model="form.notes" />
       </UFormGroup>
       <div class="flex justify-between">
-        <UButton @click="deleteBill" variant="outline" color="rose">
+        <UButton @click="deleteBill" variant="outline" color="fuchsia">
           Delete Bill
         </UButton>
-        <UButton type="submit" color="rose"> Save </UButton>
+        <UButton type="submit" color="fuchsia"> Save </UButton>
       </div>
       <FormsFormErrors :errors="errors" />
     </UForm>

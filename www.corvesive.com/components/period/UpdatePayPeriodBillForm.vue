@@ -47,7 +47,7 @@ const detachPayPeriodBill = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">
+      <h4 class="text-xl font-bold text-fuchsia-500">
         {{ modalStore.settings.data.bill.issuer }} -
         {{ modalStore.settings.data.bill.name }}
       </h4>
@@ -62,10 +62,10 @@ const detachPayPeriodBill = async () => {
         <UCheckbox :v-model="Boolean(form.is_automatic)" />
       </UFormGroup>
       <div class="flex justify-between">
-        <UButton @click="detachPayPeriodBill" variant="outline" color="rose">
+        <UButton @click="detachPayPeriodBill" variant="outline" color="fuchsia">
           Remove Bill
         </UButton>
-        <UButton type="submit" color="rose"> Save </UButton>
+        <UButton type="submit" color="fuchsia"> Save </UButton>
       </div>
       <FormsFormErrors :errors="errors" />
     </UForm>

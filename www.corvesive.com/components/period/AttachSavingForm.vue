@@ -47,7 +47,9 @@ const handleSubmit = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">Attach Saving to Period</h4>
+      <h4 class="text-xl font-bold text-fuchsia-500">
+        Attach Saving to Period
+      </h4>
       <UFormGroup label="Select one of your recurring Savings" name="saving_id">
         <USelect v-model="selectedSaving" :options="savingOptions" />
       </UFormGroup>
@@ -56,7 +58,7 @@ const handleSubmit = async () => {
       <UFormGroup label="Amount" name="amount">
         <UInput v-model="form.amount" />
       </UFormGroup>
-      <UButton type="submit" color="rose" :disabled="selectedSaving === 0">
+      <UButton type="submit" color="fuchsia" :disabled="selectedSaving === 0">
         Attach
       </UButton>
       <FormsFormErrors :errors="errors" />

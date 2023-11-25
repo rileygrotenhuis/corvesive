@@ -30,7 +30,7 @@ const handleSubmit = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">Make a Deposit</h4>
+      <h4 class="text-xl font-bold text-fuchsia-500">Make a Deposit</h4>
       <p class="text-sm font-light">
         Have some extra money that you'd like to track in this current period?
         Make a deposit to add to your total funds!
@@ -41,7 +41,7 @@ const handleSubmit = async () => {
       <UFormGroup label="Notes" name="notes">
         <UTextarea v-model="form.notes" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Deposit </UButton>
+      <UButton type="submit" color="fuchsia"> Deposit </UButton>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>

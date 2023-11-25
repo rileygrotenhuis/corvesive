@@ -33,7 +33,7 @@ const handleSubmit = async () => {
 <template>
   <div>
     <UForm :state="form" class="space-y-4" @submit="handleSubmit">
-      <h4 class="text-xl font-bold text-rose-500">New Pay Period</h4>
+      <h4 class="text-xl font-bold text-fuchsia-500">New Pay Period</h4>
       <p class="text-sm font-light">
         Magnify your budgeting to smaller segments of time with Pay Periods.
       </p>
@@ -49,7 +49,7 @@ const handleSubmit = async () => {
       >
         <UCheckbox v-model="autoGenerateResources" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Create </UButton>
+      <UButton type="submit" color="fuchsia"> Create </UButton>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>
