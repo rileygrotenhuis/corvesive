@@ -5,26 +5,26 @@ const modalStore = useModalStore();
 const menuItems = [
   [
     {
-      label: 'Transactions:',
+      label: 'New Transaction:',
       slot: 'title',
       disabled: true,
     },
   ],
   [
     {
-      label: 'Make Deposit',
+      label: 'Make a Deposit',
       click: () => {
         modalStore.openTransactionsModal('deposit');
       },
     },
     {
-      label: 'Pay Bill',
+      label: 'Pay a Bill',
       click: () => {
         modalStore.openTransactionsModal('bill');
       },
     },
     {
-      label: 'Pay Budget',
+      label: 'Pay off Budget',
       click: () => {
         modalStore.openTransactionsModal('budget');
       },

@@ -41,7 +41,7 @@ const handleSubmit = async () => {
         :options="payPeriodBillOptions"
         v-model="selectedPayPeriodBill"
       />
-      <UButton @click.prevent="handleSubmit" color="rose"> Submit </UButton>
+      <UButton @click.prevent="handleSubmit" color="rose"> Pay </UButton>
       <FormsFormErrors :errors="errors" />
     </div>
   </div>

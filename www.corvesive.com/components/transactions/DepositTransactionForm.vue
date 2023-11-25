@@ -41,7 +41,7 @@ const handleSubmit = async () => {
       <UFormGroup label="Notes" name="notes">
         <UTextarea v-model="form.notes" />
       </UFormGroup>
-      <UButton type="submit" color="rose"> Submit </UButton>
+      <UButton type="submit" color="rose"> Deposit </UButton>
       <FormsFormErrors :errors="errors" />
     </UForm>
   </div>
