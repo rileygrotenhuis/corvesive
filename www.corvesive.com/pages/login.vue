@@ -1,6 +1,16 @@
 <script setup lang="ts">
 useHead({
+  htmlAttrs: {
+    lang: 'en',
+  },
   title: 'Corvesive - Login',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Corvesivs is a segments budgeting tool built using Laravel and Nuxt.',
+    },
+  ],
 });
 </script>
 

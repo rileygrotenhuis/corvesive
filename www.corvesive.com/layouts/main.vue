@@ -3,6 +3,14 @@ useHead({
   htmlAttrs: {
     lang: 'en',
   },
+  title: 'Corvesive - A Segmented Budgeting Tool',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Corvesivs is a segments budgeting tool built using Laravel and Nuxt.',
+    },
+  ],
 });
 </script>
 
