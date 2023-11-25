@@ -19,7 +19,7 @@ const handleSubmit = async () => {
   const response = await useNuxtApp().$api.savings.createSaving(form);
 
   if (!(errors.value = response.errors)) {
-    await savingStore.getSavings();
+    await savingStore.getSavings(true);
     modalStore.closeRecurringModal();
   }
 };

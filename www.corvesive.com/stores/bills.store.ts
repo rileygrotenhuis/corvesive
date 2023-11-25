@@ -12,35 +12,48 @@ export const useBillStore = defineStore('useBillStore', {
     payPeriodBill: {} as IPayPeriodBillResource,
   }),
   actions: {
-    async getBills(): Promise<IBillResource[]> {
-      this.bills = (await useNuxtApp().$api.bills.getBills()).data;
+    async getBills(refresh: boolean = false): Promise<IBillResource[]> {
+      if (refresh || this.bills.length === 0) {
+        this.bills = (await useNuxtApp().$api.bills.getBills()).data;
+      }
 
       return this.bills;
     },
-    async getBill(id: number): Promise<IBillResource> {
-      this.bill = (await useNuxtApp().$api.bills.getBill(id)).data;
+    async getBill(
+      id: number,
+      refresh: boolean = false
+    ): Promise<IBillResource> {
+      if (refresh || Object.keys(this.bill).length === 0) {
+        this.bill = (await useNuxtApp().$api.bills.getBill(id)).data;
+      }
 
       return this.bill;
     },
     async getPayPeriodBills(
-      payPeriodId: number
+      payPeriodId: number,
+      refresh: boolean = false
     ): Promise<IPayPeriodBillResource[]> {
-      this.payPeriodBills = (
-        await useNuxtApp().$api.bills.getPayPeriodBills(payPeriodId)
-      ).data;
+      if (refresh || this.payPeriodBills.length === 0) {
+        this.payPeriodBills = (
+          await useNuxtApp().$api.bills.getPayPeriodBills(payPeriodId)
+        ).data;
+      }
 
       return this.payPeriodBills;
     },
     async getPayPeriodBill(
       payPeriodId: number,
-      payPeriodBillId: number
+      payPeriodBillId: number,
+      refresh: boolean = false
     ): Promise<IPayPeriodBillResource> {
-      this.payPeriodBill = (
-        await useNuxtApp().$api.bills.getPayPeriodBill(
-          payPeriodId,
-          payPeriodBillId
-        )
-      ).data;
+      if (refresh || Object.keys(this.payPeriodBill).length === 0) {
+        this.payPeriodBill = (
+          await useNuxtApp().$api.bills.getPayPeriodBill(
+            payPeriodId,
+            payPeriodBillId
+          )
+        ).data;
+      }
 
       return this.payPeriodBill;
     },

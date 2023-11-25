@@ -8,22 +8,28 @@ export const useTransactionStore = defineStore('useTransactionStore', {
   }),
   actions: {
     async getPayPeriodTransactions(
-      payPeriodId: number
+      payPeriodId: number,
+      refresh: boolean = false
     ): Promise<ITransactionResource[]> {
-      this.transactions = (
-        await useNuxtApp().$api.transactions.getPayPeriodTransactions(
-          payPeriodId
-        )
-      ).data;
+      if (refresh || this.transactions.length === 0) {
+        this.transactions = (
+          await useNuxtApp().$api.transactions.getPayPeriodTransactions(
+            payPeriodId
+          )
+        ).data;
+      }
 
       return this.transactions;
     },
     async getPayPeriodDeposits(
-      payPeriodId: number
+      payPeriodId: number,
+      refresh: boolean = false
     ): Promise<ITransactionResource[]> {
-      this.deposits = (
-        await useNuxtApp().$api.transactions.getPayPeriodDeposits(payPeriodId)
-      ).data;
+      if (refresh || this.deposits.length === 0) {
+        this.deposits = (
+          await useNuxtApp().$api.transactions.getPayPeriodDeposits(payPeriodId)
+        ).data;
+      }
 
       return this.deposits;
     },

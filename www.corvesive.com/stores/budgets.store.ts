@@ -12,35 +12,48 @@ export const useBudgetStore = defineStore('useBudgetStore', {
     payPeriodBudget: {} as IPayPeriodBudgetResource,
   }),
   actions: {
-    async getBudgets(): Promise<IBudgetResource[]> {
-      this.budgets = (await useNuxtApp().$api.budgets.getBudgets()).data;
+    async getBudgets(refresh: boolean = false): Promise<IBudgetResource[]> {
+      if (refresh || this.budgets.length === 0) {
+        this.budgets = (await useNuxtApp().$api.budgets.getBudgets()).data;
+      }
 
       return this.budgets;
     },
-    async getBudget(id: number): Promise<IBudgetResource> {
-      this.budget = (await useNuxtApp().$api.budgets.getBudget(id)).data;
+    async getBudget(
+      id: number,
+      refresh: boolean = false
+    ): Promise<IBudgetResource> {
+      if (refresh || Object.keys(this.budget).length === 0) {
+        this.budget = (await useNuxtApp().$api.budgets.getBudget(id)).data;
+      }
 
       return this.budget;
     },
     async getPayPeriodBudgets(
-      payPeriodId: number
+      payPeriodId: number,
+      refresh: boolean = false
     ): Promise<IPayPeriodBudgetResource[]> {
-      this.payPeriodBudgets = (
-        await useNuxtApp().$api.budgets.getPayPeriodBudgets(payPeriodId)
-      ).data;
+      if (refresh || this.payPeriodBudgets.length === 0) {
+        this.payPeriodBudgets = (
+          await useNuxtApp().$api.budgets.getPayPeriodBudgets(payPeriodId)
+        ).data;
+      }
 
       return this.payPeriodBudgets;
     },
     async getPayPeriodBudget(
       payPeriodId: number,
-      payPeriodBudgetId: number
+      payPeriodBudgetId: number,
+      refresh: boolean = false
     ): Promise<IPayPeriodBudgetResource> {
-      this.payPeriodBudget = (
-        await useNuxtApp().$api.budgets.getPayPeriodBudget(
-          payPeriodId,
-          payPeriodBudgetId
-        )
-      ).data;
+      if (refresh || Object.keys(this.payPeriodBudget).length === 0) {
+        this.payPeriodBudget = (
+          await useNuxtApp().$api.budgets.getPayPeriodBudget(
+            payPeriodId,
+            payPeriodBudgetId
+          )
+        ).data;
+      }
 
       return this.payPeriodBudget;
     },

@@ -22,7 +22,10 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closeSettingsModal();
-    await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
+    await savingStore.getPayPeriodSavings(
+      accountStore.user.pay_period.id,
+      true
+    );
   }
 };
 
@@ -37,7 +40,10 @@ const detachPayPeriodSaving = async () => {
       modalStore.settings.data.id
     );
     modalStore.closeSettingsModal();
-    await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
+    await savingStore.getPayPeriodSavings(
+      accountStore.user.pay_period.id,
+      true
+    );
   }
 };
 </script>

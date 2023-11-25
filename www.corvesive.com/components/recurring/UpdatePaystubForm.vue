@@ -23,7 +23,7 @@ const handleSubmit = async () => {
   );
 
   if (!(errors.value = response.errors)) {
-    await paystubStore.getPaystubs();
+    await paystubStore.getPaystubs(true);
     modalStore.closeSettingsModal();
   }
 };
@@ -31,8 +31,11 @@ const handleSubmit = async () => {
 const deletePaystub = async () => {
   if (window.confirm('Are you sure you want to delete this paystub?')) {
     await useNuxtApp().$api.paystubs.deletePaystub(modalStore.settings.data.id);
-    await paystubStore.getPaystubs();
-    await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
+    await paystubStore.getPaystubs(true);
+    await paystubStore.getPayPeriodPaystubs(
+      accountStore.user.pay_period.id,
+      true
+    );
     modalStore.closeSettingsModal();
   }
 };

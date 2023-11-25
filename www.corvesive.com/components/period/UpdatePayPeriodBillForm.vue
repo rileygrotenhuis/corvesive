@@ -24,7 +24,7 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closeSettingsModal();
-    await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
+    await billStore.getPayPeriodBills(accountStore.user.pay_period.id, true);
   }
 };
 
@@ -39,7 +39,7 @@ const detachPayPeriodBill = async () => {
       modalStore.settings.data.id
     );
     modalStore.closeSettingsModal();
-    await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
+    await billStore.getPayPeriodBills(accountStore.user.pay_period.id, true);
   }
 };
 </script>

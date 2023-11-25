@@ -21,7 +21,7 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closePayPeriodModal();
-    await payPeriodStore.getPayPeriods();
+    await payPeriodStore.getPayPeriods(true);
     useToast().add({
       title:
         'You have created a new Pay Period. Select it in the Pay Period Menu to continue.',

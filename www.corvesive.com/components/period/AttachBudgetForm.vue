@@ -6,7 +6,7 @@ const accountStore = useAccountStore();
 const budgetStore = useBudgetStore();
 const modalStore = useModalStore();
 
-await budgetStore.getBudgets();
+await budgetStore.getBudgets(true);
 
 const budgetOptions = computed(() => {
   return budgetStore.budgets.map((budget: IBudgetResource) => {
@@ -36,7 +36,10 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closePeriodModal();
-    await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id);
+    await budgetStore.getPayPeriodBudgets(
+      accountStore.user.pay_period.id,
+      true
+    );
   }
 };
 </script>

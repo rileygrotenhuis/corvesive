@@ -6,7 +6,7 @@ const accountStore = useAccountStore();
 const savingStore = useSavingStore();
 const modalStore = useModalStore();
 
-await savingStore.getSavings();
+await savingStore.getSavings(true);
 
 const savingOptions = computed(() => {
   return savingStore.savings.map((saving: ISavingResource) => {
@@ -36,7 +36,10 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closePeriodModal();
-    await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
+    await savingStore.getPayPeriodSavings(
+      accountStore.user.pay_period.id,
+      true
+    );
   }
 };
 </script>

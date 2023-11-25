@@ -6,7 +6,7 @@ const accountStore = useAccountStore();
 const paystubStore = usePaystubStore();
 const modalStore = useModalStore();
 
-await paystubStore.getPaystubs();
+await paystubStore.getPaystubs(true);
 
 const paystubOptions = computed(() => {
   return paystubStore.paystubs.map((paystub: IPaystubResource) => {
@@ -36,7 +36,10 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closePeriodModal();
-    await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
+    await paystubStore.getPayPeriodPaystubs(
+      accountStore.user.pay_period.id,
+      true
+    );
   }
 };
 </script>

@@ -22,7 +22,7 @@ const handleSubmit = async () => {
   );
 
   if (!(errors.value = response.errors)) {
-    await savingStore.getSavings();
+    await savingStore.getSavings(true);
     modalStore.closeSettingsModal();
   }
 };
@@ -30,8 +30,11 @@ const handleSubmit = async () => {
 const deleteSaving = async () => {
   if (window.confirm('Are you sure you want to delete this saving?')) {
     await useNuxtApp().$api.savings.deleteSaving(modalStore.settings.data.id);
-    await savingStore.getSavings();
-    await savingStore.getPayPeriodSavings(accountStore.user.pay_period.id);
+    await savingStore.getSavings(true);
+    await savingStore.getPayPeriodSavings(
+      accountStore.user.pay_period.id,
+      true
+    );
     modalStore.closeSettingsModal();
   }
 };

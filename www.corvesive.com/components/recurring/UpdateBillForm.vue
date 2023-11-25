@@ -25,7 +25,7 @@ const handleSubmit = async () => {
   );
 
   if (!(errors.value = response.errors)) {
-    await billStore.getBills();
+    await billStore.getBills(true);
     modalStore.closeSettingsModal();
   }
 };
@@ -33,8 +33,8 @@ const handleSubmit = async () => {
 const deleteBill = async () => {
   if (window.confirm('Are you sure you want to delete this bill?')) {
     await useNuxtApp().$api.bills.deleteBill(modalStore.settings.data.id);
-    await billStore.getBills();
-    await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
+    await billStore.getBills(true);
+    await billStore.getPayPeriodBills(accountStore.user.pay_period.id, true);
     modalStore.closeSettingsModal();
   }
 };

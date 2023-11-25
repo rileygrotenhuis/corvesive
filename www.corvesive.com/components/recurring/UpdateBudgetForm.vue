@@ -22,7 +22,7 @@ const handleSubmit = async () => {
   );
 
   if (!(errors.value = response.errors)) {
-    await budgetStore.getBudgets();
+    await budgetStore.getBudgets(true);
     modalStore.closeSettingsModal();
   }
 };
@@ -30,8 +30,11 @@ const handleSubmit = async () => {
 const deleteBudget = async () => {
   if (window.confirm('Are you sure you want to delete this budget?')) {
     await useNuxtApp().$api.budgets.deleteBudget(modalStore.settings.data.id);
-    await budgetStore.getBudgets();
-    await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id);
+    await budgetStore.getBudgets(true);
+    await budgetStore.getPayPeriodBudgets(
+      accountStore.user.pay_period.id,
+      true
+    );
     modalStore.closeSettingsModal();
   }
 };

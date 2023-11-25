@@ -19,7 +19,7 @@ const handleSubmit = async () => {
   const response = await useNuxtApp().$api.paystubs.createPaystub(form);
 
   if (!(errors.value = response.errors)) {
-    await paystubStore.getPaystubs();
+    await paystubStore.getPaystubs(true);
     modalStore.closeRecurringModal();
   }
 };

@@ -24,7 +24,7 @@ const handleSubmit = async () => {
 
     await setAccessToken(response.token);
 
-    await payPeriodStore.getPayPeriods();
+    await payPeriodStore.getPayPeriods(true);
     await payPeriodStore.getPayPeriod(response.user.pay_period.id);
 
     return await navigateTo('/');

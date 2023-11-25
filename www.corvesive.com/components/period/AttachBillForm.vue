@@ -6,7 +6,7 @@ const accountStore = useAccountStore();
 const billStore = useBillStore();
 const modalStore = useModalStore();
 
-await billStore.getBills();
+await billStore.getBills(true);
 
 const billOptions = computed(() => {
   return billStore.bills.map((bill: IBillResource) => {
@@ -38,7 +38,7 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closePeriodModal();
-    await billStore.getPayPeriodBills(accountStore.user.pay_period.id);
+    await billStore.getPayPeriodBills(accountStore.user.pay_period.id, true);
   }
 };
 </script>

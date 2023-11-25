@@ -22,7 +22,10 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closeSettingsModal();
-    await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
+    await paystubStore.getPayPeriodPaystubs(
+      accountStore.user.pay_period.id,
+      true
+    );
   }
 };
 
@@ -37,7 +40,10 @@ const detachPayPeriodPaystub = async () => {
       modalStore.settings.data.id
     );
     modalStore.closeSettingsModal();
-    await paystubStore.getPayPeriodPaystubs(accountStore.user.pay_period.id);
+    await paystubStore.getPayPeriodPaystubs(
+      accountStore.user.pay_period.id,
+      true
+    );
   }
 };
 </script>

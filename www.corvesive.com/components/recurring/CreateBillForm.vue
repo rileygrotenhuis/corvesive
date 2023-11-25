@@ -21,7 +21,7 @@ const handleSubmit = async () => {
   const response = await useNuxtApp().$api.bills.createBill(form);
 
   if (!(errors.value = response.errors)) {
-    await billStore.getBills();
+    await billStore.getBills(true);
     modalStore.closeRecurringModal();
   }
 };

@@ -24,7 +24,10 @@ const handleSubmit = async () => {
 
   if (!(errors.value = response.errors)) {
     modalStore.closeSettingsModal();
-    await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id);
+    await budgetStore.getPayPeriodBudgets(
+      accountStore.user.pay_period.id,
+      true
+    );
   }
 };
 
@@ -39,7 +42,10 @@ const detachPayPeriodBudget = async () => {
       modalStore.settings.data.id
     );
     modalStore.closeSettingsModal();
-    await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id);
+    await budgetStore.getPayPeriodBudgets(
+      accountStore.user.pay_period.id,
+      true
+    );
   }
 };
 </script>

@@ -4,7 +4,7 @@ const billStore = useBillStore();
 const modalStore = useModalStore();
 
 const payPeriodBillOptions = (
-  await billStore.getPayPeriodBills(accountStore.user.pay_period.id)
+  await billStore.getPayPeriodBills(accountStore.user.pay_period.id, true)
 ).map((payPeriodBill) => {
   return {
     label: `${payPeriodBill.bill.issuer} ${payPeriodBill.bill.name} (${payPeriodBill.amount.pretty})`,

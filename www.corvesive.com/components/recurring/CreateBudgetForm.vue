@@ -18,7 +18,7 @@ const handleSubmit = async () => {
   const response = await useNuxtApp().$api.budgets.createBudget(form);
 
   if (!(errors.value = response.errors)) {
-    await budgetStore.getBudgets();
+    await budgetStore.getBudgets(true);
     modalStore.closeRecurringModal();
   }
 };

@@ -11,7 +11,7 @@ const form: IBudgetTransactionRequest = reactive({
 });
 
 const payPeriodBudgetOptions = (
-  await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id)
+  await budgetStore.getPayPeriodBudgets(accountStore.user.pay_period.id, true)
 ).map((payPeriodBudget) => {
   return {
     label: `${payPeriodBudget.budget.name} (${payPeriodBudget.remaining_balance.pretty})`,
