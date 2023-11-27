@@ -13,7 +13,7 @@ export const useSavingStore = defineStore('useSavingStore', {
   }),
   actions: {
     async getSavings(refresh: boolean = false): Promise<ISavingResource[]> {
-      if (refresh && this.savings.length === 0) {
+      if (refresh || this.savings.length === 0) {
         this.savings = (await useNuxtApp().$api.savings.getSavings()).data;
       }
 
