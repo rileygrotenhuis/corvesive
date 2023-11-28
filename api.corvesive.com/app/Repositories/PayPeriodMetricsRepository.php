@@ -27,11 +27,6 @@ class PayPeriodMetricsRepository
             ->sum('transactions.amount');
     }
 
-    public function getIncomeTotal(): int
-    {
-        return $this->getPaystubsTotal() + $this->getDepositsTotal();
-    }
-
     public function getPayedBillsTotal(): int
     {
         return $this->payPeriod->bills()
@@ -48,11 +43,6 @@ class PayPeriodMetricsRepository
             ->sum('pay_period_bill.amount');
     }
 
-    public function getBillsTotal(): int
-    {
-        return $this->getPayedBillsTotal() + $this->getUnpayedBillsTotal();
-    }
-
     public function getBudgetsBalanceTotal(): int
     {
         return $this->payPeriod->budgets()
@@ -67,30 +57,10 @@ class PayPeriodMetricsRepository
             ->sum('pay_period_budget.remaining_balance');
     }
 
-    public function getBudgetsSpentTotal(): int
-    {
-        return $this->getBudgetsBalanceTotal() - $this->getRemainingBudgetsTotal();
-    }
-
     public function getSavingsTotal(): int
     {
         return $this->payPeriod->savingAccounts()
             ->whereNull('pay_period_saving.deleted_at')
             ->sum('pay_period_saving.amount');
-    }
-
-    public function getExpensesTotal(): int
-    {
-        return $this->getBudgetsBalanceTotal() + $this->getBillsTotal() + $this->getSavingsTotal();
-    }
-
-    public function getSurplusTotal(): int
-    {
-        return $this->getExpensesTotal() - $this->getIncomeTotal();
-    }
-
-    public function getTransactionPaymentsTotal(): int
-    {
-        return $this->getBudgetsSpentTotal() + $this->getPayedBillsTotal();
     }
 }

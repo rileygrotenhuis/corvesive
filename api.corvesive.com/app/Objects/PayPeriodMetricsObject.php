@@ -16,7 +16,9 @@ class PayPeriodMetricsObject
 
     public int $expenses_total;
 
-    public int $surplus_total;
+    public int $projected_surplus;
+
+    public int $current_surplus;
 
     public function __construct(
         public int $paystubs_total,
@@ -33,6 +35,7 @@ class PayPeriodMetricsObject
         $this->spent_total = $this->budgets_spent_total + $this->payed_bills_total;
         $this->remaining_total = $this->remaining_budgets_total + $this->unpayed_bills_total;
         $this->expenses_total = $this->budgets_balance_total + $this->bills_total + $this->savings_total;
-        $this->surplus_total = $this->expenses_total + $this->income_total;
+        $this->projected_surplus = $this->income_total - $this->expenses_total;
+        $this->current_surplus = $this->income_total - $this->spent_total;
     }
 }
