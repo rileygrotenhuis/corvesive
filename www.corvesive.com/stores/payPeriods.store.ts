@@ -1,10 +1,14 @@
 import { defineStore } from 'pinia';
-import type { IPayPeriodResource } from '~/http/resources/payPeriods.resource';
+import type {
+  IPayPeriodMetricsResource,
+  IPayPeriodResource,
+} from '~/http/resources/payPeriods.resource';
 
 export const usePayPeriodStore = defineStore('usePayPeriodStore', {
   state: () => ({
     payPeriods: [] as IPayPeriodResource[],
     currentPayPeriod: {} as IPayPeriodResource,
+    metrics: {} as IPayPeriodMetricsResource,
   }),
   actions: {
     async getPayPeriods(
@@ -24,6 +28,18 @@ export const usePayPeriodStore = defineStore('usePayPeriodStore', {
       ).data;
 
       return this.currentPayPeriod;
+    },
+    async getPayPeriodMetrics(
+      id: number,
+      refresh: boolean = true
+    ): Promise<IPayPeriodMetricsResource> {
+      if (refresh || Object.keys(this.metrics).length === 0) {
+        this.metrics = (
+          await useNuxtApp().$api.payPeriods.getPayPeriodMetrics(id)
+        ).data;
+      }
+
+      return this.metrics;
     },
   },
 });
