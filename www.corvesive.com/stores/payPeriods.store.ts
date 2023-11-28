@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import type {
+  IPayPeriodAttributesResource,
   IPayPeriodMetricsResource,
   IPayPeriodResource,
 } from '~/http/resources/payPeriods.resource';
@@ -8,7 +9,7 @@ export const usePayPeriodStore = defineStore('usePayPeriodStore', {
   state: () => ({
     payPeriods: [] as IPayPeriodResource[],
     currentPayPeriod: {} as IPayPeriodResource,
-    attributes: {},
+    attributes: {} as IPayPeriodAttributesResource,
     metrics: {} as IPayPeriodMetricsResource,
   }),
   actions: {
@@ -33,7 +34,7 @@ export const usePayPeriodStore = defineStore('usePayPeriodStore', {
     async getPayPeriodAttributes(
       id: number,
       refresh: boolean = false
-    ): Promise<Object> {
+    ): Promise<IPayPeriodAttributesResource> {
       if (refresh || Object.keys(this.attributes).length === 0) {
         this.attributes = (
           await useNuxtApp().$api.payPeriods.getPayPeriodAttributes(id)

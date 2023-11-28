@@ -1,3 +1,7 @@
+import type { IPayPeriodBillResource } from './bills.resource';
+import type { IPayPeriodBudgetResource } from './budgets.resource';
+import type { ITransactionResource } from './transactions.resource';
+
 export interface IPayPeriodResource {
   id: number;
   dates: {
@@ -19,6 +23,22 @@ export interface IPayPeriodResource {
     };
   };
   is_complete: Boolean;
+}
+
+export interface IPayPeriodAttributesResource {
+  bills: {
+    payed: IPayPeriodBillResource[];
+    upcoming: IPayPeriodBillResource[];
+    overdue: IPayPeriodBillResource[];
+  };
+  budgets: {
+    remaining: IPayPeriodBudgetResource[];
+    overpayed: IPayPeriodBudgetResource[];
+    payed: IPayPeriodBudgetResource[];
+  };
+  transactions: {
+    recent: ITransactionResource[];
+  };
 }
 
 export interface IPayPeriodMetricsResource {

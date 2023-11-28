@@ -1,6 +1,7 @@
 import type { ICreateOrUpdatePayPeriodRequest } from '~/http/requests/payPeriods.request';
 import type { IHttpResource } from '~/http/resources/http.resource';
 import type {
+  IPayPeriodAttributesResource,
   IPayPeriodMetricsResource,
   IPayPeriodResource,
 } from '~/http/resources/payPeriods.resource';
@@ -39,7 +40,7 @@ class PayPeriodService extends HttpFactory {
 
   async getPayPeriodAttributes(
     id: number
-  ): Promise<IHttpResource<IPayPeriodMetricsResource>> {
+  ): Promise<IHttpResource<IPayPeriodAttributesResource>> {
     return await this.call('GET', `/pay-periods/${id}/attributes`);
   }
 
