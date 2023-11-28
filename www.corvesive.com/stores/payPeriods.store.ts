@@ -12,7 +12,7 @@ export const usePayPeriodStore = defineStore('usePayPeriodStore', {
   }),
   actions: {
     async getPayPeriods(
-      refresh: boolean = true
+      refresh: boolean = false
     ): Promise<IPayPeriodResource[]> {
       if (refresh || this.payPeriods.length === 0) {
         this.payPeriods = (
@@ -31,7 +31,7 @@ export const usePayPeriodStore = defineStore('usePayPeriodStore', {
     },
     async getPayPeriodMetrics(
       id: number,
-      refresh: boolean = true
+      refresh: boolean = false
     ): Promise<IPayPeriodMetricsResource> {
       if (refresh || Object.keys(this.metrics).length === 0) {
         this.metrics = (
