@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\PayPeriod;
-use App\Models\PayPeriodPaystub;
 
 class PayPeriodMetricsRepository
 {
@@ -13,8 +12,7 @@ class PayPeriodMetricsRepository
 
     public function getPaystubsTotal(): int
     {
-        return PayPeriodPaystub::query()
-            ->where('pay_period_id', $this->payPeriod->id)
+        return $this->payPeriod->paystubs()
             ->whereNull('pay_period_paystub.deleted_at')
             ->sum('pay_period_paystub.amount');
     }
