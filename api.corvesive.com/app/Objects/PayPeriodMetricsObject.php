@@ -32,7 +32,7 @@ class PayPeriodMetricsObject
         $this->income_total = $this->paystubs_total + $this->deposits_total;
         $this->bills_total = $this->payed_bills_total + $this->unpayed_bills_total;
         $this->budgets_spent_total = $this->budgets_balance_total - $this->remaining_budgets_total;
-        $this->spent_total = $this->budgets_spent_total + $this->payed_bills_total;
+        $this->spent_total = $this->budgets_spent_total + $this->payed_bills_total + $this->savings_total;
         $this->remaining_total = $this->remaining_budgets_total + $this->unpayed_bills_total;
         $this->expenses_total = $this->budgets_balance_total + $this->bills_total + $this->savings_total;
         $this->projected_surplus = $this->income_total - $this->expenses_total;
