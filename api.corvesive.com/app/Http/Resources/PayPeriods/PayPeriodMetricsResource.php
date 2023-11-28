@@ -29,10 +29,10 @@ class PayPeriodMetricsResource extends JsonResource
                 'savings' => [
                     'total' => CurrencyUtil::formatCurrencyValues($this->savings_total),
                 ],
+                'total' => CurrencyUtil::formatCurrencyValues($this->expenses_total),
             ],
             'spent' => CurrencyUtil::formatCurrencyValues($this->spent_total),
             'remaining' => CurrencyUtil::formatCurrencyValues($this->remaining_total),
-            'total' => CurrencyUtil::formatCurrencyValues($this->expenses_total),
             'surplus' => CurrencyUtil::formatCurrencyValues($this->surplus_total),
         ];
     }

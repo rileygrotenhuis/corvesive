@@ -81,6 +81,11 @@ export interface IPayPeriodMetricsResource {
         input: number;
       };
     };
+    total: {
+      raw: number;
+      pretty: string;
+      input: number;
+    };
   };
   spent: {
     raw: number;
@@ -88,11 +93,6 @@ export interface IPayPeriodMetricsResource {
     input: number;
   };
   remaining: {
-    raw: number;
-    pretty: string;
-    input: number;
-  };
-  total: {
     raw: number;
     pretty: string;
     input: number;
