@@ -3,10 +3,13 @@
 namespace App\Repositories;
 
 use App\Models\PayPeriod;
+use App\Models\PayPeriodBill;
+use App\Models\PayPeriodBudget;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
-class PayPeriodAttributeRepository
+class PayPeriodAttributesRepository
 {
     public function __construct(protected PayPeriod $payPeriod)
     {
@@ -14,16 +17,16 @@ class PayPeriodAttributeRepository
 
     public function getPayedBills(): Collection
     {
-        return $this->payPeriod->bills()
-            ->whereNull('pay_period_bill.deleted_at')
+        return PayPeriodBill::query()
+            ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_bill.has_payed', 1)
             ->get();
     }
 
     public function getUpcomingBills(): Collection
     {
-        return $this->payPeriod->bills()
-            ->whereNull('pay_period_bill.deleted_at')
+        return PayPeriodBill::query()
+            ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_bill.has_payed', 0)
             ->whereBetween(
                 'pay_period_bill.due_date',
@@ -36,8 +39,8 @@ class PayPeriodAttributeRepository
 
     public function getOverdueBills(): Collection
     {
-        return $this->payPeriod->bills()
-            ->whereNull('pay_period_bill.deleted_at')
+        return PayPeriodBill::query()
+            ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_bill.has_payed', 0)
             ->where(
                 'pay_period_bill.due_date',
@@ -48,32 +51,32 @@ class PayPeriodAttributeRepository
 
     public function getRemainingBudgets(): Collection
     {
-        return $this->payPeriod->budgets()
-            ->whereNull('pay_period_budget.deleted_at')
+        return PayPeriodBudget::query()
+            ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_budget.remaining_balance', '>', 0)
             ->get();
     }
 
     public function getOverpayedBudgets(): Collection
     {
-        return $this->payPeriod->budgets()
-            ->whereNull('pay_period_budget.deleted_at')
+        return PayPeriodBudget::query()
+            ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_budget.remaining_balance', '<', 0)
             ->get();
     }
 
     public function getPayedBudgets(): Collection
     {
-        return $this->payPeriod->budgets()
-            ->whereNull('pay_period_budget.deleted_at')
+        return PayPeriodBudget::query()
+            ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_budget.remaining_balance', 0)
             ->get();
     }
 
     public function getRecentTransactions(): Collection
     {
-        return $this->payPeriod->transactions()
-            ->whereNull('transactions.deleted_at')
+        return Transaction::query()
+            ->where('pay_period_id', $this->payPeriod->id)
             ->whereBetween(
                 'transactions.created_at',
                 [

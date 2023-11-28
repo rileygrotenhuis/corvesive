@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\PayPeriods\PayPeriodAttributesController;
 use App\Http\Controllers\PayPeriods\PayPeriodBillController;
 use App\Http\Controllers\PayPeriods\PayPeriodBudgetController;
 use App\Http\Controllers\PayPeriods\PayPeriodController;
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     ]);
 
     Route::prefix('pay-periods/{payPeriod}')->group(function () {
+        Route::get('attributes', PayPeriodAttributesController::class)->name('pay-periods.attributes');
         Route::get('metrics', PayPeriodMetricsController::class)->name('pay-periods.metrics');
 
         Route::prefix('paystubs')->group(function () {

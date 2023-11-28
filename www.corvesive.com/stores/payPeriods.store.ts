@@ -8,6 +8,7 @@ export const usePayPeriodStore = defineStore('usePayPeriodStore', {
   state: () => ({
     payPeriods: [] as IPayPeriodResource[],
     currentPayPeriod: {} as IPayPeriodResource,
+    attributes: {},
     metrics: {} as IPayPeriodMetricsResource,
   }),
   actions: {
@@ -28,6 +29,18 @@ export const usePayPeriodStore = defineStore('usePayPeriodStore', {
       ).data;
 
       return this.currentPayPeriod;
+    },
+    async getPayPeriodAttributes(
+      id: number,
+      refresh: boolean = false
+    ): Promise<Object> {
+      if (refresh || Object.keys(this.attributes).length === 0) {
+        this.attributes = (
+          await useNuxtApp().$api.payPeriods.getPayPeriodAttributes(id)
+        ).data;
+      }
+
+      return this.attributes;
     },
     async getPayPeriodMetrics(
       id: number,

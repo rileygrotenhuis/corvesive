@@ -11,6 +11,7 @@ definePageMeta({
 const accountStore = useAccountStore();
 const payPeriodsStore = usePayPeriodStore();
 
+await payPeriodsStore.getPayPeriodAttributes(accountStore.user.pay_period.id);
 await payPeriodsStore.getPayPeriodMetrics(accountStore.user.pay_period.id);
 
 const tabs = [

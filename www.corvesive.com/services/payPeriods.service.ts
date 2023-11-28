@@ -37,6 +37,12 @@ class PayPeriodService extends HttpFactory {
     return await this.call('DELETE', `/pay-periods/${id}`);
   }
 
+  async getPayPeriodAttributes(
+    id: number
+  ): Promise<IHttpResource<IPayPeriodMetricsResource>> {
+    return await this.call('GET', `/pay-periods/${id}/attributes`);
+  }
+
   async getPayPeriodMetrics(
     id: number
   ): Promise<IHttpResource<IPayPeriodMetricsResource>> {
