@@ -15,6 +15,6 @@ class RecurringMetricsObject
         public int $savings_total
     ) {
         $this->expenses_total = $this->bills_total + $this->budgets_total + $this->savings_total;
-        $this->projected_surplus = $this->expenses_total - $this->paystubs_total;
+        $this->projected_surplus = $this->paystubs_total - $this->expenses_total;
     }
 }
