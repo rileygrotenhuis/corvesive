@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     ]);
 
     Route::prefix('recurring')->group(function () {
-        Route::get('metrics', [RecurringMetricsController::class])->name('recurring.metrics');
+        Route::get('metrics', RecurringMetricsController::class)->name('recurring.metrics');
     });
 
     Route::prefix('pay-periods/{payPeriod}')->group(function () {

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\RecurringMetricsResource;
-use App\Models\PayPeriod;
 use App\Objects\RecurringMetricsObject;
 use App\Repositories\RecurringMetricsRepository;
 
 class RecurringMetricsController
 {
-    public function __invoke(PayPeriod $payPeriod): RecurringMetricsResource
+    public function __invoke(): RecurringMetricsResource
     {
         $repository = new RecurringMetricsRepository(auth()->user());
 

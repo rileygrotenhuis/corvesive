@@ -7,10 +7,12 @@ import BudgetService from '~/services/budgets.service';
 import PayPeriodService from '~/services/payPeriods.service';
 import SavingService from '~/services/savings.service';
 import TransactionService from '~/services/transactions.service';
+import RecurringService from '~/services/recurring.service';
 
 interface IApiInstance {
   auth: AuthService;
   account: AccountService;
+  recurring: RecurringService;
   paystubs: PaystubService;
   bills: BillService;
   budgets: BudgetService;
@@ -23,6 +25,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   const modules: IApiInstance = {
     auth: new AuthService(),
     account: new AccountService(),
+    recurring: new RecurringService(),
     paystubs: new PaystubService(),
     bills: new BillService(),
     budgets: new BudgetService(),

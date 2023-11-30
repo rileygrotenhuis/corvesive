@@ -9,10 +9,18 @@ definePageMeta({
 });
 
 const accountStore = useAccountStore();
+const recurringStore = useRecurringStore();
 const payPeriodsStore = usePayPeriodStore();
 
-await payPeriodsStore.getPayPeriodAttributes(accountStore.user.pay_period.id);
-await payPeriodsStore.getPayPeriodMetrics(accountStore.user.pay_period.id);
+await recurringStore.getRecurringMetrics(true);
+await payPeriodsStore.getPayPeriodAttributes(
+  accountStore.user.pay_period.id,
+  true
+);
+await payPeriodsStore.getPayPeriodMetrics(
+  accountStore.user.pay_period.id,
+  true
+);
 
 const tabs = [
   {
