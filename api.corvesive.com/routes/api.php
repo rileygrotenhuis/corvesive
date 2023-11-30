@@ -12,6 +12,7 @@ use App\Http\Controllers\PayPeriods\PayPeriodMetricsController;
 use App\Http\Controllers\PayPeriods\PayPeriodPaystubController;
 use App\Http\Controllers\PayPeriods\PayPeriodSavingController;
 use App\Http\Controllers\PaystubController;
+use App\Http\Controllers\RecurringMetricsController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         'budgets' => BudgetController::class,
         'savings' => SavingController::class,
     ]);
+
+    Route::prefix('recurring')->group(function () {
+        Route::get('metrics', [RecurringMetricsController::class])->name('recurring.metrics');
+    });
 
     Route::prefix('pay-periods/{payPeriod}')->group(function () {
         Route::get('attributes', PayPeriodAttributesController::class)->name('pay-periods.attributes');
