@@ -1,4 +1,3 @@
-import type BillsTableVue from '../expenses/BillsTable.vue';
 <script setup lang="ts">
 const payPeriodStore = usePayPeriodStore();
 </script>
