@@ -41,7 +41,7 @@ const tabs = [
         <UCard>
           <div class="flex flex-col gap-4">
             <h3 v-if="item.key === 'dashboard'">Dashboard</h3>
-            <h3 v-if="item.key === 'metrics'">Metrics</h3>
+            <MetricsPayPeriodMetrics v-if="item.key === 'metrics'" />
           </div>
         </UCard>
       </template>
