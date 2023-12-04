@@ -12,6 +12,12 @@ const menuItems = [
   ],
   [
     {
+      label: 'Make Payment',
+      click: () => {
+        modalStore.openTransactionsModal('payment');
+      },
+    },
+    {
       label: 'Make a Deposit',
       click: () => {
         modalStore.openTransactionsModal('deposit');
