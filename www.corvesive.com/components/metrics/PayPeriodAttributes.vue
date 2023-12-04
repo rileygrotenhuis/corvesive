@@ -3,7 +3,7 @@ const payPeriodStore = usePayPeriodStore();
 </script>
 
 <template>
-  <div>
+  <div class="space-y-4">
     <div>
       <h4>Overdue Bills:</h4>
       <ul class="list-disc ml-4">
