@@ -18,7 +18,7 @@ const handleSubmit = async () => {
 
   const response = await useNuxtApp().$api.budgets.updatePayPeriodBudget(
     accountStore.user.pay_period.id,
-    modalStore.settings.data.id,
+    modalStore.settings.data.budget.id,
     form
   );
 
@@ -39,7 +39,7 @@ const detachPayPeriodBudget = async () => {
   ) {
     await useNuxtApp().$api.budgets.detachBudgetFromPayPeriod(
       accountStore.user.pay_period.id,
-      modalStore.settings.data.id
+      modalStore.settings.data.budget.id
     );
     modalStore.closeSettingsModal();
     await budgetStore.getPayPeriodBudgets(

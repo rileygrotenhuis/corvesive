@@ -16,7 +16,7 @@ const handleSubmit = async () => {
 
   const response = await useNuxtApp().$api.paystubs.updatePayPeriodPaystub(
     accountStore.user.pay_period.id,
-    modalStore.settings.data.id,
+    modalStore.settings.data.paystub.id,
     form
   );
 
@@ -37,7 +37,7 @@ const detachPayPeriodPaystub = async () => {
   ) {
     await useNuxtApp().$api.paystubs.detachPaystubFromPayPeriod(
       accountStore.user.pay_period.id,
-      modalStore.settings.data.id
+      modalStore.settings.data.paystub.id
     );
     modalStore.closeSettingsModal();
     await paystubStore.getPayPeriodPaystubs(
