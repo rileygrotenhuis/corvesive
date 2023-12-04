@@ -18,6 +18,7 @@ class PayPeriodAttributesRepository
     public function getPayedBills(): Collection
     {
         return PayPeriodBill::query()
+            ->with('bill')
             ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_bill.has_payed', 1)
             ->get();
@@ -26,6 +27,7 @@ class PayPeriodAttributesRepository
     public function getUpcomingBills(): Collection
     {
         return PayPeriodBill::query()
+            ->with('bill')
             ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_bill.has_payed', 0)
             ->whereBetween(
@@ -40,6 +42,7 @@ class PayPeriodAttributesRepository
     public function getOverdueBills(): Collection
     {
         return PayPeriodBill::query()
+            ->with('bill')
             ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_bill.has_payed', 0)
             ->where(
@@ -52,6 +55,7 @@ class PayPeriodAttributesRepository
     public function getRemainingBudgets(): Collection
     {
         return PayPeriodBudget::query()
+            ->with('budget')
             ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_budget.remaining_balance', '>', 0)
             ->get();
@@ -60,6 +64,7 @@ class PayPeriodAttributesRepository
     public function getOverpayedBudgets(): Collection
     {
         return PayPeriodBudget::query()
+            ->with('budget')
             ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_budget.remaining_balance', '<', 0)
             ->get();
@@ -68,6 +73,7 @@ class PayPeriodAttributesRepository
     public function getPayedBudgets(): Collection
     {
         return PayPeriodBudget::query()
+            ->with('budget')
             ->where('pay_period_id', $this->payPeriod->id)
             ->where('pay_period_budget.remaining_balance', 0)
             ->get();
@@ -80,8 +86,8 @@ class PayPeriodAttributesRepository
             ->whereBetween(
                 'transactions.created_at',
                 [
-                    Carbon::today()->subDays(1)->toDateString(),
-                    Carbon::today()->toDateString(),
+                    Carbon::today()->subDays(2)->toDateString(),
+                    Carbon::today()->addDays(2)->toDateString(),
                 ]
             )->get();
     }

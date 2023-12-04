@@ -13,8 +13,14 @@ const recurringStore = useRecurringStore();
 const payPeriodsStore = usePayPeriodStore();
 
 await recurringStore.getRecurringMetrics(true);
-await payPeriodsStore.getPayPeriodAttributes(accountStore.user.pay_period.id);
-await payPeriodsStore.getPayPeriodMetrics(accountStore.user.pay_period.id);
+await payPeriodsStore.getPayPeriodAttributes(
+  accountStore.user.pay_period.id,
+  true
+);
+await payPeriodsStore.getPayPeriodMetrics(
+  accountStore.user.pay_period.id,
+  true
+);
 
 const tabs = [
   {
@@ -34,7 +40,7 @@ const tabs = [
       <template #item="{ item }">
         <UCard>
           <div class="flex flex-col gap-4">
-            <h3 v-if="item.key === 'dashboard'">Dashboard</h3>
+            <MetricsPayPeriodAttributes v-if="item.key === 'dashboard'" />
             <MetricsPayPeriodMetrics
               v-if="item.key === 'metrics' && !accountStore.isRecurringView"
             />
