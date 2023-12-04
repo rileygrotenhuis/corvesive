@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/', [TransactionController::class, 'payPeriodTransactions'])->name('pay-periods.transactions');
             Route::post('deposits', [TransactionController::class, 'payPeriodDeposit'])->name('pay-periods.deposit');
             Route::get('/deposits', [TransactionController::class, 'payPeriodDeposits'])->name('pay-periods.deposits');
+            Route::post('/payment', [TransactionController::class, 'payPeriodPayment'])->name('pay-periods.payments');
             Route::put('{transaction}', [TransactionController::class, 'update'])->name('pay-periods.transactions.update');
             Route::delete('{transaction}', [TransactionController::class, 'destroy'])->name('pay-periods.transactions.destroy');
         });

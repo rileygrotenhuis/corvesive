@@ -60,6 +60,22 @@ class TransactionService
         return $transaction;
     }
 
+    public function makePayPeriodPayment(
+        PayPeriod $payPeriod,
+        int $amount,
+        ?string $notes
+    ): Transaction {
+        $transaction = new Transaction();
+        $transaction->user_id = auth()->user()->id;
+        $transaction->pay_period_id = $payPeriod->id;
+        $transaction->type = 'payment';
+        $transaction->amount = $amount;
+        $transaction->notes = $notes;
+        $transaction->save();
+
+        return $transaction;
+    }
+
     public function updateTransaction(
         PayPeriod $payPeriod,
         Transaction $transaction,
