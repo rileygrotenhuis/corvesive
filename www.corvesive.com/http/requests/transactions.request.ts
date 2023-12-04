@@ -2,7 +2,7 @@ export interface IBudgetTransactionRequest {
   amount: number;
 }
 
-export interface IDeposiTransactionRequest {
+export interface IDepositOrPaymentTransactionRequest {
   amount: number;
   notes: string;
 }

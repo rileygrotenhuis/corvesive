@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import type { IDeposiTransactionRequest } from '~/http/requests/transactions.request';
+import type { IDepositOrPaymentTransactionRequest } from '~/http/requests/transactions.request';
 
 const accountStore = useAccountStore();
-const transactionStore = useTransactionStore();
 const modalStore = useModalStore();
 
-const form: IDeposiTransactionRequest = reactive({
+const form: IDepositOrPaymentTransactionRequest = reactive({
   amount: 0,
   notes: '',
 });

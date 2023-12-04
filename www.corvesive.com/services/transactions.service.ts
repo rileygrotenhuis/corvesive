@@ -1,6 +1,6 @@
 import type {
   IBudgetTransactionRequest,
-  IDeposiTransactionRequest,
+  IDepositOrPaymentTransactionRequest,
 } from '~/http/requests/transactions.request';
 import type { IHttpResource } from '~/http/resources/http.resource';
 import type { ITransactionResource } from '~/http/resources/transactions.resource';
@@ -46,11 +46,22 @@ class TransactionService extends HttpFactory {
 
   async payPeriodDeposit(
     payPeriodId: number,
-    payload: IDeposiTransactionRequest
+    payload: IDepositOrPaymentTransactionRequest
   ): Promise<IHttpResource<ITransactionResource>> {
     return await this.call(
       'POST',
       `/pay-periods/${payPeriodId}/transactions/deposits`,
+      payload
+    );
+  }
+
+  async payPeriodPayment(
+    payPeriodId: number,
+    payload: IDepositOrPaymentTransactionRequest
+  ): Promise<IHttpResource<ITransactionResource>> {
+    return await this.call(
+      'POST',
+      `/pay-periods/${payPeriodId}/transactions/payments`,
       payload
     );
   }
