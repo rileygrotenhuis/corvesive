@@ -17,6 +17,7 @@ class PayPeriodMetricsController
             new PayPeriodMetricsObject(
                 $repository->getPaystubsTotal(),
                 $repository->getDepositsTotal(),
+                $repository->getPaymentsTotal(),
                 $repository->getPayedBillsTotal(),
                 $repository->getUnpayedBillsTotal(),
                 $repository->getBudgetsBalanceTotal(),

@@ -21,7 +21,17 @@ class PayPeriodMetricsRepository
     {
         return $this->payPeriod->transactions()
             ->whereNull('deleted_at')
-            ->where('type', 'transactions.deposit')
+            ->where('transactions.type', 'deposit')
+            ->sum('transactions.amount');
+    }
+
+    public function getPaymentsTotal(): int
+    {
+        return $this->payPeriod->transactions()
+            ->whereNull('deleted_at')
+            ->whereNull('transactions.pay_period_bill_id')
+            ->whereNull('transactions.pay_period_budget_id')
+            ->where('transactions.type', 'payment')
             ->sum('transactions.amount');
     }
 
