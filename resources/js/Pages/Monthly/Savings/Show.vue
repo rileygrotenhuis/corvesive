@@ -1,21 +1,21 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
-import InputError from '@/Components/InputError.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
+  import { Head, useForm } from '@inertiajs/vue3'
+  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+  import InputLabel from '@/Components/InputLabel.vue'
+  import TextInput from '@/Components/TextInput.vue'
+  import InputError from '@/Components/InputError.vue'
+  import PrimaryButton from '@/Components/PrimaryButton.vue'
+  import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue'
 
-const props = defineProps({
-  monthlySaving: Object,
-});
+  const props = defineProps({
+    monthlySaving: Object
+  })
 
-const form = useForm({
-  name: props.monthlySaving.name,
-  amount: props.monthlySaving.amount_in_cents / 100,
-  notes: props.monthlySaving.notes,
-});
+  const form = useForm({
+    name: props.monthlySaving.name,
+    amount: props.monthlySaving.amount_in_cents / 100,
+    notes: props.monthlySaving.notes
+  })
 </script>
 
 <template>

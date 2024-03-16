@@ -1,18 +1,18 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { router } from '@inertiajs/vue3';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
+  import { Head, Link } from '@inertiajs/vue3'
+  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+  import { router } from '@inertiajs/vue3'
+  import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue'
 
-defineProps({
-  monthlyBills: Array,
-});
+  defineProps({
+    monthlyBills: Array
+  })
 
-const columns = ['Issuer', 'Name', 'Amount', 'Due Day of Month', 'Notes'];
+  const columns = ['Issuer', 'Name', 'Amount', 'Due Day of Month', 'Notes']
 
-const gotoBill = (bill) => {
-  router.visit(route('bills.show', bill.id));
-};
+  const gotoBill = (bill) => {
+    router.visit(route('bills.show', bill.id))
+  }
 </script>
 
 <template>

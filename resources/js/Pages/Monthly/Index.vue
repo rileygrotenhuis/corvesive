@@ -1,13 +1,13 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import MonthlyExpenseBreakdownChart from '@/Pages/Monthly/Partials/MonthlyExpenseBreakdownChart.vue';
-import MonthlyExpenseBreakdownCard from '@/Pages/Monthly/Partials/MonthlyExpenseBreakdownCard.vue';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
+  import { Head } from '@inertiajs/vue3'
+  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+  import MonthlyExpenseBreakdownChart from '@/Pages/Monthly/Partials/MonthlyExpenseBreakdownChart.vue'
+  import MonthlyExpenseBreakdownCard from '@/Pages/Monthly/Partials/MonthlyExpenseBreakdownCard.vue'
+  import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue'
 
-const props = defineProps({
-  monthlyExpenseBreakdown: Object,
-});
+  const props = defineProps({
+    monthlyExpenseBreakdown: Object
+  })
 </script>
 
 <template>

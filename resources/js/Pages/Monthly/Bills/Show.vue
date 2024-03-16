@@ -1,23 +1,23 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import InputError from '@/Components/InputError.vue';
-import TextInput from '@/Components/TextInput.vue';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
+  import { Head, useForm } from '@inertiajs/vue3'
+  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+  import PrimaryButton from '@/Components/PrimaryButton.vue'
+  import InputLabel from '@/Components/InputLabel.vue'
+  import InputError from '@/Components/InputError.vue'
+  import TextInput from '@/Components/TextInput.vue'
+  import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue'
 
-const props = defineProps({
-  monthlyBill: Object,
-});
+  const props = defineProps({
+    monthlyBill: Object
+  })
 
-const form = useForm({
-  issuer: props.monthlyBill.issuer,
-  name: props.monthlyBill.name,
-  amount: props.monthlyBill.amount_in_cents / 100,
-  due_day_of_month: props.monthlyBill.due_day_of_month,
-  notes: props.monthlyBill.notes,
-});
+  const form = useForm({
+    issuer: props.monthlyBill.issuer,
+    name: props.monthlyBill.name,
+    amount: props.monthlyBill.amount_in_cents / 100,
+    due_day_of_month: props.monthlyBill.due_day_of_month,
+    notes: props.monthlyBill.notes
+  })
 </script>
 
 <template>
@@ -43,9 +43,7 @@ const form = useForm({
             </header>
 
             <form
-              @submit.prevent="
-                form.put(route('bills.update', monthlyBill.id))
-              "
+              @submit.prevent="form.put(route('bills.update', monthlyBill.id))"
               class="mt-6 space-y-6"
             >
               <div>

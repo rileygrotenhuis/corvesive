@@ -1,7 +1,7 @@
 <script setup>
-defineProps({
-  monthlyExpenseBreakdown: Object,
-});
+  defineProps({
+    monthlyExpenseBreakdown: Object
+  })
 </script>
 
 <template>

@@ -1,21 +1,21 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
-import InputError from '@/Components/InputError.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
+  import { Head, useForm } from '@inertiajs/vue3'
+  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+  import InputLabel from '@/Components/InputLabel.vue'
+  import TextInput from '@/Components/TextInput.vue'
+  import InputError from '@/Components/InputError.vue'
+  import PrimaryButton from '@/Components/PrimaryButton.vue'
+  import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue'
 
-const props = defineProps({
-  monthlyBudget: Object,
-});
+  const props = defineProps({
+    monthlyBudget: Object
+  })
 
-const form = useForm({
-  name: props.monthlyBudget.name,
-  total_balance: props.monthlyBudget.total_balance_in_cents / 100,
-  notes: props.monthlyBudget.notes,
-});
+  const form = useForm({
+    name: props.monthlyBudget.name,
+    total_balance: props.monthlyBudget.total_balance_in_cents / 100,
+    notes: props.monthlyBudget.notes
+  })
 </script>
 
 <template>

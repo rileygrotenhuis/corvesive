@@ -1,13 +1,13 @@
 <script setup>
-import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+  import { ref } from 'vue'
+  import ApplicationLogo from '@/Components/ApplicationLogo.vue'
+  import Dropdown from '@/Components/Dropdown.vue'
+  import DropdownLink from '@/Components/DropdownLink.vue'
+  import NavLink from '@/Components/NavLink.vue'
+  import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
+  import { Link } from '@inertiajs/vue3'
 
-const showingNavigationDropdown = ref(false);
+  const showingNavigationDropdown = ref(false)
 </script>
 
 <template>
@@ -31,18 +31,18 @@ const showingNavigationDropdown = ref(false);
 
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                  <NavLink
-                      :href="route('expenses.index')"
-                      :active="route().current('expenses.index')"
-                  >
-                      Expenses
-                  </NavLink>
-                  <NavLink
-                      :href="route('paystubs.index')"
-                      :active="route().current('paystubs.index')"
-                  >
-                      Income
-                  </NavLink>
+                <NavLink
+                  :href="route('expenses.index')"
+                  :active="route().current('expenses.index')"
+                >
+                  Expenses
+                </NavLink>
+                <NavLink
+                  :href="route('paystubs.index')"
+                  :active="route().current('paystubs.index')"
+                >
+                  Income
+                </NavLink>
               </div>
             </div>
 
@@ -105,7 +105,7 @@ const showingNavigationDropdown = ref(false);
                   <path
                     :class="{
                       hidden: showingNavigationDropdown,
-                      'inline-flex': !showingNavigationDropdown,
+                      'inline-flex': !showingNavigationDropdown
                     }"
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -115,7 +115,7 @@ const showingNavigationDropdown = ref(false);
                   <path
                     :class="{
                       hidden: !showingNavigationDropdown,
-                      'inline-flex': showingNavigationDropdown,
+                      'inline-flex': showingNavigationDropdown
                     }"
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -132,23 +132,23 @@ const showingNavigationDropdown = ref(false);
         <div
           :class="{
             block: showingNavigationDropdown,
-            hidden: !showingNavigationDropdown,
+            hidden: !showingNavigationDropdown
           }"
           class="sm:hidden"
         >
           <div class="pt-2 pb-3 space-y-1">
-              <ResponsiveNavLink
-                  :href="route('expenses.index')"
-                  :active="route().current('expenses.index')"
-              >
-                  Expenses
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
-                  :href="route('paystubs.index')"
-                  :active="route().current('paystubs.index')"
-              >
-                  Income
-              </ResponsiveNavLink>
+            <ResponsiveNavLink
+              :href="route('expenses.index')"
+              :active="route().current('expenses.index')"
+            >
+              Expenses
+            </ResponsiveNavLink>
+            <ResponsiveNavLink
+              :href="route('paystubs.index')"
+              :active="route().current('paystubs.index')"
+            >
+              Income
+            </ResponsiveNavLink>
           </div>
 
           <!-- Responsive Settings Options -->
