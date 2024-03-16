@@ -11,15 +11,15 @@ const isActive = (route) => {
     class="flex flex-col md:flex-row justify-center md:justify-start gap-8 md:gap-16"
   >
     <Link
-      :href="route('monthly.index')"
+      :href="route('expenses.index')"
       class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight"
     >
-      Monthly Expenses
+      Expenses
     </Link>
     <ul class="flex justify-center items-center gap-16">
       <li>
         <Link
-          :href="route('monthly.bills.index')"
+          :href="route('bills.index')"
           class="font-semibold text-gray-400 leading-tight"
           :class="{ 'text-gray-800 dark:text-gray-100': isActive('bills') }"
         >
@@ -28,7 +28,7 @@ const isActive = (route) => {
       </li>
       <li>
         <Link
-          :href="route('monthly.budgets.index')"
+          :href="route('budgets.index')"
           class="font-semibold text-gray-400 leading-tight"
           :class="{ 'text-gray-800 dark:text-gray-100': isActive('budgets') }"
         >
@@ -37,7 +37,7 @@ const isActive = (route) => {
       </li>
       <li>
         <Link
-          :href="route('monthly.savings.index')"
+          :href="route('savings.index')"
           class="font-semibold text-gray-400 leading-tight"
           :class="{ 'text-gray-800 dark:text-gray-100': isActive('savings') }"
         >

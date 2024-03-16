@@ -39,7 +39,7 @@ const form = useForm({
             </header>
 
             <form
-              @submit.prevent="form.post(route('monthly.bills.store'))"
+              @submit.prevent="form.post(route('bills.store'))"
               class="mt-6 space-y-6"
             >
               <div>

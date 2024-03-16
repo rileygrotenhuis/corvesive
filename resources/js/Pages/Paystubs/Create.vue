@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import PaystubHeader from "@/Pages/Paystubs/Partials/PaystubHeader.vue";
 
 const form = useForm({
     issuer: '',
@@ -19,16 +20,7 @@ const form = useForm({
 
     <AuthenticatedLayout>
         <template #header>
-            <div
-                class="flex flex-col md:flex-row justify-center md:justify-start gap-8 md:gap-16"
-            >
-                <Link
-                    :href="route('paystubs.index')"
-                    class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight"
-                >
-                    Paystubs
-                </Link>
-            </div>
+            <PaystubHeader />
         </template>
 
         <div class="py-12">

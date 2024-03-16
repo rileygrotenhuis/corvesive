@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateMonthlySavingRequest;
 use App\Models\MonthlySaving;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -32,12 +33,12 @@ class MonthlySavingController extends Controller
             'notes' => $request->input('notes'),
         ]);
 
-        return to_route('monthly.savings.index');
+        return to_route('savings.index');
     }
 
     public function show(MonthlySaving $monthlySaving): Response
     {
-        $this->authorize('isOwner', $monthlySaving);
+        Gate::authorize('isOwner', $monthlySaving);
 
         return Inertia::render('Monthly/Savings/Show', [
             'monthlySaving' => $monthlySaving,
@@ -46,7 +47,7 @@ class MonthlySavingController extends Controller
 
     public function update(UpdateMonthlySavingRequest $request, MonthlySaving $monthlySaving): RedirectResponse
     {
-        $this->authorize('isOwner', $monthlySaving);
+        Gate::authorize('isOwner', $monthlySaving);
 
         $monthlySaving->update([
             'name' => $request->input('name'),
@@ -54,7 +55,7 @@ class MonthlySavingController extends Controller
             'notes' => $request->input('notes'),
         ]);
 
-        return to_route('monthly.savings.show', $monthlySaving);
+        return to_route('savings.show', $monthlySaving);
     }
 
     public function destroy(): RedirectResponse

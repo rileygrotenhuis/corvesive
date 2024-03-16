@@ -2,17 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdatePaystubRequest extends FormRequest
+class UpdatePaystubRequest extends StorePaystubRequest
 {
-    public function rules(): array
-    {
-        return [
-            'issuer' => ['required', 'string', 'max:255'],
-            'amount' => ['required', 'numeric', 'min:0'],
-            'issued_day_of_month' => ['required', 'integer', 'min:1', 'max:31'],
-            'notes' => ['nullable', 'string', 'max:255'],
-        ];
-    }
 }

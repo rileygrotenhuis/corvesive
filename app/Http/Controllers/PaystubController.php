@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePaystubRequest;
 use App\Models\Paystub;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -38,7 +39,7 @@ class PaystubController extends Controller
 
     public function show(Paystub $paystub): Response
     {
-        $this->authorize('isOwner', $paystub);
+        Gate::authorize('isOwner', $paystub);
 
         return Inertia::render('Paystubs/Show', [
             'paystub' => $paystub,
@@ -47,7 +48,7 @@ class PaystubController extends Controller
 
     public function update(UpdatePaystubRequest $request, Paystub $paystub): RedirectResponse
     {
-        $this->authorize('isOwner', $paystub);
+        Gate::authorize('isOwner', $paystub);
 
         $paystub->update([
             'issuer' => $request->input('issuer'),

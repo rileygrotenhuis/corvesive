@@ -37,7 +37,7 @@ const form = useForm({
             </header>
 
             <form
-              @submit.prevent="form.post(route('monthly.savings.store'))"
+              @submit.prevent="form.post(route('savings.store'))"
               class="mt-6 space-y-6"
             >
               <div>

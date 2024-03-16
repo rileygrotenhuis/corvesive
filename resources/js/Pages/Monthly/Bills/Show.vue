@@ -44,7 +44,7 @@ const form = useForm({
 
             <form
               @submit.prevent="
-                form.put(route('monthly.bills.update', monthlyBill.id))
+                form.put(route('bills.update', monthlyBill.id))
               "
               class="mt-6 space-y-6"
             >

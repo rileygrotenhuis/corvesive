@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateMonthlyBillRequest;
 use App\Models\MonthlyBill;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -34,12 +35,12 @@ class MonthlyBillController extends Controller
             'notes' => $request->input('notes'),
         ]);
 
-        return to_route('monthly.bills.index');
+        return to_route('bills.index');
     }
 
     public function show(MonthlyBill $monthlyBill): Response
     {
-        $this->authorize('isOwner', $monthlyBill);
+        Gate::authorize('isOwner', $monthlyBill);
 
         return Inertia::render('Monthly/Bills/Show', [
             'monthlyBill' => $monthlyBill,
@@ -48,7 +49,7 @@ class MonthlyBillController extends Controller
 
     public function update(UpdateMonthlyBillRequest $request, MonthlyBill $monthlyBill): RedirectResponse
     {
-        $this->authorize('isOwner', $monthlyBill);
+        Gate::authorize('isOwner', $monthlyBill);
 
         $monthlyBill->update([
             'issuer' => $request->input('issuer'),
@@ -58,7 +59,7 @@ class MonthlyBillController extends Controller
             'notes' => $request->input('notes'),
         ]);
 
-        return to_route('monthly.bills.show', $monthlyBill);
+        return to_route('bills.show', $monthlyBill);
     }
 
     public function destroy(): RedirectResponse

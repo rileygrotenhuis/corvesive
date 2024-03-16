@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateMonthlyBudgetRequest;
 use App\Models\MonthlyBudget;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -32,12 +33,12 @@ class MonthlyBudgetController extends Controller
             'notes' => $request->input('notes'),
         ]);
 
-        return to_route('monthly.budgets.index');
+        return to_route('budgets.index');
     }
 
     public function show(MonthlyBudget $monthlyBudget): Response
     {
-        $this->authorize('isOwner', $monthlyBudget);
+        Gate::authorize('isOwner', $monthlyBudget);
 
         return Inertia::render('Monthly/Budgets/Show', [
             'monthlyBudget' => $monthlyBudget,
@@ -46,7 +47,7 @@ class MonthlyBudgetController extends Controller
 
     public function update(UpdateMonthlyBudgetRequest $request, MonthlyBudget $monthlyBudget): RedirectResponse
     {
-        $this->authorize('isOwner', $monthlyBudget);
+        Gate::authorize('isOwner', $monthlyBudget);
 
         $monthlyBudget->update([
             'name' => $request->input('name'),
@@ -54,7 +55,7 @@ class MonthlyBudgetController extends Controller
             'notes' => $request->input('notes'),
         ]);
 
-        return to_route('monthly.budgets.show', $monthlyBudget);
+        return to_route('budgets.show', $monthlyBudget);
     }
 
     public function destroy(): RedirectResponse

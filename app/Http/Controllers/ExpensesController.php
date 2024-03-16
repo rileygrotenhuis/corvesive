@@ -6,7 +6,7 @@ use App\Repositories\MonthlyExpenseBreakdown;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class MonthlyController extends Controller
+class ExpensesController extends Controller
 {
     public function __invoke(Request $request)
     {

@@ -22,7 +22,7 @@ const showingNavigationDropdown = ref(false);
             <div class="flex">
               <!-- Logo -->
               <div class="shrink-0 flex items-center">
-                <Link :href="route('monthly.index')">
+                <Link :href="route('expenses.index')">
                   <ApplicationLogo
                     class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
                   />
@@ -31,12 +31,18 @@ const showingNavigationDropdown = ref(false);
 
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <NavLink
-                  :href="route('monthly.index')"
-                  :active="route().current('monthly.index')"
-                >
-                  Monthly
-                </NavLink>
+                  <NavLink
+                      :href="route('expenses.index')"
+                      :active="route().current('expenses.index')"
+                  >
+                      Expenses
+                  </NavLink>
+                  <NavLink
+                      :href="route('paystubs.index')"
+                      :active="route().current('paystubs.index')"
+                  >
+                      Income
+                  </NavLink>
               </div>
             </div>
 
@@ -131,12 +137,18 @@ const showingNavigationDropdown = ref(false);
           class="sm:hidden"
         >
           <div class="pt-2 pb-3 space-y-1">
-            <ResponsiveNavLink
-              :href="route('monthly.index')"
-              :active="route().current('monthly.index')"
-            >
-              Monthly
-            </ResponsiveNavLink>
+              <ResponsiveNavLink
+                  :href="route('expenses.index')"
+                  :active="route().current('expenses.index')"
+              >
+                  Expenses
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                  :href="route('paystubs.index')"
+                  :active="route().current('paystubs.index')"
+              >
+                  Income
+              </ResponsiveNavLink>
           </div>
 
           <!-- Responsive Settings Options -->
