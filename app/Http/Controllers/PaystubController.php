@@ -26,14 +26,12 @@ class PaystubController extends Controller
 
     public function store(StorePaystubRequest $request): RedirectResponse
     {
-        foreach ($request->input('issued_days_of_month') as $day) {
-            $request->user()->paystubs()->create([
-                'issuer' => $request->input('issuer'),
-                'amount_in_cents' => $request->input('amount') * 100,
-                'issued_day_of_month' => $day,
-                'notes' => $request->input('notes'),
-            ]);
-        }
+        $request->user()->paystubs()->create([
+            'issuer' => $request->input('issuer'),
+            'amount_in_cents' => $request->input('amount') * 100,
+            'issued_day_of_month' => $request->input('issued_day_of_month'),
+            'notes' => $request->input('notes'),
+        ]);
 
         return to_route('paystubs.index');
     }
