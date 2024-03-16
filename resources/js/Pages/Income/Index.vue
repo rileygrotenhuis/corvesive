@@ -4,7 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import IncomeHeader from '@/Pages/Income/Partials/IncomeHeader.vue';
 
 const props = defineProps({
-  monthlyExpenseBreakdown: Object,
+  incomeBreakdown: Object,
 });
 </script>
 
@@ -19,7 +19,7 @@ const props = defineProps({
     <div
       class="py-12 flex flex-col md:flex-row justify-center items-center gap-12"
     >
-      <h1>Content will go here</h1>
+      {{ JSON.stringify(incomeBreakdown) }}
     </div>
   </AuthenticatedLayout>
 </template>
