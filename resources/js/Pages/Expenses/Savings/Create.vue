@@ -5,17 +5,17 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
+import MonthlyExpenseHeader from '@/Pages/Expenses/Partials/MonthlyExpenseHeader.vue';
 
 const form = useForm({
   name: '',
-  total_balance: '',
+  amount: '',
   notes: '',
 });
 </script>
 
 <template>
-  <Head title="Budgets" />
+  <Head title="Savings" />
 
   <AuthenticatedLayout>
     <template #header>
@@ -28,16 +28,16 @@ const form = useForm({
           <section>
             <header>
               <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                New Monthly Budget
+                New Monthly Saving
               </h2>
 
               <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Add a new monthly budget to keep track of.
+                Add a new monthly saving to keep track of.
               </p>
             </header>
 
             <form
-              @submit.prevent="form.post(route('budgets.store'))"
+              @submit.prevent="form.post(route('savings.store'))"
               class="mt-6 space-y-6"
             >
               <div>
@@ -55,18 +55,18 @@ const form = useForm({
               </div>
 
               <div>
-                <InputLabel for="total_balance" value="Total Balance" />
+                <InputLabel for="amount" value="Amount" />
 
                 <TextInput
-                  id="total_balance"
+                  id="amount"
                   type="text"
                   class="mt-1 block w-full"
-                  v-model="form.total_balance"
+                  v-model="form.amount"
                   pattern="[0-9]+(\.[0-9]{1,2})?"
                   required
                 />
 
-                <InputError class="mt-2" :message="form.errors.total_balance" />
+                <InputError class="mt-2" :message="form.errors.amount" />
               </div>
 
               <div>

@@ -2,7 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { router } from '@inertiajs/vue3';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
+import MonthlyExpenseHeader from '@/Pages/Expenses/Partials/MonthlyExpenseHeader.vue';
 
 defineProps({
   monthlySavings: Array,

@@ -5,16 +5,12 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
-
-const props = defineProps({
-  monthlyBudget: Object,
-});
+import MonthlyExpenseHeader from '@/Pages/Expenses/Partials/MonthlyExpenseHeader.vue';
 
 const form = useForm({
-  name: props.monthlyBudget.name,
-  total_balance: props.monthlyBudget.total_balance_in_cents / 100,
-  notes: props.monthlyBudget.notes,
+  name: '',
+  total_balance: '',
+  notes: '',
 });
 </script>
 
@@ -32,18 +28,16 @@ const form = useForm({
           <section>
             <header>
               <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Monthly Budget Settings
+                New Monthly Budget
               </h2>
 
               <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Update the settings for this monthly budget.
+                Add a new monthly budget to keep track of.
               </p>
             </header>
 
             <form
-              @submit.prevent="
-                form.put(route('budgets.update', monthlyBudget.id))
-              "
+              @submit.prevent="form.post(route('budgets.store'))"
               class="mt-6 space-y-6"
             >
               <div>

@@ -1,25 +1,30 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
+import IncomeHeader from '@/Pages/Income/Partials/IncomeHeader.vue';
+
+const props = defineProps({
+  paystub: Object,
+});
 
 const form = useForm({
-  name: '',
-  amount: '',
-  notes: '',
+  issuer: props.paystub.issuer,
+  amount: props.paystub.amount_in_cents / 100,
+  issued_day_of_month: props.paystub.issued_day_of_month,
+  notes: props.paystub.notes,
 });
 </script>
 
 <template>
-  <Head title="Savings" />
+  <Head title="Paystubs" />
 
   <AuthenticatedLayout>
     <template #header>
-      <MonthlyExpenseHeader />
+      <IncomeHeader />
     </template>
 
     <div class="py-12">
@@ -28,30 +33,31 @@ const form = useForm({
           <section>
             <header>
               <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                New Monthly Saving
+                Paystub Settings
               </h2>
 
               <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Add a new monthly saving to keep track of.
+                Update the settings for this paystub.
               </p>
             </header>
 
             <form
-              @submit.prevent="form.post(route('savings.store'))"
+              @submit.prevent="form.put(route('paystubs.update', paystub.id))"
               class="mt-6 space-y-6"
             >
               <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="issuer" value="Issuer" />
 
                 <TextInput
-                  id="name"
+                  id="issuer"
                   type="text"
                   class="mt-1 block w-full"
-                  v-model="form.name"
+                  v-model="form.issuer"
                   required
+                  autofocus
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.issuer" />
               </div>
 
               <div>
@@ -67,6 +73,26 @@ const form = useForm({
                 />
 
                 <InputError class="mt-2" :message="form.errors.amount" />
+              </div>
+
+              <div>
+                <InputLabel
+                  for="issued_day_of_month"
+                  value="Issued Day of Month"
+                />
+
+                <TextInput
+                  id="issued_day_of_month"
+                  type="text"
+                  class="mt-1 block w-full"
+                  v-model="form.issued_day_of_month"
+                  required
+                />
+
+                <InputError
+                  class="mt-2"
+                  :message="form.errors.issued_day_of_month"
+                />
               </div>
 
               <div>

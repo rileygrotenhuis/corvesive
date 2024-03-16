@@ -12,7 +12,7 @@ class ExpensesController extends Controller
     {
         $repository = new MonthlyExpenseBreakdown($request->user());
 
-        return Inertia::render('Monthly/Index', [
+        return Inertia::Render('Expenses/Index', [
             'monthlyExpenseBreakdown' => $repository->getMonthlyExpensebreakdown(),
         ]);
     }

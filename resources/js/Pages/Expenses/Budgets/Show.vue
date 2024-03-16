@@ -5,19 +5,21 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
+import MonthlyExpenseHeader from '@/Pages/Expenses/Partials/MonthlyExpenseHeader.vue';
+
+const props = defineProps({
+  monthlyBudget: Object,
+});
 
 const form = useForm({
-  issuer: '',
-  name: '',
-  amount: '',
-  due_day_of_month: '',
-  notes: '',
+  name: props.monthlyBudget.name,
+  total_balance: props.monthlyBudget.total_balance_in_cents / 100,
+  notes: props.monthlyBudget.notes,
 });
 </script>
 
 <template>
-  <Head title="Bills" />
+  <Head title="Budgets" />
 
   <AuthenticatedLayout>
     <template #header>
@@ -30,33 +32,20 @@ const form = useForm({
           <section>
             <header>
               <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                New Monthly Bill
+                Monthly Budget Settings
               </h2>
 
               <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Add a new monthly bill to keep track of.
+                Update the settings for this monthly budget.
               </p>
             </header>
 
             <form
-              @submit.prevent="form.post(route('bills.store'))"
+              @submit.prevent="
+                form.put(route('budgets.update', monthlyBudget.id))
+              "
               class="mt-6 space-y-6"
             >
-              <div>
-                <InputLabel for="issuer" value="Issuer" />
-
-                <TextInput
-                  id="issuer"
-                  type="text"
-                  class="mt-1 block w-full"
-                  v-model="form.issuer"
-                  required
-                  autofocus
-                />
-
-                <InputError class="mt-2" :message="form.errors.issuer" />
-              </div>
-
               <div>
                 <InputLabel for="name" value="Name" />
 
@@ -72,35 +61,18 @@ const form = useForm({
               </div>
 
               <div>
-                <InputLabel for="amount" value="Amount" />
+                <InputLabel for="total_balance" value="Total Balance" />
 
                 <TextInput
-                  id="amount"
+                  id="total_balance"
                   type="text"
                   class="mt-1 block w-full"
-                  v-model="form.amount"
+                  v-model="form.total_balance"
                   pattern="[0-9]+(\.[0-9]{1,2})?"
                   required
                 />
 
-                <InputError class="mt-2" :message="form.errors.amount" />
-              </div>
-
-              <div>
-                <InputLabel for="due_day_of_month" value="Due Day of Month" />
-
-                <TextInput
-                  id="due_day_of_month"
-                  type="text"
-                  class="mt-1 block w-full"
-                  v-model="form.due_day_of_month"
-                  required
-                />
-
-                <InputError
-                  class="mt-2"
-                  :message="form.errors.due_day_of_month"
-                />
+                <InputError class="mt-2" :message="form.errors.total_balance" />
               </div>
 
               <div>

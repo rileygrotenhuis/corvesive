@@ -1,9 +1,9 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import MonthlyExpenseBreakdownChart from '@/Pages/Monthly/Partials/MonthlyExpenseBreakdownChart.vue';
-import MonthlyExpenseBreakdownCard from '@/Pages/Monthly/Partials/MonthlyExpenseBreakdownCard.vue';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
+import MonthlyExpenseBreakdownChart from '@/Pages/Expenses/Partials/MonthlyExpenseBreakdownChart.vue';
+import MonthlyExpenseBreakdownCard from '@/Pages/Expenses/Partials/MonthlyExpenseBreakdownCard.vue';
+import MonthlyExpenseHeader from '@/Pages/Expenses/Partials/MonthlyExpenseHeader.vue';
 
 const props = defineProps({
   monthlyExpenseBreakdown: Object,

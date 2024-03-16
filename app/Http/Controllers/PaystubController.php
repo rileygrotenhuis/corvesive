@@ -15,14 +15,14 @@ class PaystubController extends Controller
 {
     public function index(Request $request): Response
     {
-        return Inertia::render('Paystubs/Index', [
+        return Inertia::Render('Income/Paystubs/Index', [
             'paystubs' => $request->user()->paystubs,
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('Paystubs/Create');
+        return Inertia::Render('Income/Paystubs/Create');
     }
 
     public function store(StorePaystubRequest $request): RedirectResponse
@@ -41,7 +41,7 @@ class PaystubController extends Controller
     {
         Gate::authorize('isOwner', $paystub);
 
-        return Inertia::render('Paystubs/Show', [
+        return Inertia::Render('Income/Paystubs/Show', [
             'paystub' => $paystub,
         ]);
     }

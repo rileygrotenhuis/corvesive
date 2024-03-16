@@ -1,30 +1,31 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
-import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import PaystubHeader from '@/Pages/Paystubs/Partials/PaystubHeader.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import InputError from '@/Components/InputError.vue';
+import TextInput from '@/Components/TextInput.vue';
+import MonthlyExpenseHeader from '@/Pages/Expenses/Partials/MonthlyExpenseHeader.vue';
 
 const props = defineProps({
-  paystub: Object,
+  monthlyBill: Object,
 });
 
 const form = useForm({
-  issuer: props.paystub.issuer,
-  amount: props.paystub.amount_in_cents / 100,
-  issued_day_of_month: props.paystub.issued_day_of_month,
-  notes: props.paystub.notes,
+  issuer: props.monthlyBill.issuer,
+  name: props.monthlyBill.name,
+  amount: props.monthlyBill.amount_in_cents / 100,
+  due_day_of_month: props.monthlyBill.due_day_of_month,
+  notes: props.monthlyBill.notes,
 });
 </script>
 
 <template>
-  <Head title="Paystubs" />
+  <Head title="Bills" />
 
   <AuthenticatedLayout>
     <template #header>
-      <PaystubHeader />
+      <MonthlyExpenseHeader />
     </template>
 
     <div class="py-12">
@@ -33,16 +34,16 @@ const form = useForm({
           <section>
             <header>
               <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Paystub Settings
+                Monthly Bill Settings
               </h2>
 
               <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Update the settings for this paystub.
+                Update the settings for this monthly bill.
               </p>
             </header>
 
             <form
-              @submit.prevent="form.put(route('paystubs.update', paystub.id))"
+              @submit.prevent="form.put(route('bills.update', monthlyBill.id))"
               class="mt-6 space-y-6"
             >
               <div>
@@ -61,6 +62,20 @@ const form = useForm({
               </div>
 
               <div>
+                <InputLabel for="name" value="Name" />
+
+                <TextInput
+                  id="name"
+                  type="text"
+                  class="mt-1 block w-full"
+                  v-model="form.name"
+                  required
+                />
+
+                <InputError class="mt-2" :message="form.errors.name" />
+              </div>
+
+              <div>
                 <InputLabel for="amount" value="Amount" />
 
                 <TextInput
@@ -76,22 +91,19 @@ const form = useForm({
               </div>
 
               <div>
-                <InputLabel
-                  for="issued_day_of_month"
-                  value="Issued Day of Month"
-                />
+                <InputLabel for="due_day_of_month" value="Due Day of Month" />
 
                 <TextInput
-                  id="issued_day_of_month"
+                  id="due_day_of_month"
                   type="text"
                   class="mt-1 block w-full"
-                  v-model="form.issued_day_of_month"
+                  v-model="form.due_day_of_month"
                   required
                 />
 
                 <InputError
                   class="mt-2"
-                  :message="form.errors.issued_day_of_month"
+                  :message="form.errors.due_day_of_month"
                 />
               </div>
 

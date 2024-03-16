@@ -5,7 +5,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import PaystubHeader from '@/Pages/Paystubs/Partials/PaystubHeader.vue';
+import IncomeHeader from '@/Pages/Income/Partials/IncomeHeader.vue';
 
 const form = useForm({
   issuer: '',
@@ -20,7 +20,7 @@ const form = useForm({
 
   <AuthenticatedLayout>
     <template #header>
-      <PaystubHeader />
+      <IncomeHeader />
     </template>
 
     <div class="py-12">
