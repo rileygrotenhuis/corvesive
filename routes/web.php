@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepositController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\MonthlyBillController;
 use App\Http\Controllers\MonthlyBudgetController;
@@ -32,7 +33,14 @@ Route::middleware('auth')->group(function () {
             Route::delete('/{paystub}', [PaystubController::class, 'destroy'])->name('paystubs.destroy');
         });
 
-        // TODO: Deposits
+        Route::prefix('deposits')->group(function () {
+            Route::get('/', [DepositController::class, 'index'])->name('deposits.index');
+            Route::get('/create', [DepositController::class, 'create'])->name('deposits.create');
+            Route::post('/', [DepositController::class, 'store'])->name('deposits.store');
+            Route::get('/{deposit}', [DepositController::class, 'show'])->name('deposits.show');
+            Route::put('/{deposit}', [DepositController::class, 'update'])->name('deposits.update');
+            Route::delete('/{deposit}', [DepositController::class, 'destroy'])->name('deposits.destroy');
+        });
     });
 
     Route::prefix('expenses')->group(function () {

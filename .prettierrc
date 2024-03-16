@@ -1,9 +1,6 @@
 {
-    "tabWidth": 2,
-    "semi": false,
+    "semi": true,
     "singleQuote": true,
-    "trailingComma": "none",
-    "bracketSpacing": true,
-    "arrowParens": "always",
-    "vueIndentScriptAndStyle": true
+    "tabWidth": 2,
+    "trailingComma": "es5"
 }

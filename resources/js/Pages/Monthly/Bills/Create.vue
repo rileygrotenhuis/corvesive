@@ -1,19 +1,19 @@
 <script setup>
-  import { Head, useForm } from '@inertiajs/vue3'
-  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-  import InputLabel from '@/Components/InputLabel.vue'
-  import TextInput from '@/Components/TextInput.vue'
-  import InputError from '@/Components/InputError.vue'
-  import PrimaryButton from '@/Components/PrimaryButton.vue'
-  import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue'
+import { Head, useForm } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/InputError.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
 
-  const form = useForm({
-    issuer: '',
-    name: '',
-    amount: '',
-    due_day_of_month: '',
-    notes: ''
-  })
+const form = useForm({
+  issuer: '',
+  name: '',
+  amount: '',
+  due_day_of_month: '',
+  notes: '',
+});
 </script>
 
 <template>

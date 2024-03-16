@@ -1,18 +1,18 @@
 <script setup>
-  import { Head, Link, useForm } from '@inertiajs/vue3'
-  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-  import InputLabel from '@/Components/InputLabel.vue'
-  import TextInput from '@/Components/TextInput.vue'
-  import InputError from '@/Components/InputError.vue'
-  import PrimaryButton from '@/Components/PrimaryButton.vue'
-  import PaystubHeader from '@/Pages/Paystubs/Partials/PaystubHeader.vue'
+import { Head, useForm } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/InputError.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import PaystubHeader from '@/Pages/Paystubs/Partials/PaystubHeader.vue';
 
-  const form = useForm({
-    issuer: '',
-    amount: '',
-    issued_day_of_month: '',
-    notes: ''
-  })
+const form = useForm({
+  issuer: '',
+  amount: '',
+  issued_day_of_month: '',
+  notes: '',
+});
 </script>
 
 <template>

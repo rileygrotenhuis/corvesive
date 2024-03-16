@@ -1,9 +1,9 @@
 <script setup>
-  import { Link } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3';
 
-  const isActive = (route) => {
-    return window.location.pathname.includes(route)
-  }
+const isActive = (route) => {
+  return window.location.pathname.includes(route);
+};
 </script>
 
 <template>
@@ -24,6 +24,15 @@
           :class="{ 'text-gray-800 dark:text-gray-100': isActive('paystubs') }"
         >
           Paystubs
+        </Link>
+      </li>
+      <li>
+        <Link
+          :href="route('deposits.index')"
+          class="font-semibold text-gray-400 leading-tight"
+          :class="{ 'text-gray-800 dark:text-gray-100': isActive('deposits') }"
+        >
+          Deposits
         </Link>
       </li>
     </ul>

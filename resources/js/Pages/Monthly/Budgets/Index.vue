@@ -1,18 +1,18 @@
 <script setup>
-  import { Head, Link } from '@inertiajs/vue3'
-  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-  import { router } from '@inertiajs/vue3'
-  import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue'
+import { Head, Link } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { router } from '@inertiajs/vue3';
+import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
 
-  defineProps({
-    monthlyBudgets: Array
-  })
+defineProps({
+  monthlyBudgets: Array,
+});
 
-  const columns = ['Name', 'Total Balance', 'Notes']
+const columns = ['Name', 'Total Balance', 'Notes'];
 
-  const gotoBudget = (budget) => {
-    router.visit(route('budgets.show', budget.id))
-  }
+const gotoBudget = (budget) => {
+  router.visit(route('budgets.show', budget.id));
+};
 </script>
 
 <template>

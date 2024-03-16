@@ -5,25 +5,20 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import MonthlyExpenseHeader from '@/Pages/Monthly/Partials/MonthlyExpenseHeader.vue';
-
-const props = defineProps({
-  monthlySaving: Object,
-});
+import PaystubHeader from '@/Pages/Paystubs/Partials/PaystubHeader.vue';
 
 const form = useForm({
-  name: props.monthlySaving.name,
-  amount: props.monthlySaving.amount_in_cents / 100,
-  notes: props.monthlySaving.notes,
+  amount: '',
+  notes: '',
 });
 </script>
 
 <template>
-  <Head title="Savings" />
+  <Head title="Deposits" />
 
   <AuthenticatedLayout>
     <template #header>
-      <MonthlyExpenseHeader />
+      <PaystubHeader />
     </template>
 
     <div class="py-12">
@@ -32,34 +27,18 @@ const form = useForm({
           <section>
             <header>
               <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Monthly Saving Settings
+                New Deposit
               </h2>
 
               <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Update the settings for this monthly saving.
+                Make a new deposit to track in your account.
               </p>
             </header>
 
             <form
-              @submit.prevent="
-                form.put(route('savings.update', monthlySaving.id))
-              "
+              @submit.prevent="form.post(route('deposits.store'))"
               class="mt-6 space-y-6"
             >
-              <div>
-                <InputLabel for="name" value="Name" />
-
-                <TextInput
-                  id="name"
-                  type="text"
-                  class="mt-1 block w-full"
-                  v-model="form.name"
-                  required
-                />
-
-                <InputError class="mt-2" :message="form.errors.name" />
-              </div>
-
               <div>
                 <InputLabel for="amount" value="Amount" />
 

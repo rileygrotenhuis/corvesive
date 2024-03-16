@@ -1,9 +1,9 @@
 <script setup>
-  import { Link } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3';
 
-  const isActive = (route) => {
-    return window.location.pathname.includes(route)
-  }
+const isActive = (route) => {
+  return window.location.pathname.includes(route);
+};
 </script>
 
 <template>

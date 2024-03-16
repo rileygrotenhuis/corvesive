@@ -1,18 +1,18 @@
 <script setup>
-  import { Head, Link } from '@inertiajs/vue3'
-  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-  import { router } from '@inertiajs/vue3'
-  import PaystubHeader from '@/Pages/Paystubs/Partials/PaystubHeader.vue'
+import { Head, Link } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { router } from '@inertiajs/vue3';
+import PaystubHeader from '@/Pages/Paystubs/Partials/PaystubHeader.vue';
 
-  defineProps({
-    paystubs: Array
-  })
+defineProps({
+  paystubs: Array,
+});
 
-  const columns = ['Issuer', 'Amount', 'Issued Day of Month', 'Notes']
+const columns = ['Issuer', 'Amount', 'Issued Day of Month', 'Notes'];
 
-  const gotoPaystub = (paystub) => {
-    router.visit(route('paystubs.show', paystub.id))
-  }
+const gotoPaystub = (paystub) => {
+  router.visit(route('paystubs.show', paystub.id));
+};
 </script>
 
 <template>

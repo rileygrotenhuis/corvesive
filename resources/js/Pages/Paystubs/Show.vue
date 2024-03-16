@@ -1,22 +1,22 @@
 <script setup>
-  import { Head, Link, useForm } from '@inertiajs/vue3'
-  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-  import InputLabel from '@/Components/InputLabel.vue'
-  import TextInput from '@/Components/TextInput.vue'
-  import InputError from '@/Components/InputError.vue'
-  import PrimaryButton from '@/Components/PrimaryButton.vue'
-  import PaystubHeader from '@/Pages/Paystubs/Partials/PaystubHeader.vue'
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/InputError.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import PaystubHeader from '@/Pages/Paystubs/Partials/PaystubHeader.vue';
 
-  const props = defineProps({
-    paystub: Object
-  })
+const props = defineProps({
+  paystub: Object,
+});
 
-  const form = useForm({
-    issuer: props.paystub.issuer,
-    amount: props.paystub.amount_in_cents / 100,
-    issued_day_of_month: props.paystub.issued_day_of_month,
-    notes: props.paystub.notes
-  })
+const form = useForm({
+  issuer: props.paystub.issuer,
+  amount: props.paystub.amount_in_cents / 100,
+  issued_day_of_month: props.paystub.issued_day_of_month,
+  notes: props.paystub.notes,
+});
 </script>
 
 <template>
