@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\ExpensesController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\MonthlyBillController;
 use App\Http\Controllers\MonthlyBudgetController;
 use App\Http\Controllers\MonthlySavingController;
@@ -22,7 +23,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::prefix('income')->group(function () {
-        // TODO: Income Dashboard
+        Route::get('/', IncomeController::class)->name('income.index');
 
         Route::prefix('paystubs')->group(function () {
             Route::get('/', [PaystubController::class, 'index'])->name('paystubs.index');

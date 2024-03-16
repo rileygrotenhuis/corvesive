@@ -38,8 +38,8 @@ const showingNavigationDropdown = ref(false);
                   Expenses
                 </NavLink>
                 <NavLink
-                  :href="route('paystubs.index')"
-                  :active="route().current('paystubs.index')"
+                  :href="route('income.index')"
+                  :active="route().current('income.index')"
                 >
                   Income
                 </NavLink>
@@ -144,8 +144,8 @@ const showingNavigationDropdown = ref(false);
               Expenses
             </ResponsiveNavLink>
             <ResponsiveNavLink
-              :href="route('paystubs.index')"
-              :active="route().current('paystubs.index')"
+              :href="route('income.index')"
+              :active="route().current('income.index')"
             >
               Income
             </ResponsiveNavLink>
