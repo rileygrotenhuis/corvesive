@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\MonthlyExpenseBreakdown;
+use App\Services\ExpenseBreakdownService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ExpensesController extends Controller
 {
+    public function __construct()
+    {
+    }
+
     public function __invoke(Request $request)
     {
-        $repository = new MonthlyExpenseBreakdown($request->user());
+        $service = new ExpenseBreakdownService($request->user());
 
-        return Inertia::Render('Expenses/Index', [
-            'monthlyExpenseBreakdown' => $repository->getMonthlyExpensebreakdown(),
+        return Inertia::render('Expenses/Index', [
+            'expenseBreakdown' => $service->build(),
         ]);
     }
 }

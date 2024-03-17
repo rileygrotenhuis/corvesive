@@ -6,7 +6,7 @@ import MonthlyExpenseBreakdownCard from '@/Pages/Expenses/Partials/MonthlyExpens
 import MonthlyExpenseHeader from '@/Pages/Expenses/Partials/MonthlyExpenseHeader.vue';
 
 const props = defineProps({
-  monthlyExpenseBreakdown: Object,
+  expenseBreakdown: Object,
 });
 </script>
 
@@ -21,12 +21,8 @@ const props = defineProps({
     <div
       class="py-12 flex flex-col md:flex-row justify-center items-center gap-12"
     >
-      <MonthlyExpenseBreakdownCard
-        :monthlyExpenseBreakdown="monthlyExpenseBreakdown"
-      />
-      <MonthlyExpenseBreakdownChart
-        :monthlyExpenseBreakdown="monthlyExpenseBreakdown"
-      />
+      <MonthlyExpenseBreakdownCard :data="expenseBreakdown.card" />
+      <MonthlyExpenseBreakdownChart :chart="expenseBreakdown.chart" />
     </div>
   </AuthenticatedLayout>
 </template>

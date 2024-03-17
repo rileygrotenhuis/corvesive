@@ -15,14 +15,14 @@ class MonthlySavingController extends Controller
 {
     public function index(Request $request): Response
     {
-        return Inertia::Render('Expenses/Savings/Index', [
+        return Inertia::render('Expenses/Savings/Index', [
             'monthlySavings' => $request->user()->monthlySavings,
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::Render('Expenses/Savings/Create');
+        return Inertia::render('Expenses/Savings/Create');
     }
 
     public function store(StoreMonthlySavingRequest $request): RedirectResponse
@@ -40,7 +40,7 @@ class MonthlySavingController extends Controller
     {
         Gate::authorize('isOwner', $monthlySaving);
 
-        return Inertia::Render('Expenses/Savings/Show', [
+        return Inertia::render('Expenses/Savings/Show', [
             'monthlySaving' => $monthlySaving,
         ]);
     }

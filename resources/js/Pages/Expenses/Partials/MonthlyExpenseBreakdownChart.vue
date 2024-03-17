@@ -3,30 +3,14 @@ import Chart from 'chart.js/auto';
 import { onMounted } from 'vue';
 
 const props = defineProps({
-  monthlyExpenseBreakdown: Object,
+  chart: Object,
 });
 
-const chartData = {
-  labels: props.monthlyExpenseBreakdown.labels,
-  datasets: [
-    {
-      label: 'Monthly Expense Breakdown',
-      data: Object.values(props.monthlyExpenseBreakdown.data),
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)',
-      ],
-      hoverOffset: 4,
-    },
-  ],
-};
-
 onMounted(() => {
-  const ctx = document.getElementById('monthlyExpenseChart');
+  const ctx = document.getElementById('expenseBreakdownChart');
   new Chart(ctx, {
     type: 'pie',
-    data: chartData,
+    data: props.chart,
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -47,6 +31,6 @@ onMounted(() => {
 
 <template>
   <div>
-    <canvas id="monthlyExpenseChart" width="400" height="400"></canvas>
+    <canvas id="expenseBreakdownChart" width="400" height="400"></canvas>
   </div>
 </template>

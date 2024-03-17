@@ -12,7 +12,7 @@ class IncomeController extends Controller
     {
         $repository = new IncomeBreakdown($request->user());
 
-        return Inertia::Render('Income/Index', [
+        return Inertia::render('Income/Index', [
             'incomeBreakdown' => $repository->getIncomeBreakdown(),
         ]);
     }

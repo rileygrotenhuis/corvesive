@@ -14,14 +14,14 @@ class DepositController extends Controller
 {
     public function index(Request $request): Response
     {
-        return Inertia::Render('Income/Deposits/Index', [
+        return Inertia::render('Income/Deposits/Index', [
             'deposits' => $request->user()->deposits()->orderBy('created_at', 'desc')->get(),
         ]);
     }
 
     public function create()
     {
-        return Inertia::Render('Income/Deposits/Create');
+        return Inertia::render('Income/Deposits/Create');
     }
 
     public function store(StoreDepositRequest $request)

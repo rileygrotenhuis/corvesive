@@ -15,14 +15,14 @@ class MonthlyBudgetController extends Controller
 {
     public function index(Request $request): Response
     {
-        return Inertia::Render('Expenses/Budgets/Index', [
+        return Inertia::render('Expenses/Budgets/Index', [
             'monthlyBudgets' => $request->user()->monthlyBudgets,
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::Render('Expenses/Budgets/Create');
+        return Inertia::render('Expenses/Budgets/Create');
     }
 
     public function store(StoreMonthlyBudgetRequest $request): RedirectResponse
@@ -40,7 +40,7 @@ class MonthlyBudgetController extends Controller
     {
         Gate::authorize('isOwner', $monthlyBudget);
 
-        return Inertia::Render('Expenses/Budgets/Show', [
+        return Inertia::render('Expenses/Budgets/Show', [
             'monthlyBudget' => $monthlyBudget,
         ]);
     }
