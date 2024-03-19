@@ -32,7 +32,7 @@ class PayPeriodController extends Controller
             'current_pay_period_id' => $payPeriod->id,
         ]);
 
-        return to_route('dashboard');
+        return to_route('pay-periods.index');
     }
 
     public function current(Request $request, PayPeriod $payPeriod): RedirectResponse
@@ -41,6 +41,6 @@ class PayPeriodController extends Controller
             'current_pay_period_id' => $payPeriod->id,
         ]);
 
-        return to_route('dashboard');
+        return to_route('pay-periods.index');
     }
 }
