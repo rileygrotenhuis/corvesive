@@ -11,7 +11,7 @@ use Inertia\Response;
 
 class PayPeriodController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(): Response
     {
         return Inertia::render('PayPeriods/Index');
     }
@@ -33,6 +33,11 @@ class PayPeriodController extends Controller
         ]);
 
         return to_route('pay-periods.index');
+    }
+
+    public function settings(): Response
+    {
+        return Inertia::render('PayPeriods/Settings');
     }
 
     public function current(Request $request, PayPeriod $payPeriod): RedirectResponse

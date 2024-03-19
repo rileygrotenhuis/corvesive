@@ -83,6 +83,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [PayPeriodController::class, 'index'])->name('pay-periods.index');
         Route::get('/create', [PayPeriodController::class, 'create'])->name('pay-periods.create');
         Route::post('/', [PayPeriodController::class, 'store'])->name('pay-periods.store');
+        Route::get('/settings', [PayPeriodController::class, 'settings'])->name('pay-periods.settings');
         Route::put('/{payPeriod}/current', [PayPeriodController::class, 'current'])->name('pay-periods.current');
     });
 
