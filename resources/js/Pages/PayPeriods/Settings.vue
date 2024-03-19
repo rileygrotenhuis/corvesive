@@ -2,6 +2,9 @@
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
+import PayPeriodBills from '@/Pages/PayPeriods/Partials/PayPeriodBills.vue';
+import PayPeriodBudgets from '@/Pages/PayPeriods/Partials/PayPeriodBudgets.vue';
+import PayPeriodSavings from '@/Pages/PayPeriods/Partials/PayPeriodSavings.vue';
 </script>
 
 <template>
@@ -13,9 +16,19 @@ import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
     </template>
 
     <div class="py-12">
-      <h1 class="text-white text-center">
-        {{ JSON.stringify($page.props.auth.user.current_pay_period) }}
-      </h1>
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+          <PayPeriodBills />
+        </div>
+
+        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+          <PayPeriodBudgets />
+        </div>
+
+        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+          <PayPeriodSavings />
+        </div>
+      </div>
     </div>
   </AuthenticatedLayout>
 </template>
