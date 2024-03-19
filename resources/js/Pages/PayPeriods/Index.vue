@@ -13,7 +13,9 @@ import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
     </template>
 
     <div class="py-12">
-      <h1>Content will go here</h1>
+      <h1 class="text-white text-center">
+        {{ JSON.stringify($page.props.auth.user.current_pay_period) }}
+      </h1>
     </div>
   </AuthenticatedLayout>
 </template>
