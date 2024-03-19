@@ -32,6 +32,12 @@ const showingNavigationDropdown = ref(false);
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <NavLink
+                  :href="route('pay-periods.index')"
+                  :active="route().current('pay-periods.index')"
+                >
+                  Pay Periods
+                </NavLink>
+                <NavLink
                   :href="route('income.index')"
                   :active="route().current('income.index')"
                 >
@@ -137,6 +143,12 @@ const showingNavigationDropdown = ref(false);
           class="sm:hidden"
         >
           <div class="pt-2 pb-3 space-y-1">
+            <ResponsiveNavLink
+              :href="route('pay-periods.index')"
+              :active="route().current('pay-periods.index')"
+            >
+              Pay Periods
+            </ResponsiveNavLink>
             <ResponsiveNavLink
               :href="route('income.index')"
               :active="route().current('income.index')"
