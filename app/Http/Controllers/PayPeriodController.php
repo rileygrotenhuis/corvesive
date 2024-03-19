@@ -13,9 +13,7 @@ class PayPeriodController extends Controller
 {
     public function index(Request $request): Response
     {
-        return Inertia::render('PayPeriods/Index', [
-            'allPayPeriods' => $request->user()->payPeriods()->latest()->get(),
-        ]);
+        return Inertia::render('PayPeriods/Index');
     }
 
     public function create(): Response

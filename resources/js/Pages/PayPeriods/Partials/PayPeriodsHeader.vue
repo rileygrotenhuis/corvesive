@@ -1,5 +1,11 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
+
+const user = usePage().props.auth.user;
+const payPeriods = usePage().props.auth.payPeriods;
+
+console.log(user.current_pay_period);
+console.log(payPeriods);
 </script>
 
 <template>
