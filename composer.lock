@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "78d26f555a67d7d89a4f0b89b9f7449e",
+    "content-hash": "b8ddf43242e01c18285c5d879bcb84ba",
     "packages": [
         {
             "name": "brick/math",
@@ -3256,6 +3256,43 @@
                 }
             ],
             "time": "2023-11-08T05:53:05+00:00"
+        },
+        {
+            "name": "rileygrotenhuis/ripcord",
+            "version": "v0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rileygrotenhuis/ripcord.git",
+                "reference": "e71a01f373f6f74d85456534f0c05a678fc76fe6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rileygrotenhuis/ripcord/zipball/e71a01f373f6f74d85456534f0c05a678fc76fe6",
+                "reference": "e71a01f373f6f74d85456534f0c05a678fc76fe6",
+                "shasum": ""
+            },
+            "require-dev": {
+                "laravel/pint": "^1.14",
+                "phpunit/phpunit": "^11.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rileygrotenhuis\\Ripcord\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Riley Grotenhuis"
+                }
+            ],
+            "description": "Build chart.js components with PHP",
+            "support": {
+                "issues": "https://github.com/rileygrotenhuis/ripcord/issues",
+                "source": "https://github.com/rileygrotenhuis/ripcord/tree/v0.0.2"
+            },
+            "time": "2024-03-18T16:42:40+00:00"
         },
         {
             "name": "symfony/clock",

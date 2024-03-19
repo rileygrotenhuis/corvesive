@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Objects\PieChart;
 
 class ExpenseBreakdownService
 {
@@ -20,15 +19,26 @@ class ExpenseBreakdownService
         $this->monthlySavingsTotal = $this->getMonthlySavingsTotal();
     }
 
-    public function build(): array
+    public function getChartLabels(): array
+    {
+        return ['Bills', 'Budgets', 'Savings'];
+    }
+
+    public function getChartData(): array
     {
         return [
-            'card' => $this->buildCard(),
-            'chart' => $this->buildPieChart(),
+            [
+                'label' => 'Monthly Expense Breakdown',
+                'data' => [
+                    $this->monthlyBillsTotal / 100,
+                    $this->monthlyBudgetsTotal / 100,
+                    $this->monthlySavingsTotal / 100,
+                ],
+            ],
         ];
     }
 
-    protected function buildCard(): array
+    public function getCardData(): array
     {
         return [
             'bills' => '$'.number_format($this->monthlyBillsTotal / 100, 2),
@@ -39,21 +49,6 @@ class ExpenseBreakdownService
                 2
             ),
         ];
-    }
-
-    protected function buildPieChart(): array
-    {
-        $chart = new PieChart(
-            'Expense Breakdown',
-            ['Bills', 'Budgets', 'Savings'],
-            [
-                $this->monthlyBillsTotal / 100,
-                $this->monthlyBudgetsTotal / 100,
-                $this->monthlySavingsTotal / 100,
-            ]
-        );
-
-        return $chart->build();
     }
 
     protected function getMonthlyBillsTotal(): int

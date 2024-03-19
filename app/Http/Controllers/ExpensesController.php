@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\ExpenseBreakdownService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Rileygrotenhuis\Ripcord\Charts\PieChart;
 
 class ExpensesController extends Controller
 {
@@ -16,8 +17,14 @@ class ExpensesController extends Controller
     {
         $service = new ExpenseBreakdownService($request->user());
 
+        $chart = new PieChart(
+            $service->getChartLabels(),
+            $service->getChartData()
+        );
+
         return Inertia::render('Expenses/Index', [
-            'expenseBreakdown' => $service->build(),
+            'chart' => $chart->build(),
+            'card' => $service->getCardData(),
         ]);
     }
 }
