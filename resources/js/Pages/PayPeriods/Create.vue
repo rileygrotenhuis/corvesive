@@ -1,10 +1,11 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
 
 const form = useForm({
   start_date: '',
@@ -17,16 +18,7 @@ const form = useForm({
 
   <AuthenticatedLayout>
     <template #header>
-      <div
-        class="flex flex-col md:flex-row justify-center md:justify-start gap-8 md:gap-16"
-      >
-        <Link
-          :href="route('pay-periods.index')"
-          class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight"
-        >
-          Pay Periods
-        </Link>
-      </div>
+      <PayPeriodsHeader />
     </template>
 
     <div class="py-12">
