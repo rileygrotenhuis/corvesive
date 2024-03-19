@@ -24,9 +24,13 @@ class PayPeriodController extends Controller
 
     public function store(StorePayPeriodRequest $request): RedirectResponse
     {
-        $request->user()->payPeriods()->create([
+        $payPeriod = $request->user()->payPeriods()->create([
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
+        ]);
+
+        $request->user()->update([
+            'current_pay_period_id' => $payPeriod->id,
         ]);
 
         return to_route('dashboard');

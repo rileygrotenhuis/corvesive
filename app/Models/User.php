@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -17,6 +18,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'current_pay_period_id',
     ];
 
     protected $hidden = [
@@ -55,6 +57,11 @@ class User extends Authenticatable
     public function payPeriods(): HasMany
     {
         return $this->hasMany(PayPeriod::class);
+    }
+
+    public function currentPayPeriod(): HasOne
+    {
+        return $this->hasOne(PayPeriod::class, 'id', 'current_pay_period_id');
     }
 
     public function payPeriodPaystubs(): HasMany
