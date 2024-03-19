@@ -21,10 +21,10 @@ const form = useForm({
         class="flex flex-col md:flex-row justify-center md:justify-start gap-8 md:gap-16"
       >
         <Link
-          :href="route('expenses.index')"
+          :href="route('pay-periods.index')"
           class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight"
         >
-          Pay Period
+          Pay Periods
         </Link>
       </div>
     </template>
