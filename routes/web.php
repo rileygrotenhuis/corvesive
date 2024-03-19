@@ -89,21 +89,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/settings', [PayPeriodController::class, 'settings'])->name('pay-periods.settings');
         Route::put('/{payPeriod}/current', [PayPeriodController::class, 'current'])->name('pay-periods.current');
 
-        Route::prefix('/{payPeriod}')->group(function () {
-            Route::prefix('bills')->group(function () {
-                Route::get('/', [PayPeriodBillController::class, 'index'])->name('pay-period-bills.index');
-                Route::post('/', [PayPeriodBillController::class, 'store'])->name('pay-period-bills.store');
-            });
+        Route::prefix('bills')->group(function () {
+            Route::get('/', [PayPeriodBillController::class, 'index'])->name('pay-period-bills.index');
+            Route::post('/', [PayPeriodBillController::class, 'store'])->name('pay-period-bills.store');
+        });
 
-            Route::prefix('budgets')->group(function () {
-                Route::get('/', [PayPeriodBudgetController::class, 'index'])->name('pay-period-budgets.index');
-                Route::post('/', [PayPeriodBudgetController::class, 'store'])->name('pay-period-budgets.store');
-            });
+        Route::prefix('budgets')->group(function () {
+            Route::get('/', [PayPeriodBudgetController::class, 'index'])->name('pay-period-budgets.index');
+            Route::post('/', [PayPeriodBudgetController::class, 'store'])->name('pay-period-budgets.store');
+        });
 
-            Route::prefix('savings')->group(function () {
-                Route::get('/', [PayPeriodSavingController::class, 'index'])->name('pay-period-savings.index');
-                Route::post('/', [PayPeriodSavingController::class, 'store'])->name('pay-period-savings.store');
-            });
+        Route::prefix('savings')->group(function () {
+            Route::get('/', [PayPeriodSavingController::class, 'index'])->name('pay-period-savings.index');
+            Route::post('/', [PayPeriodSavingController::class, 'store'])->name('pay-period-savings.store');
         });
     });
 
