@@ -6,7 +6,9 @@ defineProps({
 
 <template>
   <div class="bg-gray-800 rounded-lg shadow-lg w-3/4 md:w-1/4">
-    <h3 class="text-white p-6 font-bold text-2xl mb-4">Expenses Breakdown</h3>
+    <h3 class="text-white text-center p-6 font-bold text-2xl mb-4">
+      Expense Breakdown
+    </h3>
     <ul class="px-6">
       <li class="flex justify-between mb-2 text-lg">
         <span class="text-gray-300">Bills:</span>
@@ -22,7 +24,9 @@ defineProps({
       </li>
     </ul>
     <div class="bg-gray-700 p-4 rounded-b-lg">
-      <h4 class="text-white font-bold">Total Expenses: {{ data.total }}</h4>
+      <h4 class="text-white font-bold">
+        Total: <span class="float-right">{{ data.total }}</span>
+      </h4>
     </div>
   </div>
 </template>

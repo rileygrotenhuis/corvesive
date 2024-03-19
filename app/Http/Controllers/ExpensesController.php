@@ -23,8 +23,8 @@ class ExpensesController extends Controller
         );
 
         return Inertia::render('Expenses/Index', [
-            'chart' => $chart->build(),
             'card' => $service->getCardData(),
+            'chart' => $chart->build(),
         ]);
     }
 }

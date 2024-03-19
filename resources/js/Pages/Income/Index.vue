@@ -3,9 +3,11 @@ import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import IncomeHeader from '@/Pages/Income/Partials/IncomeHeader.vue';
 import IncomeBreakdownCard from '@/Pages/Income/Partials/IncomeBreakdownCard.vue';
+import IncomeBreakdownChart from '@/Pages/Income/Partials/IncomeBreakdownChart.vue';
 
 const props = defineProps({
-  incomeBreakdown: Object,
+  card: Object,
+  chart: Object,
 });
 </script>
 
@@ -20,9 +22,8 @@ const props = defineProps({
     <div
       class="py-12 flex flex-col md:flex-row justify-center items-center gap-12"
     >
-      <IncomeBreakdownCard :incomeBreakdown="incomeBreakdown" />
-      n
-      <div class="bg-gray-800 rounded-lg shadow-lg w-[350px]" />
+      <IncomeBreakdownCard :data="card" />
+      <IncomeBreakdownChart :chart="chart" />
     </div>
   </AuthenticatedLayout>
 </template>

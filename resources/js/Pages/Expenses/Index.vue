@@ -6,8 +6,8 @@ import MonthlyExpenseBreakdownCard from '@/Pages/Expenses/Partials/MonthlyExpens
 import MonthlyExpenseHeader from '@/Pages/Expenses/Partials/MonthlyExpenseHeader.vue';
 
 const props = defineProps({
-  chart: Object,
   card: Object,
+  chart: Object,
 });
 </script>
 
