@@ -7,7 +7,10 @@ use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\MonthlyBillController;
 use App\Http\Controllers\MonthlyBudgetController;
 use App\Http\Controllers\MonthlySavingController;
+use App\Http\Controllers\PayPeriodBillController;
+use App\Http\Controllers\PayPeriodBudgetController;
 use App\Http\Controllers\PayPeriodController;
+use App\Http\Controllers\PayPeriodSavingController;
 use App\Http\Controllers\PaystubController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -85,6 +88,23 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [PayPeriodController::class, 'store'])->name('pay-periods.store');
         Route::get('/settings', [PayPeriodController::class, 'settings'])->name('pay-periods.settings');
         Route::put('/{payPeriod}/current', [PayPeriodController::class, 'current'])->name('pay-periods.current');
+
+        Route::prefix('/{payPeriod}')->group(function () {
+            Route::prefix('bills')->group(function () {
+                Route::get('/', [PayPeriodBillController::class, 'index'])->name('pay-period-bills.index');
+                Route::post('/', [PayPeriodBillController::class, 'store'])->name('pay-period-bills.store');
+            });
+
+            Route::prefix('budgets')->group(function () {
+                Route::get('/', [PayPeriodBudgetController::class, 'index'])->name('pay-period-budgets.index');
+                Route::post('/', [PayPeriodBudgetController::class, 'store'])->name('pay-period-budgets.store');
+            });
+
+            Route::prefix('savings')->group(function () {
+                Route::get('/', [PayPeriodSavingController::class, 'index'])->name('pay-period-savings.index');
+                Route::post('/', [PayPeriodSavingController::class, 'store'])->name('pay-period-savings.store');
+            });
+        });
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
