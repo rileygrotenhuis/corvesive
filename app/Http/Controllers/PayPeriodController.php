@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayPeriodRequest;
+use App\Models\PayPeriod;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -29,6 +30,15 @@ class PayPeriodController extends Controller
             'end_date' => $request->input('end_date'),
         ]);
 
+        $request->user()->update([
+            'current_pay_period_id' => $payPeriod->id,
+        ]);
+
+        return to_route('dashboard');
+    }
+
+    public function current(Request $request, PayPeriod $payPeriod): RedirectResponse
+    {
         $request->user()->update([
             'current_pay_period_id' => $payPeriod->id,
         ]);
