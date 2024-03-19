@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePayPeriodBillsRequest;
 use App\Models\PayPeriodBill;
 use Illuminate\Http\RedirectResponse;
+use Inertia\Inertia;
 use Inertia\Response;
 
 class PayPeriodBillController extends Controller
 {
     public function index(): Response
     {
-        //
+        return Inertia::render('PayPeriods/Bills');
     }
 
     public function store(StorePayPeriodBillsRequest $request): RedirectResponse
