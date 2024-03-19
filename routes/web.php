@@ -7,6 +7,7 @@ use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\MonthlyBillController;
 use App\Http\Controllers\MonthlyBudgetController;
 use App\Http\Controllers\MonthlySavingController;
+use App\Http\Controllers\PayPeriodController;
 use App\Http\Controllers\PaystubController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -76,6 +77,12 @@ Route::middleware('auth')->group(function () {
             Route::put('/{monthlySaving}', [MonthlySavingController::class, 'update'])->name('savings.update');
             Route::delete('/{monthlySaving}', [MonthlySavingController::class, 'destroy'])->name('savings.destroy');
         });
+    });
+
+    Route::prefix('pay-periods')->group(function () {
+        Route::get('/', [PayPeriodController::class, 'index'])->name('pay-periods.index');
+        Route::get('/create', [PayPeriodController::class, 'create'])->name('pay-periods.create');
+        Route::post('/', [PayPeriodController::class, 'store'])->name('pay-periods.store');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
