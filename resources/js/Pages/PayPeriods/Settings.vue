@@ -5,6 +5,7 @@ import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
 import PayPeriodBills from '@/Pages/PayPeriods/Partials/PayPeriodBills.vue';
 import PayPeriodBudgets from '@/Pages/PayPeriods/Partials/PayPeriodBudgets.vue';
 import PayPeriodSavings from '@/Pages/PayPeriods/Partials/PayPeriodSavings.vue';
+import PayPeriodPaystubs from '@/Pages/PayPeriods/Partials/PayPeriodPaystubs.vue';
 </script>
 
 <template>
@@ -17,6 +18,10 @@ import PayPeriodSavings from '@/Pages/PayPeriods/Partials/PayPeriodSavings.vue';
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+          <PayPeriodPaystubs />
+        </div>
+
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
           <PayPeriodBills />
         </div>

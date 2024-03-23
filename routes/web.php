@@ -10,6 +10,7 @@ use App\Http\Controllers\MonthlySavingController;
 use App\Http\Controllers\PayPeriodBillController;
 use App\Http\Controllers\PayPeriodBudgetController;
 use App\Http\Controllers\PayPeriodController;
+use App\Http\Controllers\PayPeriodPaystubController;
 use App\Http\Controllers\PayPeriodSavingController;
 use App\Http\Controllers\PaystubController;
 use App\Http\Controllers\ProfileController;
@@ -88,6 +89,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [PayPeriodController::class, 'store'])->name('pay-periods.store');
         Route::get('/settings', [PayPeriodController::class, 'settings'])->name('pay-periods.settings');
         Route::put('/{payPeriod}/current', [PayPeriodController::class, 'current'])->name('pay-periods.current');
+
+        Route::prefix('paystubs')->group(function () {
+            Route::get('/', [PayPeriodPaystubController::class, 'index'])->name('pay-period-paystubs.index');
+            Route::post('/', [PayPeriodPaystubController::class, 'store'])->name('pay-period-paystubs.store');
+            // TODO: Show page
+            // TODO: Remove
+        });
 
         Route::prefix('bills')->group(function () {
             Route::get('/', [PayPeriodBillController::class, 'index'])->name('pay-period-bills.index');
