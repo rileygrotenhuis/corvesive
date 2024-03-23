@@ -4,7 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
 
 defineProps({
-  unassignedBills: Array
+  unassignedBills: Array,
 });
 </script>
 
