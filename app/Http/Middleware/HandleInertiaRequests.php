@@ -32,7 +32,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user()->load('currentPayPeriod'),
+                'user' => $request->user() ? $request->user()->load('currentPayPeriod') : null,
                 'payPeriods' => $request->user() ? $request->user()->payPeriods()->latest()->get() : [],
             ],
         ];
