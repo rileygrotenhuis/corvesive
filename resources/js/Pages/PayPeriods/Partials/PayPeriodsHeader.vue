@@ -5,14 +5,11 @@ import { ref, watch } from 'vue';
 const user = usePage().props.auth.user;
 const payPeriods = usePage().props.auth.payPeriods;
 
-const currentPayPeriod = ref(user.current_pay_period.id);
+const currentPayPeriod = ref(user.current_pay_period?.id ?? null);
 
 watch(currentPayPeriod, (newValue, oldValue) => {
   useForm({}).put(route('pay-periods.current', newValue));
 });
-
-console.log(user.current_pay_period);
-console.log(payPeriods);
 </script>
 
 <template>
@@ -27,6 +24,7 @@ console.log(payPeriods);
     </Link>
     <div class="flex gap-8 items-center">
       <select
+        v-if="payPeriods.length > 0"
         v-model="currentPayPeriod"
         class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
       >
