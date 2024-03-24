@@ -35,9 +35,16 @@ class PayPeriodController extends Controller
         return to_route('pay-periods.index');
     }
 
-    public function settings(): Response
+    public function settings(Request $request): Response
     {
-        return Inertia::render('PayPeriods/Settings');
+        $currentPayPeriod = $request->user()->currentPayPeriod;
+
+        return Inertia::render('PayPeriods/Settings', [
+            'paystubs' => $currentPayPeriod->paystubs,
+            'bills' => $currentPayPeriod->bills,
+            'budgets' => $currentPayPeriod->budgets,
+            'savings' => $currentPayPeriod->savings,
+        ]);
     }
 
     public function current(Request $request, PayPeriod $payPeriod): RedirectResponse

@@ -1,3 +1,9 @@
+<script setup>
+defineProps({
+  paystubs: Array,
+});
+</script>
+
 <template>
   <section>
     <header>
@@ -10,7 +16,14 @@
       </p>
     </header>
 
-    <div>Content will go here</div>
+    <ul class="mt-4 list-disc">
+      <li
+        v-for="(paystub, index) in paystubs"
+        :key="index"
+        class="text-white list-disc ml-8"
+      >
+        {{ paystub.issuer }} - ${{ paystub.pivot.amount_in_cents / 100 }}
+      </li>
+    </ul>
   </section>
 </template>
-<script setup></script>
