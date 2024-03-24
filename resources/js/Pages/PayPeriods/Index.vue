@@ -2,6 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
+import PayPeriodSurplusCard from '@/Pages/PayPeriods/Partials/PayPeriodSurplusCard.vue';
 
 defineProps({
   totalIncome: Number,
@@ -12,15 +13,6 @@ defineProps({
   actualSurplus: Number,
   projectedSurplus: Number,
 });
-
-/**
- * TODO: Module #1
- *
- * - Total Income
- * - Total Expenses
- * - Current Surplus
- * - Projected Surplus
- */
 
 /**
  * TODO: Module #2
@@ -48,7 +40,12 @@ defineProps({
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-        <h1>Content will go here</h1>
+        <PayPeriodSurplusCard
+          :totalIncome="totalIncome"
+          :totalExpenses="totalExpenses"
+          :actualSurplus="actualSurplus"
+          :projectedSurplus="projectedSurplus"
+        />
       </div>
     </div>
   </AuthenticatedLayout>
