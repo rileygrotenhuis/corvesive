@@ -20,6 +20,11 @@ class PayPeriodBudget extends Model
         'total_balance_in_cents',
     ];
 
+    protected $appends = [
+        'amount_paid',
+        'remaining_balance',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

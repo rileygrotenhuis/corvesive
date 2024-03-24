@@ -21,6 +21,12 @@ class PayPeriodBill extends Model
         'due_date',
     ];
 
+    protected $appends = [
+        'amount_paid',
+        'remaining_amount',
+        'has_paid',
+    ];
+
     public function casts(): array
     {
         return [

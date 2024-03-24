@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayPeriodRequest;
 use App\Models\PayPeriod;
+use App\Services\PayPeriodBreakdownService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,9 +12,13 @@ use Inertia\Response;
 
 class PayPeriodController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return Inertia::render('PayPeriods/Index');
+        $service = new PayPeriodBreakdownService($request->user()->currentPayPeriod);
+
+        return Inertia::render('PayPeriods/Index', [
+            'breakdownData' => $service->getBreakdownData(),
+        ]);
     }
 
     public function create(): Response

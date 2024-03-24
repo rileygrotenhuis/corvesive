@@ -20,6 +20,11 @@ class PayPeriodSaving extends Model
         'amount_in_cents',
     ];
 
+    protected $appends = [
+        'amount_paid',
+        'remaining_amount',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
