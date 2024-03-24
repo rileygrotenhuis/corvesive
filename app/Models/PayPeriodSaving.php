@@ -23,6 +23,7 @@ class PayPeriodSaving extends Model
     protected $appends = [
         'amount_paid',
         'remaining_amount',
+        'has_paid',
     ];
 
     public function user(): BelongsTo
@@ -57,5 +58,10 @@ class PayPeriodSaving extends Model
     public function getRemainingAmountAttribute(): int
     {
         return $this->amount_in_cents - $this->amount_paid;
+    }
+
+    public function getHasPaidAttribute(): bool
+    {
+        return $this->amount_paid >= $this->amount_in_cents;
     }
 }
