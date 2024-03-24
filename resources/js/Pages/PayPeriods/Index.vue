@@ -16,21 +16,6 @@ defineProps({
   actualSurplus: Number,
   projectedSurplus: Number,
 });
-
-/**
- * TODO: Module #2
- * Due Bills
- */
-
-/**
- * TODO: Module #3
- * Remaining Budgets
- */
-
-/**
- * TODO: Module #4
- * Remaining Savings
- */
 </script>
 
 <template>
