@@ -28,16 +28,25 @@ defineProps({
       </div>
     </header>
 
-    <ul class="mt-4 list-disc">
-      <li
-        v-for="(bill, index) in bills"
-        :key="index"
-        class="text-white list-disc ml-8"
-      >
-        {{ bill.bill.issuer }} ({{ bill.bill.name }}) - ${{
-          bill.amount_in_cents / 100
-        }}
-      </li>
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Issuer</th>
+          <th>Name</th>
+          <th>Due Date</th>
+          <th>Amount Paid</th>
+          <th>Amount Due</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(bill, index) in bills" :key="index">
+          <td>{{ bill.bill.issuer }}</td>
+          <td>{{ bill.bill.name }}</td>
+          <td>{{ new Date(bill.bill.due_date).toLocaleDateString() }}</td>
+          <td>${{ bill.amount_paid / 100 }}</td>
+          <td>${{ bill.remaining_amount / 100 }}</td>
+        </tr>
+      </tbody>
+    </table>
   </section>
 </template>

@@ -28,14 +28,21 @@ defineProps({
       </div>
     </header>
 
-    <ul class="mt-4 list-disc">
-      <li
-        v-for="(budget, index) in budgets"
-        :key="index"
-        class="text-white list-disc ml-8"
-      >
-        {{ budget.budget.name }} - ${{ budget.total_balance_in_cents / 100 }}
-      </li>
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Amount Paid</th>
+          <th>Remaining Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(budget, index) in budgets" :key="index">
+          <td>{{ budget.budget.name }}</td>
+          <td>${{ budget.amount_paid / 100 }}</td>
+          <td>${{ budget.remaining_balance / 100 }}</td>
+        </tr>
+      </tbody>
+    </table>
   </section>
 </template>
