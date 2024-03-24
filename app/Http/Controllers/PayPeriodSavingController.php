@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePayPeriodSavingsRequest;
 use App\Models\PayPeriodSaving;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class PayPeriodSavingController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return Inertia::render('PayPeriods/Savings');
+        return Inertia::render('PayPeriods/Savings', [
+            'savings' => $request->user()->monthlySavings,
+            'currentSavings' => $request->user()->currentPayPeriod->savings,
+        ]);
     }
 
     public function store(StorePayPeriodSavingsRequest $request): RedirectResponse

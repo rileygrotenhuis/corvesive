@@ -2,6 +2,16 @@
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
+import PayPeriodBudgetForm from '@/Pages/PayPeriods/Partials/PayPeriodBudgetForm.vue';
+
+const props = defineProps({
+  budgets: Array,
+  currentBudgets: Array,
+});
+
+const getCurrentBudget = (budgetId) => {
+  return props.currentBudgets.find((budget) => budget.id === budgetId);
+};
 </script>
 
 <template>
@@ -13,7 +23,14 @@ import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
     </template>
 
     <div class="py-12">
-      <h1 class="text-white text-center">Budgets Settings</h1>
+      <div class="space-y-6">
+        <PayPeriodBudgetForm
+          v-for="(budget, index) in budgets"
+          :key="index"
+          :budget="budget"
+          :currentBudget="getCurrentBudget(budget.id)"
+        />
+      </div>
     </div>
   </AuthenticatedLayout>
 </template>

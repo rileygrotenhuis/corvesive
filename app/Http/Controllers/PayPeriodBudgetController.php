@@ -5,19 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePayPeriodBudgetsRequest;
 use App\Models\PayPeriodBudget;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class PayPeriodBudgetController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return Inertia::render('PayPeriods/Budgets');
+        return Inertia::render('PayPeriods/Budgets', [
+            'budgets' => $request->user()->monthlyBudgets,
+            'currentBudgets' => request()->user()->currentPayPeriod->budgets,
+        ]);
     }
 
     public function store(StorePayPeriodBudgetsRequest $request): RedirectResponse
     {
-        PayPeriodBudget::udpateOrCreate(
+        PayPeriodBudget::updateOrCreate(
             [
                 'user_id' => $request->user()->id,
                 'pay_period_id' => $request->user()->currentPayPeriod->id,
