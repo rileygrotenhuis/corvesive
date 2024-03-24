@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayPeriodSavingsRequest;
 use App\Models\PayPeriodSaving;
-use App\Services\PayPeriodBreakdownService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,10 +13,15 @@ class PayPeriodSavingController extends Controller
 {
     public function index(Request $request): Response
     {
-        $service = new PayPeriodBreakdownService($request->user()->currentPayPeriod);
+        $currentPayPeriod = $request->user()->currentPayPeriod;
+
+        $savings = PayPeriodSaving::query()
+            ->with('monthlySaving')
+            ->where('pay_period_id', $currentPayPeriod->id)
+            ->get();
 
         return Inertia::render('PayPeriods/Savings/Index', [
-            'savings' => $service->getSavingsBreakdown(),
+            'savings' => $savings,
         ]);
     }
 

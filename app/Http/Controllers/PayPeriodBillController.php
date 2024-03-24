@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayPeriodBillsRequest;
 use App\Models\PayPeriodBill;
-use App\Services\PayPeriodBreakdownService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,10 +13,15 @@ class PayPeriodBillController extends Controller
 {
     public function index(Request $request): Response
     {
-        $service = new PayPeriodBreakdownService($request->user()->currentPayPeriod);
+        $currentPayPeriod = $request->user()->currentPayPeriod;
+
+        $bills = PayPeriodBill::query()
+            ->with('bill')
+            ->where('pay_period_id', $currentPayPeriod->id)
+            ->get();
 
         return Inertia::render('PayPeriods/Bills/Index', [
-            'bills' => $service->getBillsBreakdown(),
+            'bills' => $bills,
         ]);
     }
 

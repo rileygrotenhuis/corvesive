@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTransactionRequest;
-use App\Services\PayPeriodBreakdownService;
+use App\Models\PayPeriodBill;
+use App\Models\PayPeriodBudget;
+use App\Models\PayPeriodSaving;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,12 +15,27 @@ class TransactionController extends Controller
 {
     public function create(Request $request): Response
     {
-        $service = new PayPeriodBreakdownService($request->user()->currentPayPeriod);
+        $currentPayPeriod = $request->user()->currentPayPeriod;
+
+        $bills = PayPeriodBill::query()
+            ->with('bill')
+            ->where('pay_period_id', $currentPayPeriod->id)
+            ->get();
+
+        $budgets = PayPeriodBudget::query()
+            ->with('budget')
+            ->where('pay_period_id', $currentPayPeriod->id)
+            ->get();
+
+        $savings = PayPeriodSaving::query()
+            ->with('monthlySaving')
+            ->where('pay_period_id', $currentPayPeriod->id)
+            ->get();
 
         return Inertia::render('Transactions/Create', [
-            'bills' => $service->getBillsBreakdown(),
-            'budgets' => $service->getBudgetsBreakdown(),
-            'savings' => $service->getSavingsBreakdown(),
+            'bills' => $bills,
+            'budgets' => $budgets,
+            'savings' => $savings,
         ]);
     }
 
