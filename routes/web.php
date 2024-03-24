@@ -14,6 +14,7 @@ use App\Http\Controllers\PayPeriodPaystubController;
 use App\Http\Controllers\PayPeriodSavingController;
 use App\Http\Controllers\PaystubController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -117,6 +118,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/settings', [PayPeriodSavingController::class, 'settings'])->name('pay-period-savings.settings');
             Route::delete('/{payPeriodSaving}', [PayPeriodSavingController::class, 'destroy'])->name('pay-period-savings.destroy');
         });
+    });
+
+    Route::prefix('transactions')->group(function () {
+        Route::get('/', [TransactionController::class, 'index'])->name('transaction.index');
+        Route::get('/create', [TransactionController::class, 'create'])->name('transaction.create');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
