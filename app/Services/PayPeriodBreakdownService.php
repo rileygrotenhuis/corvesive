@@ -15,42 +15,36 @@ class PayPeriodBreakdownService
     {
     }
 
-    public function getBreakdownData(): array
-    {
-        return [
-            'paystubs' => $this->getPaystubsBreakdown(),
-            'bills' => $this->getBillsBreakdown(),
-            'budgets' => $this->getBudgetsBreakdown(),
-            'savings' => $this->getSavingsBreakdown(),
-        ];
-    }
-
-    protected function getPaystubsBreakdown(): Collection
+    public function getPaystubsBreakdown(): Collection
     {
         return PayPeriodPaystub::query()
+            ->with('paystub')
             ->where('pay_period_id', $this->payPeriod->id)
             ->get();
     }
 
-    protected function getBillsBreakdown(): Collection
+    public function getBillsBreakdown(): Collection
     {
         return PayPeriodBill::query()
+            ->with('bill')
             ->where('pay_period_id', $this->payPeriod->id)
             ->get()
             ->where('has_paid', false);
     }
 
-    protected function getBudgetsBreakdown(): Collection
+    public function getBudgetsBreakdown(): Collection
     {
         return PayPeriodBudget::query()
+            ->with('budget')
             ->where('pay_period_id', $this->payPeriod->id)
             ->get()
             ->where('remaining_balance', '>', 0);
     }
 
-    protected function getSavingsBreakdown(): Collection
+    public function getSavingsBreakdown(): Collection
     {
         return PayPeriodSaving::query()
+            ->with('monthlySaving')
             ->where('pay_period_id', $this->payPeriod->id)
             ->get()
             ->where('remaining_amount', '>', 0);

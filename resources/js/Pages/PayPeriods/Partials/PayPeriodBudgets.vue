@@ -34,7 +34,7 @@ defineProps({
         :key="index"
         class="text-white list-disc ml-8"
       >
-        {{ budget.name }} - ${{ budget.pivot.total_balance_in_cents / 100 }}
+        {{ budget.budget.name }} - ${{ budget.total_balance_in_cents / 100 }}
       </li>
     </ul>
   </section>

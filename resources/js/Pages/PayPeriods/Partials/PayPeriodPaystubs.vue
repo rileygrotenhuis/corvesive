@@ -34,7 +34,7 @@ defineProps({
         :key="index"
         class="text-white list-disc ml-8"
       >
-        {{ paystub.issuer }} - ${{ paystub.pivot.amount_in_cents / 100 }}
+        {{ paystub.paystub.issuer }} - ${{ paystub.amount_in_cents / 100 }}
       </li>
     </ul>
   </section>

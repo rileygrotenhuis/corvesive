@@ -34,7 +34,7 @@ defineProps({
         :key="index"
         class="text-white list-disc ml-8"
       >
-        {{ saving.name }} - ${{ saving.pivot.amount_in_cents / 100 }}
+        {{ saving.monthly_saving.name }} - ${{ saving.amount_in_cents / 100 }}
       </li>
     </ul>
   </section>

@@ -35,10 +35,14 @@ class PayPeriodSaving extends Model
         return $this->belongsTo(PayPeriod::class);
     }
 
-    //    public function saving(): BelongsTo
-    //    {
-    //        return $this->belongsTo(MonthlySaving::class);
-    //    }
+    public function monthlySaving(): BelongsTo
+    {
+        return $this->belongsTo(
+            MonthlySaving::class,
+            'saving_id',
+            'id'
+        );
+    }
 
     public function transactions(): MorphMany
     {

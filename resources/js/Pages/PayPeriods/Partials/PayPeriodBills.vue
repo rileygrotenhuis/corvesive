@@ -34,8 +34,8 @@ defineProps({
         :key="index"
         class="text-white list-disc ml-8"
       >
-        {{ bill.issuer }} ({{ bill.name }}) - ${{
-          bill.pivot.amount_in_cents / 100
+        {{ bill.bill.issuer }} ({{ bill.bill.name }}) - ${{
+          bill.amount_in_cents / 100
         }}
       </li>
     </ul>
