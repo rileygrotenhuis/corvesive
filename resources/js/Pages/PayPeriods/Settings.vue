@@ -30,15 +30,15 @@ defineProps({
         </div>
 
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-          <PayPeriodBills />
+          <PayPeriodBills :bills="bills" />
         </div>
 
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-          <PayPeriodBudgets />
+          <PayPeriodBudgets :budgets="budgets" />
         </div>
 
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-          <PayPeriodSavings />
+          <PayPeriodSavings :savings="savings" />
         </div>
       </div>
     </div>
