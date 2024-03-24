@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayPeriodRequest;
 use App\Models\PayPeriod;
-use App\Services\PayPeriodBreakdownService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,10 +13,13 @@ class PayPeriodController extends Controller
 {
     public function index(Request $request): Response
     {
-        $service = new PayPeriodBreakdownService($request->user()->currentPayPeriod);
+        $currentPayPeriod = $request->user()->currentPayPeriod;
 
         return Inertia::render('PayPeriods/Index', [
-            'breakdownData' => $service->getBreakdownData(),
+            'paystubs' => $currentPayPeriod->paystubs,
+            'bills' => $currentPayPeriod->bills,
+            'budgets' => $currentPayPeriod->budgets,
+            'savings' => $currentPayPeriod->savings,
         ]);
     }
 
@@ -38,18 +40,6 @@ class PayPeriodController extends Controller
         ]);
 
         return to_route('pay-periods.index');
-    }
-
-    public function settings(Request $request): Response
-    {
-        $currentPayPeriod = $request->user()->currentPayPeriod;
-
-        return Inertia::render('PayPeriods/Settings', [
-            'paystubs' => $currentPayPeriod->paystubs,
-            'bills' => $currentPayPeriod->bills,
-            'budgets' => $currentPayPeriod->budgets,
-            'savings' => $currentPayPeriod->savings,
-        ]);
     }
 
     public function current(Request $request, PayPeriod $payPeriod): RedirectResponse
