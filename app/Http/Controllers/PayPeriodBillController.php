@@ -40,4 +40,11 @@ class PayPeriodBillController extends Controller
 
         return to_route('pay-period-bills.index');
     }
+
+    public function destroy(PayPeriodBill $payPeriodBill): RedirectResponse
+    {
+        $payPeriodBill->delete();
+
+        return to_route('pay-period-bills.index');
+    }
 }

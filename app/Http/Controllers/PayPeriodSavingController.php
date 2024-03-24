@@ -30,4 +30,11 @@ class PayPeriodSavingController extends Controller
 
         return to_route('pay-period-savings.index');
     }
+
+    public function destroy(PayPeriodSaving $payPeriodSaving): RedirectResponse
+    {
+        $payPeriodSaving->delete();
+
+        return to_route('pay-period-savings.index');
+    }
 }

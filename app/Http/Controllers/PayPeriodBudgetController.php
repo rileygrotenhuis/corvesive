@@ -30,4 +30,11 @@ class PayPeriodBudgetController extends Controller
 
         return to_route('pay-period-budgets.index');
     }
+
+    public function destroy(PayPeriodBudget $payPeriodBudget): RedirectResponse
+    {
+        $payPeriodBudget->delete();
+
+        return to_route('pay-period-budgets.index');
+    }
 }
