@@ -5,7 +5,9 @@ namespace App\Services;
 use App\Models\PayPeriod;
 use App\Models\PayPeriodBill;
 use App\Models\PayPeriodBudget;
+use App\Models\PayPeriodPaystub;
 use App\Models\PayPeriodSaving;
+use App\Models\Transaction;
 use Illuminate\Support\Collection;
 
 class PayPeriodBreakdownService
@@ -14,34 +16,85 @@ class PayPeriodBreakdownService
     {
     }
 
-    protected function getDueBills(): Collection
+    public function getTotalIncome(): int
+    {
+        return PayPeriodPaystub::query()
+            ->where('pay_period_id', $this->payPeriod->id)
+            ->sum('amount_in_cents');
+    }
+
+    public function getTotalExpenses(): int
+    {
+        $billsTotal = PayPeriodBill::query()
+            ->where('pay_period_id', $this->payPeriod->id)
+            ->sum('amount_in_cents');
+
+        $budgetsTotal = PayPeriodBudget::query()
+            ->where('pay_period_id', $this->payPeriod->id)
+            ->sum('total_balance_in_cents');
+
+        $savingsTotal = PayPeriodSaving::query()
+            ->where('pay_period_id', $this->payPeriod->id)
+            ->sum('amount_in_cents');
+
+        return $billsTotal + $budgetsTotal + $savingsTotal;
+    }
+
+    public function getTotalPayments(): int
+    {
+        return Transaction::query()
+            ->where('created_at', '>=', $this->payPeriod->start_date)
+            ->where('created_at', '<=', $this->payPeriod->end_date)
+            ->sum('amount_in_cents');
+    }
+
+    public function getTotalSurplusPayments(): int
+    {
+        return Transaction::query()
+            ->where('created_at', '>=', $this->payPeriod->start_date)
+            ->where('created_at', '<=', $this->payPeriod->end_date)
+            ->whereNull('transactionable_type')
+            ->whereNull('transactionable_id')
+            ->sum('amount_in_cents');
+    }
+
+    public function getDueBills(): Collection
     {
         return PayPeriodBill::query()
             ->with('bill')
             ->where('pay_period_id', $this->payPeriod->id)
             ->get()
-            ->where('has_paid', false);
+            ->where('has_paid', false)
+            ->values();
     }
 
-    protected function getRemainingBudgets(): Collection
+    public function getRemainingBudgets(): Collection
     {
         return PayPeriodBudget::query()
             ->with('budget')
             ->where('pay_period_id', $this->payPeriod->id)
             ->get()
-            ->where('remaining_balance', '>', 0);
+            ->where('remaining_balance', '>', 0)
+            ->values();
     }
 
-    protected function getRemainingSavings(): Collection
+    public function getRemainingSavings(): Collection
     {
         return PayPeriodSaving::query()
-            ->with('saving')
+            ->with('monthlySaving')
             ->where('pay_period_id', $this->payPeriod->id)
             ->get()
-            ->where('has_paid', false);
+            ->where('has_paid', false)
+            ->values();
     }
 
-    // TODO: Actual Surplus
+    public function getActualSurplus(): int
+    {
+        return $this->getTotalIncome() - $this->getTotalPayments();
+    }
 
-    // TODO: Projected Surplus
+    public function getProjectedSurplus(): int
+    {
+        return $this->getTotalIncome() - $this->getTotalSurplusPayments() - $this->getTotalExpenses();
+    }
 }

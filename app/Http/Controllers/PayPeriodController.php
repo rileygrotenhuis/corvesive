@@ -16,7 +16,15 @@ class PayPeriodController extends Controller
     {
         $service = new PayPeriodBreakdownService($request->user()->currentPayPeriod);
 
-        return Inertia::render('PayPeriods/Index');
+        return Inertia::render('PayPeriods/Index', [
+            'totalIncome' => $service->getTotalIncome(),
+            'totalExpenses' => $service->getTotalExpenses(),
+            'dueBills' => $service->getDueBills(),
+            'remainingBudgets' => $service->getRemainingBudgets(),
+            'remainingSavings' => $service->getRemainingSavings(),
+            'actualSurplus' => $service->getActualSurplus(),
+            'projectedSurplus' => $service->getProjectedSurplus(),
+        ]);
     }
 
     public function create(): Response
