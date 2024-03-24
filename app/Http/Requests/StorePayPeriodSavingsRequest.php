@@ -9,9 +9,8 @@ class StorePayPeriodSavingsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'savings' => ['required', 'array'],
-            'savings.*.id' => ['required', 'exists:savings,id'],
-            'savings.*.amount' => ['required', 'numeric', 'min:0'],
+            'saving_id' => ['required', 'exists:savings,id'],
+            'amount' => ['required', 'numeric', 'min:0'],
         ];
     }
 }

@@ -88,34 +88,37 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [PayPeriodController::class, 'create'])->name('pay-periods.create');
         Route::post('/', [PayPeriodController::class, 'store'])->name('pay-periods.store');
         Route::get('/settings', [PayPeriodController::class, 'settings'])->name('pay-periods.settings');
-        Route::put('/{payPeriod}/current', [PayPeriodController::class, 'current'])->name('pay-periods.current');
 
-        Route::prefix('paystubs')->group(function () {
-            Route::get('/', [PayPeriodPaystubController::class, 'index'])->name('pay-period-paystubs.index');
-            Route::post('/', [PayPeriodPaystubController::class, 'store'])->name('pay-period-paystubs.store');
-            // TODO: Show page
-            // TODO: Remove
-        });
+        Route::prefix('{payPeriod}')->group(function () {
+            Route::put('/current', [PayPeriodController::class, 'current'])->name('pay-periods.current');
 
-        Route::prefix('bills')->group(function () {
-            Route::get('/', [PayPeriodBillController::class, 'index'])->name('pay-period-bills.index');
-            Route::post('/', [PayPeriodBillController::class, 'store'])->name('pay-period-bills.store');
-            // TODO: Show page
-            // TODO: Remove
-        });
+            Route::prefix('paystubs')->group(function () {
+                Route::get('/', [PayPeriodPaystubController::class, 'index'])->name('pay-period-paystubs.index');
+                Route::post('/', [PayPeriodPaystubController::class, 'store'])->name('pay-period-paystubs.store');
+                // TODO: Show page
+                // TODO: Remove
+            });
 
-        Route::prefix('budgets')->group(function () {
-            Route::get('/', [PayPeriodBudgetController::class, 'index'])->name('pay-period-budgets.index');
-            Route::post('/', [PayPeriodBudgetController::class, 'store'])->name('pay-period-budgets.store');
-            // TODO: Show page
-            // TODO: Remove
-        });
+            Route::prefix('bills')->group(function () {
+                Route::get('/', [PayPeriodBillController::class, 'index'])->name('pay-period-bills.index');
+                Route::post('/', [PayPeriodBillController::class, 'store'])->name('pay-period-bills.store');
+                // TODO: Show page
+                // TODO: Remove
+            });
 
-        Route::prefix('savings')->group(function () {
-            Route::get('/', [PayPeriodSavingController::class, 'index'])->name('pay-period-savings.index');
-            Route::post('/', [PayPeriodSavingController::class, 'store'])->name('pay-period-savings.store');
-            // TODO: Show page
-            // TODO: Remove
+            Route::prefix('budgets')->group(function () {
+                Route::get('/', [PayPeriodBudgetController::class, 'index'])->name('pay-period-budgets.index');
+                Route::post('/', [PayPeriodBudgetController::class, 'store'])->name('pay-period-budgets.store');
+                // TODO: Show page
+                // TODO: Remove
+            });
+
+            Route::prefix('savings')->group(function () {
+                Route::get('/', [PayPeriodSavingController::class, 'index'])->name('pay-period-savings.index');
+                Route::post('/', [PayPeriodSavingController::class, 'store'])->name('pay-period-savings.store');
+                // TODO: Show page
+                // TODO: Remove
+            });
         });
     });
 

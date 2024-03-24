@@ -9,10 +9,9 @@ class StorePayPeriodBillsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'bills' => ['required', 'array'],
-            'bills.*.id' => ['required', 'exists:bills,id'],
-            'bills.*.amount' => ['required', 'numeric', 'min:0'],
-            'bills.*.due_date' => ['required', 'date'],
+            'bill_id' => ['required', 'exists:bills,id'],
+            'amount' => ['required', 'numeric', 'min:0'],
+            'due_date' => ['required', 'date'],
         ];
     }
 }

@@ -9,9 +9,8 @@ class StorePayPeriodPaystubsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'paystubs' => ['required', 'array'],
-            'paystubs.*.id' => ['required', 'exists:paystubs,id'],
-            'paystubs.*.amount' => ['required', 'numeric', 'min:0'],
+            'paystub_id' => ['required', 'exists:paystubs,id'],
+            'amount' => ['required', 'numeric', 'min:0'],
         ];
     }
 }
