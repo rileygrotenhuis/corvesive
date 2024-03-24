@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayPeriodBudgetsRequest;
 use App\Models\PayPeriodBudget;
+use App\Services\PayPeriodBreakdownService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,7 +14,16 @@ class PayPeriodBudgetController extends Controller
 {
     public function index(Request $request): Response
     {
-        return Inertia::render('PayPeriods/Budgets', [
+        $service = new PayPeriodBreakdownService($request->user()->currentPayPeriod);
+
+        return Inertia::render('PayPeriods/Budgets/Index', [
+            'budgets' => $service->getBudgetsBreakdown(),
+        ]);
+    }
+
+    public function settings(Request $request): Response
+    {
+        return Inertia::render('PayPeriods/Budgets/Settings', [
             'budgets' => $request->user()->monthlyBudgets,
             'currentBudgets' => request()->user()->currentPayPeriod->budgets,
         ]);
@@ -32,13 +42,13 @@ class PayPeriodBudgetController extends Controller
             ]
         );
 
-        return to_route('pay-period-budgets.index');
+        return to_route('pay-period-budgets.settings');
     }
 
     public function destroy(PayPeriodBudget $payPeriodBudget): RedirectResponse
     {
         $payPeriodBudget->delete();
 
-        return to_route('pay-period-budgets.index');
+        return to_route('pay-period-budgets.settings');
     }
 }

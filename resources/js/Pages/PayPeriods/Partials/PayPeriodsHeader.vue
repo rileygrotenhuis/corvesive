@@ -14,15 +14,53 @@ watch(currentPayPeriod, (newValue, oldValue) => {
 
 <template>
   <div
-    class="flex flex-col md:flex-row gap-8 justify-center sm:justify-between items-center"
+    class="flex flex-col md:flex-row justify-center sm:justify-between items-center"
   >
-    <Link
-      :href="route('pay-periods.index')"
-      class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight"
+    <div
+      class="flex flex-col md:flex-row justify-center md:justify-start items-center gap-4 md:gap-16"
     >
-      Pay Periods
-    </Link>
-    <div class="flex gap-8 items-center">
+      <Link
+        :href="route('pay-periods.index')"
+        class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight"
+      >
+        Pay Periods
+      </Link>
+      <ul class="flex justify-center items-center gap-8">
+        <li>
+          <Link
+            :href="route('pay-period-paystubs.index')"
+            class="font-semibold text-gray-400 leading-tight"
+          >
+            Paystubs
+          </Link>
+        </li>
+        <li>
+          <Link
+            :href="route('pay-period-bills.index')"
+            class="font-semibold text-gray-400 leading-tight"
+          >
+            Bills
+          </Link>
+        </li>
+        <li>
+          <Link
+            :href="route('pay-period-budgets.index')"
+            class="font-semibold text-gray-400 leading-tight"
+          >
+            Budgets
+          </Link>
+        </li>
+        <li>
+          <Link
+            :href="route('pay-period-savings.index')"
+            class="font-semibold text-gray-400 leading-tight"
+          >
+            Savings
+          </Link>
+        </li>
+      </ul>
+    </div>
+    <div class="flex gap-8 items-center pt-4 md:pt-0">
       <select
         v-if="payPeriods.length > 0"
         v-model="currentPayPeriod"

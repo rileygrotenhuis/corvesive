@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayPeriodPaystubsRequest;
 use App\Models\PayPeriodPaystub;
+use App\Services\PayPeriodBreakdownService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,7 +14,16 @@ class PayPeriodPaystubController extends Controller
 {
     public function index(Request $request): Response
     {
-        return Inertia::render('PayPeriods/Paystubs', [
+        $service = new PayPeriodBreakdownService($request->user()->currentPayPeriod);
+
+        return Inertia::render('PayPeriods/Paystubs/Index', [
+            'paystubs' => $service->getPaystubsBreakdown(),
+        ]);
+    }
+
+    public function settings(Request $request): Response
+    {
+        return Inertia::render('PayPeriods/Paystubs/Settings', [
             'paystubs' => $request->user()->paystubs,
             'currentPaystubs' => $request->user()->currentPayPeriod->paystubs,
         ]);
@@ -32,13 +42,13 @@ class PayPeriodPaystubController extends Controller
             ]
         );
 
-        return to_route('pay-period-paystubs.index');
+        return to_route('pay-period-paystubs.settings');
     }
 
     public function destroy(PayPeriodPaystub $payPeriodPaystub): RedirectResponse
     {
         $payPeriodPaystub->delete();
 
-        return to_route('pay-period-paystubs.index');
+        return to_route('pay-period-paystubs.settings');
     }
 }

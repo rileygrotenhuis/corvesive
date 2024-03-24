@@ -85,32 +85,36 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('pay-periods')->group(function () {
         Route::get('/', [PayPeriodController::class, 'index'])->name('pay-periods.index');
-        Route::get('/create', [PayPeriodController::class, 'create'])->name('pay-periods.create');
         Route::post('/', [PayPeriodController::class, 'store'])->name('pay-periods.store');
+        Route::get('/create', [PayPeriodController::class, 'create'])->name('pay-periods.create');
 
         Route::put('/{payPeriod}/current', [PayPeriodController::class, 'current'])->name('pay-periods.current');
 
         Route::prefix('paystubs')->group(function () {
             Route::get('/', [PayPeriodPaystubController::class, 'index'])->name('pay-period-paystubs.index');
             Route::post('/', [PayPeriodPaystubController::class, 'store'])->name('pay-period-paystubs.store');
+            Route::get('/settings', [PayPeriodPaystubController::class, 'settings'])->name('pay-period-paystubs.settings');
             Route::delete('/{payPeriodPaystub}', [PayPeriodPaystubController::class, 'destroy'])->name('pay-period-paystubs.destroy');
         });
 
         Route::prefix('bills')->group(function () {
             Route::get('/', [PayPeriodBillController::class, 'index'])->name('pay-period-bills.index');
             Route::post('/', [PayPeriodBillController::class, 'store'])->name('pay-period-bills.store');
+            Route::get('/settings', [PayPeriodBillController::class, 'settings'])->name('pay-period-bills.settings');
             Route::delete('/{payPeriodBill}', [PayPeriodBillController::class, 'destroy'])->name('pay-period-bills.destroy');
         });
 
         Route::prefix('budgets')->group(function () {
             Route::get('/', [PayPeriodBudgetController::class, 'index'])->name('pay-period-budgets.index');
             Route::post('/', [PayPeriodBudgetController::class, 'store'])->name('pay-period-budgets.store');
+            Route::get('/settings', [PayPeriodBudgetController::class, 'settings'])->name('pay-period-budgets.settings');
             Route::delete('/{payPeriodBudget}', [PayPeriodBudgetController::class, 'destroy'])->name('pay-period-budgets.destroy');
         });
 
         Route::prefix('savings')->group(function () {
             Route::get('/', [PayPeriodSavingController::class, 'index'])->name('pay-period-savings.index');
             Route::post('/', [PayPeriodSavingController::class, 'store'])->name('pay-period-savings.store');
+            Route::get('/settings', [PayPeriodSavingController::class, 'settings'])->name('pay-period-savings.settings');
             Route::delete('/{payPeriodSaving}', [PayPeriodSavingController::class, 'destroy'])->name('pay-period-savings.destroy');
         });
     });
