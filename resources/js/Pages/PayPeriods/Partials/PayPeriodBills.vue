@@ -50,12 +50,12 @@ defineProps({
             <th
               class="px-6 py-3 bg-gray-800 dark:bg-gray-700 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider"
             >
-              Amount Paid
+              Total
             </th>
             <th
               class="px-6 py-3 bg-gray-800 dark:bg-gray-700 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider"
             >
-              Amount Due
+              Due
             </th>
           </tr>
         </thead>
@@ -75,7 +75,7 @@ defineProps({
               {{ new Date(bill.bill.due_date).toLocaleDateString() }}
             </td>
             <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
-              ${{ bill.amount_paid / 100 }}
+              ${{ bill.amount_in_cents / 100 }}
             </td>
             <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
               ${{ bill.remaining_amount / 100 }}

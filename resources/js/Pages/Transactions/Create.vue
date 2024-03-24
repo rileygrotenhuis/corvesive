@@ -7,13 +7,29 @@ import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TransactionsHeader from '@/Pages/Transactions/Partials/TransactionsHeader.vue';
 
-defineProps({
+const props = defineProps({
   bills: Array,
   budgets: Array,
   savings: Array,
 });
 
+const transactionableTypes = [
+  {
+    label: 'Bill',
+    value: 'App\\Models\\PayPeriodBill',
+  },
+  {
+    label: 'Budget',
+    value: 'App\\Models\\PayPeriodBudget',
+  },
+  {
+    label: 'Saving',
+    value: 'App\\Models\\PayPeriodSaving',
+  },
+];
+
 const form = useForm({
+  transactionable_type: '',
   transactionable_id: '',
   amount: '',
 });
@@ -46,6 +62,22 @@ const form = useForm({
               class="mt-6 space-y-6"
             >
               <div>
+                <InputLabel for="transactionable_type" value="Payment Type" />
+
+                <select
+                  v-model="form.transactionable_type"
+                  class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full"
+                >
+                  <option
+                    v-for="(type, index) in transactionableTypes"
+                    :key="index"
+                    :value="type.value"
+                  >
+                    {{ type.label }}
+                  </option>
+                </select>
+              </div>
+              <div>
                 <InputLabel for="transactionable_id" value="Expense" />
 
                 <select
@@ -53,12 +85,42 @@ const form = useForm({
                   class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full"
                 >
                   <option
+                    v-if="
+                      form.transactionable_type === 'App\\Models\\PayPeriodBill'
+                    "
                     v-for="(bill, index) in bills"
                     :key="index"
                     :value="bill.id"
                   >
                     {{ bill.bill.issuer }} - {{ bill.bill.name }} (${{
                       bill.remaining_amount / 100
+                    }})
+                  </option>
+                  <option
+                    v-if="
+                      form.transactionable_type ===
+                      'App\\Models\\PayPeriodBudget'
+                    "
+                    v-for="(budget, index) in budgets"
+                    :key="index"
+                    :value="budget.id"
+                    @click="handleTransactionableTypeChange('budget')"
+                  >
+                    {{ budget.budget.name }} (${{
+                      budget.remaining_balance / 100
+                    }})
+                  </option>
+                  <option
+                    v-if="
+                      form.transactionable_type ===
+                      'App\\Models\\PayPeriodSaving'
+                    "
+                    v-for="(saving, index) in savings"
+                    :key="index"
+                    :value="saving.id"
+                  >
+                    {{ saving.monthly_saving.name }} (${{
+                      saving.remaining_amount / 100
                     }})
                   </option>
                 </select>

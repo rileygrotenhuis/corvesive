@@ -40,12 +40,12 @@ defineProps({
             <th
               class="px-6 py-3 bg-gray-800 dark:bg-gray-700 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider"
             >
-              Amount Paid
+              Total
             </th>
             <th
               class="px-6 py-3 bg-gray-800 dark:bg-gray-700 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider"
             >
-              Remaining Balance
+              Due
             </th>
           </tr>
         </thead>
@@ -59,7 +59,7 @@ defineProps({
               {{ saving.monthly_saving.name }}
             </td>
             <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
-              ${{ saving.amount_paid / 100 }}
+              ${{ saving.amount_in_cents / 100 }}
             </td>
             <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
               ${{ saving.remaining_amount / 100 }}

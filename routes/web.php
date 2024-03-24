@@ -121,8 +121,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('transactions')->group(function () {
-        Route::get('/', [TransactionController::class, 'index'])->name('transaction.index');
-        Route::get('/create', [TransactionController::class, 'create'])->name('transaction.create');
+        Route::post('/', [TransactionController::class, 'store'])->name('transactions.store');
+        Route::get('/create', [TransactionController::class, 'create'])->name('transactions.create');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -55,8 +55,8 @@ const showingNavigationDropdown = ref(false);
             <div class="flex items-center gap-4">
               <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <NavLink
-                  :href="route('transaction.create')"
-                  :active="route().current('transaction.create')"
+                  :href="route('transactions.create')"
+                  :active="route().current('transactions.create')"
                 >
                   Transaction
                 </NavLink>
