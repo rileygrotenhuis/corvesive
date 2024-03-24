@@ -72,7 +72,7 @@ defineProps({
               {{ bill.bill.name }}
             </td>
             <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
-              {{ new Date(bill.bill.due_date).toLocaleDateString() }}
+              {{ new Date(bill.due_date).toLocaleDateString() }}
             </td>
             <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
               ${{ bill.amount_in_cents / 100 }}
