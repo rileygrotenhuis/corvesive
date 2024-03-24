@@ -9,7 +9,7 @@ class StorePayPeriodBudgetsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'budget_id' => ['required', 'exists:budgets,id'],
+            'budget_id' => ['required', 'exists:monthly_budgets,id'],
             'total_balance' => ['required', 'numeric', 'min:0'],
         ];
     }

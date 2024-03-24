@@ -7,20 +7,21 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 
 const props = defineProps({
-  paystub: Object,
-  currentPaystub: Object,
+  bill: Object,
+  currentBill: Object,
 });
 
 const form = useForm({
-  paystub_id: props.paystub.id,
-  amount: props.currentPaystub
-    ? props.currentPaystub.pivot.amount_in_cents / 100
-    : props.paystub.amount_in_cents / 100 || '',
+  bill_id: props.bill.id,
+  amount: props.currentBill
+    ? props.currentBill.pivot.amount_in_cents / 100
+    : props.bill.amount_in_cents / 100 || '',
+  due_date: props.currentBill ? props.currentBill.pivot.due_date : '',
 });
 
-const removePaystub = () => {
+const removeBill = () => {
   useForm({}).delete(
-    route('pay-period-paystubs.destroy', props.currentPaystub.pivot.id)
+    route('pay-period-bills.destroy', props.currentBill.pivot.id)
   );
 };
 </script>
@@ -31,15 +32,15 @@ const removePaystub = () => {
       <section>
         <header>
           <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ paystub.issuer }}
+            {{ bill.issuer }} - {{ bill.name }}
           </h2>
 
           <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            Attach this paystub to your current pay period.
+            Attach this bill to your current pay period.
           </p>
         </header>
         <form
-          @submit.prevent="form.post(route('pay-period-paystubs.store'))"
+          @submit.prevent="form.post(route('pay-period-bills.store'))"
           class="mt-6 space-y-6"
         >
           <div>
@@ -56,16 +57,29 @@ const removePaystub = () => {
 
             <InputError class="mt-2" :message="form.errors.amount" />
           </div>
+          <div>
+            <InputLabel for="due_date" value="Due Date" />
+
+            <TextInput
+              id="due_date"
+              type="date"
+              class="mt-1 block w-full"
+              v-model="form.due_date"
+              required
+            />
+
+            <InputError class="mt-2" :message="form.errors.due_date" />
+          </div>
           <div class="flex items-center gap-4">
             <DangerButton
-              @click.prevent="removePaystub"
-              v-if="currentPaystub"
+              @click.prevent="removeBill"
+              v-if="currentBill"
               class="bg-red-500"
             >
               Remove
             </DangerButton>
             <PrimaryButton :disabled="form.processing">
-              {{ currentPaystub ? 'Update' : 'Attach' }}
+              {{ currentBill ? 'Update' : 'Attach' }}
             </PrimaryButton>
           </div>
         </form>

@@ -2,10 +2,16 @@
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
+import PayPeriodBillForm from '@/Pages/PayPeriods/Partials/PayPeriodBillForm.vue';
 
-defineProps({
-  unassignedBills: Array,
+const props = defineProps({
+  bills: Array,
+  currentBills: Array,
 });
+
+const getCurrentBill = (billId) => {
+  return props.currentBills.find((bill) => bill.id === billId);
+};
 </script>
 
 <template>
@@ -17,9 +23,13 @@ defineProps({
     </template>
 
     <div class="py-12">
-      <h1 class="text-white text-center">Bills Settings</h1>
-      <div class="text-white font-bold">
-        {{ JSON.stringify(unassignedBills) }}
+      <div class="space-y-6">
+        <PayPeriodBillForm
+          v-for="(bill, index) in bills"
+          :key="index"
+          :bill="bill"
+          :currentBill="getCurrentBill(bill.id)"
+        />
       </div>
     </div>
   </AuthenticatedLayout>

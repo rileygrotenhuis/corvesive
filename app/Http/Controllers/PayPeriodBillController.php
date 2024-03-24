@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayPeriodBillsRequest;
 use App\Models\PayPeriodBill;
-use App\Services\PayPeriodBillService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,13 +13,9 @@ class PayPeriodBillController extends Controller
 {
     public function index(Request $request): Response
     {
-        $service = new PayPeriodBillService(
-            $request->user(),
-            $request->user()->currentPayPeriod
-        );
-
         return Inertia::render('PayPeriods/Bills', [
-            'unassignedBills' => $service->getUnassignedBills(),
+            'bills' => $request->user()->monthlyBills,
+            'currentBills' => $request->user()->currentPayPeriod->bills,
         ]);
     }
 

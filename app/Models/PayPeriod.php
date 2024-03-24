@@ -25,24 +25,24 @@ class PayPeriod extends Model
     public function paystubs(): BelongsToMany
     {
         return $this->belongsToMany(Paystub::class, 'pay_period_paystub', 'pay_period_id', 'paystub_id')
-            ->withPivot('amount_in_cents');
+            ->withPivot('id', 'amount_in_cents');
     }
 
     public function bills(): BelongsToMany
     {
         return $this->belongsToMany(MonthlyBill::class, 'pay_period_bill', 'pay_period_id', 'bill_id')
-            ->withPivot('amount_in_cents', 'due_date');
+            ->withPivot('id', 'amount_in_cents', 'due_date');
     }
 
     public function budgets(): BelongsToMany
     {
         return $this->belongsToMany(MonthlyBudget::class, 'pay_period_budget', 'pay_period_id', 'budget_id')
-            ->withPivot('total_balance_in_cents');
+            ->withPivot('id', 'total_balance_in_cents');
     }
 
     public function savings(): BelongsToMany
     {
         return $this->belongsToMany(MonthlySaving::class, 'pay_period_saving', 'pay_period_id', 'saving_id')
-            ->withPivot('amount_in_cents');
+            ->withPivot('id', 'amount_in_cents');
     }
 }

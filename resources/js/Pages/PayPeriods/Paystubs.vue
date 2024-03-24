@@ -2,15 +2,15 @@
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
-import PayPeriodPaystubForm from "@/Pages/PayPeriods/Partials/PayPeriodPaystubForm.vue";
+import PayPeriodPaystubForm from '@/Pages/PayPeriods/Partials/PayPeriodPaystubForm.vue';
 
 const props = defineProps({
   paystubs: Array,
-  currentPaystubs: Array
+  currentPaystubs: Array,
 });
 
 const getCurrentPaystub = (paystubId) => {
-  return props.currentPaystubs.find(paystub => paystub.id === paystubId);
+  return props.currentPaystubs.find((paystub) => paystub.id === paystubId);
 };
 </script>
 
