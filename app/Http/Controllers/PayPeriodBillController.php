@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayPeriodBillsRequest;
-use App\Models\PayPeriod;
 use App\Models\PayPeriodBill;
 use App\Services\PayPeriodBillService;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +12,7 @@ use Inertia\Response;
 
 class PayPeriodBillController extends Controller
 {
-    public function index(Request $request, PayPeriod $payPeriod): Response
+    public function index(Request $request): Response
     {
         $service = new PayPeriodBillService(
             $request->user(),
@@ -25,11 +24,12 @@ class PayPeriodBillController extends Controller
         ]);
     }
 
-    public function store(StorePayPeriodBillsRequest $request, PayPeriod $payPeriod): RedirectResponse
+    public function store(StorePayPeriodBillsRequest $request): RedirectResponse
     {
         PayPeriodBill::updateOrCreate(
             [
-                'pay_period_id' => $payPeriod->id,
+                'user_id' => $request->user()->id,
+                'pay_period_id' => $request->user()->currentPayPeriod->id,
                 'bill_id' => $request->input('bill_id'),
             ],
             [
@@ -38,6 +38,6 @@ class PayPeriodBillController extends Controller
             ]
         );
 
-        return to_route('pay-periods.settings');
+        return to_route('pay-period-bills.index');
     }
 }

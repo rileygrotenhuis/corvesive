@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayPeriodSavingsRequest;
-use App\Models\PayPeriod;
 use App\Models\PayPeriodSaving;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -11,16 +10,17 @@ use Inertia\Response;
 
 class PayPeriodSavingController extends Controller
 {
-    public function index(PayPeriod $payPeriod): Response
+    public function index(): Response
     {
         return Inertia::render('PayPeriods/Savings');
     }
 
-    public function store(StorePayPeriodSavingsRequest $request, PayPeriod $payPeriod): RedirectResponse
+    public function store(StorePayPeriodSavingsRequest $request): RedirectResponse
     {
         PayPeriodSaving::updateOrCreate(
             [
-                'pay_period_id' => $payPeriod->id,
+                'user_id' => $request->user()->id,
+                'pay_period_id' => $request->user()->currentPayPeriod->id,
                 'saving_id' => $request->input('saving_id'),
             ],
             [
@@ -28,6 +28,6 @@ class PayPeriodSavingController extends Controller
             ]
         );
 
-        return to_route('pay-periods.settings');
+        return to_route('pay-period-savings.index');
     }
 }
