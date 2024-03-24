@@ -15,6 +15,10 @@ const props = defineProps({
 
 const transactionableTypes = [
   {
+    label: 'Spending',
+    value: null,
+  },
+  {
     label: 'Bill',
     value: 'App\\Models\\PayPeriodBill',
   },
@@ -77,7 +81,7 @@ const form = useForm({
                   </option>
                 </select>
               </div>
-              <div>
+              <div v-if="form.transactionable_type">
                 <InputLabel for="transactionable_id" value="Expense" />
 
                 <select

@@ -10,7 +10,7 @@ class StoreTransactionRequest extends FormRequest
     {
         return [
             'transactionable_type' => ['nullable', 'in:App\Models\PayPeriodBill,App\Models\PayPeriodBudget,App\Models\PayPeriodSaving'],
-            'transactionable_id' => ['required', 'integer'],
+            'transactionable_id' => ['nullable', 'integer'],
             'amount' => ['required', 'numeric', 'min:0'],
         ];
     }

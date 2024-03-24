@@ -28,8 +28,7 @@ class PayPeriodBreakdownService
         return PayPeriodBill::query()
             ->with('bill')
             ->where('pay_period_id', $this->payPeriod->id)
-            ->get()
-            ->where('has_paid', false);
+            ->get();
     }
 
     public function getBudgetsBreakdown(): Collection
@@ -37,8 +36,7 @@ class PayPeriodBreakdownService
         return PayPeriodBudget::query()
             ->with('budget')
             ->where('pay_period_id', $this->payPeriod->id)
-            ->get()
-            ->where('remaining_balance', '>', 0);
+            ->get();
     }
 
     public function getSavingsBreakdown(): Collection
@@ -46,7 +44,6 @@ class PayPeriodBreakdownService
         return PayPeriodSaving::query()
             ->with('monthlySaving')
             ->where('pay_period_id', $this->payPeriod->id)
-            ->get()
-            ->where('remaining_amount', '>', 0);
+            ->get();
     }
 }
