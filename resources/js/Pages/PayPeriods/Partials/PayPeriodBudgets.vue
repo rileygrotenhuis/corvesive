@@ -28,21 +28,45 @@ defineProps({
       </div>
     </header>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Amount Paid</th>
-          <th>Remaining Balance</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(budget, index) in budgets" :key="index">
-          <td>{{ budget.budget.name }}</td>
-          <td>${{ budget.amount_paid / 100 }}</td>
-          <td>${{ budget.remaining_balance / 100 }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-700 dark:bg-gray-800 mt-8">
+        <thead>
+          <tr>
+            <th
+              class="px-6 py-3 bg-gray-800 dark:bg-gray-700 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider"
+            >
+              Name
+            </th>
+            <th
+              class="px-6 py-3 bg-gray-800 dark:bg-gray-700 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider"
+            >
+              Amount Paid
+            </th>
+            <th
+              class="px-6 py-3 bg-gray-800 dark:bg-gray-700 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider"
+            >
+              Remaining Balance
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(budget, index) in budgets"
+            :key="index"
+            class="bg-gray-900 dark:bg-gray-800"
+          >
+            <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
+              {{ budget.budget.name }}
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
+              ${{ budget.amount_paid / 100 }}
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
+              ${{ budget.remaining_balance / 100 }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 </template>

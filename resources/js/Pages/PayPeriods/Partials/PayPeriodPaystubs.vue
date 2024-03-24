@@ -28,14 +28,37 @@ defineProps({
       </div>
     </header>
 
-    <ul class="mt-4 list-disc">
-      <li
-        v-for="(paystub, index) in paystubs"
-        :key="index"
-        class="text-white list-disc ml-8"
-      >
-        {{ paystub.paystub.issuer }} - ${{ paystub.amount_in_cents / 100 }}
-      </li>
-    </ul>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-700 dark:bg-gray-800 mt-8">
+        <thead>
+          <tr>
+            <th
+              class="px-6 py-3 bg-gray-800 dark:bg-gray-700 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider"
+            >
+              Issuer
+            </th>
+            <th
+              class="px-6 py-3 bg-gray-800 dark:bg-gray-700 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider"
+            >
+              Amount
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(paystub, index) in paystubs"
+            :key="index"
+            class="bg-gray-900 dark:bg-gray-800"
+          >
+            <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
+              {{ paystub.paystub.issuer }}
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap text-gray-300">
+              ${{ paystub.amount_in_cents / 100 }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 </template>
