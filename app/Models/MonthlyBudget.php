@@ -18,6 +18,11 @@ class MonthlyBudget extends Model
         'notes',
     ];
 
+    protected $appends = [
+        'amount_paid',
+        'remaining_balance',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -31,5 +36,24 @@ class MonthlyBudget extends Model
             'budget_id',
             'pay_period_id',
         );
+    }
+
+    public function getAmountPaidAttribute(): int
+    {
+        $currentPayPeriodIds = PayPeriod::currentMonthForUser($this->user)->pluck('id');
+        $payPeriodBudgetIds = PayPeriodBudget::query()
+            ->whereIn('pay_period_id', $currentPayPeriodIds)
+            ->where('budget_id', $this->id)
+            ->pluck('id');
+
+        return Transaction::query()
+            ->where('transactionable_type', PayPeriodBudget::class)
+            ->whereIn('transactionable_id', $payPeriodBudgetIds)
+            ->sum('amount_in_cents');
+    }
+
+    public function getRemainingBalanceAttribute(): int
+    {
+        return $this->total_balance_in_cents - $this->amount_paid;
     }
 }
