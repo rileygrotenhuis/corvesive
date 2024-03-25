@@ -18,9 +18,18 @@ const form = useForm({
     : props.budget.total_balance_in_cents / 100 || '',
 });
 
+const addBudget = () => {
+  form.post(route('pay-period-budgets.store'), {
+    preserveScroll: true,
+  });
+};
+
 const removeBudget = () => {
   useForm({}).delete(
-    route('pay-period-budgets.destroy', props.currentBudget.pivot.id)
+    route('pay-period-budgets.destroy', props.currentBudget.pivot.id),
+    {
+      preserveScroll: true,
+    }
   );
 };
 </script>
@@ -38,10 +47,7 @@ const removeBudget = () => {
             Attach this budget to your current pay period.
           </p>
         </header>
-        <form
-          @submit.prevent="form.post(route('pay-period-budgets.store'))"
-          class="mt-6 space-y-6"
-        >
+        <form @submit.prevent="addBudget" class="mt-6 space-y-6">
           <div>
             <InputLabel for="total_balance" value="Total Balance" />
             <TextInput

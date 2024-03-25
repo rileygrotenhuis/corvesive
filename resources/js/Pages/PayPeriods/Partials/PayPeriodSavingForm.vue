@@ -18,9 +18,18 @@ const form = useForm({
     : props.saving.amount_in_cents / 100 || '',
 });
 
+const addSaving = () => {
+  form.post(route('pay-period-savings.store'), {
+    preserveScroll: true,
+  });
+};
+
 const removeSaving = () => {
   useForm({}).delete(
-    route('pay-period-savings.destroy', props.currentSaving.pivot.id)
+    route('pay-period-savings.destroy', props.currentSaving.pivot.id),
+    {
+      preserveScroll: true,
+    }
   );
 };
 </script>
@@ -38,10 +47,7 @@ const removeSaving = () => {
             Attach this saving to your current pay period.
           </p>
         </header>
-        <form
-          @submit.prevent="form.post(route('pay-period-savings.store'))"
-          class="mt-6 space-y-6"
-        >
+        <form @submit.prevent="addSaving" class="mt-6 space-y-6">
           <div>
             <InputLabel for="amount" value="Amount" />
             <TextInput

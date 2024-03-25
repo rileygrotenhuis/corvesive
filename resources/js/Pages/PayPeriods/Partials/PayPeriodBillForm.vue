@@ -19,9 +19,18 @@ const form = useForm({
   due_date: props.currentBill ? props.currentBill.pivot.due_date : '',
 });
 
+const addBill = () => {
+  form.post(route('pay-period-bills.store'), {
+    preserveScroll: true,
+  });
+};
+
 const removeBill = () => {
   useForm({}).delete(
-    route('pay-period-bills.destroy', props.currentBill.pivot.id)
+    route('pay-period-bills.destroy', props.currentBill.pivot.id),
+    {
+      preserveScroll: true,
+    }
   );
 };
 </script>
@@ -39,10 +48,7 @@ const removeBill = () => {
             Attach this bill to your current pay period.
           </p>
         </header>
-        <form
-          @submit.prevent="form.post(route('pay-period-bills.store'))"
-          class="mt-6 space-y-6"
-        >
+        <form @submit.prevent="addBill" class="mt-6 space-y-6">
           <div>
             <InputLabel for="amount" value="Amount" />
 

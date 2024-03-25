@@ -18,9 +18,18 @@ const form = useForm({
     : props.paystub.amount_in_cents / 100 || '',
 });
 
+const addPaystub = () => {
+  form.post(route('pay-period-paystubs.store'), {
+    preserveScroll: true,
+  });
+};
+
 const removePaystub = () => {
   useForm({}).delete(
-    route('pay-period-paystubs.destroy', props.currentPaystub.pivot.id)
+    route('pay-period-paystubs.destroy', props.currentPaystub.pivot.id),
+    {
+      preserveScroll: true,
+    }
   );
 };
 </script>
@@ -38,10 +47,7 @@ const removePaystub = () => {
             Attach this paystub to your current pay period.
           </p>
         </header>
-        <form
-          @submit.prevent="form.post(route('pay-period-paystubs.store'))"
-          class="mt-6 space-y-6"
-        >
+        <form @submit.prevent="addPaystub" class="mt-6 space-y-6">
           <div>
             <InputLabel for="amount" value="Amount" />
 

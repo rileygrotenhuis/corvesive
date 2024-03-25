@@ -45,7 +45,7 @@ class ExpenseBreakdownService
             'budgets' => '$'.number_format($this->monthlyBudgetsTotal / 100, 2),
             'savings' => '$'.number_format($this->monthlySavingsTotal / 100, 2),
             'total' => '$'.number_format(
-                $this->monthlyBillsTotal + $this->monthlyBudgetsTotal + $this->monthlySavingsTotal / 100,
+                ($this->monthlyBillsTotal + $this->monthlyBudgetsTotal + $this->monthlySavingsTotal) / 100,
                 2
             ),
         ];
