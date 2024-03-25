@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Deposit;
 use App\Models\PayPeriod;
 use App\Models\PayPeriodBill;
 use App\Models\PayPeriodBudget;
@@ -18,9 +19,11 @@ class PayPeriodBreakdownService
 
     public function getTotalIncome(): int
     {
-        return PayPeriodPaystub::query()
+        $totalPaystubs = PayPeriodPaystub::query()
             ->where('pay_period_id', $this->payPeriod->id)
             ->sum('amount_in_cents');
+
+        return $totalPaystubs + $this->getTotalDeposits();
     }
 
     public function getTotalExpenses(): int
@@ -43,6 +46,7 @@ class PayPeriodBreakdownService
     public function getTotalPayments(): int
     {
         return Transaction::query()
+            ->where('user_id', $this->payPeriod->user_id)
             ->where('created_at', '>=', $this->payPeriod->start_date)
             ->where('created_at', '<=', $this->payPeriod->end_date)
             ->sum('amount_in_cents');
@@ -55,6 +59,15 @@ class PayPeriodBreakdownService
             ->where('created_at', '<=', $this->payPeriod->end_date)
             ->whereNull('transactionable_type')
             ->whereNull('transactionable_id')
+            ->sum('amount_in_cents');
+    }
+
+    public function getTotalDeposits(): int
+    {
+        return Deposit::query()
+            ->where('user_id', $this->payPeriod->id)
+            ->where('created_at', '>=', $this->payPeriod->start_date)
+            ->where('created_at', '<=', $this->payPeriod->end_date)
             ->sum('amount_in_cents');
     }
 
