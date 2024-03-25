@@ -15,7 +15,7 @@ const form = useForm({
   bill_id: props.bill.id,
   amount: props.currentBill
     ? props.currentBill.pivot.amount_in_cents / 100
-    : props.bill.amount_in_cents / 100 || '',
+    : props.bill.remaining_amount / 100 || '',
   due_date: props.currentBill ? props.currentBill.pivot.due_date : '',
 });
 

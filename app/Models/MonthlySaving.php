@@ -20,7 +20,7 @@ class MonthlySaving extends Model
 
     protected $appends = [
         'amount_paid',
-        'amount_remaining',
+        'remaining_amount',
         'has_paid',
     ];
 
@@ -53,7 +53,7 @@ class MonthlySaving extends Model
             ->sum('amount_in_cents');
     }
 
-    public function getAmountRemainingAttribute(): int
+    public function getRemainingAmountAttribute(): int
     {
         return $this->amount_in_cents - $this->amount_paid;
     }

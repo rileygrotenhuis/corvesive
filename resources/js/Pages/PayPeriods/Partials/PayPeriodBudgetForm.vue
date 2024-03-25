@@ -15,7 +15,7 @@ const form = useForm({
   budget_id: props.budget.id,
   total_balance: props.currentBudget
     ? props.currentBudget.pivot.total_balance_in_cents / 100
-    : props.budget.total_balance_in_cents / 100 || '',
+    : props.budget.remaining_balance / 100 || '',
 });
 
 const addBudget = () => {

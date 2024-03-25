@@ -15,7 +15,7 @@ const form = useForm({
   saving_id: props.saving.id,
   amount: props.currentSaving
     ? props.currentSaving.pivot.amount_in_cents / 100
-    : props.saving.amount_in_cents / 100 || '',
+    : props.saving.remaining_amount / 100 || '',
 });
 
 const addSaving = () => {
