@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Collection;
 
 class PayPeriod extends Model
 {
@@ -44,5 +45,14 @@ class PayPeriod extends Model
     {
         return $this->belongsToMany(MonthlySaving::class, 'pay_period_saving', 'pay_period_id', 'saving_id')
             ->withPivot('id', 'amount_in_cents');
+    }
+
+    public static function currentMonthForUser(User $user): Collection
+    {
+        return self::query()
+            ->where('user_id', $user->id)
+            ->whereBetween('start_date', [now()->startOfMonth(), now()->endOfMonth()])
+            ->orWhereBetween('end_date', [now()->startOfMonth(), now()->endOfMonth()])
+            ->get();
     }
 }
