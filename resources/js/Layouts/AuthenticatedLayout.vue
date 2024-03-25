@@ -5,9 +5,11 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
+
+const userHasPayPeriod = Boolean(usePage().props.auth.user.current_pay_period);
 </script>
 
 <template>
@@ -32,8 +34,16 @@ const showingNavigationDropdown = ref(false);
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <NavLink
-                  :href="route('pay-periods.index')"
-                  :active="route().current('pay-periods.index')"
+                  :href="
+                    userHasPayPeriod
+                      ? route('pay-periods.index')
+                      : route('pay-periods.create')
+                  "
+                  :active="
+                    userHasPayPeriod
+                      ? route().current('pay-periods.index')
+                      : route().current('pay-periods.create')
+                  "
                 >
                   Pay Periods
                 </NavLink>
@@ -155,8 +165,16 @@ const showingNavigationDropdown = ref(false);
         >
           <div class="pt-2 pb-3 space-y-1">
             <ResponsiveNavLink
-              :href="route('pay-periods.index')"
-              :active="route().current('pay-periods.index')"
+              :href="
+                userHasPayPeriod
+                  ? route('pay-periods.index')
+                  : route('pay-periods.create')
+              "
+              :active="
+                userHasPayPeriod
+                  ? route().current('pay-periods.index')
+                  : route().current('pay-periods.create')
+              "
             >
               Pay Periods
             </ResponsiveNavLink>

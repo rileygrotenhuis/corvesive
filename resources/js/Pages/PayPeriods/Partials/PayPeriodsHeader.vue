@@ -4,6 +4,7 @@ import { ref, watch } from 'vue';
 
 const user = usePage().props.auth.user;
 const payPeriods = usePage().props.auth.payPeriods;
+const userHasPayPeriod = Boolean(usePage().props.auth.user.current_pay_period);
 
 const currentPayPeriod = ref(user.current_pay_period?.id ?? null);
 
@@ -25,7 +26,10 @@ watch(currentPayPeriod, (newValue, oldValue) => {
       >
         Pay Periods
       </Link>
-      <ul class="flex justify-center items-center gap-8">
+      <ul
+        v-if="userHasPayPeriod"
+        class="flex justify-center items-center gap-8"
+      >
         <li>
           <Link
             :href="route('pay-period-paystubs.index')"
