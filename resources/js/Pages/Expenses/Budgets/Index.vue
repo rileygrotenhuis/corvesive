@@ -8,7 +8,7 @@ defineProps({
   monthlyBudgets: Array,
 });
 
-const columns = ['Name', 'Total Balance', 'Notes'];
+const columns = ['Name', 'Total Balance', 'Remaining Balance', 'Notes'];
 
 const gotoBudget = (budget) => {
   router.visit(route('budgets.show', budget.id));
@@ -81,6 +81,11 @@ const gotoBudget = (budget) => {
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm text-gray-900 dark:text-gray-100">
                       ${{ budget.total_balance_in_cents / 100 }}
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900 dark:text-gray-100">
+                      ${{ budget.remaining_balance / 100 }}
                     </div>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">

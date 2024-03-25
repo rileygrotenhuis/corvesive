@@ -20,7 +20,7 @@ class MonthlySaving extends Model
 
     protected $appends = [
         'amount_paid',
-        'remaining_amount',
+        'amount_remaining',
         'has_paid',
     ];
 

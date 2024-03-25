@@ -55,7 +55,7 @@ class MonthlyBill extends Model
             ->sum('amount_in_cents');
     }
 
-    public function getAmountRemainingAttribute(): int
+    public function getRemainingAmountAttribute(): int
     {
         return $this->amount_in_cents - $this->amount_paid;
     }

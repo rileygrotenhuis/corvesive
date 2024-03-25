@@ -8,7 +8,7 @@ defineProps({
   monthlySavings: Array,
 });
 
-const columns = ['Name', 'Amount', 'Notes'];
+const columns = ['Name', 'Total', 'Remaining this Month', 'Notes'];
 
 const gotoSaving = (saving) => {
   router.visit(route('savings.show', saving.id));
@@ -81,6 +81,11 @@ const gotoSaving = (saving) => {
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm text-gray-900 dark:text-gray-100">
                       ${{ saving.amount_in_cents / 100 }}
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900 dark:text-gray-100">
+                      ${{ saving.amount_remaining / 100 }}
                     </div>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">

@@ -8,7 +8,14 @@ defineProps({
   monthlyBills: Array,
 });
 
-const columns = ['Issuer', 'Name', 'Amount', 'Due Day of Month', 'Notes'];
+const columns = [
+  'Issuer',
+  'Name',
+  'Due Day of Month',
+  'Total',
+  'Remaining this Month',
+  'Notes',
+];
 
 const gotoBill = (bill) => {
   router.visit(route('bills.show', bill.id));
@@ -85,12 +92,17 @@ const gotoBill = (bill) => {
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm text-gray-900 dark:text-gray-100">
+                      {{ bill.due_day_of_month }}
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900 dark:text-gray-100">
                       ${{ bill.amount_in_cents / 100 }}
                     </div>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm text-gray-900 dark:text-gray-100">
-                      {{ bill.due_day_of_month }}
+                      ${{ bill.remaining_amount / 100 }}
                     </div>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
