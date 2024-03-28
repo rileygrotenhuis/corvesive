@@ -65,6 +65,7 @@ const userHasPayPeriod = Boolean(usePage().props.auth.user.current_pay_period);
             <div class="flex items-center gap-4">
               <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <NavLink
+                  v-if="userHasPayPeriod"gi
                   :href="route('transactions.create')"
                   :active="route().current('transactions.create')"
                 >
