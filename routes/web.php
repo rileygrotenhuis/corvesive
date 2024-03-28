@@ -28,6 +28,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/playground', function () {
+    return Inertia::render('Playground');
+})->name('playground');
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
