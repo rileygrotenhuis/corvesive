@@ -26,15 +26,6 @@ const isActive = (route) => {
           Paystubs
         </Link>
       </li>
-      <li>
-        <Link
-          :href="route('deposits.index')"
-          class="font-semibold text-gray-400 leading-tight"
-          :class="{ 'text-gray-800 dark:text-gray-100': isActive('deposits') }"
-        >
-          Deposits
-        </Link>
-      </li>
     </ul>
   </div>
 </template>

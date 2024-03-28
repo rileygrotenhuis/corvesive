@@ -2,11 +2,15 @@
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PayPeriodsHeader from '@/Pages/PayPeriods/Partials/PayPeriodsHeader.vue';
-import PayPeriodPaystubs from '@/Pages/PayPeriods/Partials/PayPeriodPaystubs.vue';
+import TableRow from '@/Components/Tables/TableRow.vue';
+import TableData from '@/Components/Tables/TableData.vue';
+import Table from '@/Components/Tables/Table.vue';
 
 defineProps({
   paystubs: Array,
 });
+
+const columns = ['Issuer', 'Amount'];
 </script>
 
 <template>
@@ -19,9 +23,19 @@ defineProps({
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-          <PayPeriodPaystubs :paystubs="paystubs" />
-        </div>
+        <Table
+          title="Paystubs"
+          description="View all paystubs this pay period"
+          actionHref="pay-period-paystubs.settings"
+          actionText="+ Add"
+          :columns="columns"
+          :dataLength="paystubs.length"
+        >
+          <TableRow v-for="(paystub, index) in paystubs" :key="index">
+            <TableData :value="paystub.paystub.issuer" />
+            <TableData :value="`$${paystub.amount_in_cents / 100}`" />
+          </TableRow>
+        </Table>
       </div>
     </div>
   </AuthenticatedLayout>
