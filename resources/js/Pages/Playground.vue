@@ -1,6 +1,9 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Table from '@/Components/Tables/Table.vue';
+import TableRow from '@/Components/Tables/TableRow.vue';
+import TableData from '@/Components/Tables/TableData.vue';
 </script>
 
 <template>
@@ -25,10 +28,25 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     </template>
 
     <div class="py-12">
-      <div
-        class="max-w-7xl mx-auto flex flex-wrap gap-8 justify-center items-start"
-      >
-        <h1>Playground</h1>
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <Table
+          title="Table Title"
+          description="This is where your table description will go"
+          actionHref="playground"
+          actionText="Action"
+          :columns="['Column 1', 'Column 2', 'Column 3']"
+        >
+          <TableRow>
+            <TableData :value="'Data 1'" />
+            <TableData :value="'Data 1'" />
+            <TableData :value="'Data 1'" />
+          </TableRow>
+          <TableRow>
+            <TableData :value="'Data 1'" />
+            <TableData :value="'Data 1'" />
+            <TableData :value="'Data 1'" />
+          </TableRow>
+        </Table>
       </div>
     </div>
   </AuthenticatedLayout>
