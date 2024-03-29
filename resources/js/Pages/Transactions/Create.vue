@@ -49,7 +49,7 @@ const form = useForm({
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+        <div class="p-4 sm:p-8 bg-black shadow sm:rounded-lg">
           <section>
             <header>
               <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -70,7 +70,7 @@ const form = useForm({
 
                 <select
                   v-model="form.transactionable_type"
-                  class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full"
+                  class="border-gray-700 bg-zinc-900 text-white focus:border-indigo-600 focus:ring-indigo-600 rounded-md shadow-sm"
                 >
                   <option
                     v-for="(type, index) in transactionableTypes"
@@ -86,7 +86,7 @@ const form = useForm({
 
                 <select
                   v-model="form.transactionable_id"
-                  class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full"
+                  class="border-gray-700 bg-zinc-900 text-white focus:border-indigo-600 focus:ring-indigo-600 rounded-md shadow-sm"
                 >
                   <option
                     v-if="

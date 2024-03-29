@@ -68,7 +68,7 @@ watch(currentPayPeriod, (newValue, oldValue) => {
       <select
         v-if="payPeriods.length > 0"
         v-model="currentPayPeriod"
-        class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+        class="border-gray-700 bg-zinc-900 text-white focus:border-indigo-600 focus:ring-indigo-600 rounded-md shadow-sm"
       >
         <option
           v-for="(payPeriod, index) in payPeriods"
