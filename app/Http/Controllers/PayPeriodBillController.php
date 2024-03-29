@@ -25,8 +25,14 @@ class PayPeriodBillController extends Controller
         ]);
     }
 
-    public function settings(Request $request): Response
+    public function settings(Request $request): Response|RedirectResponse
     {
+        $bills = $request->user()->monthlyBills;
+
+        if ($bills->isEmpty()) {
+            return to_route('bills.create');
+        }
+
         return Inertia::render('PayPeriods/Bills/Settings', [
             'bills' => $request->user()->monthlyBills,
             'currentBills' => $request->user()->currentPayPeriod->bills,

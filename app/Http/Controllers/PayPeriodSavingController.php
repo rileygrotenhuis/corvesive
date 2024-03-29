@@ -11,7 +11,7 @@ use Inertia\Response;
 
 class PayPeriodSavingController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): Response|RedirectResponse
     {
         $currentPayPeriod = $request->user()->currentPayPeriod;
 
@@ -19,6 +19,10 @@ class PayPeriodSavingController extends Controller
             ->with('monthlySaving')
             ->where('pay_period_id', $currentPayPeriod->id)
             ->get();
+
+        if ($savings->isEmpty()) {
+            return to_route('savings.create');
+        }
 
         return Inertia::render('PayPeriods/Savings/Index', [
             'savings' => $savings,

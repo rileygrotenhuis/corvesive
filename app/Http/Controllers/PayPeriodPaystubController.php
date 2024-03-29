@@ -25,10 +25,16 @@ class PayPeriodPaystubController extends Controller
         ]);
     }
 
-    public function settings(Request $request): Response
+    public function settings(Request $request): Response|RedirectResponse
     {
+        $paystubs = $request->user()->paystubs;
+
+        if ($paystubs->isEmpty()) {
+            return to_route('paystubs.create');
+        }
+
         return Inertia::render('PayPeriods/Paystubs/Settings', [
-            'paystubs' => $request->user()->paystubs,
+            'paystubs' => $paystubs,
             'currentPaystubs' => $request->user()->currentPayPeriod->paystubs,
         ]);
     }

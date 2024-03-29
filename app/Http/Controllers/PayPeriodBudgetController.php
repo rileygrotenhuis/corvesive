@@ -25,10 +25,16 @@ class PayPeriodBudgetController extends Controller
         ]);
     }
 
-    public function settings(Request $request): Response
+    public function settings(Request $request): Response|RedirectResponse
     {
+        $budgets = $request->user()->monthlyBudgets;
+
+        if ($budgets->isEmpty()) {
+            return to_route('budgets.create');
+        }
+
         return Inertia::render('PayPeriods/Budgets/Settings', [
-            'budgets' => $request->user()->monthlyBudgets,
+            'budgets' => $budgets,
             'currentBudgets' => request()->user()->currentPayPeriod->budgets,
         ]);
     }
