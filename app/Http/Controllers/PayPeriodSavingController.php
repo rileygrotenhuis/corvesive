@@ -20,10 +20,6 @@ class PayPeriodSavingController extends Controller
             ->where('pay_period_id', $currentPayPeriod->id)
             ->get();
 
-        if ($savings->isEmpty()) {
-            return to_route('savings.create');
-        }
-
         return Inertia::render('PayPeriods/Savings/Index', [
             'savings' => $savings,
         ]);

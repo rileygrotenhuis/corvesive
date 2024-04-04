@@ -10,7 +10,7 @@ defineProps({
   savings: Array,
 });
 
-const columns = ['Issuer', 'Amount'];
+const columns = ['Issuer', 'Total', 'Remaining'];
 </script>
 
 <template>
@@ -34,6 +34,7 @@ const columns = ['Issuer', 'Amount'];
           <TableRow v-for="(saving, index) in savings" :key="index">
             <TableData :value="saving.monthly_saving.name" />
             <TableData :value="`$${saving.amount_in_cents / 100}`" />
+            <TableData :value="`$${saving.remaining_amount / 100}`" />
           </TableRow>
         </Table>
       </div>
