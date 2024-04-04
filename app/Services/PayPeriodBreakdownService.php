@@ -66,8 +66,8 @@ class PayPeriodBreakdownService
     {
         return Deposit::query()
             ->where('user_id', $this->payPeriod->id)
-            ->where('date', '>=', $this->payPeriod->start_date)
-            ->where('date', '<=', $this->payPeriod->end_date)
+            ->where('created_at', '>=', $this->payPeriod->start_date)
+            ->where('created_at', '<=', $this->payPeriod->end_date)
             ->sum('amount_in_cents');
     }
 
