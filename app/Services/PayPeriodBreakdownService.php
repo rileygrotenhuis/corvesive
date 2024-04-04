@@ -47,16 +47,16 @@ class PayPeriodBreakdownService
     {
         return Transaction::query()
             ->where('user_id', $this->payPeriod->user_id)
-            ->where('created_at', '>=', $this->payPeriod->start_date)
-            ->where('created_at', '<=', $this->payPeriod->end_date)
+            ->where('date', '>=', $this->payPeriod->start_date)
+            ->where('date', '<=', $this->payPeriod->end_date)
             ->sum('amount_in_cents');
     }
 
     public function getTotalSurplusPayments(): int
     {
         return Transaction::query()
-            ->where('created_at', '>=', $this->payPeriod->start_date)
-            ->where('created_at', '<=', $this->payPeriod->end_date)
+            ->where('date', '>=', $this->payPeriod->start_date)
+            ->where('date', '<=', $this->payPeriod->end_date)
             ->whereNull('transactionable_type')
             ->whereNull('transactionable_id')
             ->sum('amount_in_cents');
@@ -66,8 +66,8 @@ class PayPeriodBreakdownService
     {
         return Deposit::query()
             ->where('user_id', $this->payPeriod->id)
-            ->where('created_at', '>=', $this->payPeriod->start_date)
-            ->where('created_at', '<=', $this->payPeriod->end_date)
+            ->where('date', '>=', $this->payPeriod->start_date)
+            ->where('date', '<=', $this->payPeriod->end_date)
             ->sum('amount_in_cents');
     }
 
@@ -108,6 +108,6 @@ class PayPeriodBreakdownService
 
     public function getProjectedSurplus(): int
     {
-        return $this->getTotalIncome() - $this->getTotalSurplusPayments() - $this->getTotalExpenses();
+        return $this->getT.otalIncome() - $this->getTotalSurplusPayments() - $this->getTotalExpenses();
     }
 }
