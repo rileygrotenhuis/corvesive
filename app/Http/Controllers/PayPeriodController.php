@@ -14,6 +14,10 @@ class PayPeriodController extends Controller
 {
     public function index(Request $request): Response
     {
+        if ($request->user()->currentPayPeriod === null) {
+            return Inertia::render('PayPeriods/Create');
+        }
+
         $service = new PayPeriodBreakdownService($request->user()->currentPayPeriod);
 
         return Inertia::render('PayPeriods/Index', [
