@@ -108,6 +108,6 @@ class PayPeriodBreakdownService
 
     public function getProjectedSurplus(): int
     {
-        return $this->getT.otalIncome() - $this->getTotalSurplusPayments() - $this->getTotalExpenses();
+        return $this->getTotalIncome() - $this->getTotalSurplusPayments() - $this->getTotalExpenses();
     }
 }
