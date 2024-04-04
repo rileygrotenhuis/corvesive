@@ -33,7 +33,7 @@ const transactionableTypes = [
 ];
 
 const form = useForm({
-  transactionable_type: '',
+  transactionable_type: null,
   transactionable_id: '',
   amount: '',
   date: new Date().toISOString().substr(0, 10),
