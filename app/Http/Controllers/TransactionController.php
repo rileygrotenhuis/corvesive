@@ -20,17 +20,20 @@ class TransactionController extends Controller
         $bills = PayPeriodBill::query()
             ->with('bill')
             ->where('pay_period_id', $currentPayPeriod->id)
-            ->get();
+            ->get()
+            ->where('has_paid', false);
 
         $budgets = PayPeriodBudget::query()
             ->with('budget')
             ->where('pay_period_id', $currentPayPeriod->id)
-            ->get();
+            ->get()
+            ->where('remaining_balance', '>', 0);
 
         $savings = PayPeriodSaving::query()
             ->with('monthlySaving')
             ->where('pay_period_id', $currentPayPeriod->id)
-            ->get();
+            ->get()
+            ->where('has_paid', false);
 
         return Inertia::render('Transactions/Create', [
             'bills' => $bills,
