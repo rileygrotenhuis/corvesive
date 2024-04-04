@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\IncomeController;
@@ -33,8 +32,6 @@ Route::get('/playground', function () {
 })->name('playground');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', DashboardController::class)->name('dashboard');
-
     Route::prefix('income')->group(function () {
         Route::get('/', IncomeController::class)->name('income.index');
 
