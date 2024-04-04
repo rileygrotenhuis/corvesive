@@ -6,6 +6,7 @@ import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TransactionsHeader from '@/Pages/Transactions/Partials/TransactionsHeader.vue';
+import { watch } from 'vue';
 
 const props = defineProps({
   bills: Array,
@@ -38,6 +39,23 @@ const form = useForm({
   amount: '',
   date: new Date().toISOString().substr(0, 10),
 });
+
+watch(
+  () => form.transactionable_id,
+  (value) => {
+    if (form.transactionable_type === 'App\\Models\\PayPeriodBill') {
+      form.amount =
+        Object.values(props.bills).find((bill) => bill.id === value)
+          .remaining_amount / 100;
+    }
+
+    if (form.transactionable_type === 'App\\Models\\PayPeriodSaving') {
+      form.amount =
+        Object.values(props.savings).find((saving) => saving.id === value)
+          .remaining_amount / 100;
+    }
+  }
+);
 </script>
 
 <template>
