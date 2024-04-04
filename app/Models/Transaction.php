@@ -15,7 +15,15 @@ class Transaction extends Model
         'transactionable_type',
         'transactionable_id',
         'amount_in_cents',
+        'date',
     ];
+
+    public function casts(): array
+    {
+        return [
+            'date' => 'date',
+        ];
+    }
 
     public function user(): BelongsTo
     {

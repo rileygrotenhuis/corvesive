@@ -12,6 +12,7 @@ class StoreTransactionRequest extends FormRequest
             'transactionable_type' => ['nullable', 'in:App\Models\PayPeriodBill,App\Models\PayPeriodBudget,App\Models\PayPeriodSaving'],
             'transactionable_id' => ['nullable', 'integer'],
             'amount' => ['required', 'numeric', 'min:0'],
+            'date' => ['required', 'date'],
         ];
     }
 }

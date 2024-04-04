@@ -18,6 +18,7 @@ class TransactionFactory extends Factory
             ]),
             'transactionable_id' => $this->faker->numberBetween(1, 100),
             'amount_in_cents' => $this->faker->numberBetween(100, 100000),
+            'date' => $this->faker->date(),
         ];
     }
 }

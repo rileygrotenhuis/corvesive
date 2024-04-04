@@ -45,6 +45,7 @@ class TransactionController extends Controller
             'transactionable_type' => $request->input('transactionable_type'),
             'transactionable_id' => $request->input('transactionable_id'),
             'amount_in_cents' => $request->input('amount') * 100,
+            'date' => $request->input('date'),
         ]);
 
         return to_route('pay-periods.index');

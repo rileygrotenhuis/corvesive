@@ -36,6 +36,7 @@ const form = useForm({
   transactionable_type: '',
   transactionable_id: '',
   amount: '',
+  date: new Date().toISOString().substr(0, 10),
 });
 </script>
 
@@ -143,6 +144,20 @@ const form = useForm({
                 />
 
                 <InputError class="mt-2" :message="form.errors.amount" />
+              </div>
+
+              <div>
+                <InputLabel for="date" value="Date" />
+
+                <TextInput
+                  id="date"
+                  type="date"
+                  class="mt-1 block w-full"
+                  v-model="form.date"
+                  required
+                />
+
+                <InputError class="mt-2" :message="form.errors.date" />
               </div>
 
               <div class="flex items-center gap-4">
