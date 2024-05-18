@@ -1,5 +1,7 @@
 # Corvesive
 
+Budgeting made simple.
+
 ## Prerequisites
 
 Before you can run this application, ensure you have the following software installed on your system:
