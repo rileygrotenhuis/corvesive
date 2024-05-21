@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Objects\PieChart;
 use App\Services\IncomeBreakdownService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Objects\PieChart;
 
 class IncomeController extends Controller
 {

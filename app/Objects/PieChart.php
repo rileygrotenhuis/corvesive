@@ -2,7 +2,6 @@
 
 namespace App\Objects;
 
-
 class PieChart
 {
     public array $BACKGROUND_COLORS = [
