@@ -14,22 +14,9 @@ use App\Http\Controllers\PayPeriodSavingController;
 use App\Http\Controllers\PaystubController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/playground', function () {
-    return Inertia::render('Playground');
-})->name('playground');
+Route::redirect('/', '/pay-periods');
 
 Route::middleware('auth')->group(function () {
     Route::prefix('income')->group(function () {
