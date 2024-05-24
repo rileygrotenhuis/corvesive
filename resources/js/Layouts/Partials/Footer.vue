@@ -4,7 +4,7 @@ import GithubIcon from '@/Components/Icons/GithubIcon.vue';
 
 <template>
   <footer
-    class="max-w-7xl mx-auto px-8 py-60 pb-24 flex justify-center sm:justify-between gap-16 flex-wrap"
+    class="max-w-6xl mx-auto px-8 py-60 pb-24 flex justify-center sm:justify-between gap-16 flex-wrap"
   >
     <div>
       <h1 class="text-white text-3xl font-bold">Corvesive.</h1>

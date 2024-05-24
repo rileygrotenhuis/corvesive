@@ -1,9 +1,10 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
+import HeroSection from '@/Pages/Landing/Partials/HeroSection.vue';
 </script>
 
 <template>
   <GuestLayout>
-    <h1>Home Page</h1>
+    <HeroSection />
   </GuestLayout>
 </template>
