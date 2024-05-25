@@ -5,21 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Paystub extends Model
+class MonthlyPaystub extends Model
 {
     use HasFactory;
 
-    protected $table = 'paystubs';
+    protected $table = 'monthly_paystub';
 
     protected $fillable = [
         'user_id',
-        'issuer',
+        'paystub_id',
+        'year',
+        'month',
+        'pay_day',
         'amount_in_cents',
-        'recurrence_rate',
-        'recurrence_interval_one',
-        'recurrence_interval_two',
     ];
 
     public function user(): BelongsTo
@@ -27,8 +26,8 @@ class Paystub extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function monthlyPaystubs(): HasMany
+    public function paystub(): BelongsTo
     {
-        return $this->hasMany(MonthlyPaystub::class);
+        return $this->belongsTo(Paystub::class);
     }
 }

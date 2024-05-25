@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('issuer');
             $table->string('name');
-            $table->string('amount_in_cents');
+            $table->unsignedBigInteger('amount_in_cents');
             $table->unsignedInteger('due_day_of_month');
             $table->text('notes')->nullable();
             $table->timestamps();

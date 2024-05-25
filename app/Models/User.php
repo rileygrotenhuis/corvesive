@@ -37,8 +37,18 @@ class User extends Authenticatable
         return $this->hasMany(Paystub::class);
     }
 
+    public function monthlyPaystubs(): HasMany
+    {
+        return $this->hasMany(MonthlyPaystub::class);
+    }
+
     public function expenses(): HasMany
     {
         return $this->hasMany(Expense::class);
+    }
+
+    public function monthlyExpenses(): HasMany
+    {
+        return $this->hasMany(MonthlyExpense::class);
     }
 }

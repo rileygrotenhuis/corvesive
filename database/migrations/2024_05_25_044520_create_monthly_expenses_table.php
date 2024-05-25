@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paystubs', function (Blueprint $table) {
+        Schema::create('monthly_expense', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('issuer');
+            $table->foreignId('expense_id')->constrained('expenses')->cascadeOnDelete();
+            $table->unsignedInteger('year');
+            $table->unsignedInteger('month');
+            $table->date('due_date');
             $table->unsignedBigInteger('amount_in_cents');
-            $table->string('recurrence_rate');
-            $table->unsignedInteger('recurrence_interval_one');
-            $table->unsignedInteger('recurrence_interval_two')->nullable();
-            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paystubs');
+        Schema::dropIfExists('monthly_expense');
     }
 };
