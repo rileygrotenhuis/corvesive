@@ -5,7 +5,7 @@ import ExpenseSketch from '@/Components/Sketches/ExpenseSketch.vue';
 <template>
   <div class="w-full bg-primary-400">
     <div
-      class="max-w-6xl mx-auto px-8 py-12 md:py-16 flex flex-wrap-reverse items-center justify-center gap-8 md:gap-0"
+      class="max-w-4xl mx-auto px-8 py-12 md:py-16 flex flex-wrap-reverse items-center justify-center gap-8 md:gap-0"
     >
       <div class="w-full md:w-1/2 flex justify-center">
         <ExpenseSketch />

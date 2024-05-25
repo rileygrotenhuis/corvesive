@@ -5,11 +5,12 @@ import IncomeSketch from '@/Components/Sketches/IncomeSketch.vue';
 <template>
   <div class="w-full bg-white">
     <div
-      class="max-w-6xl mx-auto px-8 py-12 md:py-16 flex flex-wrap-reverse items-center justify-center gap-8 md:gap-0"
+      class="max-w-4xl mx-auto px-8 py-12 md:py-16 flex flex-wrap-reverse items-center justify-center gap-8 md:gap-0"
     >
       <div class="w-full md:w-1/2">
         <h3 class="text-primary-950 text-2xl font-bold mb-2">
-          Your paychecks, when you get them.
+          Your paychecks, when <br />
+          you get them.
         </h3>
         <p class="text-primary-950 text-base mb-4">
           Customize how you visualize your income by defining all of your
