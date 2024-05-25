@@ -6,6 +6,9 @@ use App\Models\MonthlyExpense;
 
 trait MonthlyExpenseManager
 {
+    /**
+     * Modifies the amount value for a Monthly Expense.
+     */
     public function modify(
         MonthlyExpense $monthlyExpense,
         int $amountInCents,
@@ -19,6 +22,9 @@ trait MonthlyExpenseManager
         return $monthlyExpense;
     }
 
+    /**
+     * Reschedules a Monthly Expense for a specific date.
+     */
     public function reschedule(
         MonthlyExpense $monthlyExpense,
         string $dueDate
@@ -32,6 +38,9 @@ trait MonthlyExpenseManager
         return $monthlyExpense;
     }
 
+    /**
+     * Un-schedules a Monthly Expense.
+     */
     public function unschedule(MonthlyExpense $monthlyExpense): void
     {
         // TODO: Validation Rules

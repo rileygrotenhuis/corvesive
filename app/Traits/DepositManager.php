@@ -7,6 +7,9 @@ use App\Models\User;
 
 trait DepositManager
 {
+    /**
+     * Makes a deposit for a user.
+     */
     public static function makeDeposit(
         User $user,
         int $amountInCents,
@@ -20,6 +23,9 @@ trait DepositManager
         ]);
     }
 
+    /**
+     * Modify the amount and notes for an existing deposit.
+     */
     public function modify(
         Deposit $deposit,
         int $amountInCents,
@@ -33,6 +39,9 @@ trait DepositManager
         return $deposit;
     }
 
+    /**
+     * Refund a deposit to remove it from the system.
+     */
     public function refund(Deposit $deposit): void
     {
         $deposit->delete();

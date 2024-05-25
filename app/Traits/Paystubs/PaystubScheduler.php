@@ -8,6 +8,9 @@ use Carbon\Carbon;
 
 trait PaystubScheduler
 {
+    /**
+     * Schedules a Paystub for a user on a specific date.
+     */
     public function schedule(
         Paystub $paystub,
         int $year,
@@ -28,6 +31,9 @@ trait PaystubScheduler
         ]);
     }
 
+    /**
+     * Schedules future Paystubs for the next 12 months.
+     */
     public function generateFutureExpenses(Paystub $paystub): void
     {
         if (in_array($paystub->recurrence_rate, ['monthly', 'semi-monthly'])) {
@@ -45,6 +51,9 @@ trait PaystubScheduler
         }
     }
 
+    /**
+     * Generates monthly, or semi-monthly expenses for the next 12 months.
+     */
     protected function generateMonthlyExpenses(
         Paystub $paystub,
         bool $semiMonthly = false
@@ -74,6 +83,9 @@ trait PaystubScheduler
         }
     }
 
+    /**
+     * Generates weekly, or bi-weekly expenses for the next 12 months.
+     */
     protected function generateWeeklyExpenses(
         Paystub $paystub,
         bool $biWeekly = false
@@ -93,6 +105,9 @@ trait PaystubScheduler
         }
     }
 
+    /**
+     * Updates future Paystubs with the new amount value.
+     */
     public function modifyFuturePaystubs(Paystub $paystub): void
     {
         $today = now()->format('Y-m-d');

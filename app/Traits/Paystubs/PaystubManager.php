@@ -9,6 +9,9 @@ use App\Models\User;
 
 trait PaystubManager
 {
+    /**
+     * Adds a new Paystub for a user.
+     */
     public static function add(
         User $user,
         string $issuer,
@@ -33,6 +36,9 @@ trait PaystubManager
         return $paystub;
     }
 
+    /**
+     * Modifies an existing Paystub.
+     */
     public function modify(
         Paystub $paystub,
         string $issuer,
@@ -60,6 +66,9 @@ trait PaystubManager
         return $paystub;
     }
 
+    /**
+     * Removes an existing Paystub.
+     */
     public function remove(Paystub $paystub): void
     {
         $paystub->delete();

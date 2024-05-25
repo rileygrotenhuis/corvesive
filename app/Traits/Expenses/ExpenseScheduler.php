@@ -8,6 +8,9 @@ use Carbon\Carbon;
 
 trait ExpenseScheduler
 {
+    /**
+     * Schedules an Expense for a user on a specific date.
+     */
     public function schedule(
         Expense $expense,
         int $year,
@@ -28,6 +31,9 @@ trait ExpenseScheduler
         ]);
     }
 
+    /**
+     * Schedules future Expenses for the next 12 months.
+     */
     public function generateFutureExpenses(Expense $expense): void
     {
         for ($i = 0; $i < 12; $i++) {
@@ -43,6 +49,9 @@ trait ExpenseScheduler
         }
     }
 
+    /**
+     * Updates future Expenses with the new amount value.
+     */
     public function modifyFutureExpenses(Expense $expense): void
     {
         $today = now()->format('Y-m-d');

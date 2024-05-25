@@ -9,6 +9,9 @@ use App\Models\User;
 
 trait ExpenseManager
 {
+    /**
+     * Adds a new Expense for a user.
+     */
     public static function add(
         User $user,
         string $type,
@@ -33,6 +36,9 @@ trait ExpenseManager
         return $expense;
     }
 
+    /**
+     * Modifies an existing Expense.
+     */
     public function modify(
         Expense $expense,
         string $issuer,
@@ -59,6 +65,9 @@ trait ExpenseManager
         return $expense;
     }
 
+    /**
+     * Removes an existing Expense.
+     */
     public function remove(Expense $expense): void
     {
         $expense->delete();
