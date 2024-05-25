@@ -8,7 +8,8 @@ import HeroSketch from '@/Components/Sketches/HeroSketch.vue';
   >
     <div class="w-full">
       <h1 class="text-4xl font-bold mb-4">
-        Budgeting never needed to be so complex.
+        Budgeting never <br />
+        needed to be so complex.
       </h1>
       <p class="mb-4">
         Record your personal finances and view your money in the way that you
