@@ -19,7 +19,7 @@ const submitRegisterForm = () => {
   <div class="flex justify-center items-center">
     <div class="w-full max-w-2xl px-8">
       <h4 class="text-black text-3xl font-bold mb-2">Welcome aboard!</h4>
-      <p class="text-black mb-8">
+      <p class="text-black mb-2">
         Already have an account?
         <a
           class="text-primary-700 font-bold hover:underline"
@@ -126,6 +126,12 @@ const submitRegisterForm = () => {
           </button>
         </div>
       </form>
+
+      <div
+        class="mt-8 text-center text-black hover:text-primary-700 hover:font-semibold transition-all ease-in-out"
+      >
+        <a :href="route('home')"> Back to home. </a>
+      </div>
     </div>
   </div>
 </template>

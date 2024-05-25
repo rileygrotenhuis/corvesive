@@ -68,6 +68,12 @@ const submitLoginForm = () => {
           </button>
         </div>
       </form>
+
+      <div
+        class="mt-8 text-center text-black hover:text-primary-700 hover:font-semibold transition-all ease-in-out"
+      >
+        <a :href="route('home')"> Back to home. </a>
+      </div>
     </div>
   </div>
 </template>
