@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Traits;
 
 use App\Models\Expense;
 use App\Models\User;
 
-class ExpenseService
+trait ExpenseManager
 {
-    public function create(
+    public static function add(
         User $user,
         string $issuer,
         string $name,
@@ -25,7 +25,7 @@ class ExpenseService
         ]);
     }
 
-    public function update(
+    public function modify(
         Expense $expense,
         string $issuer,
         string $name,
@@ -44,7 +44,7 @@ class ExpenseService
         return $expense;
     }
 
-    public function delete(Expense $expense): void
+    public function remove(Expense $expense): void
     {
         $expense->delete();
     }

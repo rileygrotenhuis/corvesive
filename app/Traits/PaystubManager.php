@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Traits;
 
 use App\Models\Paystub;
 use App\Models\User;
 
-class PaystubService
+trait PaystubManager
 {
-    public function create(
+    public static function add(
         User $user,
         string $issuer,
         int $amountInCents,
@@ -27,7 +27,7 @@ class PaystubService
         ]);
     }
 
-    public function update(
+    public function modify(
         Paystub $paystub,
         string $issuer,
         int $amountInCents,
@@ -48,7 +48,7 @@ class PaystubService
         return $paystub;
     }
 
-    public function delete(Paystub $paystub): void
+    public function remove(Paystub $paystub): void
     {
         $paystub->delete();
     }

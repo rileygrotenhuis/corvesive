@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Paystubs;
 
-use App\Traits\PaystubRecurrence;
+use App\Types\PaystubRecurrence;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ConditionalRules;
 use Illuminate\Validation\Rule;

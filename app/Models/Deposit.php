@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\DepositManager;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Deposit extends Model
 {
-    use HasFactory;
+    use DepositManager, HasFactory;
 
     protected $table = 'deposits';
 
