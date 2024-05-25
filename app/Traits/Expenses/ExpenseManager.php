@@ -11,6 +11,7 @@ trait ExpenseManager
 {
     public static function add(
         User $user,
+        string $type,
         string $issuer,
         string $name,
         int $amountInCents,
@@ -19,6 +20,7 @@ trait ExpenseManager
     ): Expense {
         return Expense::query()->create([
             'user_id' => $user->id,
+            'type' => $type,
             'issuer' => $issuer,
             'name' => $name,
             'amount_in_cents' => $amountInCents,

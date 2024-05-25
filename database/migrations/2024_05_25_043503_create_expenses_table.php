@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('type');
             $table->string('issuer');
             $table->string('name');
             $table->unsignedBigInteger('amount_in_cents');
