@@ -20,6 +20,7 @@ class Paystub extends Model
         'recurrence_rate',
         'recurrence_interval_one',
         'recurrence_interval_two',
+        'notes',
     ];
 
     public function user(): BelongsTo
