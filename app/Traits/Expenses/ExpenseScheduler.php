@@ -33,7 +33,7 @@ trait ExpenseScheduler
         for ($i = 0; $i < 12; $i++) {
             $dueDate = Carbon::now()->addMonths($i)->day($expense->due_day_of_month);
 
-            $expense->schedule(
+            $this->schedule(
                 $expense,
                 $dueDate->year,
                 $dueDate->month,
