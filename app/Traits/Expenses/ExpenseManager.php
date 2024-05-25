@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\Expenses;
 
 use App\Models\Expense;
 use App\Models\MonthlyExpense;

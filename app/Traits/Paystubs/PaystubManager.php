@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\Paystubs;
 
 use App\Models\MonthlyPaystub;
 use App\Models\Paystub;

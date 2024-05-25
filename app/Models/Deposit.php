@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Deposit extends Model
 {
-    use DepositManager, HasFactory;
+    use DepositManager, DepositManager, HasFactory;
 
     protected $table = 'deposits';
 
