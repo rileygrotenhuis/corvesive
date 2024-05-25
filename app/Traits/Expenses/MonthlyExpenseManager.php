@@ -13,9 +13,6 @@ trait MonthlyExpenseManager
         MonthlyExpense $monthlyExpense,
         int $amountInCents,
     ): MonthlyExpense {
-        // TODO: Validation Rules
-        // TODO: Policies
-
         $monthlyExpense->amount_in_cents = $amountInCents;
         $monthlyExpense->save();
 
@@ -29,9 +26,6 @@ trait MonthlyExpenseManager
         MonthlyExpense $monthlyExpense,
         string $dueDate
     ): MonthlyExpense {
-        // TODO: Validation Rules
-        // TODO: Policies
-
         $monthlyExpense->due_duate = $dueDate;
         $monthlyExpense->save();
 
@@ -43,9 +37,6 @@ trait MonthlyExpenseManager
      */
     public function unschedule(MonthlyExpense $monthlyExpense): void
     {
-        // TODO: Validation Rules
-        // TODO: Policies
-
         $monthlyExpense->delete();
     }
 }

@@ -18,9 +18,6 @@ trait ExpenseScheduler
         string $dueDate,
         int $amountInCents
     ): MonthlyExpense {
-        // TODO: Validation Rules
-        // TODO: Policies
-
         return MonthlyExpense::query()->create([
             'user_id' => $expense->user_id,
             'expense_id' => $expense->id,

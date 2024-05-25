@@ -31,6 +31,10 @@ trait ExpenseManager
             'notes' => $notes,
         ]);
 
+        /**
+         * Schedules future instances of this Expense
+         * for the next 12 months
+         */
         event(new ExpenseCreated($expense));
 
         return $expense;
@@ -58,8 +62,21 @@ trait ExpenseManager
             'notes' => $notes,
         ]);
 
+        /**
+         * If the amount value changed, modify all
+         * future instances of this Expense
+         */
         if ($amountChanged) {
             event(new ExpenseModified($expense));
+        }
+
+        /**
+         * If the recurrence changed, un-schedule
+         * and reschedule all future instances of this Expense
+         */
+        if ($dueDayChanged) {
+            // TODO: Modify future due dates
+            logger('Due day changed');
         }
 
         return $expense;

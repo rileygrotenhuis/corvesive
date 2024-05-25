@@ -18,9 +18,6 @@ trait PaystubScheduler
         string $payDay,
         int $amountInCents
     ): MonthlyPaystub {
-        // TODO: Validation Rules
-        // TODO: Policies
-
         return MonthlyPaystub::query()->create([
             'user_id' => $paystub->user_id,
             'paystub_id' => $paystub->id,

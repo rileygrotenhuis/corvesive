@@ -31,6 +31,10 @@ trait PaystubManager
             'notes' => $notes,
         ]);
 
+        /**
+         * Schedules future instances of this Paystub
+         * for the next 12 months
+         */
         event(new PaystubCreated($paystub));
 
         return $paystub;
@@ -50,6 +54,12 @@ trait PaystubManager
     ): Paystub {
         $amountChanged = $paystub->amount_in_cents !== $amountInCents;
 
+        $recurrenceChanged = (
+            $paystub->recurrence_rate !== $recurrenceRate ||
+            $paystub->recurrence_interval_one !== $recurrenceIntervalOne ||
+            $paystub->recurrence_interval_two !== $recurrenceIntervalTwo
+        );
+
         $paystub->update([
             'issuer' => $issuer,
             'amount_in_cents' => $amountInCents,
@@ -59,8 +69,21 @@ trait PaystubManager
             'notes' => $notes,
         ]);
 
+        /**
+         * If the amount value changed, modify all
+         * future instances of this Paystub
+         */
         if ($amountChanged) {
             event(new PaystubModified($paystub));
+        }
+
+        /**
+         * If the recurrence changed, unschedule
+         * and reschedule all future instances of this Paystub
+         */
+        if ($recurrenceChanged) {
+            // TODO: Modify future paystub dates
+            logger('Recurrence changed');
         }
 
         return $paystub;

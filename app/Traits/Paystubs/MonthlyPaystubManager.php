@@ -13,9 +13,6 @@ trait MonthlyPaystubManager
         MonthlyPaystub $monthlyPaystub,
         int $amountInCents
     ): MonthlyPaystub {
-        // TODO: Validation Rules
-        // TODO: Policies
-
         $monthlyPaystub->amount_in_cents = $amountInCents;
         $monthlyPaystub->save();
 
@@ -29,9 +26,6 @@ trait MonthlyPaystubManager
         MonthlyPaystub $monthlyPaystub,
         string $payDay
     ): MonthlyPaystub {
-        // TODO: Validation Rules
-        // TODO: Policies
-
         $monthlyPaystub->pay_day = $payDay;
         $monthlyPaystub->save();
 
@@ -43,9 +37,6 @@ trait MonthlyPaystubManager
      */
     public function unschedule(MonthlyPaystub $monthlyPaystub): void
     {
-        // TODO: Validation Rules
-        // TODO: Policies
-
         $monthlyPaystub->delete();
     }
 }
