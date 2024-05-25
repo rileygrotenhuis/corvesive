@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Expense extends Model
 {
-    use HasFactory, ExpenseManager, ExpenseScheduler;
+    use ExpenseManager, ExpenseScheduler, HasFactory;
 
     protected $table = 'expenses';
 

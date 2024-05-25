@@ -20,7 +20,7 @@ class StorePaystubRequest extends FormRequest
             'recurrence_interval_one' => ['required', $this->intervalRules()],
             'recurrence_interval_two' => [
                 'nullable',
-                'required_if:recurrence_rate,bi-monthly,bi-weekly',
+                'required_if:recurrence_rate,semi-monthly',
                 $this->intervalRules(),
             ],
         ];
@@ -40,7 +40,7 @@ class StorePaystubRequest extends FormRequest
         return [
             'recurrence_interval_one.between' => 'Your selected interval is out of range.',
             'recurrence_interval_two.between' => 'Your selected interval is out of range.',
-            'recurrence_interval_two.required_if' => 'You must provide a second value for bi-weekly or bi-montly paystubs.',
+            'recurrence_interval_two.required_if' => 'You must provide a second value for semi-montly paystubs.',
         ];
     }
 }

@@ -30,9 +30,38 @@ trait PaystubScheduler
 
     public function generateFutureExpenses(Paystub $paystub): void
     {
-        if ($paystub->recurrence_rate === 'monthly' || $paystub->recurrence_rate === 'bi-monthly') {
-            for ($i = 0; $i < 12; $i++) {
-                $payDate = Carbon::now()->addMonths($i)->day($paystub->recurrence_interval_one);
+        if (in_array($paystub->recurrence_rate, ['monthly', 'semi-monthly'])) {
+            $this->generateMonthlyExpenses(
+                $paystub,
+                $paystub->recurrence_rate === 'semi-monthly'
+            );
+        }
+
+        if (in_array($paystub->recurrence_rate, ['weekly', 'bi-weekly'])) {
+            $this->generateWeeklyExpenses(
+                $paystub,
+                $paystub->recurrence_rate === 'bi-weekly'
+            );
+        }
+    }
+
+    protected function generateMonthlyExpenses(
+        Paystub $paystub,
+        bool $semiMonthly = false
+    ): void {
+        for ($i = 0; $i < 12; $i++) {
+            $payDate = Carbon::now()->addMonths($i)->day($paystub->recurrence_interval_one);
+
+            $this->schedule(
+                $paystub,
+                $payDate->year,
+                $payDate->month,
+                $payDate,
+                $paystub->amount_in_cents,
+            );
+
+            if ($semiMonthly) {
+                $payDate = Carbon::now()->addMonths($i)->day($paystub->recurrence_interval_two);
 
                 $this->schedule(
                     $paystub,
@@ -41,19 +70,26 @@ trait PaystubScheduler
                     $payDate,
                     $paystub->amount_in_cents,
                 );
-
-                if ($paystub->recurrence_rate === 'bi-monthly') {
-                    $payDate = Carbon::now()->addMonths($i)->day($paystub->recurrence_interval_two);
-
-                    $this->schedule(
-                        $paystub,
-                        $payDate->year,
-                        $payDate->month,
-                        $payDate,
-                        $paystub->amount_in_cents,
-                    );
-                }
             }
+        }
+    }
+
+    protected function generateWeeklyExpenses(
+        Paystub $paystub,
+        bool $biWeekly = false
+    ): void {
+        $interval = $biWeekly ? 2 : 1;
+
+        for ($i = 0; $i < 52; $i += $interval) {
+            $payDate = Carbon::now()->addWeeks($i)->next($paystub->recurrence_interval_one);
+
+            $this->schedule(
+                $paystub,
+                $payDate->year,
+                $payDate->month,
+                $payDate,
+                $paystub->amount_in_cents
+            );
         }
     }
 

@@ -8,6 +8,6 @@ trait PaystubRecurrence
         'weekly',
         'bi-weekly',
         'monthly',
-        'bi-monthly',
+        'semi-monthly',
     ];
 }
