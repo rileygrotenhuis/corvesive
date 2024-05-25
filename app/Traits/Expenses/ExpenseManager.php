@@ -2,6 +2,7 @@
 
 namespace App\Traits\Expenses;
 
+use App\Events\ExpenseModified;
 use App\Models\Expense;
 use App\Models\MonthlyExpense;
 use App\Models\User;
@@ -34,6 +35,9 @@ trait ExpenseManager
         int $dueDayOfMonth,
         string $notes
     ): Expense {
+        $amountChanged = $expense->amount_in_cents !== $amountInCents;
+        $dueDayChanged = $expense->due_day_of_month !== $dueDayOfMonth;
+
         $expense->update([
             'issuer' => $issuer,
             'name' => $name,
@@ -41,6 +45,10 @@ trait ExpenseManager
             'due_day_of_month' => $dueDayOfMonth,
             'notes' => $notes,
         ]);
+
+        if ($amountChanged) {
+            event(new ExpenseModified($expense));
+        }
 
         return $expense;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Traits\Paystubs;
 
+use App\Events\PaystubModified;
 use App\Models\MonthlyPaystub;
 use App\Models\Paystub;
 use App\Models\User;
@@ -37,6 +38,8 @@ trait PaystubManager
         ?string $recurrenceIntervalTwo,
         ?string $notes
     ): Paystub {
+        $amountChanged = $paystub->amount_in_cents !== $amountInCents;
+
         $paystub->update([
             'issuer' => $issuer,
             'amount_in_cents' => $amountInCents,
@@ -45,6 +48,10 @@ trait PaystubManager
             'recurrence_interval_two' => $recurrenceIntervalTwo,
             'notes' => $notes,
         ]);
+
+        if ($amountChanged) {
+            event(new PaystubModified($paystub));
+        }
 
         return $paystub;
     }
