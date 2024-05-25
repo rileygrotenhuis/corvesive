@@ -6,7 +6,7 @@ import HeroSketch from '@/Components/Sketches/HeroSketch.vue';
   <section
     class="max-w-6xl h-[100vh] md:h-[65vh] mx-auto px-8 flex justify-center mt-32 md:mt-48 gap-24"
   >
-    <div class="w-full">
+    <div class="w-full mt-8">
       <h1 class="text-4xl font-bold mb-4">
         Budgeting never <br />
         needed to be so complex.
