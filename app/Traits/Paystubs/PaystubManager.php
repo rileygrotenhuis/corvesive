@@ -2,7 +2,7 @@
 
 namespace App\Traits\Paystubs;
 
-use App\Events\PaystubModified;
+use App\Events\Paystubs\PaystubModified;
 use App\Models\MonthlyPaystub;
 use App\Models\Paystub;
 use App\Models\User;
@@ -79,5 +79,17 @@ trait PaystubManager
             'pay_day' => $payDay,
             'amount_in_cents' => $amountInCents,
         ]);
+    }
+
+    public function modifyFuturePaystubs(Paystub $paystub): void
+    {
+        $today = now()->format('Y-m-d');
+
+        MonthlyPaystub::query()
+            ->where('paystub_id', $paystub->id)
+            ->where('pay_date', '>=', $today)
+            ->update([
+                'amount_in_cents' => $paystub->amount_in_cents,
+            ]);
     }
 }

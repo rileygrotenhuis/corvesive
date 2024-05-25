@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Expenses;
 
 use App\Models\Expense;
 use Illuminate\Broadcasting\InteractsWithSockets;

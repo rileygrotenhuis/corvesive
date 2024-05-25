@@ -2,10 +2,12 @@
 
 namespace App\Traits\Expenses;
 
-use App\Events\ExpenseModified;
+use App\Events\Expenses\ExpenseCreated;
+use App\Events\Expenses\ExpenseModified;
 use App\Models\Expense;
 use App\Models\MonthlyExpense;
 use App\Models\User;
+use Carbon\Carbon;
 
 trait ExpenseManager
 {
@@ -18,7 +20,7 @@ trait ExpenseManager
         int $dueDayOfMonth,
         string $notes,
     ): Expense {
-        return Expense::query()->create([
+        $expense = Expense::query()->create([
             'user_id' => $user->id,
             'type' => $type,
             'issuer' => $issuer,
@@ -27,6 +29,10 @@ trait ExpenseManager
             'due_day_of_month' => $dueDayOfMonth,
             'notes' => $notes,
         ]);
+
+        event(new ExpenseCreated($expense));
+
+        return $expense;
     }
 
     public function modify(
@@ -78,5 +84,32 @@ trait ExpenseManager
             'due_date' => $dueDate,
             'amount_in_cents' => $amountInCents,
         ]);
+    }
+
+    public function generateFutureExpenses(Expense $expense): void
+    {
+        for ($i = 0; $i < 12; $i++) {
+            $dueDate = Carbon::now()->addMonths($i)->day($expense->due_day_of_month);
+
+            $expense->schedule(
+                $expense,
+                $dueDate->year,
+                $dueDate->month,
+                $dueDate,
+                $expense->amount_in_cents
+            );
+        }
+    }
+
+    public function modifyFutureExpenses(Expense $expense): void
+    {
+        $today = now()->format('Y-m-d');
+
+        MonthlyExpense::query()
+            ->where('expense_id', $expense->id)
+            ->where('due_date', '>=', $today)
+            ->update([
+                'amount_in_cents' => $expense->amount_in_cents,
+            ]);
     }
 }
