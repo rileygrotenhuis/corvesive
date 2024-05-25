@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Expense;
+use App\Models\MonthlyExpense;
 use App\Models\User;
 
 trait ExpenseManager
@@ -47,5 +48,25 @@ trait ExpenseManager
     public function remove(Expense $expense): void
     {
         $expense->delete();
+    }
+
+    public function schedule(
+        Expense $expense,
+        int $year,
+        int $month,
+        string $dueDate,
+        int $amountInCents
+    ): MonthlyExpense {
+        // TODO: Validation Rules
+        // TODO: Policies
+
+        return MonthlyExpense::query()->create([
+            'user_id' => $expense->user_id,
+            'expense_id' => $expense->id,
+            'year' => $year,
+            'month' => $month,
+            'due_date' => $dueDate,
+            'amount_in_cents' => $amountInCents,
+        ]);
     }
 }

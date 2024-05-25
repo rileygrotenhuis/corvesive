@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\MonthlyPaystub;
 use App\Models\Paystub;
 use App\Models\User;
 
@@ -51,5 +52,25 @@ trait PaystubManager
     public function remove(Paystub $paystub): void
     {
         $paystub->delete();
+    }
+
+    public function schedule(
+        Paystub $paystub,
+        int $year,
+        int $month,
+        string $payDay,
+        int $amountInCents
+    ): MonthlyPaystub {
+        // TODO: Validation Rules
+        // TODO: Policies
+
+        return MonthlyPaystub::query()->create([
+            'user_id' => $paystub->user_id,
+            'paystub_id' => $paystub->id,
+            'year' => $year,
+            'month' => $month,
+            'pay_day' => $payDay,
+            'amount_in_cents' => $amountInCents,
+        ]);
     }
 }
