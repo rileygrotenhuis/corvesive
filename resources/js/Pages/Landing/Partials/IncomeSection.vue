@@ -5,7 +5,7 @@ import IncomeSketch from '@/Components/Sketches/IncomeSketch.vue';
 <template>
   <div class="w-full bg-white">
     <div
-      class="max-w-6xl mx-auto px-8 py-12 sm:py-8 flex flex-wrap-reverse items-center justify-center gap-8 md:gap-0"
+      class="max-w-6xl mx-auto px-8 py-12 md:py-16 flex flex-wrap-reverse items-center justify-center gap-8 md:gap-0"
     >
       <div class="w-full md:w-1/2">
         <h3 class="text-primary-950 text-2xl font-bold mb-2">
