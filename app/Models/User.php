@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(PaydayTask::class);
     }
+
+    public function deposits(): HasMany
+    {
+        return $this->hasMany(Deposit::class);
+    }
 }
