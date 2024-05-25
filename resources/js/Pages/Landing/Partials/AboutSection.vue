@@ -1,8 +1,6 @@
-<script setup></script>
-
 <template>
   <div
-    class="max-w-4xl py-36 mx-auto px-8 pb-36 flex flex-col sm:flex-row justify-center items-center gap-8"
+    class="max-w-4xl py-36 mx-auto px-8 flex flex-col md:flex-row justify-center items-center gap-8"
   >
     <div>
       <img
@@ -13,7 +11,7 @@
     </div>
 
     <div class="w-full">
-      <h2 class="text-white font-bold text-2xl mb-4">Hi, I'm Riley!</h2>
+      <h3 class="text-white font-bold text-2xl mb-4">Hi, I'm Riley!</h3>
       <p class="text-white text-sm mb-2">
         I am the creator, and sole developer behind Corvesive. I currently work
         for Midwestern Interactive as a software engineer, but have a little
