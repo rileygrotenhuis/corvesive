@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Paystubs;
 
 use App\Traits\PaystubRecurrence;
 use Illuminate\Foundation\Http\FormRequest;
