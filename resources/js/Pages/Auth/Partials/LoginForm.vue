@@ -20,7 +20,7 @@ const submitLoginForm = () => {
         Don't have an account?
         <a
           class="text-primary-700 font-bold hover:underline"
-          :href="route('register.index')"
+          :href="route('register')"
         >
           Register now!
         </a>

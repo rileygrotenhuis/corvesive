@@ -16,7 +16,7 @@ import HeroSketch from '@/Components/Sketches/HeroSketch.vue';
         want to see it.
       </p>
       <a
-        href="#"
+        :href="route('register')"
         class="bg-primary-600 text-white px-4 py-1 rounded-md font-semibold hover:bg-primary-700 transition-all"
       >
         Get Started

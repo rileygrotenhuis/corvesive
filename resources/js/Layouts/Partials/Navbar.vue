@@ -7,7 +7,7 @@
 
       <a
         class="bg-primary-700 text-white text-sm px-6 py-1 rounded-md font-semibold hover:bg-primary-500"
-        href="#"
+        :href="route('dashboard')"
       >
         Dashboard
       </a>

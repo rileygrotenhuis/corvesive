@@ -21,7 +21,7 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return to_route('home');
+        return to_route('dashboard');
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -32,6 +32,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return to_route('login.index');
+        return to_route('login');
     }
 }

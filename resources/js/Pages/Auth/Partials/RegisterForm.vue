@@ -23,7 +23,7 @@ const submitRegisterForm = () => {
         Already have an account?
         <a
           class="text-primary-700 font-bold hover:underline"
-          :href="route('login.index')"
+          :href="route('login')"
         >
           Sign in!
         </a>
