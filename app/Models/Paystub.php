@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Paystubs\PaystubManager;
+use App\Traits\Paystubs\PaystubScheduler;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Paystub extends Model
 {
-    use HasFactory, PaystubManager;
+    use HasFactory, PaystubManager, PaystubScheduler;
 
     protected $table = 'paystubs';
 
