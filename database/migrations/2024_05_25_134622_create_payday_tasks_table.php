@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('monthly_paystubs', function (Blueprint $table) {
+        Schema::create('payday_tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('paystub_id')->constrained('paystubs')->cascadeOnDelete();
-            $table->unsignedInteger('year');
-            $table->unsignedInteger('month');
-            $table->date('pay_day');
+            $table->foreignId('monthly_paystub_id')->constrained('monthly_paystubs')->cascadeOnDelete();
+            $table->foreignId('monthly_expense_id')->constrained('monthly_expenses')->cascadeOnDelete();
             $table->unsignedBigInteger('amount_in_cents');
+            $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('monthly_paystubs');
+        Schema::dropIfExists('payday_tasks');
     }
 };
