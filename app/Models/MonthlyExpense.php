@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Expenses\ExpensePayments;
 use App\Traits\Expenses\MonthlyExpenseManager;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MonthlyExpense extends Model
 {
-    use HasFactory, MonthlyExpenseManager;
+    use ExpensePayments, HasFactory, MonthlyExpenseManager;
 
     protected $table = 'monthly_expenses';
 
