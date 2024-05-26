@@ -118,10 +118,9 @@ trait PaystubScheduler
     }
 
     /**
-     * Reschedules all future instances of a Paystub
-     * to the new recurrence cycle.
+     * Unschedules all future instances of a Paystub.
      */
-    public function rescheduleFuturePaystubs(Paystub $paystub): void
+    public function unscheduleFuturePaystubs(Paystub $paystub): void
     {
         $today = now()->format('Y-m-d');
 
@@ -129,7 +128,5 @@ trait PaystubScheduler
             ->where('paystub_id', $paystub->id)
             ->where('pay_date', '>=', $today)
             ->delete();
-
-        $this->generateFutureExpenses($paystub);
     }
 }

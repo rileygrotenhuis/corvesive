@@ -10,6 +10,7 @@ class RescheduleFuturePaystubs
     {
         $paystub = $event->paystub;
 
-        $paystub->rescheduleFuturePaystubs($paystub);
+        $paystub->unscheduleFuturePaystubs($paystub);
+        $paystub->generateFutureExpenses($paystub);
     }
 }

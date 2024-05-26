@@ -62,6 +62,19 @@ trait ExpenseScheduler
     }
 
     /**
+     * Unschedules all future instances of an Expense.
+     */
+    public function unscheduleFutureExpenses(Expense $expense): void
+    {
+        $today = now()->format('Y-m-d');
+
+        MonthlyExpense::query()
+            ->where('expense_id', $expense->id)
+            ->where('due_date', '>=', $today)
+            ->delete();
+    }
+
+    /**
      * Reschedules all future instances of an Expense
      * to the new due day of the month.
      */
