@@ -71,10 +71,10 @@ trait PaystubManager
         ]);
 
         /**
-         * If the amount value changed, modify all
+         * If ONLY the amount value changed, modify all
          * future instances of this Paystub
          */
-        if ($amountChanged) {
+        if ($amountChanged && ! $recurrenceChanged) {
             event(new PaystubModified($paystub));
         }
 

@@ -64,10 +64,10 @@ trait ExpenseManager
         ]);
 
         /**
-         * If the amount value changed, modify all
+         * If ONLY amount value changed, modify all
          * future instances of this Expense
          */
-        if ($amountChanged) {
+        if ($amountChanged && ! $dueDayChanged) {
             event(new ExpenseModified($expense));
         }
 
