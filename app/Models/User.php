@@ -22,7 +22,7 @@ class User extends Authenticatable
 
     protected $appends = [
         'full_name',
-        'initials'
+        'initials',
     ];
 
     protected $hidden = [
@@ -39,12 +39,12 @@ class User extends Authenticatable
 
     public function getFullNameAttribute(): string
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     public function getInitialsAttribute(): string
     {
-        return $this->first_name[0] . $this->last_name[0];
+        return $this->first_name[0].$this->last_name[0];
     }
 
     public function paystubs(): HasMany
@@ -70,6 +70,11 @@ class User extends Authenticatable
     public function paydayTasks(): HasMany
     {
         return $this->hasMany(PaydayTask::class);
+    }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 
     public function deposits(): HasMany
