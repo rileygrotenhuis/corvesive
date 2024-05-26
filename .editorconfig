@@ -1,0 +1,26 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Use 4 spaces for indentation
+[*.js]
+indent_style = space
+indent_size = 2
+
+# Use single quotes instead of double quotes
+[*.js]
+quote_type = single
+
+# Use semicolons at the end of each statement
+[*.js]
+insert_final_semicolon = true
+
+# Use trailing commas wherever possible (objects, arrays, etc.)
+[*.js]
+trailing_comma = es5
