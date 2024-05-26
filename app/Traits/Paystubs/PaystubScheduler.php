@@ -13,17 +13,15 @@ trait PaystubScheduler
      */
     public function schedule(
         Paystub $paystub,
-        int $year,
-        int $month,
-        string $payDay,
+        Carbon $payDay,
         int $amountInCents
     ): MonthlyPaystub {
         return MonthlyPaystub::query()->create([
             'user_id' => $paystub->user_id,
             'paystub_id' => $paystub->id,
-            'year' => $year,
-            'month' => $month,
-            'pay_day' => $payDay,
+            'year' => $payDay->year,
+            'month' => $payDay->month,
+            'pay_day' => $payDay->format('Y-m-d'),
             'amount_in_cents' => $amountInCents,
         ]);
     }
@@ -60,8 +58,6 @@ trait PaystubScheduler
 
             $this->schedule(
                 $paystub,
-                $payDate->year,
-                $payDate->month,
                 $payDate,
                 $paystub->amount_in_cents,
             );
@@ -71,8 +67,6 @@ trait PaystubScheduler
 
                 $this->schedule(
                     $paystub,
-                    $payDate->year,
-                    $payDate->month,
                     $payDate,
                     $paystub->amount_in_cents,
                 );
@@ -94,8 +88,6 @@ trait PaystubScheduler
 
             $this->schedule(
                 $paystub,
-                $payDate->year,
-                $payDate->month,
                 $payDate,
                 $paystub->amount_in_cents
             );

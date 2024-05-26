@@ -13,17 +13,15 @@ trait ExpenseScheduler
      */
     public function schedule(
         Expense $expense,
-        int $year,
-        int $month,
-        string $dueDate,
+        Carbon $dueDate,
         int $amountInCents
     ): MonthlyExpense {
         return MonthlyExpense::query()->create([
             'user_id' => $expense->user_id,
             'expense_id' => $expense->id,
-            'year' => $year,
-            'month' => $month,
-            'due_date' => $dueDate,
+            'year' => $dueDate->year,
+            'month' => $dueDate->month,
+            'due_date' => $dueDate->format('Y-m-d'),
             'amount_in_cents' => $amountInCents,
         ]);
     }
@@ -38,8 +36,6 @@ trait ExpenseScheduler
 
             $this->schedule(
                 $expense,
-                $dueDate->year,
-                $dueDate->month,
                 $dueDate,
                 $expense->amount_in_cents
             );
