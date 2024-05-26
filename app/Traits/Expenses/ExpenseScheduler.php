@@ -60,4 +60,23 @@ trait ExpenseScheduler
                 'amount_in_cents' => $expense->amount_in_cents,
             ]);
     }
+
+    /**
+     * Reschedules all future instances of an Expense
+     * to the new due day of the month.
+     */
+    public function rescheduleFutureExpenses(Expense $expense): void
+    {
+        $today = now()->format('Y-m-d');
+
+        MonthlyExpense::query()
+            ->where('expense_id', $expense->id)
+            ->where('due_date', '>=', $today)
+            ->each(function (MonthlyExpense $monthlyExpense) use ($expense) {
+                $newDueDate = Carbon::parse($monthlyExpense->due_date)->day($expense->due_day_of_month);
+
+                $monthlyExpense->due_date = $newDueDate;
+                $monthlyExpense->save();
+            });
+    }
 }

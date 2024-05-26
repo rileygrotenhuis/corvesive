@@ -4,6 +4,7 @@ namespace App\Traits\Expenses;
 
 use App\Events\Expenses\ExpenseCreated;
 use App\Events\Expenses\ExpenseModified;
+use App\Events\Expenses\ExpenseRescheduled;
 use App\Models\Expense;
 use App\Models\User;
 
@@ -75,8 +76,7 @@ trait ExpenseManager
          * and reschedule all future instances of this Expense
          */
         if ($dueDayChanged) {
-            // TODO: Modify future due dates
-            logger('Due day changed');
+            event(new ExpenseRescheduled($expense));
         }
 
         return $expense;
