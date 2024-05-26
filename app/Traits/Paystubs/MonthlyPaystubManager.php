@@ -2,7 +2,9 @@
 
 namespace App\Traits\Paystubs;
 
+use App\Models\MonthlyExpense;
 use App\Models\MonthlyPaystub;
+use App\Models\PaydayTask;
 
 trait MonthlyPaystubManager
 {
@@ -34,5 +36,20 @@ trait MonthlyPaystubManager
     public function unschedule(): void
     {
         $this->delete();
+    }
+
+    /**
+     * Schedules a Payday Task for the Monthly Paystub.
+     */
+    public function newTask(
+        MonthlyExpense $monthlyExpense,
+        int $amountInCents,
+    ): PaydayTask {
+        return PaydayTask::query()->create([
+            'user_id' => $this->user_id,
+            'monthly_paystub_id' => $this->id,
+            'monthly_expense_id' => $monthlyExpense->id,
+            'amount_in_cents' => $amountInCents,
+        ]);
     }
 }
