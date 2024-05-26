@@ -13,7 +13,7 @@ const mobileMenuOpen = ref(false);
 const pages = ref([
   {
     name: 'Income',
-    href: '#',
+    href: route('income.index'),
     icon: markRaw(IncomeIcon),
   },
   {
