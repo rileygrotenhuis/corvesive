@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Paystubs\PayDayTaskManager;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PaydayTask extends Model
 {
-    use HasFactory;
+    use HasFactory, PayDayTaskManager;
 
     protected $table = 'payday_tasks';
 
