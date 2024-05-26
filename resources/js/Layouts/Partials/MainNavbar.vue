@@ -10,7 +10,7 @@ const pages = ref([
   },
   {
     name: 'Expenses',
-    href: '#',
+    href: route('expenses.index'),
   },
 ]);
 </script>

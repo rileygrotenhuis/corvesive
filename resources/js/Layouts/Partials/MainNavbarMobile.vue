@@ -18,7 +18,7 @@ const pages = ref([
   },
   {
     name: 'Expenses',
-    href: '#',
+    href: route('expenses.index'),
     icon: markRaw(ExpenseIcon),
   },
   {
