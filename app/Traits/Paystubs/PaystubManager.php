@@ -4,6 +4,7 @@ namespace App\Traits\Paystubs;
 
 use App\Events\Paystubs\PaystubCreated;
 use App\Events\Paystubs\PaystubModified;
+use App\Events\Paystubs\PaystubRescheduled;
 use App\Models\Paystub;
 use App\Models\User;
 
@@ -82,8 +83,7 @@ trait PaystubManager
          * and reschedule all future instances of this Paystub
          */
         if ($recurrenceChanged) {
-            // TODO: Modify future paystub dates
-            logger('Recurrence changed');
+            event(new PaystubRescheduled($paystub));
         }
 
         return $paystub;

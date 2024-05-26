@@ -116,4 +116,20 @@ trait PaystubScheduler
                 'amount_in_cents' => $paystub->amount_in_cents,
             ]);
     }
+
+    /**
+     * Reschedules all future instances of a Paystub
+     * to the new recurrence cycle.
+     */
+    public function rescheduleFuturePaystubs(Paystub $paystub): void
+    {
+        $today = now()->format('Y-m-d');
+
+        MonthlyPaystub::query()
+            ->where('paystub_id', $paystub->id)
+            ->where('pay_date', '>=', $today)
+            ->delete();
+
+        $this->generateFutureExpenses($paystub);
+    }
 }
