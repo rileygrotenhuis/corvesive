@@ -49,7 +49,10 @@ trait PayDayTaskManager
      */
     public function completeTask(): Payment
     {
-        $payment = $this->monthlyExpense->payment($this->amount_in_cents);
+        $payment = $this->monthlyExpense->payment(
+            now()->format('Y-m-d'),
+            $this->amount_in_cents
+        );
 
         $this->is_completed = true;
         $this->save();
