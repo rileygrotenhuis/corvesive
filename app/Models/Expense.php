@@ -25,6 +25,26 @@ class Expense extends Model
         'notes',
     ];
 
+    protected $appends = [
+        'amount',
+        'due_day'
+    ];
+
+    public function getAmountAttribute(): float
+    {
+        return $this->amount_in_cents / 100;
+    }
+
+    public function getDueDayAttribute(): string
+    {
+        return $this->due_day_of_month . match ($this->due_day_of_month) {
+            1 => 'st',
+            2 => 'nd',
+            3 => 'rd',
+            default => 'th',
+        };
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
