@@ -15,7 +15,7 @@ const selectedDateFilter = ref('all');
   <div>
     <select
       v-model="selectedDateFilter"
-      class="block w-[150px] pl-3 pr-10 py-2 text-sm text-black font-semibold bg-white rounded-lg shadow-sm focus:outline-none focus:ring-primary-600"
+      class="block w-[150px] pl-3 pr-10 py-2 text-sm text-black font-semibold bg-primary-100 rounded-lg shadow-sm focus:outline-none focus:ring-primary-600"
     >
       <option
         v-for="filter in exampleDateFilters"
