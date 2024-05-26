@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { markRaw, ref } from 'vue';
 import HamburgerMenuIcon from '@/Components/Icons/HamburgerMenuIcon.vue';
 import IncomeIcon from '@/Components/Icons/IncomeIcon.vue';
 import ExpenseIcon from '@/Components/Icons/ExpenseIcon.vue';
@@ -9,6 +9,24 @@ import LogoutIcon from '@/Components/Icons/LogoutIcon.vue';
 import { useForm } from '@inertiajs/vue3';
 
 const mobileMenuOpen = ref(false);
+
+const pages = ref([
+  {
+    name: 'Income',
+    href: '#',
+    icon: markRaw(IncomeIcon),
+  },
+  {
+    name: 'Expenses',
+    href: '#',
+    icon: markRaw(ExpenseIcon),
+  },
+  {
+    name: 'Calendar',
+    href: '#',
+    icon: markRaw(MiniCalendarIcon),
+  },
+]);
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value;
@@ -47,22 +65,14 @@ const logout = () => {
 
     <div v-show="mobileMenuOpen" class="fixed inset-0 bg-white px-8 py-24">
       <ul class="flex flex-col gap-8">
-        <li class="text-black font-normal hover:font-semibold">
-          <a href="#" class="flex items-center gap-4">
-            <IncomeIcon />
-            <span>Income</span>
-          </a>
-        </li>
-        <li class="text-black font-normal hover:font-semibold">
-          <a href="#" class="flex items-center gap-4">
-            <ExpenseIcon />
-            <span>Expenses</span>
-          </a>
-        </li>
-        <li class="text-black font-normal hover:font-semibold">
-          <a href="#" class="flex items-center gap-4">
-            <MiniCalendarIcon />
-            <span>Calendar</span>
+        <li
+          v-for="page in pages"
+          :key="page.name"
+          class="text-black font-normal hover:font-semibold"
+        >
+          <a :href="page.href" class="flex items-center gap-4">
+            <component :is="page.icon" />
+            <span>{{ page.name }}</span>
           </a>
         </li>
       </ul>

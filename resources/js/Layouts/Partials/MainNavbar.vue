@@ -1,6 +1,18 @@
 <script setup>
+import { ref } from 'vue';
 import CalendarIcon from '@/Components/Icons/CalendarIcon.vue';
 import UserMenuDropdown from '@/Layouts/Partials/UserMenuDropdown.vue';
+
+const pages = ref([
+  {
+    name: 'Income',
+    href: '#',
+  },
+  {
+    name: 'Expenses',
+    href: '#',
+  },
+]);
 </script>
 
 <template>
@@ -12,11 +24,14 @@ import UserMenuDropdown from '@/Layouts/Partials/UserMenuDropdown.vue';
         </h1>
 
         <ul class="flex items-center gap-12">
-          <li class="font-light text-sm hover:font-semibold">
-            <a href="#">Income</a>
-          </li>
-          <li class="font-light text-sm hover:font-semibold">
-            <a href="#">Expenses</a>
+          <li
+            v-for="page in pages"
+            :key="page.name"
+            class="font-light text-sm hover:font-semibold"
+          >
+            <a :href="page.href">
+              {{ page.name }}
+            </a>
           </li>
         </ul>
       </div>
