@@ -10,7 +10,7 @@ defineProps({
 
 <template>
   <div
-    class="max-w-[750px] bg-primary-100 hover:bg-primary-300 text-black cursor-pointer hover:shadow-lg border border-gray-200 p-6 rounded-xl transition-transform transform hover:scale-105 ease-in-out"
+    class="max-w-[750px] bg-primary-100 hover:bg-primary-300 cursor-pointer text-black cursor-pointer hover:shadow-lg border border-gray-200 p-6 rounded-xl transition-transform transform hover:scale-105 ease-in-out"
   >
     <div class="flex justify-between items-center">
       <div>
