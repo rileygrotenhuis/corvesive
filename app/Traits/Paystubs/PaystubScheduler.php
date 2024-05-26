@@ -3,7 +3,6 @@
 namespace App\Traits\Paystubs;
 
 use App\Models\MonthlyPaystub;
-use App\Models\Paystub;
 use Carbon\Carbon;
 
 trait PaystubScheduler
@@ -11,14 +10,11 @@ trait PaystubScheduler
     /**
      * Schedules a Paystub for a user on a specific date.
      */
-    public function schedule(
-        Paystub $paystub,
-        Carbon $payDay,
-        int $amountInCents
-    ): MonthlyPaystub {
+    public function schedule(Carbon $payDay, int $amountInCents): MonthlyPaystub
+    {
         return MonthlyPaystub::query()->create([
-            'user_id' => $paystub->user_id,
-            'paystub_id' => $paystub->id,
+            'user_id' => $this->user_id,
+            'paystub_id' => $this->id,
             'year' => $payDay->year,
             'month' => $payDay->month,
             'pay_day' => $payDay->format('Y-m-d'),
@@ -29,19 +25,19 @@ trait PaystubScheduler
     /**
      * Schedules future Paystubs for the next 12 months.
      */
-    public function generateFutureExpenses(Paystub $paystub): void
+    public function generateFutureExpenses(): void
     {
-        if (in_array($paystub->recurrence_rate, ['monthly', 'semi-monthly'])) {
+        if (in_array($this->recurrence_rate, ['monthly', 'semi-monthly'])) {
             $this->generateMonthlyExpenses(
-                $paystub,
-                $paystub->recurrence_rate === 'semi-monthly'
+                $this,
+                $this->recurrence_rate === 'semi-monthly'
             );
         }
 
-        if (in_array($paystub->recurrence_rate, ['weekly', 'bi-weekly'])) {
+        if (in_array($this->recurrence_rate, ['weekly', 'bi-weekly'])) {
             $this->generateWeeklyExpenses(
-                $paystub,
-                $paystub->recurrence_rate === 'bi-weekly'
+                $this,
+                $this->recurrence_rate === 'bi-weekly'
             );
         }
     }
@@ -49,26 +45,22 @@ trait PaystubScheduler
     /**
      * Generates monthly, or semi-monthly expenses for the next 12 months.
      */
-    protected function generateMonthlyExpenses(
-        Paystub $paystub,
-        bool $semiMonthly = false
-    ): void {
+    protected function generateMonthlyExpenses(bool $semiMonthly = false): void
+    {
         for ($i = 0; $i < 12; $i++) {
-            $payDate = Carbon::now()->addMonths($i)->day($paystub->recurrence_interval_one);
+            $payDate = Carbon::now()->addMonths($i)->day($this->recurrence_interval_one);
 
             $this->schedule(
-                $paystub,
                 $payDate,
-                $paystub->amount_in_cents,
+                $this->amount_in_cents,
             );
 
             if ($semiMonthly) {
-                $payDate = Carbon::now()->addMonths($i)->day($paystub->recurrence_interval_two);
+                $payDate = Carbon::now()->addMonths($i)->day($this->recurrence_interval_two);
 
                 $this->schedule(
-                    $paystub,
                     $payDate,
-                    $paystub->amount_in_cents,
+                    $this->amount_in_cents,
                 );
             }
         }
@@ -77,19 +69,16 @@ trait PaystubScheduler
     /**
      * Generates weekly, or bi-weekly expenses for the next 12 months.
      */
-    protected function generateWeeklyExpenses(
-        Paystub $paystub,
-        bool $biWeekly = false
-    ): void {
+    protected function generateWeeklyExpenses(bool $biWeekly = false): void
+    {
         $interval = $biWeekly ? 2 : 1;
 
         for ($i = 0; $i < 52; $i += $interval) {
-            $payDate = Carbon::now()->addWeeks($i)->next($paystub->recurrence_interval_one);
+            $payDate = Carbon::now()->addWeeks($i)->next($this->recurrence_interval_one);
 
             $this->schedule(
-                $paystub,
                 $payDate,
-                $paystub->amount_in_cents
+                $this->amount_in_cents
             );
         }
     }
@@ -97,27 +86,27 @@ trait PaystubScheduler
     /**
      * Updates future Paystubs with the new amount value.
      */
-    public function modifyFuturePaystubs(Paystub $paystub): void
+    public function modifyFuturePaystubs(): void
     {
         $today = now()->format('Y-m-d');
 
         MonthlyPaystub::query()
-            ->where('paystub_id', $paystub->id)
+            ->where('paystub_id', $this->id)
             ->where('pay_date', '>=', $today)
             ->update([
-                'amount_in_cents' => $paystub->amount_in_cents,
+                'amount_in_cents' => $this->amount_in_cents,
             ]);
     }
 
     /**
      * Unschedules all future instances of a Paystub.
      */
-    public function unscheduleFuturePaystubs(Paystub $paystub): void
+    public function unscheduleFuturePaystubs(): void
     {
         $today = now()->format('Y-m-d');
 
         MonthlyPaystub::query()
-            ->where('paystub_id', $paystub->id)
+            ->where('paystub_id', $this->id)
             ->where('pay_date', '>=', $today)
             ->delete();
     }

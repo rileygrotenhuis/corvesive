@@ -45,17 +45,16 @@ trait ExpenseManager
      * Modifies an existing Expense.
      */
     public function modify(
-        Expense $expense,
         string $issuer,
         string $name,
         int $amountInCents,
         int $dueDayOfMonth,
         string $notes
     ): Expense {
-        $amountChanged = $expense->amount_in_cents !== $amountInCents;
-        $dueDayChanged = $expense->due_day_of_month !== $dueDayOfMonth;
+        $amountChanged = $this->amount_in_cents !== $amountInCents;
+        $dueDayChanged = $this->due_day_of_month !== $dueDayOfMonth;
 
-        $expense->update([
+        $this->update([
             'issuer' => $issuer,
             'name' => $name,
             'amount_in_cents' => $amountInCents,
@@ -68,7 +67,7 @@ trait ExpenseManager
          * future instances of this Expense
          */
         if ($amountChanged && ! $dueDayChanged) {
-            event(new ExpenseModified($expense));
+            event(new ExpenseModified($this));
         }
 
         /**
@@ -76,17 +75,17 @@ trait ExpenseManager
          * and reschedule all future instances of this Expense
          */
         if ($dueDayChanged) {
-            event(new ExpenseRescheduled($expense));
+            event(new ExpenseRescheduled($this));
         }
 
-        return $expense;
+        return $this;
     }
 
     /**
      * Removes an existing Expense.
      */
-    public function remove(Expense $expense): void
+    public function remove(): void
     {
-        $expense->delete();
+        $this->delete();
     }
 }

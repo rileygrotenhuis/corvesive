@@ -28,8 +28,8 @@ trait PaymentManager
     /**
      * Refunds a payment a user has made.
      */
-    public function refund(Payment $payment): void
+    public function refund(): void
     {
-        $payment->delete();
+        $this->delete();
     }
 }

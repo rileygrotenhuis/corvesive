@@ -27,23 +27,22 @@ trait DepositManager
      * Modify the amount and notes for an existing deposit.
      */
     public function modify(
-        Deposit $deposit,
         int $amountInCents,
         ?string $notes = null
     ): Deposit {
-        $deposit->update([
+        $this->update([
             'amount_in_cents' => $amountInCents,
             'notes' => $notes,
         ]);
 
-        return $deposit;
+        return $this;
     }
 
     /**
      * Refund a deposit to remove it from the system.
      */
-    public function refund(Deposit $deposit): void
+    public function refund(): void
     {
-        $deposit->delete();
+        $this->delete();
     }
 }

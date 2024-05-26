@@ -9,34 +9,30 @@ trait MonthlyPaystubManager
     /**
      * Modifies the amount value for a Monthly Paystub.
      */
-    public function modify(
-        MonthlyPaystub $monthlyPaystub,
-        int $amountInCents
-    ): MonthlyPaystub {
-        $monthlyPaystub->amount_in_cents = $amountInCents;
-        $monthlyPaystub->save();
+    public function modify(int $amountInCents): MonthlyPaystub
+    {
+        $this->amount_in_cents = $amountInCents;
+        $this->save();
 
-        return $monthlyPaystub;
+        return $this;
     }
 
     /**
      * Reschedules a Monthly Paystub for a specific date.
      */
-    public function reschedule(
-        MonthlyPaystub $monthlyPaystub,
-        string $payDay
-    ): MonthlyPaystub {
-        $monthlyPaystub->pay_day = $payDay;
-        $monthlyPaystub->save();
+    public function reschedule(string $payDay): MonthlyPaystub
+    {
+        $this->pay_day = $payDay;
+        $this->save();
 
-        return $monthlyPaystub;
+        return $this;
     }
 
     /**
      * Un-schedules a Monthly Paystub.
      */
-    public function unschedule(MonthlyPaystub $monthlyPaystub): void
+    public function unschedule(): void
     {
-        $monthlyPaystub->delete();
+        $this->delete();
     }
 }

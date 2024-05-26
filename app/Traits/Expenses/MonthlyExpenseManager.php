@@ -9,34 +9,30 @@ trait MonthlyExpenseManager
     /**
      * Modifies the amount value for a Monthly Expense.
      */
-    public function modify(
-        MonthlyExpense $monthlyExpense,
-        int $amountInCents,
-    ): MonthlyExpense {
-        $monthlyExpense->amount_in_cents = $amountInCents;
-        $monthlyExpense->save();
+    public function modify(int $amountInCents): MonthlyExpense
+    {
+        $this->amount_in_cents = $amountInCents;
+        $this->save();
 
-        return $monthlyExpense;
+        return $this;
     }
 
     /**
      * Reschedules a Monthly Expense for a specific date.
      */
-    public function reschedule(
-        MonthlyExpense $monthlyExpense,
-        string $dueDate
-    ): MonthlyExpense {
-        $monthlyExpense->due_duate = $dueDate;
-        $monthlyExpense->save();
+    public function reschedule(string $dueDate): MonthlyExpense
+    {
+        $this->due_duate = $dueDate;
+        $this->save();
 
-        return $monthlyExpense;
+        return $this;
     }
 
     /**
      * Un-schedules a Monthly Expense.
      */
-    public function unschedule(MonthlyExpense $monthlyExpense): void
+    public function unschedule(): void
     {
-        $monthlyExpense->delete();
+        $this->delete();
     }
 }

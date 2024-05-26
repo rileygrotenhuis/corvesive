@@ -27,21 +27,19 @@ trait PayDayTaskManager
     /**
      * Changes the amount value for the Payday Task
      */
-    public function modifyTask(
-        PaydayTask $paydayTask,
-        int $amountInCents
-    ): PaydayTask {
-        $paydayTask->amount_in_cents = $amountInCents;
-        $paydayTask->save();
+    public function modifyTask(int $amountInCents): PaydayTask
+    {
+        $this->amount_in_cents = $amountInCents;
+        $this->save();
 
-        return $paydayTask;
+        return $this;
     }
 
     /**
      * Removes a Payday Task entirely.
      */
-    public function removeTask(PaydayTask $paydayTask): void
+    public function removeTask(): void
     {
-        $paydayTask->delete();
+        $this->delete();
     }
 }

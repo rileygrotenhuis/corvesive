@@ -2,7 +2,6 @@
 
 namespace App\Traits\Expenses;
 
-use App\Models\Expense;
 use App\Models\MonthlyExpense;
 use Carbon\Carbon;
 
@@ -11,14 +10,11 @@ trait ExpenseScheduler
     /**
      * Schedules an Expense for a user on a specific date.
      */
-    public function schedule(
-        Expense $expense,
-        Carbon $dueDate,
-        int $amountInCents
-    ): MonthlyExpense {
+    public function schedule(Carbon $dueDate, int $amountInCents): MonthlyExpense
+    {
         return MonthlyExpense::query()->create([
-            'user_id' => $expense->user_id,
-            'expense_id' => $expense->id,
+            'user_id' => $this->user_id,
+            'expense_id' => $this->id,
             'year' => $dueDate->year,
             'month' => $dueDate->month,
             'due_date' => $dueDate->format('Y-m-d'),
@@ -29,15 +25,14 @@ trait ExpenseScheduler
     /**
      * Schedules future Expenses for the next 12 months.
      */
-    public function generateFutureExpenses(Expense $expense): void
+    public function generateFutureExpenses(): void
     {
         for ($i = 0; $i < 12; $i++) {
-            $dueDate = Carbon::now()->addMonths($i)->day($expense->due_day_of_month);
+            $dueDate = Carbon::now()->addMonths($i)->day($this->due_day_of_month);
 
             $this->schedule(
-                $expense,
                 $dueDate,
-                $expense->amount_in_cents
+                $this->amount_in_cents
             );
         }
     }
@@ -45,27 +40,27 @@ trait ExpenseScheduler
     /**
      * Updates future Expenses with the new amount value.
      */
-    public function modifyFutureExpenses(Expense $expense): void
+    public function modifyFutureExpenses(): void
     {
         $today = now()->format('Y-m-d');
 
         MonthlyExpense::query()
-            ->where('expense_id', $expense->id)
+            ->where('expense_id', $this->id)
             ->where('due_date', '>=', $today)
             ->update([
-                'amount_in_cents' => $expense->amount_in_cents,
+                'amount_in_cents' => $this->amount_in_cents,
             ]);
     }
 
     /**
      * Unschedules all future instances of an Expense.
      */
-    public function unscheduleFutureExpenses(Expense $expense): void
+    public function unscheduleFutureExpenses(): void
     {
         $today = now()->format('Y-m-d');
 
         MonthlyExpense::query()
-            ->where('expense_id', $expense->id)
+            ->where('expense_id', $this->id)
             ->where('due_date', '>=', $today)
             ->delete();
     }
@@ -74,15 +69,15 @@ trait ExpenseScheduler
      * Reschedules all future instances of an Expense
      * to the new due day of the month.
      */
-    public function rescheduleFutureExpenses(Expense $expense): void
+    public function rescheduleFutureExpenses(): void
     {
         $today = now()->format('Y-m-d');
 
         MonthlyExpense::query()
-            ->where('expense_id', $expense->id)
+            ->where('expense_id', $this->id)
             ->where('due_date', '>=', $today)
-            ->each(function (MonthlyExpense $monthlyExpense) use ($expense) {
-                $newDueDate = Carbon::parse($monthlyExpense->due_date)->day($expense->due_day_of_month);
+            ->each(function (MonthlyExpense $monthlyExpense) {
+                $newDueDate = Carbon::parse($monthlyExpense->due_date)->day($this->due_day_of_month);
 
                 $monthlyExpense->due_date = $newDueDate;
                 $monthlyExpense->save();

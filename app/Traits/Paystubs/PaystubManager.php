@@ -45,7 +45,6 @@ trait PaystubManager
      * Modifies an existing Paystub.
      */
     public function modify(
-        Paystub $paystub,
         string $issuer,
         int $amountInCents,
         string $recurrenceRate,
@@ -53,15 +52,15 @@ trait PaystubManager
         ?string $recurrenceIntervalTwo,
         ?string $notes
     ): Paystub {
-        $amountChanged = $paystub->amount_in_cents !== $amountInCents;
+        $amountChanged = $this->amount_in_cents !== $amountInCents;
 
         $recurrenceChanged = (
-            $paystub->recurrence_rate !== $recurrenceRate ||
-            $paystub->recurrence_interval_one !== $recurrenceIntervalOne ||
-            $paystub->recurrence_interval_two !== $recurrenceIntervalTwo
+            $this->recurrence_rate !== $recurrenceRate ||
+            $this->recurrence_interval_one !== $recurrenceIntervalOne ||
+            $this->recurrence_interval_two !== $recurrenceIntervalTwo
         );
 
-        $paystub->update([
+        $this->update([
             'issuer' => $issuer,
             'amount_in_cents' => $amountInCents,
             'recurrence_rate' => $recurrenceRate,
@@ -75,7 +74,7 @@ trait PaystubManager
          * future instances of this Paystub
          */
         if ($amountChanged && ! $recurrenceChanged) {
-            event(new PaystubModified($paystub));
+            event(new PaystubModified($this));
         }
 
         /**
@@ -83,17 +82,17 @@ trait PaystubManager
          * and reschedule all future instances of this Paystub
          */
         if ($recurrenceChanged) {
-            event(new PaystubRescheduled($paystub));
+            event(new PaystubRescheduled($this));
         }
 
-        return $paystub;
+        return $this;
     }
 
     /**
      * Removes an existing Paystub.
      */
-    public function remove(Paystub $paystub): void
+    public function remove(): void
     {
-        $paystub->delete();
+        $this->delete();
     }
 }
