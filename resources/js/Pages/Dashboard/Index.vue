@@ -1,9 +1,9 @@
 <script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import MainLayout from '@/Layouts/MainLayout.vue';
 </script>
 
 <template>
-  <GuestLayout>
+  <MainLayout>
     <h1>Dashboard</h1>
-  </GuestLayout>
+  </MainLayout>
 </template>
