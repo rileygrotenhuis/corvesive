@@ -1,6 +1,6 @@
 <script setup>
-import {computed} from "vue";
-import {usePage} from "@inertiajs/vue3";
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 
 const props = defineProps({
   expense: Object,
@@ -9,12 +9,14 @@ const props = defineProps({
 const formattedExpense = computed(() => {
   return {
     id: props.expense.id,
-    issuer: props.expense?.issuer ?? props.expense?.expense?.issuer ?? 'Unknown',
+    issuer:
+      props.expense?.issuer ?? props.expense?.expense?.issuer ?? 'Unknown',
     name: props.expense.name ?? props.expense.expense.name ?? 'Unknown',
     amount: props.expense?.amount ?? props.expense?.expense?.amount ?? '$0.00',
-    dueDate: props.expense?.due_day ?? props.expense?.expense?.due_day ?? 'Unknown',
+    dueDate:
+      props.expense?.due_day ?? props.expense?.expense?.due_day ?? 'Unknown',
     notes: props.expense?.notes ?? props.expense?.expense?.notes ?? '',
-  }
+  };
 });
 
 const expenseUrl = computed(() => {
@@ -44,8 +46,12 @@ const expenseUrl = computed(() => {
         </div>
 
         <div class="text-right">
-          <p class="text-2xl font-bold text-primary-700">${{ formattedExpense.amount }}</p>
-          <p class="text-md font-medium text-gray-500">Due: {{ formattedExpense.dueDate }}</p>
+          <p class="text-2xl font-bold text-primary-700">
+            ${{ formattedExpense.amount }}
+          </p>
+          <p class="text-md font-medium text-gray-500">
+            Due: {{ formattedExpense.dueDate }}
+          </p>
         </div>
       </div>
 

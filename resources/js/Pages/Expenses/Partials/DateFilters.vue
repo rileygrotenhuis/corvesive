@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 
 defineProps({
-  selectedDateRange: String
+  selectedDateRange: String,
 });
 
 defineEmits(['updateSelectedDateFilter']);

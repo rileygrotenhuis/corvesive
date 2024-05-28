@@ -2,7 +2,7 @@
 import MainLayout from '@/Layouts/MainLayout.vue';
 import DateFilters from '@/Pages/Expenses/Partials/DateFilters.vue';
 import ExpenseBanner from '@/Pages/Expenses/Partials/ExpenseBanner.vue';
-import { computed, ref } from "vue";
+import { computed, ref } from 'vue';
 
 const props = defineProps({
   expenses: Object,
@@ -15,7 +15,8 @@ const selectedExpenses = computed(() => {
 });
 
 const noExpenseFoundMessage = computed(() => {
-  const snippet = selectedDateRange.value === 'all' ? '' : selectedDateRange.value;
+  const snippet =
+    selectedDateRange.value === 'all' ? '' : selectedDateRange.value;
 
   return `No expenses ${snippet} found.`;
 });
