@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         $paystub->generateFutureExpenses();
 
         /** Expenses */
-        $expenses = Expense::factory()->for($user)->create();
+        $expenses = Expense::factory(10)->for($user)->create();
 
         /**
          * Generate monthly expenses for the
