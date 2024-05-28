@@ -5,9 +5,18 @@ const props = defineProps({
   expense: Object,
 });
 
+const isBill = computed(() => {
+  if (props.expense?.expense) {
+    return props.expense.expense.type === 'bill';
+  }
+
+  return props.expense.type === 'bill';
+});
+
 const formattedExpense = computed(() => {
   return {
     id: props.expense.id,
+    type: props.expense?.type ?? props.expense?.expense?.type ?? 'Unknown',
     issuer:
       props.expense?.issuer ?? props.expense?.expense?.issuer ?? 'Unknown',
     name: props.expense.name ?? props.expense.expense.name ?? 'Unknown',
@@ -39,7 +48,7 @@ const expenseUrl = computed(() => {
             {{ formattedExpense.name }}
           </h2>
           <h4 class="text-md font-medium text-gray-600">
-            {{ formattedExpense.issuer }}
+            {{ isBill ? formattedExpense.issuer : formattedExpense.type }}
           </h4>
         </div>
 

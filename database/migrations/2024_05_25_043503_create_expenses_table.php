@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('type');
-            $table->string('issuer');
+            $table->string('issuer')->nullable();
             $table->string('name');
             $table->unsignedBigInteger('amount_in_cents');
             $table->unsignedInteger('due_day_of_month');

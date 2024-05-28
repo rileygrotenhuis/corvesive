@@ -1,7 +1,7 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import InputError from '@/Components/Breeze/InputError.vue';
 
 const expenseTypes = ref([
@@ -27,6 +27,16 @@ const form = useForm({
   due_day_of_month: 1,
   notes: '',
 });
+
+watch(
+  () => form.type,
+  (value) => {
+    if (value !== 'bill') {
+      form.issuer = '';
+      form.due_day_of_month = 28;
+    }
+  }
+);
 
 const submitForm = () => {
   form.amount_in_cents = form.amount_in_cents * 100;
@@ -75,7 +85,7 @@ const submitForm = () => {
           <InputError :message="form.errors.type" />
         </div>
 
-        <div>
+        <div v-if="form.type === 'bill'">
           <label for="issuer" class="block text-sm font-medium text-gray-700">
             Issuer
           </label>
@@ -84,7 +94,6 @@ const submitForm = () => {
             id="issuer"
             name="issuer"
             type="text"
-            required
             class="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
           />
           <InputError :message="form.errors.issuer" />
@@ -118,7 +127,7 @@ const submitForm = () => {
           />
         </div>
 
-        <div>
+        <div v-if="form.type === 'bill'">
           <label
             for="due_day_of_month"
             class="block text-sm font-medium text-gray-700"

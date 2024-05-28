@@ -14,10 +14,10 @@ class StoreExpenseRequest extends FormRequest
     {
         return [
             'type' => ['required', 'string', Rule::in(self::$EXPENSE_TYPES)],
-            'issuer' => ['required', 'string', 'max:255'],
+            'issuer' => ['nullable', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'amount_in_cents' => ['required', 'integer', 'min:0'],
-            'due_day_of_month' => ['required', 'integer', 'min:1', 'max:31'],
+            'due_day_of_month' => ['required', 'integer', 'min:1', 'max:28'],
             'notes' => ['nullable', 'string'],
         ];
     }

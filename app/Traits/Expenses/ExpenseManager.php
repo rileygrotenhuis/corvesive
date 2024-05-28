@@ -15,7 +15,7 @@ trait ExpenseManager
     public static function add(
         User $user,
         string $type,
-        string $issuer,
+        ?string $issuer,
         string $name,
         int $amountInCents,
         int $dueDayOfMonth,
