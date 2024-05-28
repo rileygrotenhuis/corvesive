@@ -8,10 +8,16 @@ const props = defineProps({
   expenses: Object,
 });
 
-const selectedDateRange = ref('thisMonth');
+const selectedDateRange = ref('all');
 
 const selectedExpenses = computed(() => {
   return props.expenses[selectedDateRange.value];
+});
+
+const noExpenseFoundMessage = computed(() => {
+  const snippet = selectedDateRange.value === 'all' ? '' : selectedDateRange.value;
+
+  return `No expenses ${snippet} found.`;
 });
 </script>
 
@@ -25,14 +31,21 @@ const selectedExpenses = computed(() => {
 
       <div class="space-y-6 py-8">
         <ExpenseBanner
+          v-if="selectedExpenses.length > 0"
           v-for="expense in selectedExpenses"
           :key="expense.id"
-          :issuer="expense.expense.issuer"
-          :name="expense.expense.name"
-          :amount="expense.expense.amount"
-          :dueDate="expense.due_day"
-          :notes="expense.notes"
+          :issuer="expense?.issuer ?? expense?.expense?.issuer ?? 'Unknown'"
+          :name="expense.name ?? expense.expense.name ?? 'Unknown'"
+          :amount="expense?.amount ?? expense?.expense?.amount ?? '$0.00'"
+          :dueDate="expense?.due_day ?? expense?.expense?.due_day ?? 'Unknown'"
+          :notes="expense?.notes ?? expense?.expense?.notes ?? ''"
         />
+
+        <div v-else>
+          <p class="text-primary-100 font-bold">
+            {{ noExpenseFoundMessage }}
+          </p>
+        </div>
       </div>
     </div>
   </MainLayout>
