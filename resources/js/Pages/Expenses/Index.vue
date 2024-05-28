@@ -34,11 +34,7 @@ const noExpenseFoundMessage = computed(() => {
           v-if="selectedExpenses.length > 0"
           v-for="expense in selectedExpenses"
           :key="expense.id"
-          :issuer="expense?.issuer ?? expense?.expense?.issuer ?? 'Unknown'"
-          :name="expense.name ?? expense.expense.name ?? 'Unknown'"
-          :amount="expense?.amount ?? expense?.expense?.amount ?? '$0.00'"
-          :dueDate="expense?.due_day ?? expense?.expense?.due_day ?? 'Unknown'"
-          :notes="expense?.notes ?? expense?.expense?.notes ?? ''"
+          :expense="expense"
         />
 
         <div v-else>
