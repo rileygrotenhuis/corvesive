@@ -26,12 +26,11 @@ class ExpenseRepository
      */
     public function upcoming(): Collection
     {
-        $today = now();
-
         return $this->user
             ->monthlyExpenses()
             ->with('expense')
-            ->whereBetween('due_date', [$today, $today->addDays(7)])
+            ->where('due_date', '>=', now()->format('Y-m-d'))
+            ->where('due_date', '<=', now()->addDays(7)->format('Y-m-d'))
             ->get();
     }
 
