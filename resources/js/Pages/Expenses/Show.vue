@@ -1,27 +1,12 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { useForm } from '@inertiajs/vue3';
-import { ref, watch } from 'vue';
 import InputError from '@/Components/Breeze/InputError.vue';
+import { useForm } from '@inertiajs/vue3';
+import { watch } from 'vue';
 
 const props = defineProps({
   expense: Object,
 });
-
-const expenseTypes = ref([
-  {
-    value: 'bill',
-    label: 'Bill',
-  },
-  {
-    value: 'budget',
-    label: 'Budget',
-  },
-  {
-    value: 'saving',
-    label: 'Saving',
-  },
-]);
 
 const form = useForm({
   type: props.expense.type,
@@ -47,6 +32,12 @@ const submitForm = () => {
   form.amount_in_cents = form.amount * 100;
 
   form.put(route('expenses.update', props.expense.id));
+};
+
+const removeExpense = () => {
+  if (confirm('Are you sure you want to remove this expense?')) {
+    form.delete(route('expenses.destroy', props.expense.id));
+  }
 };
 </script>
 
@@ -140,7 +131,15 @@ const submitForm = () => {
           />
         </div>
 
-        <div class="flex justify-end">
+        <div
+          class="flex flex-col-reverse md:flex-row justify-center md:justify-end gap-4"
+        >
+          <button
+            class="w-full md:w-fit flex justify-center py-1 px-8 bg-red-500 text-white font-semibold rounded-md hover:bg-red-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition ease-in-out duration-150"
+            @click.prevent="removeExpense"
+          >
+            Remove
+          </button>
           <button
             type="submit"
             class="w-full md:w-fit flex justify-center py-1 px-8 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition ease-in-out duration-150"

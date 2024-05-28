@@ -16,6 +16,9 @@ use Inertia\Response;
 
 class ExpenseController extends Controller
 {
+    /**
+     * Expenses - Index Page.
+     */
     public function index(Request $request): Response
     {
         $repository = new ExpenseRepository($request->user());
@@ -30,11 +33,17 @@ class ExpenseController extends Controller
         ]);
     }
 
+    /**
+     * Expenses - Create Page.
+     */
     public function create(): Response
     {
         return inertia('Expenses/Create');
     }
 
+    /**
+     * Creates a new Expense.
+     */
     public function store(StoreExpenseRequest $request): RedirectResponse
     {
         $expense = Expense::add(
@@ -56,6 +65,9 @@ class ExpenseController extends Controller
         return to_route('expenses.index');
     }
 
+    /**
+     * Expenses - Show Page.
+     */
     public function show(Expense $expense): Response
     {
         Gate::authorize('isOwner', $expense);
@@ -65,8 +77,13 @@ class ExpenseController extends Controller
         ]);
     }
 
+    /**
+     * Updates an existing Expense.
+     */
     public function update(UpdateExpenseRequest $request, Expense $expense): RedirectResponse
     {
+        Gate::authorize('isOwner', $expense);
+
         $amountChanged = $expense->amount_in_cents !== $request->input('amount_in_cents');
         $dueDayChanged = $expense->due_day_of_month !== $request->input('due_day_of_month');
 
@@ -95,5 +112,17 @@ class ExpenseController extends Controller
         }
 
         return to_route('expenses.show', $expense);
+    }
+
+    /**
+     * Removes an existing Expense.
+     */
+    public function destroy(Expense $expense): RedirectResponse
+    {
+        Gate::authorize('isOwner', $expense);
+
+        $expense->remove();
+
+        return to_route('expenses.index');
     }
 }
