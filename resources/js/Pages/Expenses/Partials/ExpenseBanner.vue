@@ -1,6 +1,5 @@
 <script setup>
 import { computed } from 'vue';
-import { usePage } from '@inertiajs/vue3';
 
 const props = defineProps({
   expense: Object,
@@ -25,14 +24,13 @@ const expenseUrl = computed(() => {
     return '#';
   }
 
-  // TODO: Expense Show
-  return '#';
+  return route('expenses.show', props.expense.id);
 });
 </script>
 
 <template>
   <div
-    class="max-w-[750px] bg-primary-100 hover:bg-primary-300 cursor-pointer text-black cursor-pointer hover:shadow-lg border border-gray-200 p-6 rounded-xl transition-transform transform hover:scale-105 ease-in-out"
+    class="w-full bg-primary-100 hover:bg-primary-300 cursor-pointer text-black cursor-pointer hover:shadow-lg border border-gray-200 p-6 rounded-xl transition-transform transform hover:scale-105 ease-in-out"
   >
     <a :href="expenseUrl">
       <div class="flex justify-between items-center">

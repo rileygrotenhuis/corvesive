@@ -11,7 +11,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/income', [IncomeController::class, 'index'])->name('income.index');
 
-    Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses.index');
+    Route::prefix('/expenses')->group(function () {
+        Route::get('/', [ExpenseController::class, 'index'])->name('expenses.index');
+        Route::get('/create', [ExpenseController::class, 'create'])->name('expenses.create');
+        Route::get('/{expense}', [ExpenseController::class, 'show'])->name('expenses.show');
+    });
 });
 
 require __DIR__.'/auth.php';

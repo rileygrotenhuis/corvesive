@@ -25,23 +25,34 @@ const noExpenseFoundMessage = computed(() => {
 <template>
   <MainLayout>
     <div class="max-w-6xl mx-auto py-6 px-8">
-      <DateFilters
-        :selectedDateRange="selectedDateRange"
-        @updateSelectedDateFilter="selectedDateRange = $event"
-      />
+      <div class="max-w-[750px]">
+        <div class="flex justify-between items-center">
+          <DateFilters
+            :selectedDateRange="selectedDateRange"
+            @updateSelectedDateFilter="selectedDateRange = $event"
+          />
 
-      <div class="space-y-6 py-8">
-        <ExpenseBanner
-          v-if="selectedExpenses.length > 0"
-          v-for="expense in selectedExpenses"
-          :key="expense.id"
-          :expense="expense"
-        />
+          <a
+            :href="route('expenses.create')"
+            class="w-8 h-8 flex text-center justify-center items-center bg-primary-100 p-2 text-primary-1000 font-bold rounded-full hover:bg-primary-700 hover:text-primary-100 transition ease-in-out"
+          >
+            +
+          </a>
+        </div>
 
-        <div v-else>
-          <p class="text-primary-100 font-bold">
-            {{ noExpenseFoundMessage }}
-          </p>
+        <div class="space-y-6 py-8">
+          <ExpenseBanner
+            v-if="selectedExpenses.length > 0"
+            v-for="expense in selectedExpenses"
+            :key="expense.id"
+            :expense="expense"
+          />
+
+          <div v-else>
+            <p class="text-primary-100 font-bold">
+              {{ noExpenseFoundMessage }}
+            </p>
+          </div>
         </div>
       </div>
     </div>

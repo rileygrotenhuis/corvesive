@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
 use App\Repositories\ExpenseRepository;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -20,5 +21,15 @@ class ExpenseController extends Controller
                 'nextMonth' => $repository->nextMonth(),
             ],
         ]);
+    }
+
+    public function create(Request $request): Response
+    {
+        return inertia('Expenses/Create');
+    }
+
+    public function show(Request $request, Expense $expense): Response
+    {
+        return inertia('Expenses/Show');
     }
 }
