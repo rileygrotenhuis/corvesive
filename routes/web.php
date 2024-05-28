@@ -14,6 +14,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/expenses')->group(function () {
         Route::get('/', [ExpenseController::class, 'index'])->name('expenses.index');
         Route::get('/create', [ExpenseController::class, 'create'])->name('expenses.create');
+        Route::post('/', [ExpenseController::class, 'store'])->name('expenses.store');
         Route::get('/{expense}', [ExpenseController::class, 'show'])->name('expenses.show');
     });
 });

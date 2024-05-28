@@ -25,7 +25,7 @@ const noExpenseFoundMessage = computed(() => {
 <template>
   <MainLayout>
     <div class="max-w-6xl mx-auto py-6 px-8">
-      <div class="max-w-[750px]">
+      <div class="max-w-3xl">
         <div class="flex justify-between items-center">
           <DateFilters
             :selectedDateRange="selectedDateRange"

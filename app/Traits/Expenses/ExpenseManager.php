@@ -2,7 +2,6 @@
 
 namespace App\Traits\Expenses;
 
-use App\Events\Expenses\ExpenseCreated;
 use App\Events\Expenses\ExpenseModified;
 use App\Events\Expenses\ExpenseRescheduled;
 use App\Models\Expense;
@@ -22,7 +21,7 @@ trait ExpenseManager
         int $dueDayOfMonth,
         string $notes,
     ): Expense {
-        $expense = Expense::query()->create([
+        return Expense::query()->create([
             'user_id' => $user->id,
             'type' => $type,
             'issuer' => $issuer,
@@ -31,14 +30,6 @@ trait ExpenseManager
             'due_day_of_month' => $dueDayOfMonth,
             'notes' => $notes,
         ]);
-
-        /**
-         * Schedules future instances of this Expense
-         * for the next 12 months
-         */
-        event(new ExpenseCreated($expense));
-
-        return $expense;
     }
 
     /**
