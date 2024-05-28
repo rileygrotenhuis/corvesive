@@ -23,6 +23,7 @@ const form = useForm({
   type: expenseTypes.value[0].value,
   issuer: '',
   name: '',
+  amount: '',
   amount_in_cents: 0,
   due_day_of_month: 1,
   notes: '',
@@ -39,7 +40,7 @@ watch(
 );
 
 const submitForm = () => {
-  form.amount_in_cents = form.amount_in_cents * 100;
+  form.amount_in_cents = form.amount * 100;
 
   form.post(route('expenses.store'));
 };
@@ -111,6 +112,7 @@ const submitForm = () => {
             required
             class="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
           />
+          <InputError :message="form.errors.name" />
         </div>
 
         <div>
@@ -118,13 +120,14 @@ const submitForm = () => {
             Amount
           </label>
           <input
-            v-model="form.amount_in_cents"
+            v-model="form.amount"
             id="amount"
             name="amount"
             type="text"
             required
             class="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
           />
+          <InputError :message="form.errors.amount" />
         </div>
 
         <div v-if="form.type === 'bill'">
@@ -142,6 +145,7 @@ const submitForm = () => {
             required
             class="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
           />
+          <InputError :message="form.errors.due_day_of_month" />
         </div>
 
         <div>
@@ -155,6 +159,7 @@ const submitForm = () => {
             class="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
             rows="4"
           />
+          <InputError :message="form.errors.notes" />
         </div>
 
         <div class="flex justify-end">

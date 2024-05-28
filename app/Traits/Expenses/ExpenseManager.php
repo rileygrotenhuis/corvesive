@@ -2,8 +2,6 @@
 
 namespace App\Traits\Expenses;
 
-use App\Events\Expenses\ExpenseModified;
-use App\Events\Expenses\ExpenseRescheduled;
 use App\Models\Expense;
 use App\Models\User;
 
@@ -36,15 +34,12 @@ trait ExpenseManager
      * Modifies an existing Expense.
      */
     public function modify(
-        string $issuer,
+        ?string $issuer,
         string $name,
         int $amountInCents,
         int $dueDayOfMonth,
-        string $notes
+        ?string $notes = null
     ): Expense {
-        $amountChanged = $this->amount_in_cents !== $amountInCents;
-        $dueDayChanged = $this->due_day_of_month !== $dueDayOfMonth;
-
         $this->update([
             'issuer' => $issuer,
             'name' => $name,
@@ -52,22 +47,6 @@ trait ExpenseManager
             'due_day_of_month' => $dueDayOfMonth,
             'notes' => $notes,
         ]);
-
-        /**
-         * If ONLY amount value changed, modify all
-         * future instances of this Expense
-         */
-        if ($amountChanged && ! $dueDayChanged) {
-            event(new ExpenseModified($this));
-        }
-
-        /**
-         * If the recurrence changed, un-schedule
-         * and reschedule all future instances of this Expense
-         */
-        if ($dueDayChanged) {
-            event(new ExpenseRescheduled($this));
-        }
 
         return $this;
     }

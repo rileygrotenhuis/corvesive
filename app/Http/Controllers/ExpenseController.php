@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Events\Expenses\ExpenseCreated;
+use App\Events\Expenses\ExpenseModified;
+use App\Events\Expenses\ExpenseRescheduled;
 use App\Http\Requests\Expenses\StoreExpenseRequest;
+use App\Http\Requests\Expenses\UpdateExpenseRequest;
 use App\Models\Expense;
 use App\Repositories\ExpenseRepository;
 use Illuminate\Http\RedirectResponse;
@@ -60,5 +63,37 @@ class ExpenseController extends Controller
         return inertia('Expenses/Show', [
             'expense' => $expense,
         ]);
+    }
+
+    public function update(UpdateExpenseRequest $request, Expense $expense): RedirectResponse
+    {
+        $amountChanged = $expense->amount_in_cents !== $request->input('amount_in_cents');
+        $dueDayChanged = $expense->due_day_of_month !== $request->input('due_day_of_month');
+
+        $expense = $expense->modify(
+            $request->input('issuer'),
+            $request->input('name'),
+            $request->input('amount_in_cents'),
+            $request->input('due_day_of_month'),
+            $request->input('notes'),
+        );
+
+        /**
+         * If ONLY amount value changed, modify all
+         * future instances of this Expense
+         */
+        if ($amountChanged && ! $dueDayChanged) {
+            event(new ExpenseModified($expense));
+        }
+
+        /**
+         * If the recurrence changed, un-schedule
+         * and reschedule all future instances of this Expense
+         */
+        if ($dueDayChanged) {
+            event(new ExpenseRescheduled($expense));
+        }
+
+        return to_route('expenses.show', $expense);
     }
 }
