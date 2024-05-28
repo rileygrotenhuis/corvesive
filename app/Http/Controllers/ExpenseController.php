@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Repositories\ExpenseRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Response;
 
 class ExpenseController extends Controller
@@ -28,8 +29,12 @@ class ExpenseController extends Controller
         return inertia('Expenses/Create');
     }
 
-    public function show(Request $request, Expense $expense): Response
+    public function show(Expense $expense): Response
     {
-        return inertia('Expenses/Show');
+        Gate::authorize('isOwner', $expense);
+
+        return inertia('Expenses/Show', [
+            'expense' => $expense,
+        ]);
     }
 }
