@@ -30,6 +30,7 @@ class ExpenseRepository
 
         return $this->user
             ->monthlyExpenses()
+            ->with('expense')
             ->whereBetween('due_date', [$today, $today->addDays(7)])
             ->get();
     }
@@ -44,6 +45,7 @@ class ExpenseRepository
 
         return $this->user
             ->monthlyExpenses()
+            ->with('expense')
             ->where('year', $today->year)
             ->where('month', $today->month)
             ->get();
@@ -59,6 +61,7 @@ class ExpenseRepository
 
         return $this->user
             ->monthlyExpenses()
+            ->with('expense')
             ->where('year', $nextMonth->year)
             ->where('month', $nextMonth->month)
             ->get();

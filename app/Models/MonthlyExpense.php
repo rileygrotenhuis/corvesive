@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Expenses\ExpensePayments;
 use App\Traits\Expenses\MonthlyExpenseManager;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,6 +24,13 @@ class MonthlyExpense extends Model
         'due_date',
         'amount_in_cents',
     ];
+
+    protected $appends = ['due_day'];
+
+    public function getDueDayAttribute(): string
+    {
+        return Carbon::parse($this->due_date)->format('m/d');
+    }
 
     public function user(): BelongsTo
     {
