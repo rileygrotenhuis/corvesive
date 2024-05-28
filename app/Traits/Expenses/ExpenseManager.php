@@ -19,7 +19,7 @@ trait ExpenseManager
         string $name,
         int $amountInCents,
         int $dueDayOfMonth,
-        string $notes,
+        ?string $notes = null,
     ): Expense {
         return Expense::query()->create([
             'user_id' => $user->id,

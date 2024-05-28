@@ -27,7 +27,7 @@ class ExpenseController extends Controller
         ]);
     }
 
-    public function create(Request $request): Response
+    public function create(): Response
     {
         return inertia('Expenses/Create');
     }

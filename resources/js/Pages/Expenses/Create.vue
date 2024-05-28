@@ -109,7 +109,7 @@ const submitForm = () => {
             Amount
           </label>
           <input
-            v-model="form.amount"
+            v-model="form.amount_in_cents"
             id="amount"
             name="amount"
             type="text"
