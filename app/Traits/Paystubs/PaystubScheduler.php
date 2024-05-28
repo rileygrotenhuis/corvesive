@@ -28,17 +28,11 @@ trait PaystubScheduler
     public function generateFutureExpenses(): void
     {
         if (in_array($this->recurrence_rate, ['monthly', 'semi-monthly'])) {
-            $this->generateMonthlyExpenses(
-                $this,
-                $this->recurrence_rate === 'semi-monthly'
-            );
+            $this->generateMonthlyExpenses($this->recurrence_rate === 'semi-monthly');
         }
 
         if (in_array($this->recurrence_rate, ['weekly', 'bi-weekly'])) {
-            $this->generateWeeklyExpenses(
-                $this,
-                $this->recurrence_rate === 'bi-weekly'
-            );
+            $this->generateWeeklyExpenses($this->recurrence_rate === 'bi-weekly');
         }
     }
 

@@ -17,8 +17,8 @@ class ExpenseController extends Controller
                 'all' => $repository->all(),
                 'upcoming' => $repository->upcoming(),
                 'thisMonth' => $repository->thisMonth(),
-                'nextMonth' => $repository->nextMonth()
-            ]
+                'nextMonth' => $repository->nextMonth(),
+            ],
         ]);
     }
 }

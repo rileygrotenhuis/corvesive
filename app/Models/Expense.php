@@ -27,7 +27,7 @@ class Expense extends Model
 
     protected $appends = [
         'amount',
-        'due_day'
+        'due_day',
     ];
 
     public function getAmountAttribute(): float
@@ -37,7 +37,7 @@ class Expense extends Model
 
     public function getDueDayAttribute(): string
     {
-        return $this->due_day_of_month . match ($this->due_day_of_month) {
+        return $this->due_day_of_month.match ($this->due_day_of_month) {
             1 => 'st',
             2 => 'nd',
             3 => 'rd',
