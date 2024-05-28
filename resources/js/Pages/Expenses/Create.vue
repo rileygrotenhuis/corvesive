@@ -42,8 +42,15 @@ const submitForm = () => {
         @submit.prevent="submitForm"
         class="max-w-3xl space-y-6 bg-white p-6 rounded-lg"
       >
+        <a
+          :href="route('expenses.index')"
+          class="text-primary-700 hover:font-bold"
+        >
+          &larr; Back to Expenses
+        </a>
+
         <h3 class="text-lg font-semibold text-black">
-          Add one of your monthly expenses.
+          Add a new monthly expense to your budget.
         </h3>
 
         <div>
