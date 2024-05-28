@@ -57,7 +57,7 @@ const expenseUrl = computed(() => {
             ${{ formattedExpense.amount }}
           </p>
           <p class="text-md font-medium text-gray-500">
-            Due: {{ formattedExpense.dueDate }}
+            Due: {{ isBill ? formattedExpense.dueDate : 'N/A' }}
           </p>
         </div>
       </div>
