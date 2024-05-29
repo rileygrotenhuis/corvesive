@@ -5,8 +5,8 @@ import UserMenuDropdown from '@/Layouts/Partials/UserMenuDropdown.vue';
 
 const pages = ref([
   {
-    name: 'Income',
-    href: route('income.index'),
+    name: 'Paystubs',
+    href: route('paystubs.index'),
   },
   {
     name: 'Expenses',

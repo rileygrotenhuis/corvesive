@@ -1,24 +1,24 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
 import DateFilters from '@/Components/Filters/DateFilters.vue';
-import ExpenseBanner from '@/Pages/Expenses/Partials/ExpenseBanner.vue';
 import { computed, ref } from 'vue';
+import PaystubBanner from '@/Pages/Paystubs/Partials/PaystubBanner.vue';
 
 const props = defineProps({
-  expenses: Object,
+  paystubs: Object,
 });
 
 const selectedDateRange = ref('all');
 
-const selectedExpenses = computed(() => {
-  return props.expenses[selectedDateRange.value];
+const selectedPaystubs = computed(() => {
+  return props.paystubs[selectedDateRange.value];
 });
 
-const noExpenseFoundMessage = computed(() => {
+const noPaystubsFoundMessage = computed(() => {
   const snippet =
     selectedDateRange.value === 'all' ? '' : selectedDateRange.value;
 
-  return `No expenses ${snippet} found.`;
+  return `No paystubs ${snippet} found.`;
 });
 </script>
 
@@ -33,7 +33,7 @@ const noExpenseFoundMessage = computed(() => {
           />
 
           <a
-            :href="route('expenses.create')"
+            :href="route('paystubs.create')"
             class="w-8 h-8 flex text-center justify-center items-center bg-primary-100 p-2 text-primary-1000 font-bold rounded-full hover:bg-primary-700 hover:text-primary-100 transition ease-in-out"
           >
             +
@@ -41,16 +41,16 @@ const noExpenseFoundMessage = computed(() => {
         </div>
 
         <div class="space-y-6 py-8">
-          <ExpenseBanner
-            v-if="selectedExpenses.length > 0"
-            v-for="expense in selectedExpenses"
-            :key="expense.id"
-            :expense="expense"
+          <PaystubBanner
+            v-if="selectedPaystubs.length > 0"
+            v-for="paystub in selectedPaystubs"
+            :key="paystub.id"
+            :paystub="paystub"
           />
 
           <div v-else>
             <p class="text-primary-100 font-bold">
-              {{ noExpenseFoundMessage }}
+              {{ noPaystubsFoundMessage }}
             </p>
           </div>
         </div>

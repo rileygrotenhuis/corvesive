@@ -2,20 +2,20 @@
 
 namespace App\Policies;
 
-use App\Models\Expense;
+use App\Models\Paystub;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ExpensePolicy
+class PaystubPolicy
 {
     use HandlesAuthorization;
 
     /**
      * Determines whether the user is the owner
-     * of the given Expense.
+     * of the given Paystub.
      */
-    public function isOwner(User $user, Expense $expense): bool
+    public function isOwner(User $user, Paystub $paystub): bool
     {
-        return $user->id === $expense->user_id;
+        return $user->id === $paystub->user_id;
     }
 }

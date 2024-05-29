@@ -12,8 +12,8 @@ const mobileMenuOpen = ref(false);
 
 const pages = ref([
   {
-    name: 'Income',
-    href: route('income.index'),
+    name: 'Paystubs',
+    href: route('paystubs.index'),
     icon: markRaw(IncomeIcon),
   },
   {

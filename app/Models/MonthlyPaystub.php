@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Paystubs\MonthlyPaystubManager;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,6 +23,13 @@ class MonthlyPaystub extends Model
         'pay_day',
         'amount_in_cents',
     ];
+
+    protected $appends = ['pay_date'];
+
+    public function getPayDateAttribute(): string
+    {
+        return Carbon::parse($this->pay_day)->format('D, M jS');
+    }
 
     public function user(): BelongsTo
     {

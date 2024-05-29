@@ -25,6 +25,45 @@ class Paystub extends Model
         'notes',
     ];
 
+    protected $appends = [
+        'amount',
+        'interval_one',
+        'interval_two',
+    ];
+
+    public function getAmountAttribute(): float
+    {
+        return $this->amount_in_cents / 100;
+    }
+
+    public function getIntervalOneAttribute(): string
+    {
+        if (is_numeric($this->recurrence_interval_one)) {
+            return match ($this->recurrence_interval_one) {
+                1 => '1st',
+                2 => '2nd',
+                3 => '3rd',
+                default => $this->recurrence_interval_one.'th',
+            };
+        }
+
+        return $this->recurrence_interval_one.'\'s';
+    }
+
+    public function getIntervalTwoAttribute(): string
+    {
+        if (is_numeric($this->recurrence_interval_two)) {
+            return match ($this->recurrence_interval_two) {
+                1 => '1st',
+                2 => '2nd',
+                3 => '3rd',
+                default => $this->recurrence_interval_two.'th',
+            };
+        }
+
+        return $this->recurrence_interval_two.'\'s';
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
