@@ -35,11 +35,13 @@ const form = useForm({
 });
 
 const submitForm = () => {
-  form.amount_in_cents = form.amount * 100;
-  form.recurrence_interval_one = parseInt(form.recurrence_interval_one);
-  form.recurrence_interval_two = parseInt(form.recurrence_interval_two);
+  if (confirm('Are you sure you want to save this expense?')) {
+    form.amount_in_cents = form.amount * 100;
+    form.recurrence_interval_one = parseInt(form.recurrence_interval_one);
+    form.recurrence_interval_two = parseInt(form.recurrence_interval_two);
 
-  form.put(route('paystubs.update', props.paystub.id));
+    form.put(route('paystubs.update', props.paystub.id));
+  }
 };
 
 const removePaystub = () => {

@@ -29,9 +29,11 @@ watch(
 );
 
 const submitForm = () => {
-  form.amount_in_cents = form.amount * 100;
+  if (confirm('Are you sure you want to save this expense?')) {
+    form.amount_in_cents = form.amount * 100;
 
-  form.put(route('expenses.update', props.expense.id));
+    form.put(route('expenses.update', props.expense.id));
+  }
 };
 
 const removeExpense = () => {
