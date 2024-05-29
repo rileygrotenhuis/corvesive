@@ -3,6 +3,7 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 import ExpenseBanner from '@/Pages/Expenses/Partials/ExpenseBanner.vue';
 import ExpenseToggle from '@/Pages/Expenses/Partials/ExpenseToggle.vue';
 import { ref } from 'vue';
+import DateFilters from '@/Components/Filters/DateFilters.vue';
 
 const props = defineProps({
   expenses: Array,
@@ -24,6 +25,12 @@ const selectedMonth = ref(props.monthSelectionOptions[0].value);
             @updateExpenseToggle="expenseToggle = $event"
           />
 
+          <DateFilters
+            :selectedMonth="selectedMonth"
+            :monthSelectionOptions="monthSelectionOptions"
+            @updateSelectedMonth="selectedMonth = $event"
+          />
+
           <a
             v-if="expenseToggle === 'all'"
             :href="route('expenses.create')"
@@ -31,6 +38,7 @@ const selectedMonth = ref(props.monthSelectionOptions[0].value);
           >
             +
           </a>
+          <div v-else class="w-8" />
         </div>
 
         <div class="py-8">

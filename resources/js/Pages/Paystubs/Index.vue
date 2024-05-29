@@ -3,6 +3,7 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 import PaystubBanner from '@/Pages/Paystubs/Partials/PaystubBanner.vue';
 import PaystubToggle from '@/Pages/Paystubs/Partials/PaystubToggle.vue';
 import { ref } from 'vue';
+import DateFilters from '@/Components/Filters/DateFilters.vue';
 
 const props = defineProps({
   paystubs: Array,
@@ -24,6 +25,12 @@ const selectedMonth = ref(props.monthSelectionOptions[0].value);
             @updateExpenseToggle="paystubToggle = $event"
           />
 
+          <DateFilters
+            :selectedMonth="selectedMonth"
+            :monthSelectionOptions="monthSelectionOptions"
+            @updateSelectedMonth="selectedMonth = $event"
+          />
+
           <a
             v-if="paystubToggle === 'all'"
             :href="route('paystubs.create')"
@@ -31,6 +38,7 @@ const selectedMonth = ref(props.monthSelectionOptions[0].value);
           >
             +
           </a>
+          <div v-else class="w-8" />
         </div>
 
         <div class="py-8">

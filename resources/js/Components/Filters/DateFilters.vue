@@ -1,33 +1,25 @@
 <script setup>
-import { ref } from 'vue';
-
 defineProps({
-  selectedDateRange: String,
+  selectedMonth: String,
+  monthSelectionOptions: Array,
 });
 
-defineEmits(['updateSelectedDateFilter']);
-
-const exampleDateFilters = ref([
-  { label: 'All', value: 'all' },
-  { label: 'Upcoming', value: 'upcoming' },
-  { label: 'This Month', value: 'thisMonth' },
-  { label: 'Next Month', value: 'nextMonth' },
-]);
+defineEmits(['updateSelectedMonth']);
 </script>
 
 <template>
   <div>
     <select
-      :value="selectedDateRange"
+      :value="selectedMonth"
       class="block w-[150px] pl-3 pr-10 py-2 text-sm text-black font-semibold bg-primary-100 rounded-lg shadow-sm focus:outline-none focus:ring-primary-600"
-      @change.prevent="$emit('updateSelectedDateFilter', $event.target.value)"
+      @change.prevent="$emit('updateSelectedMonth', $event.target.value)"
     >
       <option
-        v-for="filter in exampleDateFilters"
-        :key="filter.value"
-        :value="filter.value"
+        v-for="month in monthSelectionOptions"
+        :key="month.value"
+        :value="month.value"
       >
-        {{ filter.label }}
+        {{ month.label }}
       </option>
     </select>
   </div>
