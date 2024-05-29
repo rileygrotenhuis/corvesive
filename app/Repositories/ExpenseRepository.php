@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class ExpenseRepository
 {
@@ -13,7 +15,8 @@ class ExpenseRepository
     }
 
     /**
-     * Returns all of a user's monthly expense records.
+     * Returns all of a user's monthly
+     * expense records.
      */
     public function all(): Collection
     {
@@ -21,48 +24,38 @@ class ExpenseRepository
     }
 
     /**
-     * Returns all of a user's monthly expenses that are
-     * due within the next 7 days.
+     * Returns all of a user's monthly expenses
+     * for the next 12 months grouped together
+     * by the month.
      */
-    public function upcoming(): Collection
+    public function monthly(): Collection
     {
-        return $this->user
-            ->monthlyExpenses()
+        $startDate = now()->startOfMonth();
+        $endDate = now()->addMonths(11)->endOfMonth();
+
+        return $this->user->monthlyExpenses()
+            ->selectRaw('*, DATE_FORMAT(due_date, \'%m-%Y\') as monthYear')
             ->with('expense')
-            ->where('due_date', '>=', now()->format('Y-m-d'))
-            ->where('due_date', '<=', now()->addDays(7)->format('Y-m-d'))
-            ->get();
+            ->where('due_date', '>=', $startDate)
+            ->where('due_date', '<=', $endDate)
+            ->get()
+            ->groupBy('monthYear');
     }
 
     /**
-     * Returns all of a user's monthly expenses that are
-     * due within the current calendar month.
+     * Returns an array of month selection options
+     * for the user's monthly expenses.
      */
-    public function thisMonth(): Collection
+    public function getMonthlySelectionOptions(Collection $monthlyExpenses): Collection
     {
-        $today = now();
+        return $monthlyExpenses->keys()->map(function ($date) {
+            $month = Str::before($date, '-');
+            $year = Str::after($date, '-');
 
-        return $this->user
-            ->monthlyExpenses()
-            ->with('expense')
-            ->where('year', $today->year)
-            ->where('month', $today->month)
-            ->get();
-    }
-
-    /**
-     * Returns all of a user's monthly expenses that are
-     * due during next calendar month.
-     */
-    public function nextMonth(): Collection
-    {
-        $nextMonth = now()->addMonth();
-
-        return $this->user
-            ->monthlyExpenses()
-            ->with('expense')
-            ->where('year', $nextMonth->year)
-            ->where('month', $nextMonth->month)
-            ->get();
+            return [
+                'value' => $date,
+                'label' => Carbon::createFromDate($year, $month)->format('F Y'),
+            ];
+        });
     }
 }

@@ -1,25 +1,17 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import DateFilters from '@/Components/Filters/DateFilters.vue';
 import ExpenseBanner from '@/Pages/Expenses/Partials/ExpenseBanner.vue';
-import { computed, ref } from 'vue';
+import ExpenseToggle from '@/Pages/Expenses/Partials/ExpenseToggle.vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   expenses: Object,
+  monthlyExpenses: Object,
+  monthSelectionOptions: Array,
 });
 
-const selectedDateRange = ref('all');
-
-const selectedExpenses = computed(() => {
-  return props.expenses[selectedDateRange.value];
-});
-
-const noExpenseFoundMessage = computed(() => {
-  const snippet =
-    selectedDateRange.value === 'all' ? '' : selectedDateRange.value;
-
-  return `No expenses ${snippet} found.`;
-});
+const expenseToggle = ref('all');
+const selectedMonth = ref(props.monthSelectionOptions[0].value);
 </script>
 
 <template>
@@ -27,9 +19,9 @@ const noExpenseFoundMessage = computed(() => {
     <div class="max-w-6xl mx-auto py-6 px-8">
       <div class="max-w-3xl">
         <div class="flex justify-between items-center">
-          <DateFilters
-            :selectedDateRange="selectedDateRange"
-            @updateSelectedDateFilter="selectedDateRange = $event"
+          <ExpenseToggle
+            :selectedOption="expenseToggle"
+            @updateExpenseToggle="expenseToggle = $event"
           />
 
           <a
@@ -40,18 +32,31 @@ const noExpenseFoundMessage = computed(() => {
           </a>
         </div>
 
-        <div class="space-y-6 py-8">
-          <ExpenseBanner
-            v-if="selectedExpenses.length > 0"
-            v-for="expense in selectedExpenses"
-            :key="expense.id"
-            :expense="expense"
-          />
+        <div class="py-8">
+          <div v-if="expenseToggle === 'all'" class="space-y-6">
+            <ExpenseBanner
+              v-if="expenses.length > 0"
+              v-for="expense in expenses"
+              :key="expense.id"
+              :expense="expense"
+            />
 
-          <div v-else>
-            <p class="text-primary-100 font-bold">
-              {{ noExpenseFoundMessage }}
-            </p>
+            <div v-else>
+              <p class="text-primary-100 font-bold">No expenses found.</p>
+            </div>
+          </div>
+
+          <div v-else class="space-y-6">
+            <ExpenseBanner
+              v-if="Object.keys(monthlyExpenses).length > 0"
+              v-for="expense in monthlyExpenses[selectedMonth]"
+              :key="expense.id"
+              :expense="expense"
+            />
+
+            <div v-else>
+              <p class="text-primary-100 font-bold">No expenses found.</p>
+            </div>
           </div>
         </div>
       </div>

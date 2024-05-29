@@ -23,13 +23,15 @@ class ExpenseController extends Controller
     {
         $repository = new ExpenseRepository($request->user());
 
+        $allExpenses = $repository->all();
+        $monthlyExpenses = $repository->monthly();
+
+        $monthSelectionOptions = $repository->getMonthlySelectionOptions($monthlyExpenses);
+
         return inertia('Expenses/Index', [
-            'expenses' => [
-                'all' => $repository->all(),
-                'upcoming' => $repository->upcoming(),
-                'thisMonth' => $repository->thisMonth(),
-                'nextMonth' => $repository->nextMonth(),
-            ],
+            'expenses' => $allExpenses,
+            'monthlyExpenses' => $monthlyExpenses,
+            'monthSelectionOptions' => $monthSelectionOptions,
         ]);
     }
 
