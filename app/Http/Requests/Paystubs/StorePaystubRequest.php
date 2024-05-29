@@ -30,8 +30,8 @@ class StorePaystubRequest extends FormRequest
     {
         return Rule::when(
             in_array($this->recurrence_rate, ['weekly', 'bi-weekly']),
-            ['integer', 'between:1,7'],
-            ['integer', 'between:1,32']
+            ['integer', 'between:0,6'],
+            ['integer', 'between:1,28']
         );
     }
 

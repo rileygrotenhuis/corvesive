@@ -12,7 +12,7 @@ const props = defineProps({
 });
 
 const expenseToggle = ref('all');
-const selectedMonth = ref(props.monthSelectionOptions[0].value);
+const selectedMonth = ref(props.monthSelectionOptions[0]?.value ?? null);
 </script>
 
 <template>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Paystubs\PaystubManager;
 use App\Traits\Paystubs\PaystubScheduler;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,7 +39,7 @@ class Paystub extends Model
 
     public function getIntervalOneAttribute(): string
     {
-        if (is_numeric($this->recurrence_interval_one)) {
+        if ($this->recurrence_rate === 'monthly' || $this->recurrence_rate === 'semi-monthly') {
             return match ($this->recurrence_interval_one) {
                 1 => '1st',
                 2 => '2nd',
@@ -47,12 +48,16 @@ class Paystub extends Model
             };
         }
 
-        return $this->recurrence_interval_one.'\'s';
+        return Carbon::now()->startOfWeek()->addDays((int) $this->recurrence_interval_one)->format('l');
     }
 
-    public function getIntervalTwoAttribute(): string
+    public function getIntervalTwoAttribute(): ?string
     {
-        if (is_numeric($this->recurrence_interval_two)) {
+        if (is_null($this->recurrence_interval_two)) {
+            return null;
+        }
+
+        if ($this->recurrence_rate === 'monthly' || $this->recurrence_rate === 'semi-monthly') {
             return match ($this->recurrence_interval_two) {
                 1 => '1st',
                 2 => '2nd',
@@ -61,7 +66,7 @@ class Paystub extends Model
             };
         }
 
-        return $this->recurrence_interval_two.'\'s';
+        return Carbon::now()->startOfWeek()->addDays((int) $this->recurrence_interval_two)->format('jS');
     }
 
     public function user(): BelongsTo

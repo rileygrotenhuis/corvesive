@@ -12,7 +12,7 @@ const props = defineProps({
 });
 
 const paystubToggle = ref('all');
-const selectedMonth = ref(props.monthSelectionOptions[0].value);
+const selectedMonth = ref(props.monthSelectionOptions[0]?.value ?? null);
 </script>
 
 <template>
@@ -55,7 +55,7 @@ const selectedMonth = ref(props.monthSelectionOptions[0].value);
             </div>
           </div>
 
-          <div v-else>
+          <div v-else class="space-y-6">
             <PaystubBanner
               v-if="Object.keys(monthlyPaystubs).length > 0"
               v-for="paystub in monthlyPaystubs[selectedMonth]"

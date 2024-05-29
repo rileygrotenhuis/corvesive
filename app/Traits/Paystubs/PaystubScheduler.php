@@ -42,7 +42,7 @@ trait PaystubScheduler
     protected function generateMonthlyExpenses(bool $semiMonthly = false): void
     {
         for ($i = 0; $i < 12; $i++) {
-            $payDate = Carbon::now()->addMonths($i)->day($this->recurrence_interval_one);
+            $payDate = Carbon::now()->addMonths($i)->day((int) $this->recurrence_interval_one);
 
             $this->schedule(
                 $payDate,
@@ -50,7 +50,7 @@ trait PaystubScheduler
             );
 
             if ($semiMonthly) {
-                $payDate = Carbon::now()->addMonths($i)->day($this->recurrence_interval_two);
+                $payDate = Carbon::now()->addMonths($i)->day((int) $this->recurrence_interval_two);
 
                 $this->schedule(
                     $payDate,
@@ -67,8 +67,10 @@ trait PaystubScheduler
     {
         $interval = $biWeekly ? 2 : 1;
 
+        $startOfWeek = Carbon::now()->startOfWeek();
+
         for ($i = 0; $i < 52; $i += $interval) {
-            $payDate = Carbon::now()->addWeeks($i)->next($this->recurrence_interval_one);
+            $payDate = $startOfWeek->copy()->addWeeks($i)->addDays((int) $this->recurrence_interval_one);
 
             $this->schedule(
                 $payDate,
@@ -86,7 +88,7 @@ trait PaystubScheduler
 
         MonthlyPaystub::query()
             ->where('paystub_id', $this->id)
-            ->where('pay_date', '>=', $today)
+            ->where('pay_day', '>=', $today)
             ->update([
                 'amount_in_cents' => $this->amount_in_cents,
             ]);
@@ -101,7 +103,7 @@ trait PaystubScheduler
 
         MonthlyPaystub::query()
             ->where('paystub_id', $this->id)
-            ->where('pay_date', '>=', $today)
+            ->where('pay_day', '>=', $today)
             ->delete();
     }
 }
