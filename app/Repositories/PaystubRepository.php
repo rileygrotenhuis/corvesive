@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class PaystubRepository
 {
@@ -21,48 +23,38 @@ class PaystubRepository
     }
 
     /**
-     * Returns all of a user's monthly paystubs that are
-     * being deposited within the next 7 days.
+     * Returns all of a user's monthly paystubs
+     * for the next 12 months grouped together
+     * by the month.
      */
-    public function upcoming(): Collection
+    public function monthly(): Collection
     {
-        return $this->user
-            ->monthlyPaystubs()
+        $startDate = now()->startOfMonth();
+        $endDate = now()->addMonths(11)->endOfMonth();
+
+        return $this->user->monthlyPaystubs()
+            ->selectRaw('*, DATE_FORMAT(pay_day, \'%m-%Y\') as monthYear')
             ->with('paystub')
-            ->where('pay_day', '>=', now()->format('Y-m-d'))
-            ->where('pay_day', '<=', now()->addDays(7)->format('Y-m-d'))
-            ->get();
+            ->where('pay_day', '>=', $startDate)
+            ->where('pay_day', '<=', $endDate)
+            ->get()
+            ->groupBy('monthYear');
     }
 
     /**
-     * Returns all of a user's monthly paystubs that are
-     * being deposited within the current calendar month.
+     * Returns an array of month selection options
+     * for the user's monthly paystubs.
      */
-    public function thisMonth(): Collection
+    public function getMonthlySelectionOptions(Collection $monthlyPaystubs): Collection
     {
-        $today = now();
+        return $monthlyPaystubs->keys()->map(function ($date) {
+            $month = Str::before($date, '-');
+            $year = Str::after($date, '-');
 
-        return $this->user
-            ->monthlyPaystubs()
-            ->with('paystub')
-            ->where('year', $today->year)
-            ->where('month', $today->month)
-            ->get();
-    }
-
-    /**
-     * Returns all of a user's monthly paystubs that are
-     * being deposited during next calendar month.
-     */
-    public function nextMonth(): Collection
-    {
-        $nextMonth = now()->addMonth();
-
-        return $this->user
-            ->monthlyPaystubs()
-            ->with('paystub')
-            ->where('year', $nextMonth->year)
-            ->where('month', $nextMonth->month)
-            ->get();
+            return [
+                'value' => $date,
+                'label' => Carbon::createFromDate($year, $month)->format('F Y'),
+            ];
+        });
     }
 }

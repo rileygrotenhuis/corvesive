@@ -23,13 +23,15 @@ class PaystubController extends Controller
     {
         $repository = new PaystubRepository($request->user());
 
+        $allPaystubs = $repository->all();
+        $monthlyPaystubs = $repository->monthly();
+
+        $monthSelectionOptions = $repository->getMonthlySelectionOptions($monthlyPaystubs);
+
         return inertia('Paystubs/Index', [
-            'paystubs' => [
-                'all' => $repository->all(),
-                'upcoming' => $repository->upcoming(),
-                'thisMonth' => $repository->thisMonth(),
-                'nextMonth' => $repository->nextMonth(),
-            ],
+            'paystubs' => $allPaystubs,
+            'monthlyPaystubs' => $monthlyPaystubs,
+            'monthSelectionOptions' => $monthSelectionOptions,
         ]);
     }
 
