@@ -80,7 +80,7 @@ const shortRecurrenceText = computed(() => {
             v-if="formattedPaystub.payDate"
             class="text-md font-medium text-gray-500"
           >
-            Due: {{ formattedPaystub.payDate }}
+            {{ formattedPaystub.payDate }}
           </p>
         </div>
       </div>
