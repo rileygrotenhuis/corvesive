@@ -28,6 +28,7 @@ const form = useForm({
   recurrence_rate: recurrenceRateOptions.value[0].value,
   recurrence_interval_one: null,
   recurrence_interval_two: null,
+  notes: '',
 });
 
 const submitForm = () => {
@@ -159,6 +160,20 @@ const submitForm = () => {
             type="number"
             class="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
           />
+        </div>
+
+        <div>
+          <label for="notes" class="block text-sm font-medium text-gray-700">
+            Notes
+          </label>
+          <textarea
+            v-model="form.notes"
+            id="notes"
+            name="notes"
+            class="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            rows="4"
+          />
+          <InputError :message="form.errors.notes" />
         </div>
 
         <div class="flex justify-end">
