@@ -11,7 +11,7 @@ defineEmits(['updateExpenseToggle']);
     <div
       :class="{
         'translate-x-0': selectedOption === 'all',
-        'translate-x-full': selectedOption === 'due',
+        'translate-x-full': selectedOption === 'soon',
       }"
       class="absolute left-0 top-0 w-1/2 h-full bg-primary-800 rounded-full transition-transform duration-300"
     ></div>
@@ -29,16 +29,16 @@ defineEmits(['updateExpenseToggle']);
       </span>
     </button>
     <button
-      @click.prevent="$emit('updateExpenseToggle', 'due')"
+      @click.prevent="$emit('updateExpenseToggle', 'soon')"
       class="relative z-10 w-1/2 h-full focus:outline-none"
     >
       <span
         :class="{
-          'text-white': selectedOption === 'due',
-          'text-gray-700': selectedOption !== 'due',
+          'text-white': selectedOption === 'soon',
+          'text-gray-700': selectedOption !== 'soon',
         }"
       >
-        Due
+        Soon
       </span>
     </button>
   </div>

@@ -1,7 +1,7 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
 import PaystubBanner from '@/Pages/Paystubs/Partials/PaystubBanner.vue';
-import ExpenseToggle from '@/Pages/Expenses/Partials/ExpenseToggle.vue';
+import PaystubToggle from '@/Pages/Paystubs/Partials/PaystubToggle.vue';
 import { ref } from 'vue';
 
 const props = defineProps({
@@ -19,7 +19,7 @@ const selectedMonth = ref(props.monthSelectionOptions[0].value);
     <div class="max-w-6xl mx-auto py-6 px-8">
       <div class="max-w-3xl">
         <div class="flex justify-between items-center">
-          <ExpenseToggle
+          <PaystubToggle
             :selectedOption="paystubToggle"
             @updateExpenseToggle="paystubToggle = $event"
           />
