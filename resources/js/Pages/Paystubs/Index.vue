@@ -11,7 +11,7 @@ const props = defineProps({
   monthSelectionOptions: Array,
 });
 
-const paystubToggle = ref('all');
+const paystubToggle = ref('soon');
 const selectedMonth = ref(props.monthSelectionOptions[0]?.value ?? null);
 </script>
 
