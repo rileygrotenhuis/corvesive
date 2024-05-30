@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\MonthlyExpenseController;
 use App\Http\Controllers\PaystubController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{expense}', [ExpenseController::class, 'show'])->name('expenses.show');
         Route::put('/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
         Route::delete('/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+        Route::get('/due/{monthlyExpense}', [MonthlyExpenseController::class, 'index'])->name('monthly-expenses.index');
     });
 });
 

@@ -28,9 +28,8 @@ const formattedExpense = computed(() => {
 });
 
 const expenseUrl = computed(() => {
-  // TODO: Monthly Expense Show
   if (props.expense?.expense) {
-    return '#';
+    return route('monthly-expenses.index', props.expense.id);
   }
 
   return route('expenses.show', props.expense.id);
