@@ -48,7 +48,11 @@ const expenseUrl = computed(() => {
             {{ formattedExpense.name }}
           </h2>
           <h4 class="text-sm font-medium text-gray-600">
-            {{ isBill ? formattedExpense.issuer : formattedExpense.type.toUpperCase() }}
+            {{
+              isBill
+                ? formattedExpense.issuer
+                : formattedExpense.type.toUpperCase()
+            }}
           </h4>
         </div>
 
