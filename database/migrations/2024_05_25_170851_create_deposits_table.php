@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('deposits', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('monthly_paystub_id')->nullable()->constrained('monthly_paystubs')->cascadeOnDelete();
             $table->date('deposit_date');
             $table->unsignedBigInteger('amount_in_cents');
             $table->text('notes')->nullable();

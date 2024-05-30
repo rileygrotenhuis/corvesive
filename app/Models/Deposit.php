@@ -15,6 +15,7 @@ class Deposit extends Model
 
     protected $fillable = [
         'user_id',
+        'monthly_paystub_id',
         'deposit_date',
         'amount_in_cents',
         'notes',
@@ -23,5 +24,10 @@ class Deposit extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function monthlyPaystub(): BelongsTo
+    {
+        return $this->belongsTo(MonthlyPaystub::class);
     }
 }

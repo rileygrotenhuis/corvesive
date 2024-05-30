@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Paystubs\MonthlyPaystubManager;
+use App\Traits\Paystubs\PaystubDeposits;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MonthlyPaystub extends Model
 {
-    use HasFactory, MonthlyPaystubManager;
+    use HasFactory, MonthlyPaystubManager, PaystubDeposits;
 
     protected $table = 'monthly_paystubs';
 
@@ -44,5 +45,10 @@ class MonthlyPaystub extends Model
     public function paydayTasks(): HasMany
     {
         return $this->hasMany(PaydayTask::class);
+    }
+
+    public function deposits(): HasMany
+    {
+        return $this->hasMany(Deposit::class);
     }
 }
