@@ -38,7 +38,7 @@ class MonthlyExpenseController extends Controller
 
         $monthlyExpense->modify($request->input('amount_in_cents'));
 
-        return to_route('monthly-expenses.index', $monthlyExpense);
+        return to_route('monthly-expenses.show', $monthlyExpense);
     }
 
     /**
@@ -52,7 +52,7 @@ class MonthlyExpenseController extends Controller
 
         $monthlyExpense->reschedule($request->due_date);
 
-        return to_route('monthly-expenses.index', $monthlyExpense);
+        return to_route('monthly-expenses.show', $monthlyExpense);
     }
 
     /**

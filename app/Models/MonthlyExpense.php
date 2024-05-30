@@ -26,11 +26,19 @@ class MonthlyExpense extends Model
         'amount_in_cents',
     ];
 
-    protected $appends = ['due_day'];
+    protected $appends = [
+        'due_day',
+        'amount',
+    ];
 
     public function getDueDayAttribute(): string
     {
         return Carbon::parse($this->due_date)->format('m/d');
+    }
+
+    public function getAmountAttribute(): float
+    {
+        return $this->amount_in_cents / 100;
     }
 
     public function user(): BelongsTo
