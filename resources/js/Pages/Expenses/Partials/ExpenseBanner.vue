@@ -47,8 +47,8 @@ const expenseUrl = computed(() => {
           <h2 class="text-xl font-bold text-gray-800">
             {{ formattedExpense.name }}
           </h2>
-          <h4 class="text-md font-medium text-gray-600">
-            {{ isBill ? formattedExpense.issuer : formattedExpense.type }}
+          <h4 class="text-sm font-medium text-gray-600">
+            {{ isBill ? formattedExpense.issuer : formattedExpense.type.toUpperCase() }}
           </h4>
         </div>
 
@@ -56,8 +56,8 @@ const expenseUrl = computed(() => {
           <p class="text-2xl font-bold text-primary-700">
             ${{ formattedExpense.amount }}
           </p>
-          <p class="text-md font-medium text-gray-500">
-            Due: {{ isBill ? formattedExpense.dueDate : 'N/A' }}
+          <p v-if="isBill" class="text-md font-medium text-gray-500">
+            Due: {{ formattedExpense.dueDate }}
           </p>
         </div>
       </div>
