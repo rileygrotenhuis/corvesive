@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Paystubs\MonthlyPaystubManager;
+use App\Traits\Paystubs\PaystubAmounts;
 use App\Traits\Paystubs\PaystubDeposits;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MonthlyPaystub extends Model
 {
-    use HasFactory, MonthlyPaystubManager, PaystubDeposits;
+    use HasFactory, MonthlyPaystubManager, PaystubAmounts, PaystubDeposits;
 
     protected $table = 'monthly_paystubs';
 

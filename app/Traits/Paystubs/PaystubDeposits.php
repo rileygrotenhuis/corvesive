@@ -9,7 +9,8 @@ trait PaystubDeposits
     /**
      * Make a deposit for a paystub.
      */
-    public function deposit(string $depositDate, ?string $notes = null): Deposit {
+    public function deposit(string $depositDate, ?string $notes = null): Deposit
+    {
         return Deposit::query()->create([
             'user_id' => $this->user_id,
             'monthly_paystub_id' => $this->id,

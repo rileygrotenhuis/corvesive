@@ -5,6 +5,7 @@ namespace App\Traits\Paystubs;
 use App\Models\MonthlyExpense;
 use App\Models\MonthlyPaystub;
 use App\Models\PaydayTask;
+use Carbon\Carbon;
 
 trait MonthlyPaystubManager
 {
@@ -24,7 +25,11 @@ trait MonthlyPaystubManager
      */
     public function reschedule(string $payDay): MonthlyPaystub
     {
-        $this->pay_day = $payDay;
+        $date = Carbon::parse($payDay);
+
+        $this->year = $date->year;
+        $this->month = $date->month;
+        $this->pay_day = $date->format('Y-m-d');
         $this->save();
 
         return $this;

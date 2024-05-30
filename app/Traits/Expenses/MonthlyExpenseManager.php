@@ -3,6 +3,7 @@
 namespace App\Traits\Expenses;
 
 use App\Models\MonthlyExpense;
+use Carbon\Carbon;
 
 trait MonthlyExpenseManager
 {
@@ -22,7 +23,11 @@ trait MonthlyExpenseManager
      */
     public function reschedule(string $dueDate): MonthlyExpense
     {
-        $this->due_duate = $dueDate;
+        $date = Carbon::parse($dueDate);
+
+        $this->year = $date->year;
+        $this->month = $date->month;
+        $this->due_duate = $date->format('Y-m-d');
         $this->save();
 
         return $this;
