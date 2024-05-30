@@ -30,6 +30,11 @@ class Expense extends Model
         'due_day',
     ];
 
+    public function getTypeAttribute(): string
+    {
+        return ucfirst($this->attributes['type']);
+    }
+
     public function getAmountAttribute(): float
     {
         return $this->amount_in_cents / 100;

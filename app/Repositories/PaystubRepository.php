@@ -37,6 +37,7 @@ class PaystubRepository
             ->with('paystub')
             ->where('pay_day', '>=', $startDate)
             ->where('pay_day', '<=', $endDate)
+            ->orderBy('pay_day')
             ->get()
             ->groupBy('monthYear');
     }

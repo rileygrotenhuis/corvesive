@@ -7,10 +7,10 @@ const props = defineProps({
 
 const isBill = computed(() => {
   if (props.expense?.expense) {
-    return props.expense.expense.type === 'bill';
+    return props.expense.expense.type === 'Bill';
   }
 
-  return props.expense.type === 'bill';
+  return props.expense.type === 'Bill';
 });
 
 const formattedExpense = computed(() => {
@@ -29,7 +29,7 @@ const formattedExpense = computed(() => {
 
 const expenseUrl = computed(() => {
   if (props.expense?.expense) {
-    return route('monthly-expenses.index', props.expense.id);
+    return route('monthly-expenses.show', props.expense.id);
   }
 
   return route('expenses.show', props.expense.id);
@@ -38,7 +38,7 @@ const expenseUrl = computed(() => {
 
 <template>
   <div
-    class="w-full bg-primary-100 hover:bg-primary-300 cursor-pointer text-black cursor-pointer hover:shadow-lg border border-gray-200 p-6 rounded-xl transition-transform transform hover:scale-105 ease-in-out"
+    class="w-full bg-primary-100 hover:bg-primary-300 cursor-pointer text-black hover:shadow-lg border border-gray-200 p-6 rounded-xl transition-transform transform hover:scale-105 ease-in-out"
   >
     <a :href="expenseUrl">
       <div class="flex justify-between items-center">

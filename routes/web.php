@@ -26,7 +26,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/{expense}', [ExpenseController::class, 'show'])->name('expenses.show');
         Route::put('/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
         Route::delete('/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
-        Route::get('/due/{monthlyExpense}', [MonthlyExpenseController::class, 'index'])->name('monthly-expenses.index');
+
+        Route::get('/due/{monthlyExpense}', [MonthlyExpenseController::class, 'show'])->name('monthly-expenses.show');
+        Route::put('monthly-expenses/{monthlyExpense}', [MonthlyExpenseController::class, 'update'])->name('monthly-expenses.update');
+        Route::put('monthly-expenses/{monthlyExpense}/reschedule', [MonthlyExpenseController::class, 'reschedule'])->name('monthly-expenses.reschedule');
+        Route::delete('monthly-expenses/{monthlyExpense}/unschedule', [MonthlyExpenseController::class, 'unschedule'])->name('monthly-expenses.unschedule');
     });
 });
 

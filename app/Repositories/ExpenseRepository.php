@@ -38,6 +38,7 @@ class ExpenseRepository
             ->with('expense')
             ->where('due_date', '>=', $startDate)
             ->where('due_date', '<=', $endDate)
+            ->orderBy('due_date')
             ->get()
             ->groupBy('monthYear');
     }

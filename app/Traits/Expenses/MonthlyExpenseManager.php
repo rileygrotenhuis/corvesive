@@ -27,7 +27,7 @@ trait MonthlyExpenseManager
 
         $this->year = $date->year;
         $this->month = $date->month;
-        $this->due_duate = $date->format('Y-m-d');
+        $this->due_date = $date->format('Y-m-d');
         $this->save();
 
         return $this;

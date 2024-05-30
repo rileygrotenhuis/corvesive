@@ -1,0 +1,29 @@
+<template>
+  <svg
+    fill="#000000"
+    width="24px"
+    height="24px"
+    viewBox="0 0 36 36"
+    version="1.1"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+    <g
+      id="SVGRepo_tracerCarrier"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <g id="SVGRepo_iconCarrier">
+      <title>redo-line</title>
+      <path
+        d="M24,4.22a1,1,0,0,0-1.41,1.42l5.56,5.49h-13A11,11,0,0,0,10.07,32,1,1,0,0,0,11,30.18a9,9,0,0,1-5-8,9.08,9.08,0,0,1,9.13-9h13l-5.54,5.48A1,1,0,0,0,24,20l8-7.91Z"
+        class="clr-i-outline clr-i-outline-path-1"
+      />
+      <rect x="0" y="0" width="36" height="36" fill-opacity="0" />
+    </g>
+  </svg>
+</template>
