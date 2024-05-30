@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::put('monthly-expenses/{monthlyExpense}', [MonthlyExpenseController::class, 'update'])->name('monthly-expenses.update');
         Route::put('monthly-expenses/{monthlyExpense}/reschedule', [MonthlyExpenseController::class, 'reschedule'])->name('monthly-expenses.reschedule');
         Route::delete('monthly-expenses/{monthlyExpense}/unschedule', [MonthlyExpenseController::class, 'unschedule'])->name('monthly-expenses.unschedule');
+        Route::post('monthly-expenses/{monthlyExpense}/payment', [MonthlyExpenseController::class, 'payment'])->name('monthly-expenses.payment');
     });
 });
 

@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import PaidIcon from '@/Components/Icons/PaidIcon.vue';
 
 const props = defineProps({
   expense: Object,
@@ -24,6 +25,7 @@ const formattedExpense = computed(() => {
     dueDate:
       props.expense?.due_day ?? props.expense?.expense?.due_day ?? 'Unknown',
     notes: props.expense?.notes ?? props.expense?.expense?.notes ?? '',
+    isPaid: props.expense?.is_paid ?? false,
   };
 });
 
@@ -43,8 +45,11 @@ const expenseUrl = computed(() => {
     <a :href="expenseUrl">
       <div class="flex justify-between items-center">
         <div>
-          <h2 class="text-xl font-bold text-gray-800">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
             {{ formattedExpense.name }}
+            <span v-if="formattedExpense.isPaid">
+              <PaidIcon />
+            </span>
           </h2>
           <h4 class="text-sm font-medium text-gray-600">
             {{

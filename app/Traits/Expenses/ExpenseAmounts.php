@@ -21,4 +21,13 @@ trait ExpenseAmounts
     {
         return $this->amount_in_cents - $this->amount_paid;
     }
+
+    /**
+     * Returns a boolean value of
+     * whether the bill is paid in full.
+     */
+    public function getIsPaidAttribute(): bool
+    {
+        return $this->amount_remaining === 0;
+    }
 }

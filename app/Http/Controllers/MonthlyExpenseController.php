@@ -17,6 +17,7 @@ class MonthlyExpenseController extends Controller
         $monthlyExpense->append([
             'amount_paid',
             'amount_remaining',
+            'is_paid',
         ]);
 
         $monthlyExpense->load('expense', 'payments');
@@ -63,5 +64,22 @@ class MonthlyExpenseController extends Controller
         $monthlyExpense->unschedule();
 
         return to_route('expenses.index');
+    }
+
+    public function payment(Request $request, MonthlyExpense $monthlyExpense): RedirectResponse
+    {
+        $request->validate([
+            'payment_date' => ['required', 'date'],
+            'amount_in_cents' => ['required', 'integer', 'min:1'],
+            'notes' => ['nullable', 'string'],
+        ]);
+
+        $monthlyExpense->payment(
+            $request->input('payment_date'),
+            $request->input('amount_in_cents'),
+            $request->input('notes'),
+        );
+
+        return to_route('monthly-expenses.show', $monthlyExpense);
     }
 }

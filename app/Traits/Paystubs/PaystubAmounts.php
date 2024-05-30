@@ -21,4 +21,13 @@ trait PaystubAmounts
     {
         return $this->amount_in_cents - $this->amount_deposited;
     }
+
+    /**
+     * Returns a boolean value of whether
+     * the paystub has been deposited in full.
+     */
+    public function getIsDepositedInFullAttribute(): bool
+    {
+        return $this->amount_remaining === 0;
+    }
 }

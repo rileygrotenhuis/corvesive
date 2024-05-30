@@ -40,7 +40,8 @@ class ExpenseRepository
             ->where('due_date', '<=', $endDate)
             ->orderBy('due_date')
             ->get()
-            ->groupBy('monthYear');
+            ->groupBy('monthYear')
+            ->append(['is_paid']);
     }
 
     /**
