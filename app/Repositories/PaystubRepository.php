@@ -39,7 +39,8 @@ class PaystubRepository
             ->where('pay_day', '<=', $endDate)
             ->orderBy('pay_day')
             ->get()
-            ->groupBy('monthYear');
+            ->groupBy('monthYear')
+            ->append(['is_deposited']);
     }
 
     /**

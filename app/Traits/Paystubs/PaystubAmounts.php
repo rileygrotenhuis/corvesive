@@ -28,6 +28,6 @@ trait PaystubAmounts
      */
     public function getIsDepositedAttribute(): bool
     {
-        return $this->amount_remaining === 0;
+        return $this->amount_remaining <= 0;
     }
 }

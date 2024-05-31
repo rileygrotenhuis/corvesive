@@ -23,6 +23,9 @@ const modifyExpense = () => {
     {
       preserveScroll: true,
       preserveState: true,
+      onSuccess: () => {
+        showModifyForm.value = false;
+      },
     }
   );
 };
@@ -63,7 +66,7 @@ const modifyExpense = () => {
         required
         class="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
       />
-      <InputError :message="modifyExpenseForm.errors.amount" />
+      <InputError :message="modifyExpenseForm.errors.amount_in_cents" />
     </div>
 
     <div class="flex justify-end">

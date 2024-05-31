@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepositController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MonthlyExpenseController;
 use App\Http\Controllers\MonthlyPaystubController;
@@ -44,6 +45,10 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/payments')->group(function () {
         Route::delete('/{payment}', [PaymentController::class, 'destroy'])->name('payments.destroy');
+    });
+
+    Route::prefix('/deposits')->group(function () {
+        Route::delete('/{deposit}', [DepositController::class, 'destroy'])->name('deposits.destroy');
     });
 });
 

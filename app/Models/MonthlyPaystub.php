@@ -26,11 +26,19 @@ class MonthlyPaystub extends Model
         'amount_in_cents',
     ];
 
-    protected $appends = ['pay_date'];
+    protected $appends = [
+        'pay_date',
+        'amount',
+    ];
 
     public function getPayDateAttribute(): string
     {
-        return Carbon::parse($this->pay_day)->format('D, M jS');
+        return Carbon::parse($this->pay_day)->format('m/d');
+    }
+
+    public function getAmountAttribute(): float
+    {
+        return $this->amount_in_cents / 100;
     }
 
     public function user(): BelongsTo

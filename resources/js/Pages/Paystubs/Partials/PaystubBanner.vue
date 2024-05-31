@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import PaidIcon from '@/Components/Icons/PaidIcon.vue';
 
 const props = defineProps({
   paystub: Object,
@@ -13,6 +14,7 @@ const formattedPaystub = computed(() => {
     amount: props.paystub?.amount ?? props.paystub?.paystub?.amount ?? '$0.00',
     payDate: props.paystub?.paystub ? props.paystub?.pay_date : null,
     notes: props.paystub?.notes ?? props.paystub?.paystub?.notes ?? '',
+    isDeposited: props.paystub?.is_deposited ?? false,
   };
 });
 
@@ -58,8 +60,11 @@ const shortRecurrenceText = computed(() => {
     <a :href="paystubUrl">
       <div class="flex justify-between items-center">
         <div>
-          <h2 class="text-xl font-bold text-gray-800">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
             {{ formattedPaystub.issuer }}
+            <span v-if="formattedPaystub.isDeposited">
+              <PaidIcon />
+            </span>
           </h2>
           <h4 class="text-md font-medium text-gray-600">
             <span class="hidden md:inline-flex">
@@ -79,7 +84,7 @@ const shortRecurrenceText = computed(() => {
             v-if="formattedPaystub.payDate"
             class="text-md font-medium text-gray-500"
           >
-            {{ formattedPaystub.payDate }}
+            Deposits: {{ formattedPaystub.payDate }}
           </p>
         </div>
       </div>

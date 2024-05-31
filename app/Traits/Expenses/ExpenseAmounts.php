@@ -28,6 +28,6 @@ trait ExpenseAmounts
      */
     public function getIsPaidAttribute(): bool
     {
-        return $this->amount_remaining === 0;
+        return $this->amount_remaining <= 0;
     }
 }

@@ -48,10 +48,10 @@ class MonthlyPaystubController extends Controller
     public function reschedule(Request $request, MonthlyPaystub $monthlyPaystub): RedirectResponse
     {
         $request->validate([
-            'due_date' => ['required', 'date'],
+            'pay_day' => ['required', 'date'],
         ]);
 
-        $monthlyPaystub->reschedule($request->due_date);
+        $monthlyPaystub->reschedule($request->input('pay_day'));
 
         return to_route('monthly-paystubs.show', $monthlyPaystub);
     }
@@ -63,7 +63,7 @@ class MonthlyPaystubController extends Controller
     {
         $monthlyPaystub->unschedule();
 
-        return to_route('monthly-paystubs.show', $monthlyPaystub);
+        return to_route('paystubs.index');
     }
 
     /**
