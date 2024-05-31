@@ -32,13 +32,11 @@ const selectedMonth = ref(props.monthSelectionOptions[0]?.value ?? null);
           />
 
           <a
-            v-if="expenseToggle === 'all'"
             :href="route('expenses.create')"
             class="w-8 h-8 flex text-center justify-center items-center bg-primary-100 p-2 text-primary-1000 font-bold rounded-full hover:bg-primary-700 hover:text-primary-100 transition ease-in-out"
           >
             +
           </a>
-          <div v-else class="w-8" />
         </div>
 
         <div class="py-8">

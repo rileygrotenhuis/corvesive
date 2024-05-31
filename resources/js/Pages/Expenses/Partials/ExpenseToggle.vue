@@ -7,7 +7,7 @@ defineEmits(['updateExpenseToggle']);
 </script>
 
 <template>
-  <div class="relative w-48 bg-gray-300 rounded-full p-1 flex items-center">
+  <div class="relative w-36 bg-gray-300 rounded-full p-1 flex items-center">
     <div
       :class="{
         'translate-x-0': selectedOption === 'due',
@@ -24,6 +24,7 @@ defineEmits(['updateExpenseToggle']);
           'text-white': selectedOption === 'due',
           'text-gray-700': selectedOption !== 'due',
         }"
+        class="text-sm"
       >
         Due
       </span>
@@ -37,6 +38,7 @@ defineEmits(['updateExpenseToggle']);
           'text-white': selectedOption === 'all',
           'text-gray-700': selectedOption !== 'all',
         }"
+        class="text-sm"
       >
         All
       </span>

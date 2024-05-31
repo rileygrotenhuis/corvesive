@@ -7,7 +7,7 @@ defineEmits(['updateExpenseToggle']);
 </script>
 
 <template>
-  <div class="relative w-48 bg-gray-300 rounded-full p-1 flex items-center">
+  <div class="relative w-36 bg-gray-300 rounded-full p-1 flex items-center">
     <div
       :class="{
         'translate-x-0': selectedOption === 'soon',
@@ -24,8 +24,9 @@ defineEmits(['updateExpenseToggle']);
           'text-white': selectedOption === 'soon',
           'text-gray-700': selectedOption !== 'soon',
         }"
+        class="text-sm"
       >
-        Deposits
+        Soon
       </span>
     </button>
     <button
@@ -37,6 +38,7 @@ defineEmits(['updateExpenseToggle']);
           'text-white': selectedOption === 'all',
           'text-gray-700': selectedOption !== 'all',
         }"
+        class="text-sm"
       >
         All
       </span>

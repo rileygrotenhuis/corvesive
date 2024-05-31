@@ -12,7 +12,7 @@ defineEmits(['updateSelectedMonth']);
     <select
       v-if="monthSelectionOptions.length > 0"
       :value="selectedMonth"
-      class="block w-[175px] pl-3 pr-10 py-2 text-sm text-black font-semibold bg-primary-100 rounded-lg shadow-sm focus:outline-none focus:ring-primary-600"
+      class="block pl-3 py-2 text-xs text-black font-semibold bg-primary-100 rounded-lg shadow-sm focus:outline-none focus:ring-primary-600"
       @change.prevent="$emit('updateSelectedMonth', $event.target.value)"
     >
       <option
