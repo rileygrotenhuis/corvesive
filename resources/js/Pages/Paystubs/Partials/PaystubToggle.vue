@@ -25,7 +25,7 @@ defineEmits(['updateExpenseToggle']);
           'text-gray-700': selectedOption !== 'soon',
         }"
       >
-        Pay Days
+        Deposits
       </span>
     </button>
     <button

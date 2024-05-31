@@ -17,9 +17,8 @@ const formattedPaystub = computed(() => {
 });
 
 const paystubUrl = computed(() => {
-  // TODO: Monthly Expense Show
-  if (props.expense?.expense) {
-    return '#';
+  if (props.paystub?.paystub) {
+    return route('monthly-paystubs.show', props.paystub.id);
   }
 
   return route('paystubs.show', props.paystub.id);
