@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MonthlyExpenseController;
+use App\Http\Controllers\MonthlyPaystubController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaystubController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/{paystub}', [PaystubController::class, 'show'])->name('paystubs.show');
         Route::put('/{paystub}', [PaystubController::class, 'update'])->name('paystubs.update');
         Route::delete('/{paystub}', [PaystubController::class, 'destroy'])->name('paystubs.destroy');
+
+        Route::get('/due/{monthlyPaystub}', [MonthlyPaystubController::class, 'show'])->name('monthly-paystubs.show');
+        Route::put('monthly-paystubs/{monthlyPaystub}', [MonthlyPaystubController::class, 'update'])->name('monthly-paystubs.update');
+        Route::put('monthly-paystubs/{monthlyPaystub}/reschedule', [MonthlyPaystubController::class, 'reschedule'])->name('monthly-paystubs.reschedule');
+        Route::delete('monthly-paystubs/{monthlyPaystub}/unschedule', [MonthlyPaystubController::class, 'unschedule'])->name('monthly-paystubs.unschedule');
+        Route::post('monthly-paystubs/{monthlyPaystub}/deposit', [MonthlyPaystubController::class, 'deposit'])->name('monthly-paystubs.deposit');
     });
 
     Route::prefix('/expenses')->group(function () {

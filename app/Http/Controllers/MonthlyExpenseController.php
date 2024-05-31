@@ -66,6 +66,9 @@ class MonthlyExpenseController extends Controller
         return to_route('expenses.index');
     }
 
+    /**
+     * Make a payment for a Monthly Expense.
+     */
     public function payment(Request $request, MonthlyExpense $monthlyExpense): RedirectResponse
     {
         $request->validate([

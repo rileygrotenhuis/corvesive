@@ -26,7 +26,7 @@ trait PaystubAmounts
      * Returns a boolean value of whether
      * the paystub has been deposited in full.
      */
-    public function getIsDepositedInFullAttribute(): bool
+    public function getIsDepositedAttribute(): bool
     {
         return $this->amount_remaining === 0;
     }
