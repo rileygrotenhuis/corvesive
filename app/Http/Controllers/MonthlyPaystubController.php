@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MonthlyPaystub;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Response;
 
 class MonthlyPaystubController extends Controller
@@ -14,6 +15,8 @@ class MonthlyPaystubController extends Controller
      */
     public function show(MonthlyPaystub $monthlyPaystub): Response
     {
+        Gate::authorize('isOwner', $monthlyPaystub);
+
         $monthlyPaystub->append([
             'amount_deposited',
             'amount_remaining',
@@ -33,6 +36,8 @@ class MonthlyPaystubController extends Controller
      */
     public function update(Request $request, MonthlyPaystub $monthlyPaystub): RedirectResponse
     {
+        Gate::authorize('isOwner', $monthlyPaystub);
+
         $request->validate([
             'amount_in_cents' => ['required', 'integer', 'min:1'],
         ]);
@@ -61,6 +66,8 @@ class MonthlyPaystubController extends Controller
      */
     public function unschedule(MonthlyPaystub $monthlyPaystub): RedirectResponse
     {
+        Gate::authorize('isOwner', $monthlyPaystub);
+
         $monthlyPaystub->unschedule();
 
         return to_route('paystubs.index');
@@ -71,6 +78,8 @@ class MonthlyPaystubController extends Controller
      */
     public function deposit(Request $request, MonthlyPaystub $monthlyPaystub): RedirectResponse
     {
+        Gate::authorize('isOwner', $monthlyPaystub);
+
         $request->validate([
             'deposit_date' => ['required', 'date'],
             'amount_in_cents' => ['required', 'integer', 'min:1'],

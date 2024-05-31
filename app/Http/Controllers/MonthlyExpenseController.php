@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MonthlyExpense;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Response;
 
 class MonthlyExpenseController extends Controller
@@ -14,6 +15,8 @@ class MonthlyExpenseController extends Controller
      */
     public function show(MonthlyExpense $monthlyExpense): Response
     {
+        Gate::authorize('isOwner', $monthlyExpense);
+
         $monthlyExpense->append([
             'amount_paid',
             'amount_remaining',
@@ -33,6 +36,8 @@ class MonthlyExpenseController extends Controller
      */
     public function update(Request $request, MonthlyExpense $monthlyExpense): RedirectResponse
     {
+        Gate::authorize('isOwner', $monthlyExpense);
+
         $request->validate([
             'amount_in_cents' => ['required', 'integer', 'min:1'],
         ]);
@@ -47,6 +52,8 @@ class MonthlyExpenseController extends Controller
      */
     public function reschedule(Request $request, MonthlyExpense $monthlyExpense): RedirectResponse
     {
+        Gate::authorize('isOwner', $monthlyExpense);
+
         $request->validate([
             'due_date' => ['required', 'date'],
         ]);
@@ -61,6 +68,8 @@ class MonthlyExpenseController extends Controller
      */
     public function unschedule(MonthlyExpense $monthlyExpense): RedirectResponse
     {
+        Gate::authorize('isOwner', $monthlyExpense);
+
         $monthlyExpense->unschedule();
 
         return to_route('expenses.index');
@@ -71,6 +80,8 @@ class MonthlyExpenseController extends Controller
      */
     public function payment(Request $request, MonthlyExpense $monthlyExpense): RedirectResponse
     {
+        Gate::authorize('isOwner', $monthlyExpense);
+
         $request->validate([
             'payment_date' => ['required', 'date'],
             'amount_in_cents' => ['required', 'integer', 'min:1'],

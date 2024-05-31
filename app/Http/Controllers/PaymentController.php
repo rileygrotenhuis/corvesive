@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 
 class PaymentController extends Controller
 {
@@ -13,6 +14,8 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment): RedirectResponse
     {
+        Gate::authorize('isOwner', $payment);
+
         $monthlyExpense = $payment->monthlyExpense;
 
         $payment->refund();
