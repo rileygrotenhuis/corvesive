@@ -45,7 +45,7 @@ const shortRecurrenceText = computed(() => {
     props.paystub?.interval_one ?? props.paystub?.paystub?.interval_one;
   final = final.charAt(0).toUpperCase() + final.slice(1);
 
-  if (props.paystub.interval_two || props.paystub.paystub.interval_two) {
+  if (props.paystub?.interval_two || props.paystub?.paystub?.interval_two) {
     final += ` and ${props.paystub?.interval_two || props.paystub?.paystub?.interval_two}`;
   }
 
