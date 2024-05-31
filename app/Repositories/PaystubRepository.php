@@ -3,9 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class PaystubRepository
 {
@@ -49,14 +47,16 @@ class PaystubRepository
      */
     public function getMonthlySelectionOptions(Collection $monthlyPaystubs): Collection
     {
-        return $monthlyPaystubs->keys()->map(function ($date) {
-            $month = Str::before($date, '-');
-            $year = Str::after($date, '-');
+        $months = collect();
+        $currentMonth = now()->startOfMonth();
+        for ($i = 0; $i < 12; $i++) {
+            $months->push([
+                'value' => $currentMonth->format('m-Y'),
+                'label' => $currentMonth->format('F Y'),
+            ]);
+            $currentMonth->addMonth();
+        }
 
-            return [
-                'value' => $date,
-                'label' => Carbon::createFromDate($year, $month)->format('F Y'),
-            ];
-        });
+        return $months;
     }
 }

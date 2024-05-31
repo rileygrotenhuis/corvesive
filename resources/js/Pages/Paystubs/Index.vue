@@ -57,7 +57,10 @@ const selectedMonth = ref(props.monthSelectionOptions[0]?.value ?? null);
 
           <div v-else class="space-y-6">
             <PaystubBanner
-              v-if="Object.keys(monthlyPaystubs).length > 0"
+              v-if="
+                Object.keys(monthlyPaystubs).length > 0 &&
+                monthlyPaystubs[selectedMonth]?.length > 0
+              "
               v-for="paystub in monthlyPaystubs[selectedMonth]"
               :key="paystub.id"
               :paystub="paystub"
