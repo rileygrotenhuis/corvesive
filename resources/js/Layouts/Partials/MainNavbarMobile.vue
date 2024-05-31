@@ -38,7 +38,7 @@ const logout = () => {
 </script>
 
 <template>
-  <nav class="flex justify-between items-center px-8 py-6">
+  <nav class="relative flex justify-between items-center px-8 py-6 z-40">
     <div class="z-50">
       <h1
         class="text-2xl font-bold transition-colors ease-in-out"
