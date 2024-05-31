@@ -19,24 +19,32 @@ const selectedMonth = ref(props.monthSelectionOptions[0]?.value ?? null);
   <MainLayout>
     <div class="max-w-6xl mx-auto py-6 px-8">
       <div class="max-w-3xl">
-        <div class="flex justify-between items-center">
-          <PaystubToggle
-            :selectedOption="paystubToggle"
-            @updateExpenseToggle="paystubToggle = $event"
-          />
-
-          <DateFilters
-            :selectedMonth="selectedMonth"
-            :monthSelectionOptions="monthSelectionOptions"
-            @updateSelectedMonth="selectedMonth = $event"
-          />
-
-          <a
-            :href="route('paystubs.create')"
-            class="w-8 h-8 flex text-center justify-center items-center bg-primary-100 p-2 text-primary-1000 font-bold rounded-full hover:bg-primary-700 hover:text-primary-100 transition ease-in-out"
+        <div
+          class="flex flex-wrap-reverse gap-4 justify-between md:items-center"
+        >
+          <div
+            class="flex justify-between md:justify-center items-center gap-1 md:gap-4 w-full xs:w-fit"
           >
-            +
-          </a>
+            <PaystubToggle
+              :selectedOption="paystubToggle"
+              @updateExpenseToggle="paystubToggle = $event"
+            />
+
+            <DateFilters
+              :selectedMonth="selectedMonth"
+              :monthSelectionOptions="monthSelectionOptions"
+              @updateSelectedMonth="selectedMonth = $event"
+            />
+          </div>
+
+          <div class="flex justify-end w-full xs:w-fit">
+            <a
+              :href="route('paystubs.create')"
+              class="w-8 h-8 flex text-center justify-center items-center bg-primary-100 p-2 text-primary-1000 font-bold rounded-full hover:bg-primary-700 hover:text-primary-100 transition ease-in-out"
+            >
+              +
+            </a>
+          </div>
         </div>
 
         <div class="py-8">

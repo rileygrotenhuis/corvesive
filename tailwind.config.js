@@ -14,6 +14,9 @@ export default {
             fontFamily: {
                 sans: ['Poppins'],
             },
+            screens: {
+                'xs': '375px',
+            },
             colors: {
                 primary: {
                     100: '#F0E6F9',
