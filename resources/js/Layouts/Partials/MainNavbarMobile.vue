@@ -23,7 +23,7 @@ const pages = ref([
   },
   {
     name: 'Calendar',
-    href: '#',
+    href: route('calendar'),
     icon: markRaw(MiniCalendarIcon),
   },
 ]);

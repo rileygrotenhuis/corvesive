@@ -37,7 +37,7 @@ const pages = ref([
       </div>
 
       <div class="flex items-center gap-8">
-        <a href="#">
+        <a :href="route('calendar')">
           <CalendarIcon />
         </a>
 

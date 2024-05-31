@@ -13,6 +13,8 @@ Route::get('/', fn () => inertia('Landing/Index'))->name('home');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', fn () => inertia('Dashboard/Index'))->name('dashboard');
 
+    Route::get('/calendar', fn () => inertia('ComingSoon'))->name('calendar');
+
     Route::prefix('/paystubs')->group(function () {
         Route::get('/', [PaystubController::class, 'index'])->name('paystubs.index');
         Route::get('/create', [PaystubController::class, 'create'])->name('paystubs.create');
