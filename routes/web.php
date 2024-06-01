@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn () => inertia('Landing/Index'))->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', fn () => inertia('Dashboard/Index'))->name('dashboard');
+    Route::get('/dashboard', fn () => inertia('ComingSoon'))->name('dashboard');
 
     Route::get('/calendar', fn () => inertia('ComingSoon'))->name('calendar');
+
+    Route::get('/profile', fn () => inertia('ComingSoon'))->name('profile');
 
     Route::prefix('/paystubs')->group(function () {
         Route::get('/', [PaystubController::class, 'index'])->name('paystubs.index');
