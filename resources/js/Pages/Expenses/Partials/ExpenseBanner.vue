@@ -45,7 +45,9 @@ const expenseUrl = computed(() => {
     <a :href="expenseUrl">
       <div class="flex justify-between items-center">
         <div>
-          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+          <h2
+            class="text-base md:text-xl font-bold text-gray-800 flex items-center gap-2"
+          >
             {{ formattedExpense.name }}
             <span v-if="formattedExpense.isPaid">
               <PaidIcon />
@@ -64,7 +66,10 @@ const expenseUrl = computed(() => {
           <p class="text-2xl font-bold text-primary-700">
             ${{ formattedExpense.amount }}
           </p>
-          <p v-if="isBill" class="text-md font-medium text-gray-500">
+          <p
+            v-if="isBill"
+            class="text-base md:text-md font-medium text-gray-500"
+          >
             Due: {{ formattedExpense.dueDate }}
           </p>
         </div>

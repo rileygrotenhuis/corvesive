@@ -60,7 +60,9 @@ const shortRecurrenceText = computed(() => {
     <a :href="paystubUrl">
       <div class="flex justify-between items-center">
         <div>
-          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+          <h2
+            class="text-base md:text-xl font-bold text-gray-800 flex items-center gap-2"
+          >
             {{ formattedPaystub.issuer }}
             <span v-if="formattedPaystub.isDeposited">
               <PaidIcon />
@@ -82,7 +84,7 @@ const shortRecurrenceText = computed(() => {
           </p>
           <p
             v-if="formattedPaystub.payDate"
-            class="text-md font-medium text-gray-500"
+            class="text-sm md:text-md font-medium text-gray-500"
           >
             Deposits: {{ formattedPaystub.payDate }}
           </p>
