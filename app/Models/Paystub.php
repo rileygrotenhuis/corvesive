@@ -28,6 +28,7 @@ class Paystub extends Model
 
     protected $appends = [
         'amount',
+        'recurrence',
         'interval_one',
         'interval_two',
     ];
@@ -35,6 +36,19 @@ class Paystub extends Model
     public function getAmountAttribute(): float
     {
         return $this->amount_in_cents / 100;
+    }
+
+    public function getRecurrenceAttribute(): string
+    {
+        $rate = ucfirst($this->recurrence_rate);
+
+        $final = $rate.', every '.$this->interval_one;
+
+        if ($this->recurrence_interval_two) {
+            $final .= ' and '.$this->interval_two;
+        }
+
+        return $final;
     }
 
     public function getIntervalOneAttribute(): string

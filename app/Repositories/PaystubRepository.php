@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use App\Objects\PaystubBanner;
 use Illuminate\Support\Collection;
 
 class PaystubRepository
@@ -17,7 +18,20 @@ class PaystubRepository
      */
     public function all(): Collection
     {
-        return $this->user->paystubs;
+        $paystubs = $this->user->paystubs;
+
+        return $paystubs->map(function ($paystub) {
+            return new PaystubBanner(
+                $paystub->id,
+                $paystub->issuer,
+                $paystub->recurrence,
+                $paystub->amount,
+                null,
+                null,
+                false,
+                $paystub->notes
+            );
+        });
     }
 
     /**
@@ -30,15 +44,27 @@ class PaystubRepository
         $startDate = now()->startOfMonth();
         $endDate = now()->addMonths(11)->endOfMonth();
 
-        return $this->user->monthlyPaystubs()
+        $monthlyPaystubs = $this->user->monthlyPaystubs()
             ->selectRaw('*, DATE_FORMAT(pay_day, \'%m-%Y\') as monthYear')
             ->with('paystub')
             ->where('pay_day', '>=', $startDate)
             ->where('pay_day', '<=', $endDate)
             ->orderBy('pay_day')
             ->get()
-            ->groupBy('monthYear')
             ->append(['is_deposited']);
+
+        return $monthlyPaystubs->map(function ($monthlyPaystub) {
+            return new PaystubBanner(
+                $monthlyPaystub->id,
+                $monthlyPaystub->paystub->issuer,
+                $monthlyPaystub->paystub->recurrence,
+                $monthlyPaystub->amount_remaining / 100,
+                $monthlyPaystub->pay_date,
+                $monthlyPaystub->monthYear,
+                $monthlyPaystub->is_deposited,
+                $monthlyPaystub->paystub->notes,
+            );
+        })->groupBy('monthYear');
     }
 
     /**

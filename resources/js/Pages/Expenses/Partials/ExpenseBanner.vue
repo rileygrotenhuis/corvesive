@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import PaidIcon from '@/Components/Icons/PaidIcon.vue';
 
 const props = defineProps({
-  expense: Object
+  expense: Object,
 });
 
 const isBill = computed(() => {
