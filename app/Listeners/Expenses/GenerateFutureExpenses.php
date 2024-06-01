@@ -3,10 +3,9 @@
 namespace App\Listeners\Expenses;
 
 use App\Events\Expenses\ExpenseCreated;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class GenerateFutureExpenses implements ShouldQueue
+class GenerateFutureExpenses
 {
     use InteractsWithQueue;
 
