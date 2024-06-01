@@ -3,34 +3,27 @@ import { computed } from 'vue';
 import PaidIcon from '@/Components/Icons/PaidIcon.vue';
 
 const props = defineProps({
-  expense: Object,
+  expense: Object
 });
 
 const isBill = computed(() => {
-  if (props.expense?.expense) {
-    return props.expense.expense.type === 'Bill';
-  }
-
   return props.expense.type === 'Bill';
 });
 
-const formattedExpense = computed(() => {
-  return {
-    id: props.expense.id,
-    type: props.expense?.type ?? props.expense?.expense?.type ?? 'Unknown',
-    issuer:
-      props.expense?.issuer ?? props.expense?.expense?.issuer ?? 'Unknown',
-    name: props.expense.name ?? props.expense.expense.name ?? 'Unknown',
-    amount: props.expense?.amount ?? props.expense?.expense?.amount ?? '$0.00',
-    dueDate:
-      props.expense?.due_day ?? props.expense?.expense?.due_day ?? 'Unknown',
-    notes: props.expense?.notes ?? props.expense?.expense?.notes ?? '',
-    isPaid: props.expense?.is_paid ?? false,
-  };
+const isDueExpense = computed(() => {
+  return props.expense?.monthYear;
+});
+
+const amountText = computed(() => {
+  if (props.expense.amount < 0) {
+    return `-$${props.expense.amount}`;
+  }
+
+  return `$${props.expense.amount}`;
 });
 
 const expenseUrl = computed(() => {
-  if (props.expense?.expense) {
+  if (isDueExpense.value) {
     return route('monthly-expenses.show', props.expense.id);
   }
 
@@ -48,35 +41,31 @@ const expenseUrl = computed(() => {
           <h2
             class="text-base md:text-xl font-bold text-gray-800 flex items-center gap-2"
           >
-            {{ formattedExpense.name }}
-            <span v-if="formattedExpense.isPaid">
+            {{ expense.name }}
+            <span v-if="expense.isPaid">
               <PaidIcon />
             </span>
           </h2>
           <h4 class="text-sm font-medium text-gray-600">
-            {{
-              isBill
-                ? formattedExpense.issuer
-                : formattedExpense.type.toUpperCase()
-            }}
+            {{ expense?.issuer ?? `Monthly ${expense.type}` }}
           </h4>
         </div>
 
         <div class="text-right">
           <p class="text-2xl font-bold text-primary-700">
-            ${{ formattedExpense.amount }}
+            {{ amountText }}
           </p>
           <p
             v-if="isBill"
             class="text-base md:text-md font-medium text-gray-500"
           >
-            Due: {{ formattedExpense.dueDate }}
+            Due: {{ expense.date }}
           </p>
         </div>
       </div>
 
       <div class="mt-4 text-gray-700 text-md">
-        {{ formattedExpense.notes }}
+        {{ expense.notes }}
       </div>
     </a>
   </div>

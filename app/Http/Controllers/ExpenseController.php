@@ -26,7 +26,7 @@ class ExpenseController extends Controller
         $allExpenses = $repository->all();
         $monthlyExpenses = $repository->monthly();
 
-        $monthSelectionOptions = $repository->getMonthlySelectionOptions($monthlyExpenses);
+        $monthSelectionOptions = $repository->getMonthlySelectionOptions();
 
         return inertia('Expenses/Index', [
             'expenses' => $allExpenses,

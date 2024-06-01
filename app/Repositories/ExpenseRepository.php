@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use App\Objects\ExpenseBanner;
 use Illuminate\Support\Collection;
 
 class ExpenseRepository
@@ -18,7 +19,21 @@ class ExpenseRepository
      */
     public function all(): Collection
     {
-        return $this->user->expenses;
+        $expenses = $this->user->expenses;
+
+        return $expenses->map(function ($expense) {
+            return new ExpenseBanner(
+                $expense->id,
+                $expense->type,
+                $expense->issuer,
+                $expense->name,
+                $expense->amount,
+                $expense->due_day,
+                null,
+                false,
+                $expense->notes,
+            );
+        });
     }
 
     /**
@@ -31,22 +46,35 @@ class ExpenseRepository
         $startDate = now()->startOfMonth();
         $endDate = now()->addMonths(11)->endOfMonth();
 
-        return $this->user->monthlyExpenses()
+        $monthlyExpenses = $this->user->monthlyExpenses()
             ->selectRaw('*, DATE_FORMAT(due_date, \'%m-%Y\') as monthYear')
             ->with('expense')
             ->where('due_date', '>=', $startDate)
             ->where('due_date', '<=', $endDate)
             ->orderBy('due_date')
             ->get()
-            ->groupBy('monthYear')
             ->append(['is_paid']);
+
+        return $monthlyExpenses->map(function ($monthlyExpense) {
+            return new ExpenseBanner(
+                $monthlyExpense->id,
+                $monthlyExpense->expense->type,
+                $monthlyExpense->expense->issuer,
+                $monthlyExpense->expense->name,
+                $monthlyExpense->amount_remaining / 100,
+                $monthlyExpense->due_day,
+                $monthlyExpense->monthYear,
+                $monthlyExpense->is_paid,
+                $monthlyExpense->expense->notes,
+            );
+        })->groupBy('monthYear');
     }
 
     /**
      * Returns an array of month selection options
      * for the user's monthly expenses.
      */
-    public function getMonthlySelectionOptions(Collection $monthlyExpenses): Collection
+    public function getMonthlySelectionOptions(): Collection
     {
         $months = collect();
         $currentMonth = now()->startOfMonth();
