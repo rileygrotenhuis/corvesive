@@ -1,66 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Corvesive
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Budgeting made simple.
 
-## About Laravel
+## Prerequisites
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Before you can run this application, ensure you have the following software installed on your system:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **PHP**: This application requires the latest version of Php to run. You can download and install PHP from the [official website](https://www.php.net/downloads.php). Ensure you have the latest version of PHP by running the following command:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    ```bash
+    php --version
+    ```
 
-## Learning Laravel
+2. **Composer**: Composer is used to manage and install dependencies for PHP. You can download and install Composer from the [official website](https://getcomposer.org/download/). Ensure you have the latest version of Composer by running the following command:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    ```bash
+    composer --version
+    ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. **Docker**: This application is containerized by utilizing Docker. You can follow the instructions provided by the Docker team to install it on your machine on their [official documentation](https://docs.docker.com/get-docker/). Ensure you have the latest version of Docker by running the following command:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    ```bash
+    docker --version
+    ```
 
-## Laravel Sponsors
+4. **Docker Compose**: Docker Compose is a tool used in tandem with Docker for defining and running multi-container Docker applications. You can follow the instructions provided by the Docker team to install it on your machine on their [official documentation](https://docs.docker.com/compose/install/). Ensure you have the latest version of Docker by running the following command:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    ```bash
+    docker-compose --version
+    ```
 
-### Premium Partners
+5. **Node**: This application requires Node.js to compile assets. You can download and install Node.js from the [official website](https://nodejs.org/en/download/). Ensure you have the latest version of Node.js by running the following command:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    ```bash
+    node --version
+    ```
 
-## Contributing
+## Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+To get started with this application, follow these steps:
 
-## Code of Conduct
+1. **Navigate to the Project Directory**: Change your working directory to the newly cloned repository:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    ```bash
+    cd corvesive
+    ```
 
-## Security Vulnerabilities
+2. **Copy Environment Variables**: This application uses environment variables for configuration. Copy the contents from the `.env.example` file into a `.env` file.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    ```bash
+    cp .env.example .env
+    ```
 
-## License
+3. **Install Dependencies**: Now you need to install the project dependencies using Composer. Run the following command:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    ```bash
+    composer install
+    ```
+
+4. **Generate Encryption Key**: To generate an encryption key that the Laravel application uses for authentication and authorization, run the following command:
+
+    ```bash
+    php artisan key:generate
+    ```
+
+5. **Start the Application**: Once the dependencies are installed, you can start the application by running:
+
+    ```bash
+    ./vendor/bin/sail up -d
+    ```
+
+6. **Run Migrations**: To run the database migrations for this application, run the following command:
+
+    ```bash
+    ./vendor/bin/sail artisan migrate
+    ```
+
+7. **Compile Assets**: To compile the assets for this application, run the following command:
+
+    ```bash
+    npm install
+    npm run dev
+    ```
