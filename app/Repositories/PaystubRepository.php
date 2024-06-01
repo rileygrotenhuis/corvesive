@@ -58,7 +58,7 @@ class PaystubRepository
                 $monthlyPaystub->id,
                 $monthlyPaystub->paystub->issuer,
                 $monthlyPaystub->paystub->recurrence,
-                $monthlyPaystub->amount_remaining / 100,
+                $monthlyPaystub->amount,
                 $monthlyPaystub->pay_date,
                 $monthlyPaystub->monthYear,
                 $monthlyPaystub->is_deposited,

@@ -30,7 +30,7 @@ const paystubUrl = computed(() => {
               <PaidIcon />
             </span>
           </h2>
-          <h4 class="text-md font-medium text-gray-600">
+          <h4 class="text-sm md:text-md font-medium text-gray-600">
             {{ paystub.recurrence }}
           </h4>
         </div>
