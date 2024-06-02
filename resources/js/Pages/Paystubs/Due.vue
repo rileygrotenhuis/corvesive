@@ -13,6 +13,7 @@ const props = defineProps({
   monthlyPaystub: Object,
   paydayTasks: Array,
   upcomingExpenses: Object,
+  monthSelectionOptions: Array,
 });
 
 const unschedulePaystub = () => {
@@ -91,8 +92,10 @@ const unschedulePaystub = () => {
 
         <div class="w-full md:w-1/3">
           <PaydayTasks
+            :monthlyPaystub="monthlyPaystub"
             :paydayTasks="paydayTasks"
             :upcomingExpenses="upcomingExpenses"
+            :monthSelectionOptions="monthSelectionOptions"
           />
         </div>
       </div>

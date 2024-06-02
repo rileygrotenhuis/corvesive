@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Paystubs;
 
+use App\Helpers\DateHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Paystubs\MonthlyPaystubDepositRequest;
 use App\Models\MonthlyPaystub;
@@ -33,10 +34,13 @@ class MonthlyPaystubController extends Controller
             ->where('amount', '>', 0)
             ->groupBy('monthYear');
 
+        $monthSelectionOptions = DateHelpers::getMonthlySelectionOptions();
+
         return inertia('Paystubs/Due', [
             'monthlyPaystub' => $monthlyPaystub,
             'paydayTasks' => $monthlyPaystub->paydayTasks->load('monthlyExpense.expense'),
-            'upcomingExpenses' => $upcomingExpenses
+            'upcomingExpenses' => $upcomingExpenses,
+            'monthSelectionOptions' => $monthSelectionOptions,
         ]);
     }
 

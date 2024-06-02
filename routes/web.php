@@ -7,6 +7,7 @@ use App\Http\Controllers\Paystubs\MonthlyPaystubController;
 use App\Http\Controllers\Paystubs\PaystubController;
 use App\Http\Controllers\Transactions\DepositController;
 use App\Http\Controllers\Transactions\PaymentController;
+use App\Http\Controllers\PaydayTaskController;
 use Illuminate\Support\Facades\Route;
 
 /** Landing Page */
@@ -51,6 +52,10 @@ Route::middleware('auth')->group(function () {
         Route::put('monthly-expenses/{monthlyExpense}/reschedule', [MonthlyExpenseController::class, 'reschedule'])->name('monthly-expenses.reschedule');
         Route::delete('monthly-expenses/{monthlyExpense}/unschedule', [MonthlyExpenseController::class, 'unschedule'])->name('monthly-expenses.unschedule');
         Route::post('monthly-expenses/{monthlyExpense}/payment', [MonthlyExpenseController::class, 'payment'])->name('monthly-expenses.payment');
+    });
+
+    Route::prefix('/payday-tasks')->group(function () {
+        Route::post('/{monthlyPaystub}', [PaydayTaskController::class, 'store'])->name('payday-tasks.store');
     });
 
     /** Payment Routes */

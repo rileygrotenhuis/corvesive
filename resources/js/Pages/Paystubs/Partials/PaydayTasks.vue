@@ -1,9 +1,11 @@
 <script setup>
-import NewPaydayTask from "@/Pages/Paystubs/Partials/NewPaydayTask.vue";
+import NewPaydayTask from '@/Pages/Paystubs/Partials/NewPaydayTask.vue';
 
 defineProps({
+  monthlyPaystub: Object,
   paydayTasks: Array,
   upcomingExpenses: Object,
+  monthSelectionOptions: Array,
 });
 </script>
 
@@ -13,12 +15,14 @@ defineProps({
       <h3 class="text font-semibold mb-2">Pay Day Tasks</h3>
 
       <NewPaydayTask
+        :monthlyPaystub="monthlyPaystub"
         :paydayTasks="paydayTasks"
         :upcomingExpenses="upcomingExpenses"
+        :monthSelectionOptions="monthSelectionOptions"
       />
     </div>
 
-    <div class="space-y-4">
+    <div class="space-y-4 max-h-[325px] md:max-h-[750px] overflow-y-auto no-scrollbar">
       <div
         v-for="(task, index) in paydayTasks"
         :key="index"
@@ -45,3 +49,14 @@ defineProps({
     </div>
   </div>
 </template>
+
+<style scoped>
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+</style>
