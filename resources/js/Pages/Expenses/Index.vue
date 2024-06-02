@@ -42,7 +42,7 @@ const filteredMonthlyExpenses = computed(() => {
 <template>
   <MainLayout>
     <div class="max-w-6xl mx-auto py-6 px-8">
-      <div class="max-w-3xl">
+      <div class="w-full md:w-2/3">
         <div
           class="flex flex-wrap-reverse gap-4 justify-between md:items-center"
         >

@@ -24,7 +24,7 @@ const unschedulePaystub = () => {
 <template>
   <MainLayout>
     <div class="max-w-6xl mx-auto px-8 my-8">
-      <div class="max-w-3xl bg-white p-6 rounded-lg">
+      <div class="w-full md:w-2/3 bg-white p-6 rounded-lg">
         <div class="my-2">
           <a
             :href="route('paystubs.index')"
