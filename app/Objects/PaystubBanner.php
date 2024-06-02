@@ -4,6 +4,10 @@ namespace App\Objects;
 
 class PaystubBanner
 {
+    /**
+     * This object represents the details required
+     * for a single paystub banner component.
+     */
     public function __construct(
         public string $id,
         public string $issuer,
