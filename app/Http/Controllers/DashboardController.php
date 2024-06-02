@@ -15,9 +15,8 @@ class DashboardController extends Controller
     {
         $repository = new DashboardRepository($request->user());
 
-        logger($repository->totalDeposited());
-        logger($repository->totalPaid());
-
-        return inertia('Dashboard/Index');
+        return inertia('Dashboard/Index', [
+            'transactions' => $repository->allTransactions(),
+        ]);
     }
 }

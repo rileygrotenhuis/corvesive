@@ -73,7 +73,7 @@ const unschedulePaystub = () => {
             <DepositBanner
               v-for="deposit in monthlyPaystub.deposits"
               :key="deposit.id"
-              :deposit="deposit"
+              :transaction="deposit"
             />
           </div>
           <div v-else class="text-sm text-gray-500 mt-4">

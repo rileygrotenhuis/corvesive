@@ -21,6 +21,6 @@ class DepositController extends Controller
 
         $deposit->refund();
 
-        return to_route('monthly-paystubs.show', $monthlyPaystub);
+        return back();
     }
 }

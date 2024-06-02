@@ -21,6 +21,6 @@ class PaymentController extends Controller
 
         $payment->refund();
 
-        return to_route('monthly-expenses.show', $monthlyExpense);
+        return back();
     }
 }

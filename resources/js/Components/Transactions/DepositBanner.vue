@@ -3,12 +3,13 @@ import UnscheduleIcon from '@/Components/Icons/UnscheduleIcon.vue';
 import { useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
-  deposit: Object,
+  transaction: Object,
+  showType: Boolean,
 });
 
 const refundDeposit = () => {
   if (confirm('Are you sure you want to refund this deposit?')) {
-    useForm({}).delete(route('deposits.destroy', props.deposit.id), {
+    useForm({}).delete(route('deposits.destroy', props.transaction.id), {
       preserveState: true,
       preserveScroll: true,
     });
@@ -19,15 +20,18 @@ const refundDeposit = () => {
 <template>
   <a
     href="#"
-    class="block w-full bg-primary-100 hover:bg-primary-300 p-4 rounded-md cursor-pointer"
+    class="block w-full bg-primary-100 hover:bg-primary-300 p-4 rounded-md cursor-pointer text-black"
   >
     <div class="flex justify-between items-center">
-      <h4 class="text-lg font-semibold text-primary-950">
-        ${{ deposit.amount }}
-      </h4>
+      <div>
+        <h4 class="text-lg font-semibold text-primary-950">
+          ${{ transaction.amount }}
+        </h4>
+        <p v-if="showType" class="text-sm text-gray-600">Deposit</p>
+      </div>
       <div class="flex gap-4 items-center">
         <p>
-          {{ deposit.deposit_day }}
+          {{ transaction.deposit_day }}
         </p>
         <UnscheduleIcon class="w-5 h-5" @click.prevent="refundDeposit" />
       </div>
@@ -35,7 +39,7 @@ const refundDeposit = () => {
 
     <div class="mt-2">
       <p class="text-sm text-primary-950">
-        {{ deposit.notes }}
+        {{ transaction.notes }}
       </p>
     </div>
   </a>

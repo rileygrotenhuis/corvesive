@@ -79,7 +79,7 @@ const unscheduleExpense = () => {
             <PaymentBanner
               v-for="payment in monthlyExpense.payments"
               :key="payment.id"
-              :payment="payment"
+              :transaction="payment"
             />
           </div>
           <div v-else class="text-sm text-gray-500 mt-2">
