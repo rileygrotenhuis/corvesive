@@ -16,7 +16,7 @@ const paystubPercentage = computed(() => {
 </script>
 
 <template>
-  <div class="w-full md:w-1/3 bg-white p-4 rounded-md text-black">
+  <div class="w-full bg-white p-4 rounded-md text-black">
     <h3 class="text-xl font-semibold text-black mb-2">This Month</h3>
 
     <!-- Expense Metrics -->
