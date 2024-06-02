@@ -12,12 +12,14 @@ trait DepositManager
      */
     public static function makeDeposit(
         User $user,
+        string $depositDate,
         int $amountInCents,
         ?string $notes = null
     ): Deposit {
         return Deposit::query()->create([
             'user_id' => $user->id,
-            'deposit_date' => now(),
+            'monthly_paystub_id' => null,
+            'deposit_date' => $depositDate,
             'amount_in_cents' => $amountInCents,
             'notes' => $notes,
         ]);

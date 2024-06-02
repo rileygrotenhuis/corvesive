@@ -48,9 +48,16 @@ const submitExpensePayment = () => {
 
   <Modal :show="showModal" @close="showModal = false">
     <form class="p-6 space-y-6" @submit.prevent="submitExpensePayment">
-      <h3 class="text-lg font-medium leading-6 text-gray-900">
-        Make a Payment
-      </h3>
+      <div>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">
+          Make a Payment
+        </h3>
+
+        <p class="text-gray-700 text-xs md:text-sm max-w-[500px]">
+          Make a new payment for this expense.
+        </p>
+      </div>
+
       <div>
         <label
           for="payment_date"

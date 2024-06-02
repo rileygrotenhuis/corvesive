@@ -5,16 +5,29 @@ import Modal from '@/Components/Breeze/Modal.vue';
 import InputError from '@/Components/Breeze/InputError.vue';
 
 const showModal = ref(false);
+const transactionType = ref('payment');
 
 const transactionForm = useForm({
   date: new Date().toISOString().substr(0, 10),
   amount: '',
-  amount_in_cents: '',
+  amount_in_cents: 0,
   notes: '',
 });
 
 const submitTransactionForm = () => {
-  alert('submitting...');
+  transactionForm.amount_in_cents = transactionForm.amount * 100;
+
+  transactionForm.post(
+    route(
+      transactionType.value === 'payment' ? 'payments.store' : 'deposits.store'
+    ),
+    {
+      preserveScroll: true,
+      onSuccess: () => {
+        showModal.value = false;
+      },
+    }
+  );
 };
 </script>
 
@@ -28,9 +41,34 @@ const submitTransactionForm = () => {
 
   <Modal :show="showModal" @close="showModal = false">
     <form class="p-6 space-y-6" @submit.prevent="submitTransactionForm">
-      <h3 class="text-lg font-medium leading-6 text-gray-900">
-        New Transaction
-      </h3>
+      <div>
+        <h3 class="text-lg font-medium leading-6 text-gray-900 mb-1">
+          New Transaction
+        </h3>
+
+        <p class="text-gray-700 text-xs md:text-sm max-w-[500px]">
+          Make a new surplus transaction to your account that isn't associated
+          with a paystub or bill.
+        </p>
+      </div>
+
+      <div>
+        <label
+          for="transaction_type"
+          class="block text-sm font-medium text-gray-700"
+        >
+          Transaction Type
+        </label>
+        <select
+          v-model="transactionType"
+          name="transaction_type"
+          class="mt-1 text-black block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+        >
+          <option value="payment">Payment</option>
+          <option value="deposit">Deposit</option>
+        </select>
+      </div>
+
       <div>
         <label
           for="deposit_date"

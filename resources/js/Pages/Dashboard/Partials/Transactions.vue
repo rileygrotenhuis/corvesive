@@ -1,7 +1,7 @@
 <script setup>
 import PaymentBanner from '@/Components/Transactions/PaymentBanner.vue';
 import DepositBanner from '@/Components/Transactions/DepositBanner.vue';
-import NewTransaction from "@/Pages/Dashboard/Partials/NewTransaction.vue";
+import NewTransaction from '@/Pages/Dashboard/Partials/NewTransaction.vue';
 
 defineProps({
   transactions: Array,
@@ -16,7 +16,9 @@ defineProps({
       <NewTransaction />
     </div>
 
-    <div class="space-y-4 mt-4">
+    <div
+      class="space-y-4 mt-4 max-h-[450px] md:max-h-[750px] overflow-y-auto no-scrollbar"
+    >
       <component
         :is="transaction.deposit_day ? DepositBanner : PaymentBanner"
         v-for="transaction in transactions"
@@ -27,3 +29,14 @@ defineProps({
     </div>
   </div>
 </template>
+
+<style scoped>
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+</style>

@@ -55,11 +55,13 @@ Route::middleware('auth')->group(function () {
 
     /** Payment Routes */
     Route::prefix('/payments')->group(function () {
+        Route::post('/', [PaymentController::class, 'store'])->name('payments.store');
         Route::delete('/{payment}', [PaymentController::class, 'destroy'])->name('payments.destroy');
     });
 
     /** Deposit Routes */
     Route::prefix('/deposits')->group(function () {
+        Route::post('/', [DepositController::class, 'store'])->name('deposits.store');
         Route::delete('/{deposit}', [DepositController::class, 'destroy'])->name('deposits.destroy');
     });
 });
