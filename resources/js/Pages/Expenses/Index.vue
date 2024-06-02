@@ -27,13 +27,13 @@ const filteredExpenses = computed(() => {
 });
 
 const filteredMonthlyExpenses = computed(() => {
-  return props.monthlyExpenses[selectedMonth.value].filter((expense) => {
+  return props?.monthlyExpenses[selectedMonth.value]?.filter((expense) => {
     if (selectedType.value === 'All') {
       return true;
     }
 
     return expense.type === selectedType.value;
-  });
+  }) ?? [];
 });
 </script>
 

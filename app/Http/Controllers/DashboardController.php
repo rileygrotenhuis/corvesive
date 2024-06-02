@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\DashboardRepository;
+use App\Repositories\SurplusRepository;
 use Illuminate\Http\Request;
 use Inertia\Response;
 
@@ -13,18 +14,23 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request): Response
     {
-        $repository = new DashboardRepository($request->user());
+        $dashboardRepository = new DashboardRepository($request->user());
+        $surplusRepository = new SurplusRepository($request->user());
 
         return inertia('Dashboard/Index', [
-            'transactions' => $repository->allTransactions(),
+            'transactions' => $dashboardRepository->allTransactions(),
             'expenses' => [
-                'total' => $repository->totalExpenses(),
-                'paid' => $repository->paidExpenses(),
+                'total' => $dashboardRepository->totalExpenses(),
+                'paid' => $dashboardRepository->paidExpenses(),
             ],
             'paystubs' => [
-                'total' => $repository->totalPaystubs(),
-                'deposited' => $repository->depositedPaystubs(),
+                'total' => $dashboardRepository->totalPaystubs(),
+                'deposited' => $dashboardRepository->depositedPaystubs(),
             ],
+            'surplus' => [
+                'current' => $surplusRepository->currentSurplus(),
+                'projected' => $surplusRepository->projectedSurplus(),
+            ]
         ]);
     }
 }
