@@ -7,7 +7,7 @@ import UnscheduleIcon from '@/Components/Icons/UnscheduleIcon.vue';
 import ModifyMonthlyPaystub from '@/Pages/Paystubs/Partials/ModifyMonthlyPaystub.vue';
 import PaystubDeposit from '@/Pages/Paystubs/Partials/PaystubDeposit.vue';
 import DepositBanner from '@/Components/Transactions/DepositBanner.vue';
-import PaydayTasks from "@/Pages/Paystubs/Partials/PaydayTasks.vue";
+import PaydayTasks from '@/Pages/Paystubs/Partials/PaydayTasks.vue';
 
 const props = defineProps({
   monthlyPaystub: Object,
@@ -45,8 +45,8 @@ const unschedulePaystub = () => {
               >
                 {{ monthlyPaystub.paystub.issuer }}
                 <span v-if="monthlyPaystub.is_deposited">
-                <PaidIcon />
-              </span>
+                  <PaidIcon />
+                </span>
               </h2>
             </a>
 
@@ -73,7 +73,10 @@ const unschedulePaystub = () => {
               <PaystubDeposit :monthlyPaystub="monthlyPaystub" />
             </div>
 
-            <div v-if="monthlyPaystub.deposits.length > 0" class="space-y-2 mt-4">
+            <div
+              v-if="monthlyPaystub.deposits.length > 0"
+              class="space-y-2 mt-4"
+            >
               <DepositBanner
                 v-for="deposit in monthlyPaystub.deposits"
                 :key="deposit.id"

@@ -21,6 +21,13 @@ class PaydayTask extends Model
         'is_completed',
     ];
 
+    protected $appends = ['amount'];
+
+    public function getAmountAttribute(): int
+    {
+        return $this->amount_in_cents / 100;
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
