@@ -30,7 +30,7 @@ class DashboardController extends Controller
             'surplus' => [
                 'current' => $surplusRepository->currentSurplus(),
                 'projected' => $surplusRepository->projectedSurplus(),
-            ]
+            ],
         ]);
     }
 }
