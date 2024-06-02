@@ -1,6 +1,6 @@
 <script setup>
 import { useForm, usePage } from '@inertiajs/vue3';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const user = usePage().props.auth.user;
 
@@ -14,6 +14,10 @@ onMounted(() => {
   });
 });
 
+const initials = computed(() => {
+  return usePage().props.auth.user.initials;
+});
+
 const logout = () => {
   useForm({}).delete(route('logout'));
 };
@@ -25,7 +29,7 @@ const logout = () => {
       @click="dropdownOpen = !dropdownOpen"
       class="bg-white p-2 rounded-full font-bold text-primary-1000 cursor-pointer"
     >
-      {{ user.initials }}
+      {{ initials }}
     </div>
     <div
       v-if="dropdownOpen"

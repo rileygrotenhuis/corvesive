@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/profile')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/', [ProfileController::class, 'update'])->name('profile.update');
     });
 });
 
