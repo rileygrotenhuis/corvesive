@@ -69,23 +69,4 @@ class ExpenseRepository
             );
         })->groupBy('monthYear');
     }
-
-    /**
-     * Returns an array of month selection options
-     * for the user's monthly expenses.
-     */
-    public function getMonthlySelectionOptions(): Collection
-    {
-        $months = collect();
-        $currentMonth = now()->startOfMonth();
-        for ($i = 0; $i < 12; $i++) {
-            $months->push([
-                'value' => $currentMonth->format('m-Y'),
-                'label' => $currentMonth->format('M Y'),
-            ]);
-            $currentMonth->addMonth();
-        }
-
-        return $months;
-    }
 }

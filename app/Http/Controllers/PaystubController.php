@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\Paystubs\PaystubCreated;
 use App\Events\Paystubs\PaystubModified;
 use App\Events\Paystubs\PaystubRescheduled;
+use App\Helpers\DateHelpers;
 use App\Http\Requests\Paystubs\StorePaystubRequest;
 use App\Http\Requests\Paystubs\UpdatePaystubRequest;
 use App\Models\Paystub;
@@ -26,7 +27,7 @@ class PaystubController extends Controller
         $allPaystubs = $repository->all();
         $monthlyPaystubs = $repository->monthly();
 
-        $monthSelectionOptions = $repository->getMonthlySelectionOptions($monthlyPaystubs);
+        $monthSelectionOptions = DateHelpers::getMonthlySelectionOptions();
 
         return inertia('Paystubs/Index', [
             'paystubs' => $allPaystubs,

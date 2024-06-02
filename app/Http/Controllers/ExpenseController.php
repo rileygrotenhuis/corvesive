@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\Expenses\ExpenseCreated;
 use App\Events\Expenses\ExpenseModified;
 use App\Events\Expenses\ExpenseRescheduled;
+use App\Helpers\DateHelpers;
 use App\Http\Requests\Expenses\StoreExpenseRequest;
 use App\Http\Requests\Expenses\UpdateExpenseRequest;
 use App\Models\Expense;
@@ -26,7 +27,7 @@ class ExpenseController extends Controller
         $allExpenses = $repository->all();
         $monthlyExpenses = $repository->monthly();
 
-        $monthSelectionOptions = $repository->getMonthlySelectionOptions();
+        $monthSelectionOptions = DateHelpers::getMonthlySelectionOptions();
 
         return inertia('Expenses/Index', [
             'expenses' => $allExpenses,
