@@ -56,6 +56,9 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/payday-tasks')->group(function () {
         Route::post('/{monthlyPaystub}', [PaydayTaskController::class, 'store'])->name('payday-tasks.store');
+        Route::put('/{paydayTask}', [PaydayTaskController::class, 'update'])->name('payday-tasks.update');
+        Route::delete('/{paydayTask}', [PaydayTaskController::class, 'destroy'])->name('payday-tasks.destroy');
+        Route::post('/{paydayTask}/complete', [PaydayTaskController::class, 'complete'])->name('payday-tasks.complete');
     });
 
     /** Payment Routes */

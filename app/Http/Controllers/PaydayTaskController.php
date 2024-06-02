@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MonthlyExpense;
 use App\Models\MonthlyPaystub;
+use App\Models\PaydayTask;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -30,6 +31,47 @@ class PaydayTaskController extends Controller
             $monthlyExpense,
             $request->input('amount_in_cents')
         );
+
+        return back();
+    }
+
+    /**
+     * Modifies the amount of a Payday Task.
+     */
+    public function update(Request $request, PaydayTask $paydayTask): RedirectResponse
+    {
+        Gate::authorize('isOwner', $paydayTask->monthlyPaystub);
+
+        $request->validate([
+            'amount_in_cents' => ['required', 'integer'],
+        ]);
+
+        $paydayTask->modifytask($request->input('amount_in_cents'));
+
+        return back();
+    }
+
+    /**
+     * Deletes a Payday Task.
+     */
+    public function destroy(PaydayTask $paydayTask): RedirectResponse
+    {
+        Gate::authorize('isOwner', $paydayTask->monthlyPaystub);
+
+        $paydayTask->removeTask();
+
+        return back();
+    }
+
+    /**
+     * Completes a Payday Task
+     * and pays it off
+     */
+    public function complete(PaydayTask $paydayTask): RedirectResponse
+    {
+        Gate::authorize('isOwner', $paydayTask->monthlyPaystub);
+
+        $paydayTask->completeTask();
 
         return back();
     }

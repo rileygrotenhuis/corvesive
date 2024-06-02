@@ -1,5 +1,6 @@
 <script setup>
 import NewPaydayTask from '@/Pages/Paystubs/Partials/NewPaydayTask.vue';
+import PaydayTask from '@/Pages/Paystubs/Partials/PaydayTask.vue';
 
 defineProps({
   monthlyPaystub: Object,
@@ -25,28 +26,15 @@ defineProps({
     <div
       class="space-y-4 max-h-[325px] md:max-h-[750px] overflow-y-auto no-scrollbar"
     >
-      <div
+      <PaydayTask
+        v-if="paydayTasks.length > 0"
         v-for="(task, index) in paydayTasks"
         :key="index"
-        class="w-full bg-primary-100 hover:bg-primary-300 p-4 rounded-md cursor-pointer text-black flex justify-between items-center"
-      >
-        <div>
-          <h4 class="text-lg font-semibold text-black">
-            {{ task.monthly_expense.expense.name }}
-          </h4>
-          <p>
-            {{
-              task.monthly_expense?.expense?.issuer ??
-              `Monthly ${task.monthly_expense?.expense?.type}`
-            }}
-          </p>
-        </div>
+        :task="task"
+      />
 
-        <div>
-          <p class="text-lg text-primary-700 font-semibold">
-            ${{ task.amount }}
-          </p>
-        </div>
+      <div v-else>
+        <p class="text-gray-700 text-sm">Add your first pay day task!</p>
       </div>
     </div>
   </div>
