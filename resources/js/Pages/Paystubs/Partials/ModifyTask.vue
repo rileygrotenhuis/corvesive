@@ -85,7 +85,7 @@ const completeTask = () => {
     </div>
 
     <div v-if="showModifyForm">
-      <div>
+      <div class="mb-4">
         <label
           for="amount_in_cents"
           class="block text-sm font-medium text-gray-700"
