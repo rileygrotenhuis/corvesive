@@ -97,6 +97,12 @@ const maxWidthClass = computed(() => {
             class="mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
             :class="maxWidthClass"
           >
+            <button
+              @click.prevent="close"
+              class="absolute top-5 md:top-10 right-5 md:right-10 text-black text-xl font-bold"
+            >
+              X
+            </button>
             <slot v-if="show" />
           </div>
         </Transition>
