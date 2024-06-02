@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Transactions;
 
+use App\Http\Controllers\Controller;
 use App\Models\Deposit;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;

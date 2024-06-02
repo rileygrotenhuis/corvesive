@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Expenses;
 
+use App\Http\Controllers\Controller;
 use App\Models\MonthlyExpense;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

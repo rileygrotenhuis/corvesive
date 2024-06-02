@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Expenses;
 
 use App\Events\Expenses\ExpenseCreated;
 use App\Events\Expenses\ExpenseModified;
 use App\Events\Expenses\ExpenseRescheduled;
 use App\Helpers\DateHelpers;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Expenses\StoreExpenseRequest;
 use App\Http\Requests\Expenses\UpdateExpenseRequest;
 use App\Models\Expense;

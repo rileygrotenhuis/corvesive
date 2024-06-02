@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Paystubs;
 
 use App\Events\Paystubs\PaystubCreated;
 use App\Events\Paystubs\PaystubModified;
 use App\Events\Paystubs\PaystubRescheduled;
 use App\Helpers\DateHelpers;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Paystubs\StorePaystubRequest;
 use App\Http\Requests\Paystubs\UpdatePaystubRequest;
 use App\Models\Paystub;
