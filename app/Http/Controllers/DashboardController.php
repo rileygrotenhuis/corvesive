@@ -19,12 +19,12 @@ class DashboardController extends Controller
             'transactions' => $repository->allTransactions(),
             'expenses' => [
                 'total' => $repository->totalExpenses(),
-                'paid' => $repository->paidExpenses()
+                'paid' => $repository->paidExpenses(),
             ],
             'paystubs' => [
                 'total' => $repository->totalPaystubs(),
                 'deposited' => $repository->depositedPaystubs(),
-            ]
+            ],
         ]);
     }
 }

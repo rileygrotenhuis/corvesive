@@ -21,8 +21,8 @@ defineProps({
     >
       <component
         :is="transaction.deposit_day ? DepositBanner : PaymentBanner"
-        v-for="transaction in transactions"
-        :key="transaction.id"
+        v-for="(transaction, index) in transactions"
+        :key="index"
         :transaction="transaction"
         showType
       />

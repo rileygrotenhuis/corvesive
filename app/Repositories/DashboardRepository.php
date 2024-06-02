@@ -22,6 +22,34 @@ class DashboardRepository
     }
 
     /**
+     * Returns the total amount of surplus
+     * payments for the given month.
+     */
+    public function totalSurplusPayments(): int
+    {
+        return $this->user->payments()
+            ->whereNull('monthly_expense_id')
+            ->whereBetween('payment_date', [
+                $this->today->startOfMonth()->toDateString(),
+                $this->today->endOfMonth()->toDateString(),
+            ])->sum('amount_in_cents');
+    }
+
+    /**
+     * Returns the total amount of surplus
+     * deposits for the given month.
+     */
+    public function totalSurplusDeposits(): int
+    {
+        return $this->user->deposits()
+            ->whereNull('monthly_paystub_id')
+            ->whereBetween('deposit_date', [
+                $this->today->startOfMonth()->toDateString(),
+                $this->today->endOfMonth()->toDateString(),
+            ])->sum('amount_in_cents');
+    }
+
+    /**
      * Returns the total amount of expenses
      * for the given month.
      */
@@ -92,10 +120,14 @@ class DashboardRepository
     public function allTransactions(): Collection
     {
         $payments = $this->allPayments();
-
         $deposits = $this->allDeposits();
 
-        return $payments->merge($deposits)->sortBy('date')->values();
+        $combined = array_merge(
+            $payments->toArray(),
+            $deposits->toArray()
+        );
+
+        return collect($combined)->sortBy('date')->values();
     }
 
     /**
