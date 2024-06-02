@@ -35,7 +35,7 @@ class MonthlyPaystubController extends Controller
 
         return inertia('Paystubs/Due', [
             'monthlyPaystub' => $monthlyPaystub,
-            'paydayTasks' => [],
+            'paydayTasks' => $monthlyPaystub->paydayTasks,
             'upcomingExpenses' => $upcomingExpenses
         ]);
     }
