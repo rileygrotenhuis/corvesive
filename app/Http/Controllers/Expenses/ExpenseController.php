@@ -26,7 +26,7 @@ class ExpenseController extends Controller
         $repository = new ExpenseRepository($request->user());
 
         $allExpenses = $repository->all();
-        $monthlyExpenses = $repository->monthly();
+        $monthlyExpenses = $repository->monthly()->groupBy('monthYear');
 
         $monthSelectionOptions = DateHelpers::getMonthlySelectionOptions();
 

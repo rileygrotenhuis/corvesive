@@ -47,7 +47,7 @@ class ExpenseRepository
         $endDate = now()->addMonths(11)->endOfMonth();
 
         $monthlyExpenses = $this->user->monthlyExpenses()
-            ->selectRaw('*, DATE_FORMAT(due_date, \'%m-%Y\') as monthYear')
+            ->selectRaw('*, DATE_FORMAT(due_date, \'%Y-%m\') as monthYear')
             ->with('expense')
             ->where('due_date', '>=', $startDate)
             ->where('due_date', '<=', $endDate)
@@ -67,6 +67,6 @@ class ExpenseRepository
                 $monthlyExpense->is_paid,
                 $monthlyExpense->expense->notes,
             );
-        })->groupBy('monthYear');
+        });
     }
 }

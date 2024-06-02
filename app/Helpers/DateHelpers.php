@@ -16,7 +16,7 @@ class DateHelpers
         $currentMonth = now()->startOfMonth();
         for ($i = 0; $i < 12; $i++) {
             $months->push([
-                'value' => $currentMonth->format('m-Y'),
+                'value' => $currentMonth->format('Y-m'),
                 'label' => $currentMonth->format('M Y'),
             ]);
             $currentMonth->addMonth();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Paystubs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Paystubs\MonthlyPaystubDepositRequest;
 use App\Models\MonthlyPaystub;
+use App\Repositories\ExpenseRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -15,7 +16,7 @@ class MonthlyPaystubController extends Controller
     /**
      * Monthly Paystubs - Show Page.
      */
-    public function show(MonthlyPaystub $monthlyPaystub): Response
+    public function show(Request $request, MonthlyPaystub $monthlyPaystub): Response
     {
         Gate::authorize('isOwner', $monthlyPaystub);
 
@@ -27,8 +28,14 @@ class MonthlyPaystubController extends Controller
 
         $monthlyPaystub->load('paystub', 'deposits');
 
+        $repository = new ExpenseRepository($request->user());
+        $upcomingExpenses = $repository->monthly()
+            ->where('amount', '>', 0)
+            ->groupBy('monthYear');
+
         return inertia('Paystubs/Due', [
             'monthlyPaystub' => $monthlyPaystub,
+            'upcomingExpenses' => $upcomingExpenses
         ]);
     }
 

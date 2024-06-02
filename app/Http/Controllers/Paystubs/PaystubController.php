@@ -26,7 +26,7 @@ class PaystubController extends Controller
         $repository = new PaystubRepository($request->user());
 
         $allPaystubs = $repository->all();
-        $monthlyPaystubs = $repository->monthly();
+        $monthlyPaystubs = $repository->monthly()->groupBy('monthYear');
 
         $monthSelectionOptions = DateHelpers::getMonthlySelectionOptions();
 

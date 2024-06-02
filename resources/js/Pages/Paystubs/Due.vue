@@ -10,6 +10,7 @@ import DepositBanner from '@/Components/Transactions/DepositBanner.vue';
 
 const props = defineProps({
   monthlyPaystub: Object,
+  upcomingExpenses: Object,
 });
 
 const unschedulePaystub = () => {

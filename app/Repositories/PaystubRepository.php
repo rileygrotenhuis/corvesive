@@ -45,7 +45,7 @@ class PaystubRepository
         $endDate = now()->addMonths(11)->endOfMonth();
 
         $monthlyPaystubs = $this->user->monthlyPaystubs()
-            ->selectRaw('*, DATE_FORMAT(pay_day, \'%m-%Y\') as monthYear')
+            ->selectRaw('*, DATE_FORMAT(pay_day, \'%Y-%m\') as monthYear')
             ->with('paystub')
             ->where('pay_day', '>=', $startDate)
             ->where('pay_day', '<=', $endDate)
@@ -64,6 +64,6 @@ class PaystubRepository
                 $monthlyPaystub->is_deposited,
                 $monthlyPaystub->paystub->notes,
             );
-        })->groupBy('monthYear');
+        });
     }
 }
