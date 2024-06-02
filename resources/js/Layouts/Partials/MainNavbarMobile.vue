@@ -81,7 +81,7 @@ const logout = () => {
 
       <ul class="flex flex-col gap-8">
         <li class="text-black font-normal hover:font-semibold">
-          <a :href="route('profile')" class="flex items-center gap-4">
+          <a :href="route('profile.edit')" class="flex items-center gap-4">
             <ProfileIcon />
             <span>Profile</span>
           </a>

@@ -6,6 +6,7 @@ use App\Http\Controllers\MonthlyExpenseController;
 use App\Http\Controllers\MonthlyPaystubController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaystubController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => inertia('Landing/Index'))->name('home');
@@ -14,8 +15,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', fn () => inertia('ComingSoon'))->name('dashboard');
 
     Route::get('/calendar', fn () => inertia('ComingSoon'))->name('calendar');
-
-    Route::get('/profile', fn () => inertia('ComingSoon'))->name('profile');
 
     Route::prefix('/paystubs')->group(function () {
         Route::get('/', [PaystubController::class, 'index'])->name('paystubs.index');
@@ -53,6 +52,10 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/deposits')->group(function () {
         Route::delete('/{deposit}', [DepositController::class, 'destroy'])->name('deposits.destroy');
+    });
+
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
     });
 });
 
