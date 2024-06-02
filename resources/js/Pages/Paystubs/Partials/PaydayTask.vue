@@ -15,10 +15,10 @@ const showModal = ref(false);
     <ModifyTask :task="task" @close="showModal = false" />
   </Modal>
   <div
-    class="w-full bg-primary-100 hover:bg-primary-300 p-4 rounded-md cursor-pointer text-black flex justify-between items-center"
+    class="w-full p-4 rounded-md cursor-pointer text-black flex justify-between items-center"
     :class="{
-      'bg-green-200': task.is_completed,
-      'bg-primary-100': !task.is_completed,
+      'bg-green-100 hover:bg-green-200': task.is_completed,
+      'bg-primary-100 hover:bg-primary-300': !task.is_completed,
     }"
     @click="showModal = true"
   >
