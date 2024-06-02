@@ -1,4 +1,6 @@
 <script setup>
+import NewPaydayTask from "@/Pages/Paystubs/Partials/NewPaydayTask.vue";
+
 defineProps({
   paydayTasks: Array,
   upcomingExpenses: Object,
@@ -7,6 +9,15 @@ defineProps({
 
 <template>
   <div class="bg-white p-4 rounded-md text-black">
+    <div class="flex justify-between items-center mb-2">
+      <h3 class="text font-semibold mb-2">Pay Day Tasks</h3>
+
+      <NewPaydayTask
+        :paydayTasks="paydayTasks"
+        :upcomingExpenses="upcomingExpenses"
+      />
+    </div>
+
     <div class="space-y-4">
       <div
         v-for="(task, index) in paydayTasks"
