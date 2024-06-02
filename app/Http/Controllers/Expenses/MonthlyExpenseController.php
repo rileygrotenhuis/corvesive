@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Expenses;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Expenses\MonthlyExpensePaymentRequest;
 use App\Models\MonthlyExpense;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -79,15 +80,11 @@ class MonthlyExpenseController extends Controller
     /**
      * Make a payment for a Monthly Expense.
      */
-    public function payment(Request $request, MonthlyExpense $monthlyExpense): RedirectResponse
-    {
+    public function payment(
+        MonthlyExpensePaymentRequest $request,
+        MonthlyExpense $monthlyExpense
+    ): RedirectResponse {
         Gate::authorize('isOwner', $monthlyExpense);
-
-        $request->validate([
-            'payment_date' => ['required', 'date'],
-            'amount_in_cents' => ['required', 'integer', 'min:1'],
-            'notes' => ['nullable', 'string'],
-        ]);
 
         $monthlyExpense->payment(
             $request->input('payment_date'),

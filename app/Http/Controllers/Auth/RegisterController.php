@@ -10,11 +10,17 @@ use Inertia\Response;
 
 class RegisterController extends Controller
 {
+    /**
+     * Register - Show Page.
+     */
     public function index(): Response
     {
         return inertia('Auth/Register');
     }
 
+    /**
+     * Registers a new user.
+     */
     public function store(RegistrationRequest $request): RedirectResponse
     {
         $user = User::create($request->validated());

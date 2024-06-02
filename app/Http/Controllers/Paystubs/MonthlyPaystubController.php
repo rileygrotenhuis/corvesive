@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Paystubs;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Paystubs\MonthlyPaystubDepositRequest;
 use App\Models\MonthlyPaystub;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -77,17 +78,17 @@ class MonthlyPaystubController extends Controller
     /**
      * Deposit your Monthly Paystub.
      */
-    public function deposit(Request $request, MonthlyPaystub $monthlyPaystub): RedirectResponse
-    {
+    public function deposit(
+        MonthlyPaystubDepositRequest $request,
+        MonthlyPaystub $monthlyPaystub
+    ): RedirectResponse {
         Gate::authorize('isOwner', $monthlyPaystub);
 
-        $request->validate([
-            'deposit_date' => ['required', 'date'],
-            'amount_in_cents' => ['required', 'integer', 'min:1'],
-            'notes' => ['nullable', 'string'],
-        ]);
-
-        $monthlyPaystub->deposit(now()->format('Y-m-d'));
+        $monthlyPaystub->deposit(
+            $request->input('deposit_date'),
+            $request->input('amount_in_cents'),
+            $request->input('notes')
+        );
 
         return to_route('monthly-paystubs.show', $monthlyPaystub);
     }

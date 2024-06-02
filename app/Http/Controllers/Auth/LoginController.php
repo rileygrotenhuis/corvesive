@@ -10,11 +10,17 @@ use Inertia\Response;
 
 class LoginController extends Controller
 {
+    /**
+     * Login - Show Page.
+     */
     public function index(): Response
     {
         return inertia('Auth/Login');
     }
 
+    /**
+     * Logs the user IN.
+     */
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
@@ -24,6 +30,9 @@ class LoginController extends Controller
         return to_route('dashboard');
     }
 
+    /**
+     * Logs the user OUT.
+     */
     public function destroy(Request $request): RedirectResponse
     {
         auth()->guard('web')->logout();
