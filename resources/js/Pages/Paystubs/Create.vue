@@ -54,9 +54,16 @@ const submitForm = () => {
           &larr; Back to Paystubs
         </a>
 
-        <h3 class="text-lg font-semibold text-black">
-          Add a new monthly paystub to your budget.
-        </h3>
+        <div>
+          <h3 class="text-lg font-semibold text-black mb-1">
+            Add a new monthly paystub to your budget.
+          </h3>
+
+          <p class="text-sm text-gray-500 max-w-xl">
+            Define what a typical paystub looks like for you. This will generate
+            a recurring paystub in your budget for the next 12 months.
+          </p>
+        </div>
 
         <div>
           <label for="issuer" class="block text-sm font-medium text-gray-700">

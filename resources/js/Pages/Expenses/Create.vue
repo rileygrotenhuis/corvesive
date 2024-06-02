@@ -60,9 +60,16 @@ const submitForm = () => {
           &larr; Back to Expenses
         </a>
 
-        <h3 class="text-lg font-semibold text-black">
-          Add a new monthly expense to your budget.
-        </h3>
+        <div>
+          <h3 class="text-lg font-semibold text-black">
+            Add a new monthly expense to your budget.
+          </h3>
+
+          <p class="text-sm text-gray-500 max-w-xl">
+            Add one of your monthly expenses and we'll generate a recurring
+            expense in your budget for the next 12 months.
+          </p>
+        </div>
 
         <div>
           <label for="type" class="block text-sm font-medium text-gray-700">
