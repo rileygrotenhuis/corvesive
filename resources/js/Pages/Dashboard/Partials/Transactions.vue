@@ -9,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="w-full max-w-3xl bg-white p-6 rounded-lg">
+  <div class="w-full md:w-2/3 bg-white p-6 rounded-lg">
     <div class="flex justify-between items-center">
       <h2 class="text-2xl font-bold text-primary-700">Transactions</h2>
 
