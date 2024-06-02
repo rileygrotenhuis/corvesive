@@ -6,6 +6,7 @@ use App\Http\Controllers\Paystubs\MonthlyPaystubController;
 use App\Http\Controllers\Paystubs\PaystubController;
 use App\Http\Controllers\Transactions\DepositController;
 use App\Http\Controllers\Transactions\PaymentController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /** Landing Page */
@@ -13,7 +14,7 @@ Route::get('/', fn () => inertia('Landing/Index'))->name('home');
 
 Route::middleware('auth')->group(function () {
     /** Dashboard Page */
-    Route::get('/dashboard', fn () => inertia('ComingSoon'))->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     /** Calendar Page (Coming Soon) */
     Route::get('/calendar', fn () => inertia('ComingSoon'))->name('calendar');
