@@ -22,6 +22,70 @@ class DashboardRepository
     }
 
     /**
+     * Returns the total amount of expenses
+     * for the given month.
+     */
+    public function totalExpenses(): int
+    {
+        return $this->user->monthlyExpenses()
+            ->where('year', $this->year)
+            ->where('month', $this->month)
+            ->sum('amount_in_cents');
+    }
+
+    /**
+     * Returns the total amount of expenses
+     * that have already been paid this month.
+     */
+    public function paidExpenses(): int
+    {
+        $monthlyExpenses = $this->user->monthlyExpenses()
+            ->where('year', $this->year)
+            ->where('month', $this->month)
+            ->pluck('id');
+
+        return $this->user->payments()
+            ->whereBetween('payment_date', [
+                $this->today->startOfMonth()->toDateString(),
+                $this->today->endOfMonth()->toDateString(),
+            ])
+            ->whereIn('monthly_expense_id', $monthlyExpenses)
+            ->sum('amount_in_cents');
+    }
+
+    /**
+     * Returns the total amount of paystubs
+     * for the given month.
+     */
+    public function totalPaystubs(): int
+    {
+        return $this->user->monthlyPaystubs()
+            ->where('year', $this->year)
+            ->where('month', $this->month)
+            ->sum('amount_in_cents');
+    }
+
+    /**
+     * Returns the total amount of paystubs
+     * that have already been paid this month.
+     */
+    public function depositedPaystubs(): int
+    {
+        $monthlyPaystubs = $this->user->monthlyPaystubs()
+            ->where('year', $this->year)
+            ->where('month', $this->month)
+            ->pluck('id');
+
+        return $this->user->deposits()
+            ->whereBetween('deposit_date', [
+                $this->today->startOfMonth()->toDateString(),
+                $this->today->endOfMonth()->toDateString(),
+            ])
+            ->whereIn('monthly_paystub_id', $monthlyPaystubs)
+            ->sum('amount_in_cents');
+    }
+
+    /**
      * Returns the list of all transactions
      * for the given month.
      */

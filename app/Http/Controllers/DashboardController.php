@@ -17,6 +17,14 @@ class DashboardController extends Controller
 
         return inertia('Dashboard/Index', [
             'transactions' => $repository->allTransactions(),
+            'expenses' => [
+                'total' => $repository->totalExpenses(),
+                'paid' => $repository->paidExpenses()
+            ],
+            'paystubs' => [
+                'total' => $repository->totalPaystubs(),
+                'deposited' => $repository->depositedPaystubs(),
+            ]
         ]);
     }
 }
