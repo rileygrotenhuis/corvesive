@@ -3,11 +3,11 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Expenses\ExpenseController;
 use App\Http\Controllers\Expenses\MonthlyExpenseController;
+use App\Http\Controllers\PaydayTaskController;
 use App\Http\Controllers\Paystubs\MonthlyPaystubController;
 use App\Http\Controllers\Paystubs\PaystubController;
 use App\Http\Controllers\Transactions\DepositController;
 use App\Http\Controllers\Transactions\PaymentController;
-use App\Http\Controllers\PaydayTaskController;
 use Illuminate\Support\Facades\Route;
 
 /** Landing Page */

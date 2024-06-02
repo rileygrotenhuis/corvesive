@@ -22,7 +22,9 @@ defineProps({
       />
     </div>
 
-    <div class="space-y-4 max-h-[325px] md:max-h-[750px] overflow-y-auto no-scrollbar">
+    <div
+      class="space-y-4 max-h-[325px] md:max-h-[750px] overflow-y-auto no-scrollbar"
+    >
       <div
         v-for="(task, index) in paydayTasks"
         :key="index"
