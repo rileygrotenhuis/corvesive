@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{paystub}', [PaystubController::class, 'show'])->name('paystubs.show');
         Route::put('/{paystub}', [PaystubController::class, 'update'])->name('paystubs.update');
         Route::delete('/{paystub}', [PaystubController::class, 'destroy'])->name('paystubs.destroy');
+        Route::post('/{paystub}/schedule', [PaystubController::class, 'schedule'])->name('paystubs.schedule');
 
         /** Monthly Paystub Routes */
         Route::get('/due/{monthlyPaystub}', [MonthlyPaystubController::class, 'show'])->name('monthly-paystubs.show');
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{expense}', [ExpenseController::class, 'show'])->name('expenses.show');
         Route::put('/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
         Route::delete('/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+        Route::post('/{expense}/schedule', [ExpenseController::class, 'schedule'])->name('expenses.schedule');
 
         /** Monthly Expense Routes */
         Route::get('/due/{monthlyExpense}', [MonthlyExpenseController::class, 'show'])->name('monthly-expenses.show');

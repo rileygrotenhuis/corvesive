@@ -1,5 +1,6 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
+import ScheduleExpense from '@/Pages/Expenses/Partials/ScheduleExpense.vue';
 import InputError from '@/Components/Breeze/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
 import { watch } from 'vue';
@@ -57,9 +58,15 @@ const removeExpense = () => {
           &larr; Back to Expenses
         </a>
 
-        <h3 class="text-lg font-semibold text-black">
-          Modify your monthly expense.
-        </h3>
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-black">
+            Modify your monthly expense.
+          </h3>
+
+          <div>
+            <ScheduleExpense :expense="expense" />
+          </div>
+        </div>
 
         <div v-if="form.type === 'bill'">
           <label for="issuer" class="block text-sm font-medium text-gray-700">

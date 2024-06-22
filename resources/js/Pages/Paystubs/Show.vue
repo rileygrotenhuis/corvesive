@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import InputError from '@/Components/Breeze/InputError.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
+import SchedulePaystub from '@/Pages/Paystubs/Partials/SchedulePaystub.vue';
 
 const props = defineProps({
   paystub: Object,
@@ -66,9 +67,15 @@ const removePaystub = () => {
           &larr; Back to Paystubs
         </a>
 
-        <h3 class="text-lg font-semibold text-black">
-          Modify your monthly paystub.
-        </h3>
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-black">
+            Modify your monthly paystub.
+          </h3>
+
+          <div>
+            <SchedulePaystub :paystub="paystub" />
+          </div>
+        </div>
 
         <div>
           <label for="issuer" class="block text-sm font-medium text-gray-700">

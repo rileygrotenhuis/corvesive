@@ -11,6 +11,7 @@ use App\Http\Requests\Paystubs\StorePaystubRequest;
 use App\Http\Requests\Paystubs\UpdatePaystubRequest;
 use App\Models\Paystub;
 use App\Repositories\PaystubRepository;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -132,6 +133,25 @@ class PaystubController extends Controller
         Gate::authorize('isOwner', $paystub);
 
         $paystub->remove();
+
+        return to_route('paystubs.index');
+    }
+
+    /**
+     * Schedules an existing Paystub.
+     */
+    public function schedule(Request $request, Paystub $paystub): RedirectResponse
+    {
+        Gate::authorize('isOwner', $paystub);
+
+        $request->validate([
+            'pay_day' => ['required', 'date'],
+        ]);
+
+        $paystub->schedule(
+            Carbon::parse($request->input('pay_day')),
+            $paystub->amount_in_cents
+        );
 
         return to_route('paystubs.index');
     }

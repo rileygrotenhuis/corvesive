@@ -11,6 +11,7 @@ use App\Http\Requests\Expenses\StoreExpenseRequest;
 use App\Http\Requests\Expenses\UpdateExpenseRequest;
 use App\Models\Expense;
 use App\Repositories\ExpenseRepository;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -126,6 +127,25 @@ class ExpenseController extends Controller
         Gate::authorize('isOwner', $expense);
 
         $expense->remove();
+
+        return to_route('expenses.index');
+    }
+
+    /**
+     * Schedules an existing Expense.
+     */
+    public function schedule(Request $request, Expense $expense): RedirectResponse
+    {
+        Gate::authorize('isOwner', $expense);
+
+        $request->validate([
+            'due_date' => ['required', 'date'],
+        ]);
+
+        $expense->schedule(
+            Carbon::parse($request->input('due_date')),
+            $expense->amount_in_cents
+        );
 
         return to_route('expenses.index');
     }
