@@ -127,7 +127,7 @@ class DashboardRepository
             $deposits->toArray()
         );
 
-        return collect($combined)->sortBy('date')->values();
+        return collect($combined)->sortBy('date')->values()->take(10);
     }
 
     /**
@@ -138,10 +138,9 @@ class DashboardRepository
     {
         return $this->user->payments()
             ->select('*', 'payment_date as date')
-            ->whereBetween('payment_date', [
-                $this->today->startOfMonth()->toDateString(),
-                $this->today->endOfMonth()->toDateString(),
-            ])->get();
+            ->orderBy('payment_date', 'desc')
+            ->limit(10)
+            ->get();
     }
 
     /**
@@ -152,9 +151,8 @@ class DashboardRepository
     {
         return $this->user->deposits()
             ->select('*', 'deposit_date as date')
-            ->whereBetween('deposit_date', [
-                $this->today->startOfMonth()->toDateString(),
-                $this->today->endOfMonth()->toDateString(),
-            ])->get();
+            ->orderBy('deposit_date', 'desc')
+            ->limit(10)
+            ->get();
     }
 }
