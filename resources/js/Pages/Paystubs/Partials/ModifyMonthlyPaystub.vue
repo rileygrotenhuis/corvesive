@@ -1,5 +1,5 @@
 <script setup>
-import {computed, ref} from 'vue';
+import { computed, ref } from 'vue';
 import ModifyIcon from '@/Components/Icons/ModifyIcon.vue';
 import InputError from '@/Components/Breeze/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
@@ -48,9 +48,7 @@ const modifyPaystub = () => {
 <template>
   <div class="mt-4 font-medium text-gray-700">
     <div class="flex items-center gap-2">
-      <span class="text-gray-500">
-        {{ amountDeposited }} of
-      </span>
+      <span class="text-gray-500"> {{ amountDeposited }} of </span>
       <span class="text-primary-700 font-bold text-lg">
         {{ amount }} deposited
       </span>

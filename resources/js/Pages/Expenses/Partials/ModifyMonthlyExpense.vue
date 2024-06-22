@@ -2,7 +2,7 @@
 import ModifyIcon from '@/Components/Icons/ModifyIcon.vue';
 import InputError from '@/Components/Breeze/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
-import {computed, ref} from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
   monthlyExpense: Object,
@@ -48,9 +48,7 @@ const modifyExpense = () => {
 <template>
   <div class="mt-4 font-medium text-gray-700">
     <div class="flex items-center gap-2">
-      <span class="text-gray-500">
-        {{ amountPaid }} of
-      </span>
+      <span class="text-gray-500"> {{ amountPaid }} of </span>
       <span class="text-primary-700 font-bold text-lg">
         {{ amount }} paid
       </span>

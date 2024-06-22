@@ -1,7 +1,7 @@
 <script setup>
 import UnscheduleIcon from '@/Components/Icons/UnscheduleIcon.vue';
 import { useForm } from '@inertiajs/vue3';
-import {computed} from "vue";
+import { computed } from 'vue';
 
 const props = defineProps({
   transaction: Object,
@@ -9,7 +9,7 @@ const props = defineProps({
 });
 
 const amount = computed(() => {
-  return (props.transaction.amount).toLocaleString('en-US', {
+  return props.transaction.amount.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   });

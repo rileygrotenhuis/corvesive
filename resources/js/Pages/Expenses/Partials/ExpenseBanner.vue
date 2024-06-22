@@ -15,7 +15,7 @@ const isDueExpense = computed(() => {
 });
 
 const amount = computed(() => {
-  return (props.expense.amount).toLocaleString('en-US', {
+  return props.expense.amount.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   });

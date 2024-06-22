@@ -15,7 +15,7 @@ const paystubUrl = computed(() => {
 });
 
 const amount = computed(() => {
-  return (props.paystub.amount).toLocaleString('en-US', {
+  return props.paystub.amount.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   });

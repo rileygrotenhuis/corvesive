@@ -1,6 +1,22 @@
 <script setup>
+import { computed } from 'vue';
+
 const props = defineProps({
   surplus: Object,
+});
+
+const currentSurplus = computed(() => {
+  return (props.surplus.current / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+});
+
+const projectedSurplus = computed(() => {
+  return (props.surplus.projected / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 });
 </script>
 
@@ -11,14 +27,14 @@ const props = defineProps({
     <div class="mb-2">
       <label class="text-base text-gray-500">Current</label>
       <p class="text-2xl font-semibold text-primary-700">
-        ${{ (surplus.current / 100).toFixed(2) }}
+        {{ currentSurplus }}
       </p>
     </div>
 
     <div>
       <label class="text-base text-gray-500">Projected</label>
       <p class="text-2xl font-semibold text-primary-700">
-        ${{ (surplus.projected / 100).toFixed(2) }}
+        {{ projectedSurplus }}
       </p>
     </div>
   </div>

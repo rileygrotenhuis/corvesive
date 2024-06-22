@@ -6,6 +6,34 @@ const props = defineProps({
   paystubs: Object,
 });
 
+const expensesPaid = computed(() => {
+  return (props.expenses.paid / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+});
+
+const expensesTotal = computed(() => {
+  return (props.expenses.total / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+});
+
+const paystubsDeposited = computed(() => {
+  return (props.paystubs.deposited / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+});
+
+const paystubsTotal = computed(() => {
+  return (props.paystubs.total / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+});
+
 const expensePercentage = computed(() => {
   return (props.expenses.paid / props.expenses.total) * 100;
 });
@@ -25,11 +53,9 @@ const paystubPercentage = computed(() => {
 
       <div>
         <span class="text-base text-gray-500">
-          ${{ (expenses.paid / 100).toFixed(2) }}
+          {{ expensesPaid }}
         </span>
-        <span class="text-base text-primary-700">
-          / ${{ (expenses.total / 100).toFixed(2) }}
-        </span>
+        <span class="text-base text-primary-700"> / {{ expensesTotal }} </span>
       </div>
 
       <!-- Progress Bar -->
@@ -47,11 +73,9 @@ const paystubPercentage = computed(() => {
 
       <div>
         <span class="text-base text-gray-500">
-          ${{ (paystubs.deposited / 100).toFixed(2) }}
+          {{ paystubsDeposited }}
         </span>
-        <span class="text-base text-primary-700">
-          / ${{ (paystubs.total / 100).toFixed(2) }}
-        </span>
+        <span class="text-base text-primary-700"> / {{ paystubsTotal }} </span>
       </div>
 
       <!-- Progress Bar -->
