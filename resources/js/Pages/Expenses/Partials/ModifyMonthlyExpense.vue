@@ -2,13 +2,27 @@
 import ModifyIcon from '@/Components/Icons/ModifyIcon.vue';
 import InputError from '@/Components/Breeze/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 
 const props = defineProps({
   monthlyExpense: Object,
 });
 
 const showModifyForm = ref(false);
+
+const amountPaid = computed(() => {
+  return (props.monthlyExpense.amount_paid / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+});
+
+const amount = computed(() => {
+  return (props.monthlyExpense.amount_in_cents / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+});
 
 const modifyExpenseForm = useForm({
   amount: props.monthlyExpense.amount_in_cents / 100,
@@ -35,10 +49,10 @@ const modifyExpense = () => {
   <div class="mt-4 font-medium text-gray-700">
     <div class="flex items-center gap-2">
       <span class="text-gray-500">
-        ${{ (monthlyExpense.amount_paid / 100).toFixed(2) }} of
+        {{ amountPaid }} of
       </span>
       <span class="text-primary-700 font-bold text-lg">
-        ${{ (monthlyExpense.amount_in_cents / 100).toFixed(2) }} paid
+        {{ amount }} paid
       </span>
       <span
         class="cursor-pointer"

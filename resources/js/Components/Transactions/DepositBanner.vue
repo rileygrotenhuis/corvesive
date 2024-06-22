@@ -1,10 +1,18 @@
 <script setup>
 import UnscheduleIcon from '@/Components/Icons/UnscheduleIcon.vue';
 import { useForm } from '@inertiajs/vue3';
+import { computed } from "vue";
 
 const props = defineProps({
   transaction: Object,
   showType: Boolean,
+});
+
+const amount = computed(() => {
+  return (props.transaction.amount).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 });
 
 const refundDeposit = () => {
@@ -25,7 +33,7 @@ const refundDeposit = () => {
     <div class="flex justify-between items-center">
       <div>
         <h4 class="text-lg font-semibold text-primary-950">
-          ${{ transaction.amount }}
+          {{ amount }}
         </h4>
         <p v-if="showType" class="text-sm text-gray-600">Deposit</p>
       </div>

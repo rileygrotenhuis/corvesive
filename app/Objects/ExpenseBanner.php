@@ -13,7 +13,7 @@ class ExpenseBanner
         public string $type,
         public ?string $issuer,
         public string $name,
-        public int $amount,
+        public float $amount,
         public string $date,
         public ?string $monthYear,
         public bool $isPaid,

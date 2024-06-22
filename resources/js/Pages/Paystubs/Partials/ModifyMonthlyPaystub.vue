@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 import ModifyIcon from '@/Components/Icons/ModifyIcon.vue';
 import InputError from '@/Components/Breeze/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
@@ -9,6 +9,20 @@ const props = defineProps({
 });
 
 const showModifyForm = ref(false);
+
+const amountDeposited = computed(() => {
+  return (props.monthlyPaystub.amount_deposited / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+});
+
+const amount = computed(() => {
+  return (props.monthlyPaystub.amount_in_cents / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+});
 
 const modifyPaystubForm = useForm({
   amount: props.monthlyPaystub.amount_in_cents / 100,
@@ -35,10 +49,10 @@ const modifyPaystub = () => {
   <div class="mt-4 font-medium text-gray-700">
     <div class="flex items-center gap-2">
       <span class="text-gray-500">
-        ${{ (monthlyPaystub.amount_deposited / 100).toFixed(2) }} of
+        {{ amountDeposited }} of
       </span>
       <span class="text-primary-700 font-bold text-lg">
-        ${{ (monthlyPaystub.amount_in_cents / 100).toFixed(2) }} deposited
+        {{ amount }} deposited
       </span>
       <span
         class="cursor-pointer"

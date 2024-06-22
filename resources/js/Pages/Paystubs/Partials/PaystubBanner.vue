@@ -13,6 +13,13 @@ const paystubUrl = computed(() => {
 
   return route('paystubs.show', props.paystub.id);
 });
+
+const amount = computed(() => {
+  return (props.paystub.amount).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+});
 </script>
 
 <template>
@@ -37,7 +44,7 @@ const paystubUrl = computed(() => {
 
         <div class="text-right">
           <p class="text-2xl font-bold text-primary-700">
-            ${{ paystub.amount }}
+            {{ amount }}
           </p>
           <p
             v-if="paystub.date"

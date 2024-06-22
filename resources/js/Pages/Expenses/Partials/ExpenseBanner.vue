@@ -14,12 +14,11 @@ const isDueExpense = computed(() => {
   return props.expense?.monthYear;
 });
 
-const amountText = computed(() => {
-  if (props.expense.amount < 0) {
-    return `-$${props.expense.amount}`;
-  }
-
-  return `$${props.expense.amount}`;
+const amount = computed(() => {
+  return (props.expense.amount).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 });
 
 const expenseUrl = computed(() => {
@@ -53,7 +52,7 @@ const expenseUrl = computed(() => {
 
         <div class="text-right">
           <p class="text-2xl font-bold text-primary-700">
-            {{ amountText }}
+            {{ amount }}
           </p>
           <p
             v-if="isBill"

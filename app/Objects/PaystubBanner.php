@@ -12,7 +12,7 @@ class PaystubBanner
         public string $id,
         public string $issuer,
         public string $recurrence,
-        public int $amount,
+        public float $amount,
         public ?string $date,
         public ?string $monthYear,
         public bool $isDeposited,
