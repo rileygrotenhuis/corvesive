@@ -4,6 +4,7 @@ import ScheduleExpense from '@/Pages/Expenses/Partials/ScheduleExpense.vue';
 import InputError from '@/Components/Breeze/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
 import { watch } from 'vue';
+import UnscheduleIcon from '@/Components/Icons/UnscheduleIcon.vue';
 
 const props = defineProps({
   expense: Object,
@@ -63,8 +64,9 @@ const removeExpense = () => {
             Modify your monthly expense.
           </h3>
 
-          <div>
+          <div class="flex items-center gap-4">
             <ScheduleExpense :expense="expense" />
+            <UnscheduleIcon @click.prevent="removeExpense" />
           </div>
         </div>
 
@@ -140,16 +142,10 @@ const removeExpense = () => {
           />
         </div>
 
-        <div class="flex justify-center md:justify-end gap-4">
-          <button
-            class="w-full flex justify-center py-1 px-8 bg-red-500 text-white font-semibold rounded-md hover:bg-red-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition ease-in-out duration-150"
-            @click.prevent="removeExpense"
-          >
-            Remove
-          </button>
+        <div class="flex justify-end">
           <button
             type="submit"
-            class="w-full flex justify-center py-1 px-8 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition ease-in-out duration-150"
+            class="w-full md:w-fit flex justify-center py-1 px-8 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition ease-in-out duration-150"
           >
             Save
           </button>
