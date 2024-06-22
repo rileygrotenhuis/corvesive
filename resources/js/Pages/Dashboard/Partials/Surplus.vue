@@ -11,13 +11,6 @@ const currentSurplus = computed(() => {
     currency: 'USD',
   });
 });
-
-const projectedSurplus = computed(() => {
-  return (props.surplus.projected / 100).toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
-});
 </script>
 
 <template>
@@ -28,13 +21,6 @@ const projectedSurplus = computed(() => {
       <label class="text-base text-gray-500">Current</label>
       <p class="text-2xl font-semibold text-primary-700">
         {{ currentSurplus }}
-      </p>
-    </div>
-
-    <div>
-      <label class="text-base text-gray-500">Projected</label>
-      <p class="text-2xl font-semibold text-primary-700">
-        {{ projectedSurplus }}
       </p>
     </div>
   </div>

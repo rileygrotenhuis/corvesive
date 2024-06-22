@@ -32,18 +32,6 @@ class SurplusRepository
     }
 
     /**
-     * Returns the projected overall surplus
-     * for a given user. It takes the current
-     * surplus, adds the remaining amount to be
-     * deposited, and then subtracts the remaining
-     * amount to be paid.
-     */
-    public function projectedSurplus(): int
-    {
-        return $this->currentSurplus() + $this->remainingToDeposit() - $this->remainingToPay();
-    }
-
-    /**
      * Returns the total amount of deposits
      * for a given user.
      */
@@ -59,35 +47,5 @@ class SurplusRepository
     protected function totalPayments(): int
     {
         return $this->user->payments()->sum('amount_in_cents');
-    }
-
-    /**
-     * Returns the total amount remaining
-     * to be deposited for the given month.
-     */
-    protected function remainingToDeposit(): int
-    {
-        return $this->user->monthlyPaystubs()
-            ->where('year', $this->year)
-            ->where('month', $this->month)
-            ->get()
-            ->append(['is_deposited', 'amount_remaining'])
-            ->where('is_deposited', false)
-            ->sum('amount_remaining');
-    }
-
-    /**
-     * Returns the total amount remaining
-     * to be paid for the given month.
-     */
-    protected function remainingToPay(): int
-    {
-        return $this->user->monthlyExpenses()
-            ->where('year', $this->year)
-            ->where('month', $this->month)
-            ->get()
-            ->append(['is_paid', 'amount_remaining'])
-            ->where('is_paid', false)
-            ->sum('amount_remaining');
     }
 }
